@@ -28,16 +28,20 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           {/* font-awesome cdn */}
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-          />
+          <link rel="stylesheet" media="screen" href="vendor/simplebar/dist/simplebar.min.css"/>
+        	<link rel="stylesheet" media="screen" href="vendor/tiny-slider/dist/tiny-slider.css"/>
+          <link rel="stylesheet" href="css/theme.min.css"/>
         </Head>
         <body>
           <Main />
           <NextScript />
-          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossOrigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossOrigin="anonymous"></script>
+          <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+          <script src="vendor/simplebar/dist/simplebar.min.js"></script>
+          <script src="vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+          <script src="vendor/tiny-slider/dist/min/tiny-slider.js"></script>
+          <script src="vendor/jarallax/dist/jarallax.min.js"></script>
+          <script src="vendor/jarallax/dist/jarallax-element.min.js"></script>
+          <script src="js/theme.min.js"></script>
         </body>
       </Html>
     );

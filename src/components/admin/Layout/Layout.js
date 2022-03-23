@@ -1,9 +1,8 @@
 
 import Aside from "./Aside/Aside";
 import Content from "./Content/Content";
-import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
-
+import Footer from "./Footer/Footer";
 
 
 const Layout = ({ children }) => {

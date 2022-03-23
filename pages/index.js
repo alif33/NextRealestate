@@ -1,7 +1,10 @@
 
 import Head from 'next/head';
-import Layout from './../src/components/client/layout/index';
-
+import Layout from '../src/components/client/layout';
+import Hero from '../src/components/client/home/Hero';
+import Recent from '../src/components/client/home/Recent';
+import About from '../src/components/client/home/About';
+import Review from '../src/components/client/home/Review';
 
 export default function Home() {
 
@@ -13,7 +16,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        
+        <Hero />
+        <Recent />
+        <About />
+        <Review />
       </Layout>
     </>
   );
