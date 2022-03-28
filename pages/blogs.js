@@ -1,5 +1,8 @@
+import Layout from "../src/components/client/layout";
+
 function Blogs(){
     return(
+      <Layout>
         <div className="container mt-5 mb-md-4 py-5">
         {/* Breadcrumb + Page title*/}
         <nav className="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">
@@ -223,6 +226,7 @@ function Blogs(){
           </aside>
         </div>
       </div>
+      </Layout>
     )
 }
 export default Blogs;

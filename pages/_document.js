@@ -28,20 +28,20 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           {/* font-awesome cdn */}
-          <link rel="stylesheet" media="screen" href="vendor/simplebar/dist/simplebar.min.css"/>
-        	<link rel="stylesheet" media="screen" href="vendor/tiny-slider/dist/tiny-slider.css"/>
-          <link rel="stylesheet" href="css/theme.min.css"/>
+          <link rel="stylesheet" media="screen" href="/vendor/simplebar/dist/simplebar.min.css"/>
+        	<link rel="stylesheet" media="screen" href="/vendor/tiny-slider/dist/tiny-slider.css"/>
+          <link rel="stylesheet" href="/css/theme.min.css"/>
         </Head>
         <body>
           <Main />
           <NextScript />
-          <script src="vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-          <script src="vendor/simplebar/dist/simplebar.min.js"></script>
+          <script src="/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+          {/* <script src="vendor/simplebar/dist/simplebar.min.js"></script>
           <script src="vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
           <script src="vendor/tiny-slider/dist/min/tiny-slider.js"></script>
           <script src="vendor/jarallax/dist/jarallax.min.js"></script>
           <script src="vendor/jarallax/dist/jarallax-element.min.js"></script>
-          <script src="js/theme.min.js"></script>
+          <script src="js/theme.min.js"></script> */}
         </body>
       </Html>
     );

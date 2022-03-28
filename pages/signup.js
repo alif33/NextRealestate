@@ -1,6 +1,33 @@
-import Layout from "../src/components/client/layout";
+import { useState } from 'react';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import Layout from '../src/components/client/layout';
+import { showErr } from '../__lib__/helpers/ErrHandler';
+import { postData } from '../__lib__/helpers/HttpService';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
-const index = () => {
+export default function SignUp(){
+    const [ disable, setDisable ] = useState(false);
+    const { register, reset, handleSubmit, formState: { errors } } = useForm();
+    const onError = err => showErr(err);
+    const router = useRouter();
+
+    const onSubmit = data => {
+        setDisable(true)
+        postData('/users/register', data, setDisable)
+        .then(res=>{
+            if(res?.success)
+            {  
+                toast.success(`${res.message}`);
+                reset();
+                router.push({
+                    pathname: '/signin'
+                })
+            }
+        })
+    }
+
     return (
         <Layout>
             <div className="container mt-5 mb-md-4 py-5">
@@ -22,45 +49,98 @@ const index = () => {
                             <li className="d-flex mb-2"><i className="fi-check-circle text-primary mt-1 me-2" /><span>No Advance Payment</span></li>
                             <li className="d-flex mb-0"><i className="fi-check-circle text-primary mt-1 me-2" /><span>All listings physically verified</span></li>
                             </ul><img className="d-block mx-auto" src="img/signin-modal/signup.svg" width={344} alt="Illustartion" />
-                            <div className="mt-4 mt-sm-5">Already have an account? <a href="#signup" data-bs-toggle="tab" data-bs-dismiss="tab">Sign in</a></div>
+                            <div className="mt-4 mt-sm-5">Already have an account? <Link href="/signup"><a>Sign in</a></Link></div>
                         </div>
                         <div className="col-md-5 px-4 pt-2 pb-4 px-sm-5 pb-sm-5 pt-md-5">
                             <h3 className="h3 mb-4 text-primary">Sign up</h3>
-                            <form className="needs-validation" noValidate>
-                            <div className="mb-4">
-                                <label className="form-label" htmlFor="pr-study-field">I am<span className="text-danger" /></label>
-                                <select className="form-select form-select-lg" id="pr-education-level" required>
-                                <option value disabled selected>Choose</option>
-                                <option value="Associate Degree">Owner</option>
-                                <option value="Associate Degree">Tenant </option>
-                                </select>
-                            </div>
-                            <div className="mb-4">
-                                <label className="form-label" htmlFor="signup-name">Full name</label>
-                                <input className="form-control" type="text" id="signup-name" placeholder="Enter name" required />
-                            </div>
-                            <div className="mb-4">
-                                <label className="form-label" htmlFor="signup-name">Phone number</label>
-                                <input className="form-control" type="email" id="signup-email" placeholder="Enter phone" required />
-                            </div>
-                            <div className="mb-4">
-                                <label className="form-label" htmlFor="signup-name">Email</label>
-                                <input className="form-control" type="email" id="signup-email" placeholder="Enter email" required />
-                            </div>
-                            <div className="mb-4">
-                                <label className="form-label" htmlFor="signup-name">Password</label>
-                                <div className="password-toggle">
-                                <input className="form-control" type="password" id="signup-password" placeholder="Enter password" required />
-                                <label className="password-toggle-btn" aria-label="Show/hide password">
-                                    <input className="password-toggle-check" type="checkbox" /><span className="password-toggle-indicator" />
-                                </label>
+                            <form 
+                                className="needs-validation"
+                                onSubmit={handleSubmit(onSubmit, onError)}  
+                            >
+                                <div className="mb-4">
+                                    <label className="form-label" htmlFor="pr-study-field">I am<span className="text-danger" /></label>
+                                    <select className="form-select form-select-lg" id="pr-education-level" required>
+                                    <option value disabled selected>Choose</option>
+                                    <option value="Associate Degree">Owner</option>
+                                    <option value="Associate Degree">Tenant </option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div className="form-check mb-4">
-                                <input className="form-check-input" type="checkbox" id="agree-to-terms" required />
-                                <label className="form-check-label" htmlFor="agree-to-terms">I agree to the <a href="#">Terms of use</a> and <a href="#">Privacy policy</a></label>
-                            </div>
-                            <button className="btn btn-primary btn-lg w-100" type="submit">Sign up</button>
+                                <div className="mb-4">
+                                    <label className="form-label" htmlFor="signup-name">Full name</label>
+                                    <input
+                                        {...register("name",
+                                            {
+                                                required: 'Name is required.'
+                                            }
+                                        )} 
+                                        className="form-control" 
+                                        type="text" 
+                                        id="signup-name" 
+                                        placeholder="Enter name"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="form-label" htmlFor="signup-name">Phone number</label>
+                                    <input
+                                        {...register("phone",
+                                            {
+                                                required: 'Phone number is required.'
+                                            }
+                                        )}  
+                                        className="form-control" 
+                                        type="tel" 
+                                        id="signup-email" 
+                                        placeholder="Enter phone"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="form-label" htmlFor="signup-name">Email</label>
+                                    <input
+                                        {...register("email",
+                                            {
+                                                required: 'Email is required.'
+                                            }
+                                        )}   
+                                        className="form-control" 
+                                        type="email" 
+                                        id="signup-email" 
+                                        placeholder="Enter email"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="form-label" htmlFor="signup-name">Password</label>
+                                    <div className="password-toggle">
+                                    <input
+                                        {...register("password",
+                                            {
+                                                required: 'Password is required.'
+                                            }
+                                        )}  
+                                        className="form-control" 
+                                        type="password" 
+                                        id="signup-password" 
+                                        placeholder="Enter password"
+                                    />
+                                    <label className="password-toggle-btn" aria-label="Show/hide password">
+                                        <input 
+                                            className="password-toggle-check" 
+                                            type="checkbox" 
+                                        /><span className="password-toggle-indicator" />
+                                    </label>
+                                    </div>
+                                </div>
+                                <div className="form-check mb-4">
+                                    <input 
+                                        className="form-check-input" 
+                                        type="checkbox" 
+                                        id="agree-to-terms"
+                                    />
+                                    <label className="form-check-label" htmlFor="agree-to-terms">I agree to the <a href="#">Terms of use</a> and <a href="#">Privacy policy</a></label>
+                                </div>
+                                <button
+                                    disabled={disable} 
+                                    className="btn btn-primary btn-lg w-100" 
+                                    type="submit">Sign up</button>
                             </form>
                         </div>
                         </div>
@@ -70,5 +150,3 @@ const index = () => {
         </Layout>
     );
 };
-
-export default index;

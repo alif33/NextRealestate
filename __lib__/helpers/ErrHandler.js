@@ -1,7 +1,7 @@
-import { toast } from "react-toastify"
+import { toast } from 'react-hot-toast';
 
 export const showErr = err =>{
-    // Auth
+
     err?.name && toast
     .error(err.name.message)
     err?.email && toast
@@ -29,12 +29,12 @@ export const showErr = err =>{
     err?.category_id && toast
         .error(err.category_id.message)
 
-    // Contest
+    // contact
 
-    err?.contest_title && toast
-    .error(err.contest_title.message)
-    err?.contest_prize && toast
-        .error(err.contest_prize.message)
+    err?.phone && toast
+    .error(err.phone.message)
+    err?.message && toast
+        .error(err.message.message)
 
 }
 

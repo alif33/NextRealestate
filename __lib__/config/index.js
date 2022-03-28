@@ -1,5 +1,30 @@
 
 
+
+
+export const FillData = [
+    {
+        name: "Basic info",
+    },
+    {
+        name: "Location",
+    },
+    {
+        name: "Property details",
+    },
+    {
+        name: "Photos / video",
+    },
+    {
+        name: "Contact detais",
+    }
+]
+
+
+
+
+
+
 export const adminSidebar = [
     {
         link: "/admin/category",

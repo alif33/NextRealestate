@@ -5,9 +5,7 @@ import Link from 'next/link';
 // import toast from 'react-hot-toast';
 // import { useDispatch, useSelector } from 'react-redux';
 // import Cookies from 'universal-cookie';
-// import { userLogout } from '../../../../store/users/actions';
-// import avatar from '../../../assets/avatar.png';
-// import styles from './Header.module.css';
+
 const Header = () => {
   // const cookies = new Cookies();
   // const [start, setStart] = useState(false)
@@ -35,8 +33,12 @@ const Header = () => {
   return (
 
 <header className="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-scroll-header>
-        <div className="container"><a className="navbar-brand me-3 me-xl-4" href="city-guide-home-v1.html"><img className="d-block" src="img/rokye-website/logotransparent.png" width={116} alt="Finder" /></a>
-          <button className="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon" /></button><a a className="nav-link text-primary ms-2 order-lg-3" href="sign-in-model" role="button" aria-expanded="false"><i className="fi-user me-2" />Sign in</a><a className="btn btn-primary btn-sm ms-2 order-lg-3" href="job-board-post-resume-1.html">₹ Refer &amp; Earn</a><a className="btn btn-primary btn-sm ms-2 order-lg-3" href="job-board-post-resume-1.html"><i className="fi-plus me-2" />Add Property</a>
+        <div className="container">
+          <Link href="/"><a className="navbar-brand me-3 me-xl-4"><img className="d-block" src="/img/rokye-website/logotransparent.png" width={116} alt="Finder" /></a></Link>
+          <button className="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon" /></button>
+            <Link href="/signin"><a a className="nav-link text-primary ms-2 order-lg-3" role="button" aria-expanded="false"><i className="fi-user me-2" />Sign in</a></Link>
+            <Link href="/refer"><a className="btn btn-primary btn-sm ms-2 order-lg-3">₹ Refer &amp; Earn</a></Link>
+            <Link href="/add-property"><a className="btn btn-primary btn-sm ms-2 order-lg-3" href="job-board-post-resume-1.html"><i className="fi-plus me-2" />Add Property</a></Link>
           <div className="collapse navbar-collapse order-lg-2" id="navbarNav">
             <ul className="navbar-nav navbar-nav-scroll" style={{maxHeight: '35rem'}}>
               {/* Menu items*/}
@@ -62,28 +64,15 @@ const Header = () => {
                 <ul className="dropdown-menu dropdown-menu-light">
                   <li><a className="dropdown-item" href="job-board-about.html">FAQs</a></li>
                   <li><a className="dropdown-item" href="job-board-about.html">Blog</a></li>
-                  <li className="nav-item d-lg-none"><a className="nav-link" href="#signin-modal" data-bs-toggle="modal"><i className="fi-user me-2" />Sign in</a></li>
+                  <li className="nav-item d-lg-none">
+                    <Link href="/signin"><a className="nav-link" data-bs-toggle="modal"><i className="fi-user me-2" />Sign in</a></Link>
+                  </li>
                 </ul>
               </li></ul></div>
         </div>
       </header>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // <header className={`${styles.header} navbar-expand-lg`}>
-
     //   <div className="container">
     //     <div className="row align-items-center">
     //       <div className="col-4">
