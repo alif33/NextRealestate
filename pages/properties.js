@@ -1,6 +1,8 @@
-import Layout from "../src/components/client/layout";
+import Layout from '../src/components/client/layout';
+import Property from '../src/components/client/properties/Property';
+import { getData } from '../__lib__/helpers/HttpService';
 
-const Reviews = () => {
+export default function Properties({ properties }){
     return (
         <Layout>
           <div className="container-fluid mt-5 pt-5 p-0">
@@ -267,258 +269,11 @@ const Reviews = () => {
                   <hr className="d-none d-sm-block w-100 mx-4" />
                   <div className="d-none d-sm-flex align-items-center flex-shrink-0 text-muted"><i className="fi-check-circle me-2" /><span className="fs-sm mt-n1">0 results</span></div>
                 </div>
-                {/* Catalog grid*/}
-                {/* Item*/}
-                <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                  <div className="card-img-top position-relative" style={{backgroundImage: 'url(img/rokye-website/catalog/16.jpg)'}}><a className="stretched-link" href="real-estate-single.html" />
-                    <div className="position-absolute start-0 top-0 pt-3 ps-3"><span className="d-table badge bg-success mb-1">Verified</span></div>
-                    <div className="position-absolute end-0 top-0 pt-3 pe-3 zindex-5">
-                      <button className="btn btn-icon btn-light btn-xs text-primary rounded-circle shadow-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button>
-                    </div>
-                  </div>
-                  <div className="card-body position-relative pb-3">
-                    <h3 className="h6 mb-2 fs-base"><a className="nav-link stretched-link" href="real-estate-single.html">2 Bed Apartment | 1500 sq.ft</a></h3>
-                    <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
-                    <div className="border-bottom mb-2">
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-bed mt-n1 me-2 fs-lg align-middle" />Semi-furnished</li>
-                        <li className="col fw-normal"><i className="fi-users mt-n1 me-2 fs-lg align-middle" />Bachelor/Family</li>
-                      </ul>
-                    </div>
-                    <div className>
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-cash mt-n1 me-2 fs-lg align-middle" />₹24000 Rent</li>
-                        <li className="col fw-normal"><i className="fi-wallet mt-n1 me-2 fs-lg align-middle" />₹48000 Deposit</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/* Item*/}
-                <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                  <div className="card-img-top position-relative" style={{backgroundImage: 'url(img/rokye-website/catalog/16.jpg)'}}><a className="stretched-link" href="real-estate-single.html" />
-                    <div className="position-absolute start-0 top-0 pt-3 ps-3"><span className="d-table badge bg-success mb-1">Verified</span></div>
-                    <div className="position-absolute end-0 top-0 pt-3 pe-3 zindex-5">
-                      <button className="btn btn-icon btn-light btn-xs text-primary rounded-circle shadow-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button>
-                    </div>
-                  </div>
-                  <div className="card-body position-relative pb-3">
-                    <h3 className="h6 mb-2 fs-base"><a className="nav-link stretched-link" href="real-estate-single.html">2 Bed Apartment | 1500 sq.ft</a></h3>
-                    <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
-                    <div className="border-bottom mb-2">
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-bed mt-n1 me-2 fs-lg align-middle" />Semi-furnished</li>
-                        <li className="col fw-normal"><i className="fi-users mt-n1 me-2 fs-lg align-middle" />Bachelor/Family</li>
-                      </ul>
-                    </div>
-                    <div className>
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-cash mt-n1 me-2 fs-lg align-middle" />₹24000 Rent</li>
-                        <li className="col fw-normal"><i className="fi-wallet mt-n1 me-2 fs-lg align-middle" />₹48000 Deposit</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/* Item*/}
-                <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                  <div className="card-img-top position-relative" style={{backgroundImage: 'url(img/rokye-website/catalog/16.jpg)'}}><a className="stretched-link" href="real-estate-single.html" />
-                    <div className="position-absolute start-0 top-0 pt-3 ps-3"><span className="d-table badge bg-success mb-1">Verified</span></div>
-                    <div className="position-absolute end-0 top-0 pt-3 pe-3 zindex-5">
-                      <button className="btn btn-icon btn-light btn-xs text-primary rounded-circle shadow-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button>
-                    </div>
-                  </div>
-                  <div className="card-body position-relative pb-3">
-                    <h3 className="h6 mb-2 fs-base"><a className="nav-link stretched-link" href="real-estate-single.html">2 Bed Apartment | 1500 sq.ft</a></h3>
-                    <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
-                    <div className="border-bottom mb-2">
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-bed mt-n1 me-2 fs-lg align-middle" />Semi-furnished</li>
-                        <li className="col fw-normal"><i className="fi-users mt-n1 me-2 fs-lg align-middle" />Bachelor/Family</li>
-                      </ul>
-                    </div>
-                    <div className>
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-cash mt-n1 me-2 fs-lg align-middle" />₹24000 Rent</li>
-                        <li className="col fw-normal"><i className="fi-wallet mt-n1 me-2 fs-lg align-middle" />₹48000 Deposit</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/* Item*/}
-                <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                  <div className="card-img-top position-relative" style={{backgroundImage: 'url(img/rokye-website/catalog/16.jpg)'}}><a className="stretched-link" href="real-estate-single.html" />
-                    <div className="position-absolute start-0 top-0 pt-3 ps-3"><span className="d-table badge bg-success mb-1">Verified</span></div>
-                    <div className="position-absolute end-0 top-0 pt-3 pe-3 zindex-5">
-                      <button className="btn btn-icon btn-light btn-xs text-primary rounded-circle shadow-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button>
-                    </div>
-                  </div>
-                  <div className="card-body position-relative pb-3">
-                    <h3 className="h6 mb-2 fs-base"><a className="nav-link stretched-link" href="real-estate-single.html">2 Bed Apartment | 1500 sq.ft</a></h3>
-                    <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
-                    <div className="border-bottom mb-2">
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-bed mt-n1 me-2 fs-lg align-middle" />Semi-furnished</li>
-                        <li className="col fw-normal"><i className="fi-users mt-n1 me-2 fs-lg align-middle" />Bachelor/Family</li>
-                      </ul>
-                    </div>
-                    <div className>
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-cash mt-n1 me-2 fs-lg align-middle" />₹24000 Rent</li>
-                        <li className="col fw-normal"><i className="fi-wallet mt-n1 me-2 fs-lg align-middle" />₹48000 Deposit</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/* Item*/}
-                <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                  <div className="card-img-top position-relative" style={{backgroundImage: 'url(img/rokye-website/catalog/16.jpg)'}}><a className="stretched-link" href="real-estate-single.html" />
-                    <div className="position-absolute start-0 top-0 pt-3 ps-3"><span className="d-table badge bg-success mb-1">Verified</span></div>
-                    <div className="position-absolute end-0 top-0 pt-3 pe-3 zindex-5">
-                      <button className="btn btn-icon btn-light btn-xs text-primary rounded-circle shadow-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button>
-                    </div>
-                  </div>
-                  <div className="card-body position-relative pb-3">
-                    <h3 className="h6 mb-2 fs-base"><a className="nav-link stretched-link" href="real-estate-single.html">2 Bed Apartment | 1500 sq.ft</a></h3>
-                    <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
-                    <div className="border-bottom mb-2">
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-bed mt-n1 me-2 fs-lg align-middle" />Semi-furnished</li>
-                        <li className="col fw-normal"><i className="fi-users mt-n1 me-2 fs-lg align-middle" />Bachelor/Family</li>
-                      </ul>
-                    </div>
-                    <div className>
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-cash mt-n1 me-2 fs-lg align-middle" />₹24000 Rent</li>
-                        <li className="col fw-normal"><i className="fi-wallet mt-n1 me-2 fs-lg align-middle" />₹48000 Deposit</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/* Item*/}
-                <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                  <div className="card-img-top position-relative" style={{backgroundImage: 'url(img/rokye-website/catalog/16.jpg)'}}><a className="stretched-link" href="real-estate-single.html" />
-                    <div className="position-absolute start-0 top-0 pt-3 ps-3"><span className="d-table badge bg-success mb-1">Verified</span></div>
-                    <div className="position-absolute end-0 top-0 pt-3 pe-3 zindex-5">
-                      <button className="btn btn-icon btn-light btn-xs text-primary rounded-circle shadow-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button>
-                    </div>
-                  </div>
-                  <div className="card-body position-relative pb-3">
-                    <h3 className="h6 mb-2 fs-base"><a className="nav-link stretched-link" href="real-estate-single.html">2 Bed Apartment | 1500 sq.ft</a></h3>
-                    <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
-                    <div className="border-bottom mb-2">
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-bed mt-n1 me-2 fs-lg align-middle" />Semi-furnished</li>
-                        <li className="col fw-normal"><i className="fi-users mt-n1 me-2 fs-lg align-middle" />Bachelor/Family</li>
-                      </ul>
-                    </div>
-                    <div className>
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-cash mt-n1 me-2 fs-lg align-middle" />₹24000 Rent</li>
-                        <li className="col fw-normal"><i className="fi-wallet mt-n1 me-2 fs-lg align-middle" />₹48000 Deposit</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/* Item*/}
-                <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                  <div className="card-img-top position-relative" style={{backgroundImage: 'url(img/rokye-website/catalog/16.jpg)'}}><a className="stretched-link" href="real-estate-single.html" />
-                    <div className="position-absolute start-0 top-0 pt-3 ps-3"><span className="d-table badge bg-success mb-1">Verified</span></div>
-                    <div className="position-absolute end-0 top-0 pt-3 pe-3 zindex-5">
-                      <button className="btn btn-icon btn-light btn-xs text-primary rounded-circle shadow-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button>
-                    </div>
-                  </div>
-                  <div className="card-body position-relative pb-3">
-                    <h3 className="h6 mb-2 fs-base"><a className="nav-link stretched-link" href="real-estate-single.html">2 Bed Apartment | 1500 sq.ft</a></h3>
-                    <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
-                    <div className="border-bottom mb-2">
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-bed mt-n1 me-2 fs-lg align-middle" />Semi-furnished</li>
-                        <li className="col fw-normal"><i className="fi-users mt-n1 me-2 fs-lg align-middle" />Bachelor/Family</li>
-                      </ul>
-                    </div>
-                    <div className>
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-cash mt-n1 me-2 fs-lg align-middle" />₹24000 Rent</li>
-                        <li className="col fw-normal"><i className="fi-wallet mt-n1 me-2 fs-lg align-middle" />₹48000 Deposit</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/* Item*/}
-                <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                  <div className="card-img-top position-relative" style={{backgroundImage: 'url(img/rokye-website/catalog/16.jpg)'}}><a className="stretched-link" href="real-estate-single.html" />
-                    <div className="position-absolute start-0 top-0 pt-3 ps-3"><span className="d-table badge bg-success mb-1">Verified</span></div>
-                    <div className="position-absolute end-0 top-0 pt-3 pe-3 zindex-5">
-                      <button className="btn btn-icon btn-light btn-xs text-primary rounded-circle shadow-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button>
-                    </div>
-                  </div>
-                  <div className="card-body position-relative pb-3">
-                    <h3 className="h6 mb-2 fs-base"><a className="nav-link stretched-link" href="real-estate-single.html">2 Bed Apartment | 1500 sq.ft</a></h3>
-                    <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
-                    <div className="border-bottom mb-2">
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-bed mt-n1 me-2 fs-lg align-middle" />Semi-furnished</li>
-                        <li className="col fw-normal"><i className="fi-users mt-n1 me-2 fs-lg align-middle" />Bachelor/Family</li>
-                      </ul>
-                    </div>
-                    <div className>
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-cash mt-n1 me-2 fs-lg align-middle" />₹24000 Rent</li>
-                        <li className="col fw-normal"><i className="fi-wallet mt-n1 me-2 fs-lg align-middle" />₹48000 Deposit</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/* Item*/}
-                <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                  <div className="card-img-top position-relative" style={{backgroundImage: 'url(img/rokye-website/catalog/16.jpg)'}}><a className="stretched-link" href="real-estate-single.html" />
-                    <div className="position-absolute start-0 top-0 pt-3 ps-3"><span className="d-table badge bg-success mb-1">Verified</span></div>
-                    <div className="position-absolute end-0 top-0 pt-3 pe-3 zindex-5">
-                      <button className="btn btn-icon btn-light btn-xs text-primary rounded-circle shadow-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button>
-                    </div>
-                  </div>
-                  <div className="card-body position-relative pb-3">
-                    <h3 className="h6 mb-2 fs-base"><a className="nav-link stretched-link" href="real-estate-single.html">2 Bed Apartment | 1500 sq.ft</a></h3>
-                    <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
-                    <div className="border-bottom mb-2">
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-bed mt-n1 me-2 fs-lg align-middle" />Semi-furnished</li>
-                        <li className="col fw-normal"><i className="fi-users mt-n1 me-2 fs-lg align-middle" />Bachelor/Family</li>
-                      </ul>
-                    </div>
-                    <div className>
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-cash mt-n1 me-2 fs-lg align-middle" />₹24000 Rent</li>
-                        <li className="col fw-normal"><i className="fi-wallet mt-n1 me-2 fs-lg align-middle" />₹48000 Deposit</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/* Item*/}
-                <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
-                  <div className="card-img-top position-relative" style={{backgroundImage: 'url(img/rokye-website/catalog/16.jpg)'}}><a className="stretched-link" href="real-estate-single.html" />
-                    <div className="position-absolute start-0 top-0 pt-3 ps-3"><span className="d-table badge bg-success mb-1">Verified</span></div>
-                    <div className="position-absolute end-0 top-0 pt-3 pe-3 zindex-5">
-                      <button className="btn btn-icon btn-light btn-xs text-primary rounded-circle shadow-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button>
-                    </div>
-                  </div>
-                  <div className="card-body position-relative pb-3">
-                    <h3 className="h6 mb-2 fs-base"><a className="nav-link stretched-link" href="real-estate-single.html">2 Bed Apartment | 1500 sq.ft</a></h3>
-                    <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
-                    <div className="border-bottom mb-2">
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-bed mt-n1 me-2 fs-lg align-middle" />Semi-furnished</li>
-                        <li className="col fw-normal"><i className="fi-users mt-n1 me-2 fs-lg align-middle" />Bachelor/Family</li>
-                      </ul>
-                    </div>
-                    <div className>
-                      <ul className="list-unstyled row row-cols-lg-2 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
-                        <li className="col fw-normal"><i className="fi-cash mt-n1 me-2 fs-lg align-middle" />₹24000 Rent</li>
-                        <li className="col fw-normal"><i className="fi-wallet mt-n1 me-2 fs-lg align-middle" />₹48000 Deposit</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/* Pagination*/}
+
+                  {
+                    properties?.map((item, index)=><Property key={index} property={item}/>)
+                  }
+                  
                 <nav className="border-top pb-md-4 pt-4" aria-label="Pagination">
                   <ul className="pagination mb-1">
                     <li className="page-item d-sm-none"><span className="page-link page-link-static">1 / 5</span></li>
@@ -537,4 +292,14 @@ const Reviews = () => {
     );
 };
 
-export default Reviews;
+
+export async function getServerSideProps() {
+
+  const properties = await getData('/properties')
+  console.log(properties)
+  return {
+    props: {
+        properties
+    }
+  }
+}

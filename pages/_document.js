@@ -16,7 +16,6 @@ class MyDocument extends Document {
             type="image/x-icon"
             href="/images/logo.png"
           />
-          {/* ==================== google font ================  */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"

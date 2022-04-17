@@ -1,7 +1,3 @@
-
-
-
-
 export const FillData = [
     {
         name: "Basic info",
@@ -21,34 +17,52 @@ export const FillData = [
 ]
 
 
-
-
-
-
-export const adminSidebar = [
-    {
-        link: "/admin/category",
-        icon: "fas fa-list-alt",
-        name: "Category"
+export const propertyFields = {
+    basic:{
+        propertyCategory: null,
+        propertyType: null,
+        bedrooms: null,
+        bathrooms: null,
+        bikeParking: null,
+        carParking: null,
+        carpetArea: null,
+        superArea: null,
     },
-    {
-      link: "/admin/subcategory",
-      icon: "fas fa-stream",
-      name: "Sub Category"
+    location: {
+        houseNumber: null,
+        areaName: null,
+        state: null,
+        societyName: null,
+        city: null,
+        pinCode: null
     },
-    {
-        link: "/admin/nextcategory",
-        icon: "far fa-list-alt",
-        name: "Next Category"
+    details: {
+        floorNo: null,
+        facing: null,
+        furnishedStatus: null,
+        availability: null,
+        totalFloors: null,
+        balconies: null,
+        ageConstruction: null,
+        tenantsPreferred: null,
+        vegPermission: null,
+        petsPermission: null,
+        amenities:[],
+        description: null,
+        monthlyRent: null,
+        maintenanceCharges: null,
+        securityAmount: null,
+        basis: null
     },
-    {
-        link: "/admin/currency",
-        icon: "fas fa-dollar-sign",
-        name: "Currency"
+    media: {
+        propertyImage: null,
+        propertyVideo: null
     },
-    {
-        link: "/admin/reports",
-        icon: "fas fa-chart-bar",
-        name: "Reports"
-    }
-]
+    contact: {
+        firstName: null,
+        lastName: null,
+        phoneNumber: null,
+        email: null
+    },
+    position: 0
+}

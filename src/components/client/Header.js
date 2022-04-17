@@ -37,7 +37,7 @@ const Header = () => {
           <Link href="/"><a className="navbar-brand me-3 me-xl-4"><img className="d-block" src="/img/rokye-website/logotransparent.png" width={116} alt="Finder" /></a></Link>
           <button className="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon" /></button>
             <Link href="/signin"><a a className="nav-link text-primary ms-2 order-lg-3" role="button" aria-expanded="false"><i className="fi-user me-2" />Sign in</a></Link>
-            <Link href="/refer"><a className="btn btn-primary btn-sm ms-2 order-lg-3">₹ Refer &amp; Earn</a></Link>
+            <Link href="/referandearn"><a className="btn btn-primary btn-sm ms-2 order-lg-3">₹ Refer &amp; Earn</a></Link>
             <Link href="/add-property"><a className="btn btn-primary btn-sm ms-2 order-lg-3" href="job-board-post-resume-1.html"><i className="fi-plus me-2" />Add Property</a></Link>
           <div className="collapse navbar-collapse order-lg-2" id="navbarNav">
             <ul className="navbar-nav navbar-nav-scroll" style={{maxHeight: '35rem'}}>

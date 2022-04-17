@@ -45,6 +45,7 @@ export const postData = async (endPoint, formData, setDisable) => {
         return data
     } catch (error) {
         setDisable(false)
+        console.log(error)
         toast.error(`${error?.response?.data?.message}`)
         return error
     }

@@ -2,11 +2,8 @@ function About(){
     return(
         <section className="container mb-2 mb-xl-5 pb-lg-4">
         <h3>Why choose us?</h3>
-        {/* Features carousel*/}
-        <div className="tns-carousel-wrapper tns-nav-outside">
-          <div className="tns-carousel-inner" data-carousel-options="{&quot;loop&quot;: false, &quot;controls&quot;: false, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:1, &quot;gutter&quot;: 16},&quot;500&quot;:{&quot;items&quot;:2, &quot;gutter&quot;: 20},&quot;768&quot;:{&quot;items&quot;:3, &quot;gutter&quot;: 24}}}">
-            {/* Feature slide*/}
-            <div>
+          <div className="row tns-carousel-wrapper tns-nav-outside">
+            <div className="col-md-4">
               <div className="card border-0">
                 <div className="card-body">
                   <svg className="mb-3" xmlns="http://www.w3.org/2000/svg" width={48} height={48} fill="#fd5631">
@@ -17,8 +14,7 @@ function About(){
                 </div>
               </div>
             </div>
-            {/* Feature slide*/}
-            <div>
+            <div className="col-md-4">
               <div className="card border-0">
                 <div className="card-body">
                   <svg className="mb-3" xmlns="http://www.w3.org/2000/svg" width={48} height={48} fill="#fd5631">
@@ -29,8 +25,7 @@ function About(){
                 </div>
               </div>
             </div>
-            {/* Feature slide*/}
-            <div>
+            <div className="col-md-4">
               <div className="card border-0">
                 <div className="card-body">
                   <svg className="mb-3" xmlns="http://www.w3.org/2000/svg" width={48} height={48} fill="none">
@@ -42,7 +37,6 @@ function About(){
               </div>
             </div>
           </div>
-        </div>
       </section>
     )
 }

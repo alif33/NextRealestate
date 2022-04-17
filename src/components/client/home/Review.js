@@ -1,4 +1,15 @@
+import Slider from 'react-slick';
+
 function Review(){
+
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+
     return(
         <section className="container pt-lg-2 pb-5 mb-md-4" style={{marginTop: '-40px'}}>
         <div className="d-flex align-items-center justify-content-between mb-4 pb-2">
@@ -11,7 +22,7 @@ function Review(){
           </div>
           <div className="col-md-8 col-lg-7">
             <div className="tns-carousel-wrapper">
-              <div className="tns-carousel-inner" data-carousel-options="{&quot;mode&quot;: &quot;gallery&quot;, &quot;controlsContainer&quot;: &quot;#agents-carousel-controls&quot;, &quot;nav&quot;: false}">
+              <Slider {...settings}>
                 <div className="p-3">
                   <div className="card border-0">
                     <blockquote className="blockquote card-body">
@@ -42,7 +53,7 @@ function Review(){
                     </blockquote>
                   </div>
                 </div>
-              </div>
+              </Slider>
             </div>
             <div className="tns-carousel-controls justify-content-center justify-content-md-start my-2 ms-md-2" id="agents-carousel-controls">
               <button className="mx-2" type="button"><i className="fi-chevron-left" /></button>

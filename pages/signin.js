@@ -56,7 +56,7 @@ export default function SignIn() {
                                 <h3 className="h3 mb-4 text-primary">Sign in</h3>
                                 <form 
                                     className="needs-validation"
-                                    onSubmit={handleSubmit(onSubmit, onError)}  
+                                    onSubmit={ handleSubmit(onSubmit, onError) }  
                                 >
                                     <div className="mb-4">
                                         <label className="form-label mb-2" htmlFor="signin-email">Email address</label>

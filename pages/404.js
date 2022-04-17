@@ -3,7 +3,7 @@ import Layout from '../src/components/client/layout';
 export default function ErrorPage() {
   return (
     <Layout>
-      <div className='container' style={{ height: '80vh' }}>
+      {/* <div className='container' style={{ height: '80vh' }}>
         <div className='row d-flex justify-content-center'>
           <div className='col-4'>
             <div className='d-flex justify-content-center'>
@@ -40,7 +40,7 @@ export default function ErrorPage() {
             <h1 className="text-center"> This is 404 not found page</h1>
           </div>
         </div>
-      </div>
+      </div> */}
 
     </Layout>
   );
