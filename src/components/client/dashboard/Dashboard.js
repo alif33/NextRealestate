@@ -17,7 +17,6 @@ const Dashboard = () => {
             .then(res => {
                 setLoading(false)
                 setJobs(res)
-
             })
     }, [])
     console.log(jobs)
