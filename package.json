@@ -25,6 +25,7 @@
     "react-slick": "^0.28.1",
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
+    "slugify": "^1.6.5",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {

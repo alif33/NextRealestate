@@ -10,7 +10,8 @@ const categorySchema = new mongoose.Schema(
         categorySlug: {
             type: String,
             required: true,
-            // unique: true,
+            unique: true,
+            trim: true
         }
     },
     { timestamps: true }
