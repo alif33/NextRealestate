@@ -1,11 +1,11 @@
 
 import Head from 'next/head';
-import Layout from '../src/components/client/layout';
+import { useEffect } from 'react';
+import About from '../src/components/client/home/About';
 import Hero from '../src/components/client/home/Hero';
 import Recent from '../src/components/client/home/Recent';
-import About from '../src/components/client/home/About';
 import Review from '../src/components/client/home/Review';
-import { useEffect } from 'react';
+import Layout from '../src/components/client/layout';
 import { userAuthStatus } from '../__lib__/helpers/Cookiehandler';
  
 export default function Home() {

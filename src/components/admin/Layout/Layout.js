@@ -1,34 +1,32 @@
-
+import { Head } from "next/head";
 import Aside from "./Aside/Aside";
 import Content from "./Content/Content";
-import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-
+import Header from "./Header/Header";
 
 const Layout = ({ children }) => {
-    return (
-        <>
-            {/* <Toaster
+  return (
+    <>
+      <Head>
+          <title>Link up</title>
+      
+      </Head>
+      {/* <Toaster
                 position="top-center"
                 reverseOrder={false}
             /> */}
-            <div className="d-flex flex-column flex-root aside-minimize">
-                <div className="page d-flex flex-row flex-column-fluid">
-                    <Aside />
-                    <div className="wrapper d-flex flex-column flex-row-fluid">
-                        <Header />
-                        <Content>
-                            {children}
-                        </Content>
-                        <Footer />
-                    </div>
-
-                </div>
-
-            </div>
-
-        </>
-    );
+      <div className="d-flex flex-column flex-root aside-minimize">
+        <div className="page d-flex flex-row flex-column-fluid">
+          <Aside />
+          <div className="wrapper d-flex flex-column flex-row-fluid">
+            <Header />
+            <Content>{children}</Content>
+            <Footer />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Layout;
