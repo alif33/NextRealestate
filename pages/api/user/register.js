@@ -23,11 +23,6 @@ handler.post(async (req, res) => {
   res.send({
       success: true,
       message: 'Registered successfully'
-    // token,
-    // _id: user._id,
-    // name: user.name,
-    // email: user.email,
-    // isAdmin: user.isAdmin,
   });
 });
 

@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
 
-const orderSchema = new mongoose.Schema(
+const reviewSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId, 
-            ref: 'User', 
+            ref: 'user', 
             required: true 
         },
         rating: {
@@ -22,5 +22,5 @@ const orderSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-export default mongoose.models.Review || mongoose.model('Review', orderSchema);
+export default mongoose.models.Review || mongoose.model('Review', reviewSchema);
 

@@ -6,12 +6,9 @@ const handler = nc();
 
 handler.get(async (req, res) => {
   await db.connect();
-  const blogs = await Blog.find({});
-
-    return blogs;
-
-//   await db.disconnect();
-//   res.json(blogs);
+  const blogs = await Blog.find({}).populate('postedBy');
+  await db.disconnect();
+  res.send(blogs);
 });
 
 export default handler;

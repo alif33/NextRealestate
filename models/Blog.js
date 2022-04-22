@@ -22,9 +22,18 @@ const blogSchema = new mongoose.Schema(
             ref: 'Category', 
             required: true  
         },
-        tags: [
-            
-        ]
+        tags: {
+            type : Array , 
+            "default" : []
+        },
+        comments: {
+            type : Array , 
+            "default" : []
+        },
+        image: {
+            type: String,
+            required: true
+        }
     },
     { timestamps: true }
 );
