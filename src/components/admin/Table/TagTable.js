@@ -36,7 +36,7 @@ const TagTable = (props) => {
         <div className="col-12">
           <div className="card">
             <div className="card-header">
-              <h4 className="card-title">Category Table</h4>
+              <h4 className="card-title">Tag Table</h4>
             </div>
 
             {/* --------Create CategoryButton-------- Start */}
@@ -49,7 +49,7 @@ const TagTable = (props) => {
                   //   data-bs-toggle="modal"
                   onClick={() => showModal()}
                 >
-                  Add a new Category
+                  Create a new Tag
                 </a>
               </div>
             </div>
@@ -59,11 +59,53 @@ const TagTable = (props) => {
             <Modal2
               show={modal}
               close={closeModal}
-              handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
-              onError={onError}
-              register={register}
-            />
+              title="Create a new Tag"
+            //   handleSubmit={handleSubmit}
+            //   onSubmit={onSubmit}
+            //   onError={onError}
+            //   register={register}
+            >
+                <form
+                  id="editUserForm"
+                  className="row gy-1 pt-75"
+                  onsubmit="return false"
+                  noValidate="novalidate"
+                  // className="needs-validation"
+                  onSubmit={handleSubmit(onSubmit, onError)}
+                >
+                  <div className="col-12 col-md-6">
+                    <label className="form-label mb-1" htmlFor="category-name">
+                      Tag Name
+                    </label>
+                    <input
+                      {...register("tagName", {
+                        required: "Name is required.",
+                      })}
+                      className="form-control"
+                      type="name"
+                      id="category-name"
+                      placeholder="Enter tag name"
+                    />
+                  </div>
+                  <div className="col-12 text-center mt-2 pt-50">
+                    <button
+                      type="submit"
+                      className="btn btn-primary me-1 waves-effect waves-float waves-light"
+                    >
+                      Submit
+                    </button>
+                    <button
+                      type="reset"
+                      className="btn btn-outline-secondary waves-effect"
+                    //   data-bs-dismiss="modal"
+                    //   aria-label="Close"
+                      onClick={() => closeModal()}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+            </Modal2>
             <Backdrop show={modal} />
 
             {/* ------------------Modal----------end */}

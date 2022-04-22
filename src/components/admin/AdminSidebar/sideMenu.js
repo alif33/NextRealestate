@@ -1,5 +1,5 @@
 import {
-  CheckSquare, Circle, FileText, Home, List, Tag
+  CheckSquare, Circle, FileText, Home, List, Tag, BookOpen, Users
 } from "react-feather";
 
 export const menuItem = [
@@ -24,83 +24,18 @@ export const menuItem = [
       size: '140px',
       icon: <Tag/>,
      },
-     {id: 10,
-      url: '#',
-      title: 'Class Schedule ',
+     {id: 4,
+      url: '/admin/blog',
+      title: 'Blog',
       size: '140px',
-      icon: <FileText/>,
-      children: [
-          {id: 1,
-           url: '/admin/staff/add',
-           title: 'Add Staff',
-           icon: <Circle/>
-         },
-          {id: 2,
-           url: '/admin/staff/list',
-           title: 'Staff List',
-           icon: <Circle/>
-         },
-      ]
+      icon: <BookOpen/>,
      },
-     {id: 11,
-      url: '#',
-      title: 'Product',
+     {id: 4,
+      url: '/admin/blog',
+      title: 'Blog',
       size: '140px',
-      icon: <FileText/>,
-      children: [
-          {id: 1,
-           url: '/admin/product/add',
-           title: 'Add Product',
-           icon: <Circle/>
-         },
-          {id: 2,
-           url: '/admin/product/list',
-           title: 'Product List',
-           icon: <Circle/>
-         },
-      ]
-     },
-    {id: 4,
-     url: '#',
-     title: 'POS',
-     size: '100px',
-     icon: <CheckSquare/>,
-     children: [
-      {id: 1,
-       url: '/admin/pos/Sell',
-       title: 'Sell',
-       icon: <Circle/>
-     },
-     
-  ]
-    },
-    {id: 7,
-     url: '#',
-     title: 'Nutriation/Diet',
-     size: '211px',
-     icon: <FileText/>,
-     children: [
-         {id: 1,
-          url: '/admin/nutriation/diet/add',
-          title: 'Add',
-          icon: <Circle/>
-        },
-         {id: 2,
-          url: '/admin/invoice/preview',
-          title: 'Preview',
-          icon: <Circle/>
-        },
-         {id: 3,
-          url: '/admin/invoice/edit',
-          title: 'Edit',
-          icon: <Circle/>
-        },
-         {id: 4,
-          url: '/admin/invoice/add',
-          title: 'Add',
-          icon: <Circle/>
-        },
-     ]
-    }
+      icon: <BookOpen/>,
+     }
+  
   
 ]
