@@ -6,7 +6,7 @@ export const menuItem = [
     {id: 1,
      url: '/admin/dashboard',
      title: 'Dashboard',
-     height: '',
+    //  height: '',
      icon: <Home/>,
      children:[
          
