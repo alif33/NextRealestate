@@ -1,5 +1,5 @@
 import {
-  CheckSquare, Circle, FileText, Home
+  CheckSquare, Circle, FileText, Home, List
 } from "react-feather";
 
 export const menuItem = [
@@ -13,22 +13,10 @@ export const menuItem = [
      ]
     },
     {id: 2,
-      url: '#',
-      title: 'Members',
+      url: '/admin/categories',
+      title: 'Categories',
       size: '140px',
-      icon: <FileText/>,
-      children: [
-          {id: 1,
-           url: '/admin/member/add',
-           title: 'Add Member',
-           icon: <Circle/>
-         },
-          {id: 2,
-           url: '/admin/member/list',
-           title: 'Member List',
-           icon: <Circle/>
-         },
-      ]
+      icon: <List/>,
      },
      {id: 3,
       url: '#',

@@ -11,6 +11,8 @@ handler.post(async (req, res) => {
       categoryName
     } = req.body;
 
+    console.log("Request name is : ". categoryName)
+
     await db.connect();
         const category = new Category({
           categoryName,
