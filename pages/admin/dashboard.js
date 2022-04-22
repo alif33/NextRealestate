@@ -1,10 +1,11 @@
 import React from 'react';
 import AdminLayout from './../../src/components/admin/AdminLayout/AdminLayout';
+import CategoryTable from '../../src/components/admin/Table/CategoryTable';
 
 const Dashboard = () => {
     return (
         <AdminLayout>
-            <h1>Hello world</h1>
+            <CategoryTable></CategoryTable>
         </AdminLayout>
     );
 };
