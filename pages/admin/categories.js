@@ -22,9 +22,7 @@ const Categories = (props) => {
        };
  
        const closeModal = () => {
-     
          setModal(false);
-     
        };
 
 
