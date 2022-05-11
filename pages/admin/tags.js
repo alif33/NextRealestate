@@ -37,7 +37,14 @@ const Tag = () => {
 
   return (
     <AdminLayout>
-        <TagTable  modal={modal} showModal={showModal} closeModal={closeModal} handleSubmit={handleSubmit} onSubmit={onSubmit} onError={onError} register={register}/>
+        <TagTable  
+          modal={modal} showModal={showModal} 
+          closeModal={closeModal} 
+          handleSubmit={handleSubmit} 
+          onSubmit={onSubmit} 
+          onError={onError} 
+          register={register}
+        />
     </AdminLayout>
   )
 }

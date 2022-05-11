@@ -41,7 +41,7 @@ const CategoryTable = (props) => {
 
             {/* --------Create CategoryButton-------- Start */}
             <div className="card-body">
-              <div className="d-flex justify-content-left pt-2">
+              <div className="d-flex justify-content-end pt-2">
                 <a
                   href="#"
                   className="btn btn-primary me-1 waves-effect waves-float waves-light"
@@ -73,7 +73,7 @@ const CategoryTable = (props) => {
                   // className="needs-validation"
                   onSubmit={handleSubmit(onSubmit, onError)}
                 >
-                  <div className="col-12 col-md-6">
+                  <div className="col-12 col-md-12">
                     <label className="form-label mb-1" htmlFor="category-name">
                       Category Name
                     </label>
@@ -116,10 +116,9 @@ const CategoryTable = (props) => {
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Id</th>
-                    {/* <th>Status</th> */}
-                    <th>Actions</th>
+                    <th className="text-center" width="10%">Id</th>
+                    <th className="text-center" width="70%">Name</th>
+                    <th className="text-center" width="20%">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -127,16 +126,11 @@ const CategoryTable = (props) => {
                     categories.map((category) => {
                       return (
                         <tr key={category._id}>
-                          <td>
+                          <td>{category._id}</td>
+                          <td className="text-center">
                             <span className="fw-bold">{category.categoryName}</span>
                           </td>
-                          <td>{category._id}</td>
-                          {/* <td>
-                            <span className="badge rounded-pill badge-light-primary me-1">
-                              Active
-                            </span>
-                          </td> */}
-                          <td>
+                          <td className="text-center">
                             <div className="dropdown">
                               <button
                                 type="button"
