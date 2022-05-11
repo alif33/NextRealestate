@@ -18,7 +18,7 @@ export default function SignIn() {
 
     const onSubmit = data => {
         setDisable(true)
-        postData('/users/login', data, setDisable)
+        postData('/user/login', data, setDisable)
         .then(res=>{
             if(res?.success)
             {  
