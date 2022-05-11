@@ -15,10 +15,10 @@ function Recent(){
           <div className="d-flex align-items-center justify-content-between pb-2">
             <h2 className="h3 mt-md-4">Recently added</h2><a className="btn btn-link fw-normal ms-sm-3 p-0" href="city-guide-catalog.html">View all<i className="fi-arrow-long-right ms-2" /></a>
           </div>
-          <div className="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside mb-xxl-2">
+          <div className="tns-carousel-wrapper tns-controls-outside-xxl tns-nav-outside mb-xxl-2 overflow-hidden">
             <Slider {...settings}>
-              <div>
-                <div style={{ width: '99% !important'}} className="position-relative">
+              <div className='px-2'>
+                <div  className="position-relative">
                   <div className="position-relative mb-3">
                     <button className="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button><img className="rounded-3" src="img/rokye-website/catalog/09.jpg" alt="Article img" />
                   </div>
@@ -31,8 +31,8 @@ function Recent(){
               </div>
 
 
-              <div>
-                <div style={{ width: '99% !important'}} className="position-relative">
+              <div className='px-2'>
+                <div  className="position-relative">
                   <div className="position-relative mb-3">
                     <button className="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button><img className="rounded-3" src="img/rokye-website/catalog/08.jpg" alt="Article img" />
                   </div>
@@ -44,8 +44,8 @@ function Recent(){
                 </div>
               </div>
 
-              <div>
-                <div style={{ width: '99% !important'}} className="position-relative">
+              <div className='px-2'>
+                <div style={{ width: '95% !important'}} className="position-relative">
                   <div className="position-relative mb-3">
                     <button className="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button><img className="rounded-3" src="img/rokye-website/catalog/11.jpg" alt="Article img" />
                   </div>
@@ -57,8 +57,8 @@ function Recent(){
                 </div>
               </div>
 
-              <div>
-                <div style={{ width: '99% !important'}} className="position-relative">
+              <div className='px-2'>
+                <div style={{ width: '95% !important'}} className="position-relative">
                   <div className="position-relative mb-3">
                     <button className="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist"><i className="fi-heart" /></button><img className="rounded-3" src="img/rokye-website/catalog/10.jpg" alt="Article img" />
                   </div>

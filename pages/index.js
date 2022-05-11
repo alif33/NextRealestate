@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(async()=>{
    const user = await userAuthStatus();
    console.log(user)
-  })
+  },[])
   return (
     <>
       <Head>

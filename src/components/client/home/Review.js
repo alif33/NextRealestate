@@ -21,7 +21,7 @@ function Review(){
             <hr className="hr-vertical mx-auto" />
           </div>
           <div className="col-md-8 col-lg-7">
-            <div className="tns-carousel-wrapper">
+            <div className="tns-carousel-wrapper overflow-hidden">
               <Slider {...settings}>
                 <div className="p-3">
                   <div className="card border-0">
