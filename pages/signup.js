@@ -15,7 +15,7 @@ export default function SignUp(){
 
     const onSubmit = data => {
         setDisable(true)
-        postData('/users/register', data, setDisable)
+        postData('/user/register', data, setDisable)
         .then(res=>{
             if(res?.success)
             {  

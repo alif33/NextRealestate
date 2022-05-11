@@ -4,7 +4,6 @@ import AdminLayout from "./../../src/components/admin/AdminLayout/AdminLayout";
 import { postData } from "../../__lib__/helpers/HttpService";
 import { getData } from "../../__lib__/helpers/HttpService";
 import { useForm } from "react-hook-form";
-// import getCategories from '../api/categories'
 
 const Categories = (props) => {
   const {
@@ -17,9 +16,6 @@ const Categories = (props) => {
   const onError = (err) => showErr(err);
 
   const [categories, setCategories] = useState();
-
-  //  console.log(categories)
-
   const [modal, setModal] = useState(false);
  
   const showModal = () => {
@@ -40,11 +36,8 @@ const Categories = (props) => {
   }, []);
 
   const onSubmit = (data) => {
-    console.log("data is : ", data);
-    // setDisable(true)
-    postData("/admin/category", data, setDisable).then((res) => {
+     postData("/admin/category", data, setDisable).then((res) => {
       if (res?.success) {
-        console.log("category added successfully", res);
         closeModal();
       }
     });

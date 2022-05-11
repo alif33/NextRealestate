@@ -86,10 +86,18 @@ function Contact(){
               </div>
               <div className="col">
                 <label className="form-label" htmlFor="c-subject">I am*</label>
-                <select className="form-select form-select-lg" id="c-subject" required>
+                <select 
+                    {...register("role",
+                      {
+                          required: 'Role is required.'
+                      }
+                    )} 
+                    className="form-select form-select-lg" 
+                    id="c-subject" 
+                  >
                   <option value selected disabled>Choose</option>
-                  <option value="Subject 1">Owner</option>
-                  <option value="Subject 2">Tenant</option>
+                  <option value="OWNER">Owner</option>
+                  <option value="TENANT">Tenant</option>
                 </select>
               </div>
               <div className="col-12 w-100">
