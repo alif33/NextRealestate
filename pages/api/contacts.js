@@ -1,14 +1,14 @@
 import nc from 'next-connect';
 import db from '../../utils/db';
-import Category from '../../models/Category';
+import Contact from '../../models/Contact';
 
 const handler = nc();
 
 handler.get(async (req, res) => {
   await db.connect();
-  const category = await Category.find({});
+  const contacts = await Contact.find({});
   await db.disconnect();
-  res.json(category.reverse());
+  res.json(contacts.reverse());
 });
 
 export default handler;

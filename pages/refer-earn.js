@@ -1,11 +1,27 @@
-import { useEffect } from "react";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import Layout from "../src/components/client/layout";
+import { showErr } from '../__lib__/helpers/ErrHandler';
+import { postData } from '../__lib__/helpers/HttpService';
+import toast from 'react-hot-toast';
 
 const Refers = () => {
 
-    useEffect(() => {
-        
-    }, []);
+    const [ disable, setDisable ] = useState(false);
+    const { register, reset, handleSubmit, formState: { errors } } = useForm();
+    const onError = err => showErr(err);
+    
+    const onSubmit = data => {
+        setDisable(true)
+        postData('/refer', data, setDisable)
+        .then(res=>{
+            if(res?.success)
+            {  
+                toast.success(`${res.message}`);
+                reset();
+            }
+        })
+    }
 
     return (
         <Layout>
@@ -20,54 +36,94 @@ const Refers = () => {
                 <div className="row gy-4 overflow-hidden">
                     <div className="col-md-6"><img className="rounded-3" src="img/rokye-website/refer.png" alt="Cover" /></div>
                     <div className="col-xl-5 offset-xl-1 col-md-6">
-                    <h1 className="text-primary mb-md-4 mb-3">Refer &amp; Earn ₹250</h1>
-                    <p className="mb-4 pb-md-2 fs-lg">Earn in your UPI once your referral use our services.</p>
-                    <form className="needs-validation row row-cols-sm-2 row-cols-1 gy-sm-4 gy-3" noValidate>
-                        <div className="col">
-                        <label className="form-label" htmlFor="c-name">Your name*</label>
-                        <input 
-                            className="form-control form-control-lg" 
-                            id="c-name" 
-                            type="text"
-                        />
-                        <div className="invalid-tooltip mt-1">Please, enter your name</div>
-                        </div>
-                        <div className="col">
-                        <label className="form-label" htmlFor="c-phone">Your phone*</label>
-                        <input 
-                            className="form-control form-control-lg" 
-                            id="c-phone" 
-                            type="tel"
-                        />
-                        <div className="invalid-tooltip mt-1">Please, enter your phone</div>
-                        </div>
-                        <div className="col">
-                        <label className="form-label" htmlFor="c-name">Referral name*</label>
-                        <input 
-                            className="form-control form-control-lg" 
-                            id="c-name" 
-                            type="text"
-                        />
-                        <div className="invalid-tooltip mt-1">Please, enter your name</div>
-                        </div>
-                        <div className="col">
-                        <label className="form-label" htmlFor="c-phone">Referral phone*</label>
-                        <input className="form-control form-control-lg" id="c-phone" type="tel" required />
-                        <div className="invalid-tooltip mt-1">Please, enter your phone</div>
-                        </div>
-                        <div className="col-12 w-100">
-                        <label className="form-label" htmlFor="c-message">Message</label>
-                        <textarea className="form-control form-control-lg" id="c-message" rows={4} placeholder="Leave your message" required defaultValue={""} />
-                        <div className="invalid-tooltip mt-1">Please, leave your message</div>
-                        </div>
-                        <div className="form-check w-100" style={{marginLeft: '15px'}}>
-                        <input className="form-check-input" id="form-submit" type="checkbox" />
-                        <label className="form-check-label" htmlFor="agree-to-terms">I agree to the <a href="#">Terms of use</a> and <a href="#">Privacy policy</a></label>
-                        </div>
-                        <div className="col-12 w-100">
-                        <button className="btn btn-lg btn-primary w-sm-auto w-100" type="submit">Submit form</button>
-                        </div>
-                    </form>
+                        <h1 className="text-primary mb-md-4 mb-3">Refer &amp; Earn ₹250</h1>
+                        <p className="mb-4 pb-md-2 fs-lg">Earn in your UPI once your referral use our services.</p>
+                        <form 
+                            className="needs-validation row row-cols-sm-2 row-cols-1 gy-sm-4 gy-3" 
+                            onSubmit={handleSubmit(onSubmit, onError)} 
+                        >
+                            <div className="col">
+                                <label className="form-label" htmlFor="c-name">Your name*</label>
+                                <input
+                                    {...register("_name",
+                                        {
+                                            required: 'Your name is required.'
+                                        }
+                                    )} 
+                                    className="form-control form-control-lg" 
+                                    id="c-name" 
+                                    type="text"
+                                />
+                                <div className="invalid-tooltip mt-1">Please, enter your name</div>
+                            </div>
+                            <div className="col">
+                                <label className="form-label" htmlFor="c-phone">Your phone*</label>
+                                <input
+                                    {...register("_phone",
+                                        {
+                                            required: 'Your name is required.'
+                                        }
+                                    )} 
+                                    className="form-control form-control-lg" 
+                                    id="c-phone" 
+                                    type="tel"
+                                />
+                                <div className="invalid-tooltip mt-1">Please, enter your phone</div>
+                            </div>
+                            <div className="col">
+                                <label className="form-label" htmlFor="c-name">Referral name*</label>
+                                <input
+                                    {...register("name_",
+                                        {
+                                            required: 'Your name is required.'
+                                        }
+                                    )} 
+                                    className="form-control form-control-lg" 
+                                    id="c-name" 
+                                    type="text"
+                                />
+                                <div className="invalid-tooltip mt-1">Please, enter your name</div>
+                            </div>
+                            <div className="col">
+                                <label className="form-label" htmlFor="c-phone">Referral phone*</label>
+                                <input
+                                    {...register("phone_",
+                                        {
+                                            required: 'Your name is required.'
+                                        }
+                                    )}  
+                                    className="form-control form-control-lg" 
+                                    id="c-phone" 
+                                    type="tel" 
+                                    required 
+                                />
+                                <div className="invalid-tooltip mt-1">Please, enter your phone</div>
+                            </div>
+                            <div className="col-12 w-100">
+                                <label className="form-label" htmlFor="c-message">Message</label>
+                                <textarea
+                                    {...register("message",
+                                        {
+                                            required: 'Your name is required.'
+                                        }
+                                    )}  
+                                    className="form-control form-control-lg" 
+                                    id="c-message" 
+                                    rows={4} 
+                                    placeholder="Leave your message" 
+                                    required 
+                                    defaultValue={""} 
+                                />
+                                <div className="invalid-tooltip mt-1">Please, leave your message</div>
+                            </div>
+                            <div className="form-check w-100" style={{marginLeft: '15px'}}>
+                            <input className="form-check-input" id="form-submit" type="checkbox" />
+                            <label className="form-check-label" htmlFor="agree-to-terms">I agree to the <a href="#">Terms of use</a> and <a href="#">Privacy policy</a></label>
+                            </div>
+                            <div className="col-12 w-100">
+                            <button className="btn btn-lg btn-primary w-sm-auto w-100" type="submit">Submit form</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 </section>

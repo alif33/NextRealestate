@@ -1,25 +1,26 @@
 import mongoose from 'mongoose';
 
-const orderSchema = new mongoose.Schema(
+const referSchema = new mongoose.Schema(
     {
-        name: {
+        _name: {
             type: String,
             required: true,
             trim: true
         },
-        email: {
+        _phone: {
             type: String,
             required: true,
             trim: true
         },
-        phone: {
+        name_: {
             type: String,
             required: true,
             trim: true
         },
-        role: {
+        phone_: {
             type: String,
-            enum: ['OWNER', 'TENANT']
+            required: true,
+            trim: true
         },
         message: {
             type: String,
@@ -30,5 +31,5 @@ const orderSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-export default mongoose.models.Contact || mongoose.model('Contact', orderSchema);
+export default mongoose.models.Refer || mongoose.model('Refer', referSchema);
 
