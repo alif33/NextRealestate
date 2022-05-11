@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setLocation } from '../../../../store/property/actions';
 
-function Location(){
+function Location({isValid}){
 
     const dispatch = useDispatch();
     const { property }= useSelector(state=>state); 
     const { location } = property;
-
+   
+    const { areaName, city, houseNumber, pinCode, societyName, state } = location;
     return(
         <div className="bg-light rounded-3 p-4 p-md-5 mb-3">
             <h2 className="h4 mb-4"><i className="fi-info-circle text-primary fs-4 mt-n1 me-2 pe-1" />Location</h2>
@@ -21,6 +22,7 @@ function Location(){
                         type="text" id="pr-fn" 
                         placeholder="Enter your House/Flat number" 
                     />
+                      {!houseNumber &&  isValid && <div className='text-danger'>House number required</div>}
                 </div>
                 <div className="col-sm-6 mb-4">
                     <label className="form-label" htmlFor="pr-fn">Society or Project name<span className="text-danger">*</span></label>
@@ -32,6 +34,7 @@ function Location(){
                         type="text" id="pr-fn" 
                         placeholder="Enter Society or Project name"
                     />
+                      {!societyName &&  isValid && <div className='text-danger'>Society name required</div>}
                 </div>
                 <div className="col-sm-6 mb-4">
                     <label className="form-label" htmlFor="pr-fn">Area name<span className="text-danger">*</span></label>
@@ -43,6 +46,7 @@ function Location(){
                         type="text" id="pr-fn" 
                         placeholder="Enter area name"
                     />
+                      {!areaName &&  isValid && <div className='text-danger'>Area Number required</div>}
                 </div>
                 <div className="col-sm-6 mb-4">
                     <label className="form-label" htmlFor="pr-fn">City<span className="text-danger">*</span></label>
@@ -54,6 +58,7 @@ function Location(){
                         type="text" id="pr-fn" 
                         placeholder="Enter city name"
                     />
+                      {!city &&  isValid && <div className='text-danger'>City Name required</div>}
                 </div>
                 <div className="col-sm-6 mb-4">
                     <label className="form-label" htmlFor="pr-fn">State<span className="text-danger">*</span></label>
@@ -66,6 +71,7 @@ function Location(){
                         id="pr-fn" 
                         placeholder="Enter state name" 
                     />
+                      {!state &&  isValid && <div className='text-danger'>State is required</div>}
                 </div>
                 <div className="col-sm-6 mb-4">
                     <label className="form-label" htmlFor="pr-period-to">PIN code<span className="text-danger">*</span></label>
@@ -78,6 +84,7 @@ function Location(){
                         id="pr-fn" 
                         placeholder="Enter pin code number" 
                     />
+                      {!pinCode &&  isValid && <div className='text-danger'>Pin code is required</div>}
                 </div>
             </div>
       </div>

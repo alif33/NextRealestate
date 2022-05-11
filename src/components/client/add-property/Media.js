@@ -1,4 +1,10 @@
-function Media() {
+import { useDispatch, useSelector } from "react-redux";
+
+function Media({isValid}) {
+    const dispatch = useDispatch();
+    const { property }= useSelector(state=>state); 
+    const { media } = property;
+   
     return (
         <div className="bg-light rounded-3 p-4 p-md-5 mb-3">
             <h2 className="h4 mb-4"><i className="fi-image text-primary fs-4 mt-n1 me-2 pe-1" />Photos / video</h2>
@@ -10,6 +16,7 @@ function Media() {
                         </div>
                     </div>
                     <input className="file-uploader file-uploader-grid" type="file" multiple data-max-file-size="10MB" accept="image/png, image/jpeg, video/mp4, video/mov" data-label-idle="<div class=&quot;btn btn-primary mb-3&quot;><i class=&quot;fi-cloud-upload me-1&quot;></i>Upload photos / video</div><br>or drag them in" />
+                    {!media.propertyImage || !media.propertyVideo &&  isValid && <div className='text-danger'>Pin code is required</div>}
                 </div>
             </div>
         </div>

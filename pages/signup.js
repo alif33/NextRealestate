@@ -88,7 +88,7 @@ export default function SignUp(){
                                             }
                                         )}  
                                         className="form-control" 
-                                        type="tel" 
+                                        type="number" 
                                         id="signup-email" 
                                         placeholder="Enter phone"
                                     />
