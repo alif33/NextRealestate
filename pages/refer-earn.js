@@ -17,7 +17,7 @@ const Refers = () => {
                     <li className="breadcrumb-item active" aria-current="page">Refer &amp; Earn</li>
                     </ol>
                 </nav>
-                <div className="row gy-4">
+                <div className="row gy-4 overflow-hidden">
                     <div className="col-md-6"><img className="rounded-3" src="img/rokye-website/refer.png" alt="Cover" /></div>
                     <div className="col-xl-5 offset-xl-1 col-md-6">
                     <h1 className="text-primary mb-md-4 mb-3">Refer &amp; Earn ₹250</h1>
