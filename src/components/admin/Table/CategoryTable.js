@@ -59,11 +59,53 @@ const CategoryTable = (props) => {
             <Modal2
               show={modal}
               close={closeModal}
-              handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
-              onError={onError}
-              register={register}
-            />
+              title="Create a new category"
+              // handleSubmit={handleSubmit}
+              // onSubmit={onSubmit}
+              // onError={onError}
+              // register={register}
+            >
+              <form
+                  id="editUserForm"
+                  className="row gy-1 pt-75"
+                  onsubmit="return false"
+                  noValidate="novalidate"
+                  // className="needs-validation"
+                  onSubmit={handleSubmit(onSubmit, onError)}
+                >
+                  <div className="col-12 col-md-6">
+                    <label className="form-label mb-1" htmlFor="category-name">
+                      Category Name
+                    </label>
+                    <input
+                      {...register("categoryName", {
+                        required: "Name is required.",
+                      })}
+                      className="form-control"
+                      type="name"
+                      id="category-name"
+                      placeholder="Enter category name"
+                    />
+                  </div>
+                  <div className="col-12 text-center mt-2 pt-50">
+                    <button
+                      type="submit"
+                      className="btn btn-primary me-1 waves-effect waves-float waves-light"
+                    >
+                      Submit
+                    </button>
+                    <button
+                      type="reset"
+                      className="btn btn-outline-secondary waves-effect"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                      onClick={() => closeModal()}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
+            </Modal2>
             <Backdrop show={modal} />
 
             {/* ------------------Modal----------end */}
