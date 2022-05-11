@@ -37,7 +37,7 @@ const Categories = (props) => {
     };
 
     fetchData();
-  }, [categories]);
+  }, []);
 
   const onSubmit = (data) => {
     console.log("data is : ", data);
@@ -65,17 +65,5 @@ const Categories = (props) => {
     </AdminLayout>
   );
 };
-
-// export async function getStaticProps() {
-//     const categories = await getData('/categories');
-
-//     // console.log("categories are : ", categories);
-
-//     return {
-//       props: {
-//         categories: categories,
-//       },
-//     };
-//   }
 
 export default Categories;
