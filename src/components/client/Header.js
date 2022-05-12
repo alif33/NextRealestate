@@ -32,7 +32,7 @@ const Header = () => {
 
   return (
 
-<header className="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-scroll-header>
+<header className="navbar navbar-expand-lg navbar-light bg-light fixed-top" data-scroll-header style={{zIndex: '1'}}>
         <div className="container">
           <Link href="/"><a className="navbar-brand me-3 me-xl-4"><img className="d-block" src="/img/rokye-website/logotransparent.png" width={116} alt="Finder" /></a></Link>
           <button className="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span className="navbar-toggler-icon" /></button>

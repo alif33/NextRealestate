@@ -15,7 +15,7 @@ function Contact({ isValid }) {
      {
           <div className="row">
           <div className="col-sm-6 mb-4">
-            <label className="form-label" htmlFor="ap-fn">
+            <label className="form-label" htmlFor="firstName">
               First name <span className="text-danger">*</span>
             </label>
             <input
@@ -24,7 +24,7 @@ function Contact({ isValid }) {
               value={contact.firstName ? contact.firstName : ""}
               className="form-control"
               type="text"
-              id="ap-fn"
+              id="firstName"
               placeholder="Enter your first name"
             />
             {!firstName && isValid && (
@@ -32,7 +32,7 @@ function Contact({ isValid }) {
             )}
           </div>
           <div className="col-sm-6 mb-4">
-            <label className="form-label" htmlFor="ap-sn">
+            <label className="form-label" htmlFor="lastName">
               Last name <span className="text-danger">*</span>
             </label>
             <input
@@ -41,7 +41,7 @@ function Contact({ isValid }) {
               value={contact.lastName ? contact.lastName : ""}
               className="form-control"
               type="text"
-              id="ap-sn"
+              id="lastName"
               placeholder="Enter your last name"
             />
             {!lastName && isValid && (

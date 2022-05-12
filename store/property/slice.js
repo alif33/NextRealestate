@@ -71,6 +71,13 @@ export const propertySlice = createSlice({
                 ...state,
                 position: state.position - 1
             }
+        },
+        submitData: (state, action) => {
+
+            return {
+                ...state,
+                ...propertyFields
+            }
         }
     },
 })

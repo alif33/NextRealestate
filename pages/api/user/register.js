@@ -11,6 +11,8 @@ handler.post(async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
   const newUser = new User({
+    role: req.body.role,
+    phone: req.body.phoneNumber,
     name: req.body.name,
     email: req.body.email,
     password: hashedPassword,

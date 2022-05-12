@@ -1,3 +1,4 @@
+import { X } from "react-feather";
 import styles from "./Modal.module.css";
 const Modal = (props) => {
   const { show, title, close, save } = props;
@@ -6,41 +7,41 @@ const Modal = (props) => {
       {show && (
         <div
         className={styles.modal}
-        //   class="modal fade"
+        //   className="modal fade"
           id="exampleModalCenter"
-          tabindex="-1"
+          tabIndex="-1"
           role="dialog"
           aria-labelledby="exampleModalCenterTitle"
         //   aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLongTitle">
                   {title}
                 </h5>
                 <button
                   type="button"
-                  class="close"
+                  className="btn btn"
                   data-dismiss="modal"
                   aria-label="Close"
                   onClick={close}
                 >
-                  <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true"><X/></span>
                 </button>
               </div>
-              <div class="modal-body">{props.children}</div>
-              <div class="modal-footer">
+              <div className="modal-body">{props.children}</div>
+              <div className="modal-footer">
                 <button
                   type="button"
-                  class="btn btn-secondary"
+                  className="btn btn-secondary"
                   data-dismiss="modal"
                   onClick={close}
                 >
                   Close
                 </button>
                 {save && (
-                  <button type="button" class="btn btn-primary" onClick={save}>
+                  <button type="button" className="btn btn-primary" onClick={save}>
                     Save
                   </button>
                 )}
