@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import AdminLayout from "../../src/components/admin/AdminLayout/AdminLayout";
-import TagTable from "../../src/components/admin/Table/TagTable";
+import React, { useState, useEffect } from "react";
+import CategoryTable from "../../src/components/admin/Categories/CategoryTable";
+import AdminLayout from "./../../src/components/admin/AdminLayout/AdminLayout";
 import { postData } from "../../__lib__/helpers/HttpService";
 import { getData } from "../../__lib__/helpers/HttpService";
 import { useForm } from "react-hook-form";
 import { adminAuth } from "../../__lib__/helpers/requireAuthentication";
+import TagTable from "../../src/components/admin/Tags/TagTable";
 
-const Tag = () => {
+const Tags = (props) => {
   const {
     register,
     reset,
@@ -16,6 +17,7 @@ const Tag = () => {
   const [disable, setDisable] = useState(false);
   const onError = (err) => showErr(err);
 
+  const [categories, setCategories] = useState();
   const [modal, setModal] = useState(false);
 
   const showModal = () => {
@@ -26,12 +28,18 @@ const Tag = () => {
     setModal(false);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getData("/categories");
+      setCategories(data);
+    };
+
+    fetchData();
+  }, []);
+
   const onSubmit = (data) => {
-    console.log("data is : ", data);
-    // setDisable(true)
-    postData("/admin/tag", data, setDisable).then((res) => {
+    postData("/admin/category", data, setDisable).then((res) => {
       if (res?.success) {
-        console.log(res.message);
         closeModal();
       }
     });
@@ -40,46 +48,26 @@ const Tag = () => {
   return (
     <AdminLayout>
       <div className="content-header row">
-        {/* path */}
+
         <div className="content-header-left col-md-9 col-12 mb-2">
-          <div className="row breadcrumbs-top">
+          <div className="row ">
             <div className="col-12">
-              <h2 className="content-header-title float-start mb-0">Product</h2>
-              <div className="breadcrumb-wrapper">
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <a href="index.html">Dashboard</a>
-                  </li>
-                  <li className="breadcrumb-item">
-                    <a href="#">Product</a>
-                  </li>
-                  <li className="breadcrumb-item active">
-                    <a href="#">Add Product</a>
-                  </li>
-                </ol>
-              </div>
+              <h2 className="content-header-title float-start mb-0">
+                Tags
+              </h2>
             </div>
           </div>
-        </div>
-        {/* /path */}
+        </div> 
+       
       </div>
       <div className="content-body">
-        <TagTable
-          modal={modal}
-          showModal={showModal}
-          closeModal={closeModal}
-          handleSubmit={handleSubmit}
-          onSubmit={onSubmit}
-          onError={onError}
-          register={register}
-        />
+       <TagTable/>
       </div>
     </AdminLayout>
   );
 };
 
-export default Tag;
-
+export default Tags;
 export const getServerSideProps = adminAuth((context) => {
   return {
     props: {},

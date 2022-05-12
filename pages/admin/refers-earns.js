@@ -12,7 +12,7 @@ const RefersEarns = () => {
           <div className="row ">
             <div className="col-12">
               <h2 className="content-header-title float-start mb-0">
-                Refers and Earn
+                Refers and Earns
               </h2>
             </div>
           </div>
