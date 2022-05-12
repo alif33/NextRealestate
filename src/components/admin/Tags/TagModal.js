@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
-import { setCategories } from "../../../../store/catrgories/actions";
 import { setTags } from "../../../../store/tags/actions";
 import { authPost } from "../../../../__lib__/helpers/HttpService";
 import Modals from "../Modals/Modals";
@@ -61,11 +60,11 @@ const TagModal = ({ trigger, setTrigger }) => {
                 name="tagName"
                 className="form-control add-credit-card-mask"
                 type="text"
-                placeholder="Enter category name"
+                placeholder="Enter Tag name"
               />
             </div>
-            {errors.categoryName && (
-              <div className="text-danger">Please enter category name</div>
+            {errors.tagName && (
+              <div className="text-danger"> Tag name requird</div>
             )}
           </div>
           <div className="col-12 text-center">

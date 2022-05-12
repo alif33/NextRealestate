@@ -11,7 +11,7 @@ export const tagSlice = createSlice({
         setTags: (state, action) => {
             return {
                 ...state,
-                setTags: action.payload,
+                tagList: action.payload,
                 isLoading: false
             }
         },

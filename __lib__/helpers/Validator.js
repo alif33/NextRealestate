@@ -1,6 +1,5 @@
 import parse from 'html-react-parser'
 import React from 'react'
-import { useLocation } from 'react-router-dom';
 export const LowerCase = /(.*[a-z].*)/
 export const UpperCase = /(.*[A-Z].*)/
 export const Digit = /(.*\d.*)/

@@ -1,25 +1,28 @@
 import React from "react";
-
-const ReferEarnCard = () => {
+import dateFormat from "dateformat";
+const ReferEarnCard = ({ refer }) => {
   return (
-    <div className="col-12 col-md-4 col-lg-3">
+    <div className="col-12">
       <div className="card mb-4">
         <div className="card-body">
-          <h4 className="card-title">Card title</h4>
-          <h6 className="card-subtitle text-muted mb-2">Card subtitle</h6>
-          <p className="card-text">
-            {" "}
-            Some quick example text to build on the card title and make up the
-            bulk of the content.{" "}
-          </p>
-          <a href="#" target="_self" className="card-link">
-            {" "}
-            Card link{" "}
-          </a>
-          <a href="#" target="_self" className="card-link">
-            {" "}
-            Another link{" "}
-          </a>
+          <div className="d-flex justify-content-between">
+            <div className="w-75 pe-2">
+              <div className="d-flex justify-content-between">
+                <h6 className="card-title">
+                  {refer._name} <small className="text-success">Client</small>
+                </h6>
+                <h6 className="text-warning">{dateFormat(refer.createdAt, "mmm d, yyyy")}</h6>
+              </div>
+              <h6 className="card-title mb-1">Phone: {refer._phone}</h6>
+              <p className="card-text">{refer.message}</p>
+            </div>
+            <div className="w-25 border-start ps-2">
+              <h6 className="card-title mb-1">
+                {refer.name_} <small className="text-success">Referral</small>
+              </h6>
+              <h6 className="card-title">Phone: {refer.phone_}</h6>
+            </div>
+          </div>
         </div>
       </div>
     </div>

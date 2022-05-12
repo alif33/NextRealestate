@@ -15,6 +15,7 @@ const TagTable = (props) => {
   const { tags } = useSelector((state) => state);
   const dispatch = useDispatch();
   const { tagList } = tags;
+  console.log(tags)
   useEffect(() => {
     dispatch(setTags());
   }, []);
@@ -26,13 +27,13 @@ const TagTable = (props) => {
           <div className="card">
             <div className="card-header">
               <div className="">
-                <h4 className="card-title">Category Lists</h4>
+                <h4 className="card-title">Tag Lists</h4>
               </div>
               <button
                 onClick={() => setTrigger(true)}
                 className="btn btn-primary"
               >
-                Add Category
+                Add Tag
               </button>
             </div>
             {tagList?.length > 0 ? (

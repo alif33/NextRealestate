@@ -20,7 +20,7 @@ const TagTableList = ({ data }) => {
       <tr>
         
         <td>{data._id}</td>
-        <td></td>
+        <td>{data.tagName}</td>
         <td>
           <div className="dropdown">
             <button

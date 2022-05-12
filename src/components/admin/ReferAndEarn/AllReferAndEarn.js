@@ -1,29 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { getUserData } from "../../../../__lib__/helpers/HttpService";
-import Cookies from "universal-cookie";
+import { getData, getUserData } from "../../../../__lib__/helpers/HttpService";
 import ReferEarnCard from "./ReferEarnCard";
 
 const AllReferAndEarn = () => {
-  const cookie = new Cookies();
-  const [contacts, setContacts] = useState([]);
-  const admin = cookie.get("_admin");
+  const [refers, setRefers] = useState([]);
+
 
   useEffect(() => {
-    getUserData("/admin/contacts", admin.token).then((res) => setContacts(res));
+    getData("/refers").then((res) => setRefers(res));
   }, []);
 
-  console.log(contacts);
+  console.log(refers);
   return (
     <secttion>
       <div className="row">
-        <ReferEarnCard/>
-        <ReferEarnCard/>
-        <ReferEarnCard/>
-        <ReferEarnCard/>
-        <ReferEarnCard/>
-        <ReferEarnCard/>
-        <ReferEarnCard/>
-        <ReferEarnCard/>
+        {refers.length > 0 && refers?.map((refer,i) => <ReferEarnCard refer={refer} key={i}/>)}
       </div>
     </secttion>
   );
