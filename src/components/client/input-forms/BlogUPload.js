@@ -23,8 +23,8 @@ const BlogUPload = (props) => {
           </div>
         </form> */}
 
-      <form action="/action_page.php">
-        <label for="fname">Blog Title</label>
+      <form>
+        <label htmlFor="fname">Blog Title</label>
         <input
           type="text"
           id="fname"
@@ -35,7 +35,7 @@ const BlogUPload = (props) => {
           className={styles.input1}
         />
 
-        <label for="lname">Blog Description</label>
+        <label htmlFor="lname">Blog Description</label>
         <textarea
           type="text-area"
           id="lname"
@@ -46,7 +46,7 @@ const BlogUPload = (props) => {
           onChange={(e) => setDescription(e.target.value)}
         />
 
-        <label for="lname">Upload photo</label>
+        <label htmlFor="lname">Upload photo</label>
         <input
           type="file"
           className={styles.input1}
@@ -55,7 +55,7 @@ const BlogUPload = (props) => {
           onChange={imageHandler}
         />
 
-        <label className={styles.selector} for="country">
+        <label className={styles.selector} htmlFor="country">
           Category
         </label>
         <select
