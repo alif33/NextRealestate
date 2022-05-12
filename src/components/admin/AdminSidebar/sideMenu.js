@@ -32,7 +32,7 @@ export const menuItem = [
      },
      {id: 4,
       url: '/admin/refers-earns',
-      title: 'Refers & Earns',
+      title: 'Refers',
       size: '140px',
       icon: <BookOpen/>,
      }
