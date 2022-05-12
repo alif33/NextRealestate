@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.8",
     "@reduxjs/toolkit": "^1.8.0",
     "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
@@ -27,7 +28,8 @@
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
     "slugify": "^1.6.5",
-    "universal-cookie": "^4.0.4"
+    "universal-cookie": "^4.0.4",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "eslint": "8.11.0",

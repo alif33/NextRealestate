@@ -40,6 +40,7 @@ function Contact() {
       });
     }
   };
+  console.log(errors.email)
   return (
     <Layout>
       <section className="container my-5 pt-lg-5 pt-4 pb-lg-5">
@@ -112,18 +113,22 @@ function Contact() {
               </div>
               <div className="col">
                 <label className="form-label" htmlFor="c-email">
-                  Email*
+                  Email<span className="text-danger">*</span>
                 </label>
                 <input
                   {...register("email", {
                     required: "Email is required.",
+                    pattern: /\S+@\S+\.\S+/
                   })}
                   className="form-control form-control-lg"
                   id="c-email"
-                  type="email"
+                  type="text"
                 />
-                {errors.email && (
+                {errors?.email?.type === 'required' && (
                   <span className="text-danger">{errors.email.message}</span>
+                )}
+                {errors?.email?.type === 'pattern' && (
+                  <span className="text-danger">Invalid email</span>
                 )}
                 <div className="invalid-tooltip mt-1">
                   Please, enter your email

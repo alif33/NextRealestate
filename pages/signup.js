@@ -6,9 +6,16 @@ import { showErr } from "../__lib__/helpers/ErrHandler";
 import { postData } from "../__lib__/helpers/HttpService";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+
+
+
+
 
 export default function SignUp() {
   const [disable, setDisable] = useState(false);
+
   const {
     register,
     reset,
@@ -168,6 +175,7 @@ export default function SignUp() {
                     <input
                       {...register("email", {
                         required: true,
+                        pattern: /\S+@\S+\.\S+/
                       })}
                       className="form-control"
                       type="text"
@@ -175,8 +183,11 @@ export default function SignUp() {
                       placeholder="Enter email"
                       autoComplete="off"
                     />
-                    {errors.email && (
+                    {errors?.email?.type === 'required' && (
                       <span className="text-danger">Email is required.</span>
+                    )}
+                    {errors?.email?.type === 'pattern' && (
+                      <span className="text-danger">Invalid email</span>
                     )}
                   </div>
                   <div className="mb-4">
@@ -186,7 +197,7 @@ export default function SignUp() {
                     <div className="password-toggle">
                       <input
                         {...register("password", {
-                          required: "Password is required.",
+                          required: true,
                         })}
                         className="form-control"
                         type="password"
@@ -194,6 +205,10 @@ export default function SignUp() {
                         placeholder="Enter password"
                         autoComplete="off"
                       />
+                       {errors?.password?.type === 'required' && (
+                      <span className="text-danger">Password is required.</span>
+                    )}
+                     
                       <label
                         className="password-toggle-btn"
                         aria-label="Show/hide password"
