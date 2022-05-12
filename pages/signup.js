@@ -9,23 +9,25 @@ import { useRouter } from 'next/router';
 
 export default function SignUp(){
     const [ disable, setDisable ] = useState(false);
-    const { register, reset, handleSubmit, formState: { errors } } = useForm();
+    const { register, reset, handleSubmit, formState: { errors, watch } } = useForm();
     const onError = err => showErr(err);
     const router = useRouter();
+    console.log(watch);
 
     const onSubmit = data => {
-        setDisable(true)
-        postData('/user/register', data, setDisable)
-        .then(res=>{
-            if(res?.success)
-            {  
-                toast.success(`${res.message}`);
-                reset();
-                router.push({
-                    pathname: '/signin'
-                })
-            }
-        })
+        // setDisable(true)
+        console.log(data)
+        // postData('/user/register', data, setDisable)
+        // .then(res=>{
+        //     if(res?.success)
+        //     {  
+        //         toast.success(`${res.message}`);
+        //         reset();
+        //         router.push({
+        //             pathname: '/signin'
+        //         })
+        //     }
+        // })
     }
 
     return (
@@ -59,18 +61,22 @@ export default function SignUp(){
                             >
                                 <div className="mb-4">
                                     <label className="form-label" htmlFor="pr-study-field">I am<span className="text-danger" /></label>
-                                    <select className="form-select form-select-lg" id="pr-education-level" required>
+                                    <select 
+                                    name='type'
+                                        {...register('type', {required: true})}
+                                    className="form-select form-select-lg" id="pr-education-level">
                                     <option value disabled selected>Choose</option>
-                                    <option value="Associate Degree">Owner</option>
-                                    <option value="Associate Degree">Tenant </option>
+                                    <option value="owner">Owner</option>
+                                    <option value="tenant">Tenant </option>
                                     </select>
+                                    {errors.type && <span>This field is required</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label className="form-label" htmlFor="signup-name">Full name</label>
                                     <input
                                         {...register("name",
                                             {
-                                                required: 'Name is required.'
+                                                required: true
                                             }
                                         )} 
                                         className="form-control" 
@@ -78,34 +84,39 @@ export default function SignUp(){
                                         id="signup-name" 
                                         placeholder="Enter name"
                                     />
+                                    {errors.name && <span className='text-danger'>Name is required</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label className="form-label" htmlFor="signup-name">Phone number</label>
                                     <input
                                         {...register("phone",
                                             {
-                                                required: 'Phone number is required.'
+                                                required: true
                                             }
                                         )}  
                                         className="form-control" 
-                                        type="number" 
+                                        type="tel" 
                                         id="signup-email" 
                                         placeholder="Enter phone"
+                                        autoComplete='false'
+                                        
                                     />
+                                    {errors.name && <span className='text-danger'>Phone number is required</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label className="form-label" htmlFor="signup-name">Email</label>
                                     <input
                                         {...register("email",
                                             {
-                                                required: 'Email is required.'
+                                                required: true
                                             }
                                         )}   
                                         className="form-control" 
-                                        type="email" 
+                                        type="text" 
                                         id="signup-email" 
                                         placeholder="Enter email"
                                     />
+                                      {errors.email && <span className='text-danger'>Email is required.</span>}
                                 </div>
                                 <div className="mb-4">
                                     <label className="form-label" htmlFor="signup-name">Password</label>

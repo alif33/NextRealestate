@@ -60,4 +60,7 @@ export const forwordStep = () => (dispatch) => {
 export const backwordStep = () => (dispatch) => {
     dispatch(slice.backwordStep())
 }
+export const submitData = () => (dispatch) => {
+    dispatch(slice.submitData())
+}
 

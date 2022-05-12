@@ -544,7 +544,6 @@ function Details({ isValid }) {
             </div>
           </div>
         </div>
-        {!details.amenities.length > 0 &&  isValid && <div className='text-danger'>Select amenities required</div>}
         {/* Description */}
         <div className="border-top pt-4">
           <label className="form-label fw-bold pb-1 mb-2">Description</label>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import Contact from "../src/components/client/add-property/Contact";
 import Details from "../src/components/client/add-property/Details";
@@ -6,7 +7,7 @@ import Info from "../src/components/client/add-property/Info";
 import Location from "../src/components/client/add-property/Location";
 import Media from "../src/components/client/add-property/Media";
 import Layout from "../src/components/client/layout";
-import { backwordStep, forwordStep } from "../store/property/actions";
+import { backwordStep, forwordStep, submitData } from "../store/property/actions";
 import { FillData, propertyFields } from "../__lib__/config/index";
 import { postData } from "../__lib__/helpers/HttpService";
 
@@ -16,7 +17,7 @@ function AddProperty() {
   const [isValid, setIsValid] = useState(false);
   const dispatch = useDispatch();
   const { property } = useSelector((state) => state);
-  const { basic } = property;
+  const { basic, location, details, contact } = property;
   const {
     propertyCategory,
     propertyType,
@@ -27,22 +28,87 @@ function AddProperty() {
     carpetArea,
     superArea,
   } = basic;
-  const handleValidation = () => {
-    if (
-      !propertyCategory ||
-      !propertyType ||
-      !bedrooms ||
-      !bathrooms ||
-      !bikeParking ||
-      !carParking ||
-      carpetArea === '' ? true : false ||
-      superArea === '' ? true : false
-    ) {
-      setIsValid(true)
-      alert('is not working')
 
-    } else {
+  const { areaName, city, houseNumber, pinCode, societyName, state } = location;
+
+  const {
+    ageConstruction,
+    availability,
+    balconies,
+    basis,
+    description,
+    facing,
+    floorNo,
+    furnishedStatus,
+    maintenanceCharges,
+    monthlyRent,
+    petsPermission,
+    securityAmount,
+    tenantsPreferred,
+    totalFloors,
+    vegPermission,
+  } = details;
+  const { email, firstName, lastName, phoneNumber } = contact;
+  const handleValidation = () => {
+    if (property.position === 0) {
+      if (
+        !propertyCategory ||
+        !propertyType ||
+        !bedrooms ||
+        !bathrooms ||
+        !bikeParking ||
+        !carParking ||
+        carpetArea === ""
+          ? true
+          : false || superArea === ""
+          ? true
+          : false
+      ) {
+        setIsValid(true);
+      } else {
         dispatch(forwordStep());
+        setIsValid(false);
+      }
+    } else if (property.position === 1) {
+      if (
+        !areaName ||
+        !city ||
+        !houseNumber ||
+        !pinCode ||
+        !societyName ||
+        !state
+      ) {
+        setIsValid(true);
+      } else {
+        dispatch(forwordStep());
+        setIsValid(false);
+      }
+    } else if (property.position === 2) {
+      if (
+        !ageConstruction ||
+        !availability ||
+        !basis ||
+        !description ||
+        !facing ||
+        !floorNo ||
+        !balconies ||
+        !furnishedStatus ||
+        !maintenanceCharges ||
+        !monthlyRent ||
+        !petsPermission ||
+        !securityAmount ||
+        !tenantsPreferred ||
+        !totalFloors ||
+        !vegPermission
+      ) {
+        setIsValid(true);
+      } else {
+        dispatch(forwordStep());
+        setIsValid(false);
+      }
+    } else if (property.position === 3) {
+      dispatch(forwordStep());
+      setIsValid(false);
     }
   };
 
@@ -53,16 +119,16 @@ function AddProperty() {
         return <Info isValid={isValid} />;
         break;
       case 1:
-        return <Location />;
+        return <Location isValid={isValid} />;
         break;
       case 2:
-        return <Details />;
+        return <Details isValid={isValid} />;
         break;
       case 3:
-        return <Media />;
+        return <Media isValid={isValid} />;
         break;
       case 4:
-        return <Contact />;
+        return <Contact isValid={isValid} />;
         break;
       default:
         return <></>;
@@ -71,15 +137,20 @@ function AddProperty() {
 
   const onSubmit = (data) => {
     setDisable(true);
-    postData(
-      "/property",
-      { ...property.basic, ...property.location, ...property.details },
-      setDisable
-    ).then((res) => {
-      if (res?.success) {
-        console.log("success");
-      }
-    });
+    if (!firstName || !lastName || !phoneNumber || !email) {
+      setIsValid(true);
+    } else {
+      postData(
+        "/property",
+        { ...property.basic, ...property.location, ...property.details },
+        setDisable
+      ).then((res) => {
+        if (res?.success) {
+          dispatch(submitData())
+         toast.success(res.message)
+        }
+      });
+    }
   };
 
   return (
