@@ -4,6 +4,7 @@ import TagTable from "../../src/components/admin/Table/TagTable";
 import { postData } from "../../__lib__/helpers/HttpService";
 import { getData } from "../../__lib__/helpers/HttpService";
 import { useForm } from "react-hook-form";
+import { adminAuth } from "../../__lib__/helpers/requireAuthentication";
 
 const Tag = () => {
   const {
@@ -78,3 +79,9 @@ const Tag = () => {
 };
 
 export default Tag;
+
+export const getServerSideProps = adminAuth((context) => {
+  return {
+    props: {},
+  };
+});

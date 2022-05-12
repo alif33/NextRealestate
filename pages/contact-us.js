@@ -16,11 +16,11 @@ function Contact() {
   } = useForm();
 
   const onSubmit = (data) => {
+    
     if (data.role === "true") {
       setDisable(false);
     }
-    if (data.isAgree && data.role === ("owner" || "tenant")) {
-      console.log('click hoche')
+    if (data.isAgree && data.role === "owner" || "tenant") {
       setDisable(true);
       const newData = {
         name: data.name,
@@ -40,7 +40,6 @@ function Contact() {
       });
     }
   };
-  console.log(errors.email)
   return (
     <Layout>
       <section className="container my-5 pt-lg-5 pt-4 pb-lg-5">
@@ -102,7 +101,7 @@ function Contact() {
                   })}
                   className="form-control form-control-lg"
                   id="c-phone"
-                  type="tel"
+                  type="number"
                 />
                 {errors.phone && (
                   <span className="text-danger">{errors.phone.message}</span>
