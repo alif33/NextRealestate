@@ -17,7 +17,6 @@ const AdminLayout = ({ children }) => {
   return (
     <>
     <Head>
-    
       <title>Admin</title>
       <link rel="stylesheet" href="/css2/bootstrap-extended.css"/>
       <link rel="stylesheet" href="/css2/bootstrap.css"/>

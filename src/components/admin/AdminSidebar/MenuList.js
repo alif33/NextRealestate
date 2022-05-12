@@ -24,7 +24,7 @@ const MenuList = ({item}) => {
                   onClick={ () => setSubOpen(!subOpen)}
               >
                   <a
-                    className="d-flex align-items-center"
+                    className="d-flex align-items-center text-decoration-none"
                   >
                     {item.icon}
                     <span
