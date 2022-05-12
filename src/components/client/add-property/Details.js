@@ -45,7 +45,7 @@ function Details({ isValid }) {
       </h2>
       <div className="row">
         <div className="col-sm-6 mb-4">
-          <label className="form-label" htmlFor="pr-education-level">
+          <label className="form-label" htmlFor="floorNo">
             Floor no<span className="text-danger">*</span>
           </label>
           <select
@@ -53,7 +53,7 @@ function Details({ isValid }) {
             onChange={(e) => dispatch(setDetails(e))}
             value={details.floorNo ? details.floorNo : ""}
             className="form-select form-select-lg"
-            id="pr-education-level"
+            id="floorNo"
           >
             <option selected>Choose</option>
             <option value="-1">Basement</option>
@@ -68,7 +68,7 @@ function Details({ isValid }) {
           {!floorNo &&  isValid && <div className='text-danger'>Floor number is required</div>}
         </div>
         <div className="col-sm-6 mb-4">
-          <label className="form-label" htmlFor="pr-education-level">
+          <label className="form-label" htmlFor="totalFloors">
             Total floors<span className="text-danger">*</span>
           </label>
           <select
@@ -76,7 +76,7 @@ function Details({ isValid }) {
             onChange={(e) => dispatch(setDetails(e))}
             value={details.totalFloors ? details.totalFloors : ""}
             className="form-select form-select-lg"
-            id="pr-education-level"
+            id="totalFloors"
           >
             <option selected>Choose</option>
             <option value="1">1</option>
@@ -94,7 +94,7 @@ function Details({ isValid }) {
           {!totalFloors &&  isValid && <div className='text-danger'>Total Floor is required</div>}
         </div>
         <div className="col-sm-6 mb-4">
-          <label className="form-label" htmlFor="pr-study-field">
+          <label className="form-label" htmlFor="facing">
             Facing<span className="text-danger">*</span>
           </label>
           <select
@@ -102,7 +102,7 @@ function Details({ isValid }) {
             onChange={(e) => dispatch(setDetails(e))}
             value={details.facing ? details.facing : ""}
             className="form-select form-select-lg"
-            id="pr-education-level"
+            id="facing"
           >
             <option selected>Choose</option>
             <option value="East">East</option>
@@ -117,7 +117,7 @@ function Details({ isValid }) {
           {!facing &&  isValid && <div className='text-danger'>Facing is required</div>}
         </div>
         <div className="col-sm-6 mb-4">
-          <label className="form-label" htmlFor="pr-study-field">
+          <label className="form-label" htmlFor="balconies">
             Balconies<span className="text-danger">*</span>
           </label>
           <select
@@ -125,7 +125,7 @@ function Details({ isValid }) {
             onChange={(e) => dispatch(setDetails(e))}
             value={details.balconies ? details.balconies : ""}
             className="form-select form-select-lg"
-            id="pr-education-level"
+            id="balconies"
           >
             <option selected>Choose</option>
             <option value="Associate Degree">1</option>
@@ -136,7 +136,7 @@ function Details({ isValid }) {
           {!balconies &&  isValid && <div className='text-danger'>Balconies is required</div>}
         </div>
         <div className="col-sm-6 mb-4">
-          <label className="form-label" htmlFor="pr-study-field">
+          <label className="form-label" htmlFor="furnishedStatus">
             Furnished Status<span className="text-danger">*</span>
           </label>
           <select
@@ -144,7 +144,7 @@ function Details({ isValid }) {
             onChange={(e) => dispatch(setDetails(e))}
             value={details.furnishedStatus ? details.furnishedStatus : ""}
             className="form-select form-select-lg"
-            id="pr-education-level"
+            id="furnishedStatus"
           >
             <option selected>Choose</option>
             <option value="Furnished">Furnished</option>
@@ -154,7 +154,7 @@ function Details({ isValid }) {
           {!furnishedStatus &&  isValid && <div className='text-danger'>Furnished is required</div>}
         </div>
         <div className="col-sm-6 mb-4">
-          <label className="form-label" htmlFor="pr-study-field">
+          <label className="form-label" htmlFor="ageConstruction">
             Age of construction<span className="text-danger">*</span>
           </label>
           <select
@@ -162,7 +162,7 @@ function Details({ isValid }) {
             onChange={(e) => dispatch(setDetails(e))}
             value={details.ageConstruction ? details.ageConstruction : ""}
             className="form-select form-select-lg"
-            id="pr-education-level"
+            id="ageConstruction"
           >
             <option selected>Choose</option>
             <option value="New construction">New construction</option>
@@ -175,7 +175,7 @@ function Details({ isValid }) {
           {!ageConstruction &&  isValid && <div className='text-danger'>Age construction is required</div>}
         </div>
         <div className="col-sm-6 mb-4">
-          <label className="form-label" htmlFor="pr-study-field">
+          <label className="form-label" htmlFor="availability">
             Availability<span className="text-danger">*</span>
           </label>
           <select
@@ -183,7 +183,7 @@ function Details({ isValid }) {
             onChange={(e) => dispatch(setDetails(e))}
             value={details.availability ? details.availability : ""}
             className="form-select form-select-lg"
-            id="pr-education-level"
+            id="availability"
           >
             <option selected>Choose</option>
             <option value="Immediately">Immediately</option>
@@ -193,7 +193,7 @@ function Details({ isValid }) {
           {!availability &&  isValid && <div className='text-danger'>Availability required</div>}
         </div>
         <div className="col-sm-6 mb-4">
-          <label className="form-label" htmlFor="pr-study-field">
+          <label className="form-label" htmlFor="tenantsPreferred">
             Tenants preferred<span className="text-danger">*</span>
           </label>
           <select
@@ -201,7 +201,7 @@ function Details({ isValid }) {
             onChange={(e) => dispatch(setDetails(e))}
             value={details.tenantsPreferred ? details.tenantsPreferred : ""}
             className="form-select form-select-lg"
-            id="pr-education-level"
+            id="tenantsPreferred"
           >
             <option selected>Choose</option>
             <option value="Family">Family</option>
@@ -211,7 +211,7 @@ function Details({ isValid }) {
           {!tenantsPreferred &&  isValid && <div className='text-danger'>Tenants is required</div>}
         </div>
         <div className="col-sm-6 mb-4">
-          <label className="form-label" htmlFor="pr-study-field">
+          <label className="form-label" htmlFor="vegPermission">
             Non-veg<span className="text-danger">*</span>
           </label>
           <select
@@ -219,7 +219,7 @@ function Details({ isValid }) {
             onChange={(e) => dispatch(setDetails(e))}
             value={details.vegPermission ? details.vegPermission : ""}
             className="form-select form-select-lg"
-            id="pr-education-level"
+            id="vegPermission"
           >
             <option selected>Choose</option>
             <option value="1">Allowed</option>
@@ -228,7 +228,7 @@ function Details({ isValid }) {
           {!vegPermission &&  isValid && <div className='text-danger'>Veg is required</div>}
         </div>
         <div className="col-sm-6 mb-4">
-          <label className="form-label" htmlFor="pr-study-field">
+          <label className="form-label" htmlFor="petsPermission">
             Pets<span className="text-danger">*</span>
           </label>
           <select
@@ -236,7 +236,7 @@ function Details({ isValid }) {
             onChange={(e) => dispatch(setDetails(e))}
             value={details.petsPermission ? details.petsPermission : ""}
             className="form-select form-select-lg"
-            id="pr-education-level"
+            id="petsPermission"
           >
             <option selected>Choose</option>
             <option value="1">Allowed</option>
@@ -546,7 +546,7 @@ function Details({ isValid }) {
         </div>
         {/* Description */}
         <div className="border-top pt-4">
-          <label className="form-label fw-bold pb-1 mb-2">Description</label>
+          <label className="form-label fw-bold pb-1 mb-2" htmlFor="description">Description</label>
           <div className="row">
             <div className="col-lg-12 mb-4">
               <textarea
@@ -554,7 +554,7 @@ function Details({ isValid }) {
                 onChange={(e) => dispatch(setDetails(e))}
                 value={details.description ? details.description : ""}
                 className="form-control"
-                id="ap-description"
+                id="description"
                 rows={5}
                 placeholder="Describe your property"
                 defaultValue={""}
@@ -568,7 +568,7 @@ function Details({ isValid }) {
             <label className="form-label fw-bold pb-1 mb-2">Rent details</label>
             <div className="row">
               <div className="col-lg-6 mb-4">
-                <label className="form-label" htmlFor="pr-period-to">
+                <label className="form-label" htmlFor="monthlyRent">
                   Monthly rent<span className="text-danger">*</span>
                 </label>
                 <input
@@ -577,13 +577,13 @@ function Details({ isValid }) {
                   value={details.monthlyRent ? details.monthlyRent : ""}
                   className="form-control form-control-lg"
                   type="number"
-                  id="pr-fn"
+                  id="monthlyRent"
                   placeholder="Enter monthly rent"
                 />
                 {!monthlyRent &&  isValid && <div className='text-danger'>Rent is required</div>}
               </div>
               <div className="col-lg-6 mb-4">
-                <label className="form-label" htmlFor="pr-period-to">
+                <label className="form-label" htmlFor="securityAmount">
                   Security amount<span className="text-danger">*</span>
                 </label>
                 <input
@@ -592,13 +592,13 @@ function Details({ isValid }) {
                   value={details.securityAmount ? details.securityAmount : ""}
                   className="form-control form-control-lg"
                   type="number"
-                  id="pr-fn"
+                  id="securityAmount"
                   placeholder="Enter security amount"
                 />
                 {!securityAmount &&  isValid && <div className='text-danger'>Security amount is required</div>}
               </div>
               <div className="col-lg-6 mb-4">
-                <label className="form-label" htmlFor="pr-period-to">
+                <label className="form-label" htmlFor="maintenanceCharges">
                   Maintenance charges<span className="text-danger">*</span>
                 </label>
                 <input
@@ -609,13 +609,13 @@ function Details({ isValid }) {
                   }
                   className="form-control form-control-lg"
                   type="number"
-                  id="pr-fn"
+                  id="maintenanceCharges"
                   placeholder="Enter maintenance charges"
                 />
                 {!maintenanceCharges &&  isValid && <div className='text-danger'>Maintenance is required</div>}
               </div>
               <div className="col-lg-6 mb-4">
-                <label className="form-label" htmlFor="pr-study-field">
+                <label className="form-label" htmlFor="basis">
                   Per<span className="text-danger">*</span>
                 </label>
                 <select
@@ -623,7 +623,7 @@ function Details({ isValid }) {
                   onChange={(e) => dispatch(setDetails(e))}
                   value={details.basis ? details.basis : ""}
                   className="form-select form-select-lg"
-                  id="pr-education-level"
+                  id="basis"
                 >
                   <option selected>Choose</option>
                   <option value="Associate Degree">Monthly</option>
