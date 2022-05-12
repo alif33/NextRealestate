@@ -15,7 +15,7 @@ const Modal = (props) => {
         //   aria-hidden="true"
         >
           <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content">
+            <div className="modal-content" style={{overflowY: 'scroll', height: '600px'}}>
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLongTitle">
                   {title}

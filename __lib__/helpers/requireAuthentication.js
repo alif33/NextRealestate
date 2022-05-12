@@ -5,10 +5,10 @@ export function userAuth(gssp) {
         const { req, res } = context
         if (req.headers.cookie) {
             const cookies = cookie.parse(req.headers.cookie)
-            if (!cookies._utoken) {
+            if (!cookies._info) {
                 return {
                     redirect: {
-                        destination: '/login',
+                        destination: '/signin',
                     }
                 }
             }
@@ -16,7 +16,7 @@ export function userAuth(gssp) {
         } else {
             return {
                 redirect: {
-                    destination: '/login',
+                    destination: '/signin',
 
                 }
             }
