@@ -14,53 +14,56 @@ const BlogUPload = (props) => {
   } = props;
   return (
     <>
-      {/* <form>
-          <div className="form-group">
-            <input type="text" placeholder="Enter your blog title" className={styles.form} id="recipient-name" />
-          </div>
-          <div className="form-group">
-            <textarea className="form-control" placeholder="Enter your blog description"></textarea>
-          </div>
-        </form> */}
-
       <form>
-        <label htmlFor="fname">Blog Title</label>
-        <input
-          type="text"
-          id="fname"
-          name="firstname"
-          placeholder="Enter your blog title ..."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className={styles.input1}
-        />
+        <div>
+          <label className="form-label" htmlFor="fname">
+            Blog Title
+          </label>
+          <input
+            type="text"
+            id="fname"
+            name="firstname"
+            placeholder="Enter your blog title ..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className="form-control"
+          />
+        </div>
 
-        <label htmlFor="lname">Blog Description</label>
-        <textarea
-          type="text-area"
-          id="lname"
-          name="lastname"
-          placeholder="Enter your blog description ..."
-          className={styles.input1}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+        <div className="mt-2">
+          <label className="form-label" htmlFor="lname">
+            Blog Description
+          </label>
+          <textarea
+            type="text-area"
+            id="lname"
+            name="lastname"
+            placeholder="Enter your blog description ..."
+            className="form-control"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
 
-        <label htmlFor="lname">Upload photo</label>
-        <input
-          type="file"
-          className={styles.input1}
-          id="myFile"
-          name="filename"
-          onChange={imageHandler}
-        />
-
+        <div className="mt-2">
+          <label className="form-label" htmlFor="myFile">
+            Upload photo
+          </label>
+          <input
+            type="file"
+            className={styles.input1}
+            id="myFile"
+            name="filename"
+            onChange={imageHandler}
+          />
+        </div>
         <label className={styles.selector} htmlFor="country">
           Category
         </label>
         <select
+          className="form-select"
           value={category}
-          onChange={(e)=>setCategory(e.target.value)}
+          onChange={(e) => setCategory(e.target.value)}
           id="country"
           name="country"
         >
