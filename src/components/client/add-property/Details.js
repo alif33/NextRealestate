@@ -340,7 +340,7 @@ function Details({ isValid }) {
                 id="management"
               />
               <label className="form-check-label" htmlFor="management">
-                Children's play area
+                Children`&apos;s play area
               </label>
             </div>
             <div className="form-check">

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +8,11 @@ import Info from "../src/components/client/add-property/Info";
 import Location from "../src/components/client/add-property/Location";
 import Media from "../src/components/client/add-property/Media";
 import Layout from "../src/components/client/layout";
-import { backwordStep, forwordStep, submitData } from "../store/property/actions";
+import {
+  backwordStep,
+  forwordStep,
+  submitData,
+} from "../store/property/actions";
 import { FillData, propertyFields } from "../__lib__/config/index";
 import { postData } from "../__lib__/helpers/HttpService";
 
@@ -146,8 +151,8 @@ function AddProperty() {
         setDisable
       ).then((res) => {
         if (res?.success) {
-          dispatch(submitData())
-         toast.success(res.message)
+          dispatch(submitData());
+          toast.success(res.message);
         }
       });
     }
@@ -159,7 +164,9 @@ function AddProperty() {
         <nav className="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <a href="/">Home</a>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
               Add property
