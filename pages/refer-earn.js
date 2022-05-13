@@ -4,7 +4,6 @@ import Layout from "../src/components/client/layout";
 import { showErr } from "../__lib__/helpers/ErrHandler";
 import { postData } from "../__lib__/helpers/HttpService";
 import toast from "react-hot-toast";
-import { userAuth } from "../__lib__/helpers/requireAuthentication";
 import HowWorks from "../src/components/client/ReferAndEarn/HowWorks";
 import AskQuestion from "../src/components/client/ReferAndEarn/AskQuestion";
 import ReferAndEarnForm from "../src/components/client/ReferAndEarn/ReferAndEarnForm";
@@ -47,10 +46,3 @@ const Refers = () => {
 };
 
 export default Refers;
-
-export const getServerSideProps = userAuth((context) => {
-  return {
-    props: {},
-  };
-});
-

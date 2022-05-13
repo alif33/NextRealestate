@@ -32,8 +32,6 @@ const Header = () => {
   }
 
   const userInfo = cookies.get("_info");
-  console.log(userInfo);
-
   return (
     <header
       className="navbar navbar-expand-lg navbar-light bg-light fixed-top"

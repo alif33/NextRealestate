@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import Cookies from "universal-cookie";
 import Contact from "../src/components/client/add-property/Contact";
 import Details from "../src/components/client/add-property/Details";
 import Info from "../src/components/client/add-property/Info";
@@ -14,10 +15,11 @@ import {
   submitData,
 } from "../store/property/actions";
 import { FillData, propertyFields } from "../__lib__/config/index";
-import { postData } from "../__lib__/helpers/HttpService";
+import { authPost, postData } from "../__lib__/helpers/HttpService";
 import { userAuth } from "../__lib__/helpers/requireAuthentication";
 
 function AddProperty() {
+  const cookies = new Cookies()
   const [disable, setDisable] = useState(0);
   const [data, setData] = useState(propertyFields);
   const [isValid, setIsValid] = useState(false);
@@ -140,16 +142,16 @@ function AddProperty() {
         return <></>;
     }
   };
-
+  const userInfo = cookies.get("_info")
   const onSubmit = (data) => {
     setDisable(true);
     if (!firstName || !lastName || !phoneNumber || !email) {
       setIsValid(true);
     } else {
-      postData(
+      authPost(
         "/property",
         { ...property.basic, ...property.location, ...property.details },
-        setDisable
+        userInfo.token
       ).then((res) => {
         if (res?.success) {
           dispatch(submitData());
