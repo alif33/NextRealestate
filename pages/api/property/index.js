@@ -1,10 +1,19 @@
 import nc from 'next-connect';
+<<<<<<< HEAD
 import Property from '../../models/Property';
 import { v2 as cloudinary } from 'cloudinary';
 import streamifier from 'streamifier';
 import { isAuth } from '../../utils/auth';
 import db from '../../utils/db';
 import multer from 'multer'
+=======
+import multer from 'multer';
+import Property from '../../../models/Property';
+import { v2 as cloudinary } from 'cloudinary';
+import streamifier from 'streamifier';
+import { isAuth } from '../../../utils/auth';
+import db from '../../../utils/db';
+>>>>>>> f75617bb40ca4f3797b284e546d977945e7a8a31
 
 
 cloudinary.config({
@@ -22,29 +31,31 @@ export const config = {
 const handler = nc();
 const upload = multer();
 
-handler.use(isAuth, upload.single('image')).post(async (req, res) => {
+handler.use(isAuth).post(async (req, res) => {
     const data = req.body;
 
-    const streamUpload = (req) => {
-        return new Promise((resolve, reject) => {
-          const stream = cloudinary.uploader.upload_stream((error, result) => {
-            if (result) {
-              resolve(result);
-            } else {
-              reject(error);
-            }
-          });
-          streamifier.createReadStream(req.file.buffer).pipe(stream);
-        });
-      };
-    const { url } = await streamUpload(req);
+    // const streamUpload = (req) => {
+    //     return new Promise((resolve, reject) => {
+    //       const stream = cloudinary.uploader.upload_stream((error, result) => {
+    //         if (result) {
+    //           resolve(result);
+    //         } else {
+    //           reject(error);
+    //         }
+    //       });
+    //       streamifier.createReadStream(req.file.buffer).pipe(stream);
+    //     });
+    //   };
 
-    if(url){
+
+    // const { url } = await streamUpload(req);
+
+    // if(url){
         await db.connect();
     
         const property = new Property({
             ...data,
-            image: url,
+            // image: url,
             _owner: req.user._id
         });
         
@@ -55,7 +66,7 @@ handler.use(isAuth, upload.single('image')).post(async (req, res) => {
                 message: 'Submitted successfully'
             })
         }
-    }
+    // }
 
 });
 
