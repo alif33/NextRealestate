@@ -7,16 +7,15 @@ import { signToken } from '../../../utils/auth';
 const handler = nc();
 
 handler.post(async (req, res) => {
+  const { name, email, phoneNumber, password } = req.body;
   await db.connect();
   const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+  const hashedPassword = await bcrypt.hash(password, salt);
   const newUser = new User({
-    role: req.body.role,
-    phone: req.body.phoneNumber,
-    name: req.body.name,
-    email: req.body.email,
+    name: name,
+    email: email,
+    phone: phoneNumber,
     password: hashedPassword,
-    isAdmin: false,
   });
   const user = await newUser.save();
   await db.disconnect();
