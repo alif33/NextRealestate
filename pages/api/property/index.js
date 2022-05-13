@@ -1,19 +1,10 @@
 import nc from 'next-connect';
-<<<<<<< HEAD
-import Property from '../../models/Property';
-import { v2 as cloudinary } from 'cloudinary';
-import streamifier from 'streamifier';
-import { isAuth } from '../../utils/auth';
-import db from '../../utils/db';
-import multer from 'multer'
-=======
 import multer from 'multer';
 import Property from '../../../models/Property';
 import { v2 as cloudinary } from 'cloudinary';
 import streamifier from 'streamifier';
 import { isAuth } from '../../../utils/auth';
 import db from '../../../utils/db';
->>>>>>> f75617bb40ca4f3797b284e546d977945e7a8a31
 
 
 cloudinary.config({
@@ -33,7 +24,7 @@ const upload = multer();
 
 handler.use(isAuth).post(async (req, res) => {
     const data = req.body;
-
+    return res.send(data);
     // const streamUpload = (req) => {
     //     return new Promise((resolve, reject) => {
     //       const stream = cloudinary.uploader.upload_stream((error, result) => {
