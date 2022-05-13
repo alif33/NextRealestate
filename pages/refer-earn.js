@@ -2,10 +2,10 @@ import Layout from "../src/components/client/layout";
 import HowWorks from "../src/components/client/ReferAndEarn/HowWorks";
 import AskQuestion from "../src/components/client/ReferAndEarn/AskQuestion";
 import ReferAndEarnForm from "../src/components/client/ReferAndEarn/ReferAndEarnForm";
-import { useSelector } from "react-redux";
+import {useSelector} from 'react-redux'
 
 const Refers = () => {
-  const {users} = useSelector(state => state)
+const {users} = useSelector(state => state)
   console.log(users);
 
 

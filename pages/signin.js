@@ -9,7 +9,7 @@ import { postData } from "../__lib__/helpers/HttpService";
 import { userLogin } from "../store/users/actions";
 export default function SignIn() {
   const [showPass, setShowPass] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [disable, setDisable] = useState(false);
   const {
     register,
@@ -24,19 +24,13 @@ export default function SignIn() {
     setDisable(true);
     postData("/user/login", data, setDisable).then((res) => {
       if (res?.success) {
-        cookies.set(
-          "_info",
-          JSON.stringify({
-            token: res.token,
-          }),
-          { path: "/" }
-        );
-        reset();
-        router.push({
-          pathname: "/",
+        cookies.set("_info", JSON.stringify({ token: res.token }), {
+          path: "/",
         });
-        dispatch(userLogin(res.user))
-        console.log(res.user)
+        reset();
+        router.push({  pathname: "/" });
+        dispatch(userLogin(res));
+        
       }
     });
   };
@@ -46,7 +40,7 @@ export default function SignIn() {
         <nav className="mb-4 pt-md-3" aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <Link href='/'>
+              <Link href="/">
                 <a>Home</a>
               </Link>
             </li>

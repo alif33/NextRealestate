@@ -6,8 +6,9 @@ import toast from "react-hot-toast";
 // import { useRouter } from 'next/router';
 // import { useState } from 'react';
 // import toast from 'react-hot-toast';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Cookies from "universal-cookie";
+import { userLogout } from "../../../store/users/actions";
 
 const Header = () => {
   const cookies = new Cookies();
@@ -16,7 +17,7 @@ const Header = () => {
   // const [smallDevice, setSmallDevice] = useState(false)
   const router = useRouter();
   // const { users } = useSelector(state => state)
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   // const handleDashboard = () => {
   //   if (!users?.token)
@@ -29,6 +30,7 @@ const Header = () => {
       toast.success('Logout success')
       router.push(router.pathname)
     }
+    dispatch(userLogout())
   }
 
   const userInfo = cookies.get("_info");
