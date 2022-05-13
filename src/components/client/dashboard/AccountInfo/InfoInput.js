@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
-const InfoInput = ({
-  propertyValue,
-  fieldName,
-  fieldtype,
-  label,
-  collapse,
-}) => {
+const InfoInput = (props) => {
+  const [showPass, setShowPass] = useState(false);
+  const { propertyValue, fieldName, fieldtype, label, collapse, handleForm } =
+    props;
+
   return (
     <>
       <div className="border-bottom pb-3 mb-3">
@@ -27,33 +25,49 @@ const InfoInput = ({
             </a>
           </div>
         </div>
-        <div className="collapse" id={collapse?.slice(1, collapse?.length)} data-bs-parent="#personal-info">
-         {fieldtype !== "password" && <input
-            name={fieldName}
-            id={fieldName}
-            className="form-control mt-3"
-            type={fieldtype}
-            data-bs-binded-element={fieldName}
-            data-bs-unset-value="Not specified"
-            defaultValue={propertyValue}
-          />}
+        <div
+          className="collapse"
+          id={collapse?.slice(1, collapse?.length)}
+          data-bs-parent="#personal-info"
+        >
+          {fieldtype !== "password" && (
+            <input
+              name={fieldName}
+              id={fieldName}
+              className="form-control mt-3"
+              type={fieldtype}
+              data-bs-binded-element={fieldName}
+              data-bs-unset-value="Not specified"
+              defaultValue={propertyValue}
+              onChange={(e) => handleForm(e)}
+            />
+          )}
 
-        {fieldtype === 'password' && <div className="password-toggle mt-3">
+          {fieldtype === "password" && (
+            <div className="password-toggle mt-3">
+              <input
+                name={fieldName}
+                className="form-control"
+                type={showPass ? "text" : "password"}
+                id="pass-visibility"
+                onChange={(e) => handleForm(e)}
+                placeholder="Password"
+                defaultValue=""
+                autoComplete="off"
+              />
+              <label
+                className="password-toggle-btn"
+                aria-label="Show/hide password"
+              >
                 <input
-                  className="form-control"
-                  type="password"
-                  id="pass-visibility"
-                  defaultValue="hidden@password"
+                  onClick={() => setShowPass(!showPass)}
+                  className="password-toggle-check"
+                  type="checkbox"
                 />
-                <label
-                  className="password-toggle-btn"
-                  aria-label="Show/hide password"
-                >
-                  <input className="password-toggle-check" type="checkbox" />
-                  <span className="password-toggle-indicator" />
-                </label>
-              </div>}
-
+                <span className="password-toggle-indicator" />
+              </label>
+            </div>
+          )}
         </div>
       </div>
     </>
