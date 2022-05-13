@@ -11,7 +11,6 @@ import { userAuthStatus } from '../__lib__/helpers/Cookiehandler';
 export default function Home() {
   useEffect(async()=>{
    const user = await userAuthStatus();
-   console.log(user)
   },[])
   return (
     <>

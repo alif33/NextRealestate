@@ -1,14 +1,13 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
 import Layout from "../src/components/client/layout";
-import { showErr } from "../__lib__/helpers/ErrHandler";
-import { postData } from "../__lib__/helpers/HttpService";
-import toast from "react-hot-toast";
 import HowWorks from "../src/components/client/ReferAndEarn/HowWorks";
 import AskQuestion from "../src/components/client/ReferAndEarn/AskQuestion";
 import ReferAndEarnForm from "../src/components/client/ReferAndEarn/ReferAndEarnForm";
+import { useSelector } from "react-redux";
 
 const Refers = () => {
+  const {users} = useSelector(state => state)
+  console.log(users);
+
 
   return (
     <Layout>

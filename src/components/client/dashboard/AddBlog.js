@@ -46,7 +46,6 @@ const AddBlog = () => {
     const formData = await new FormData();
     formData.append("title", handleFormData.blogTitle);
     formData.append("body", handleFormData.description);
-    formData.append("postedBy", userInfo.user._id);
     formData.append("image", handleFormData.image[0]);
     for (let i = 0; i < selectedTag?.length; i++) {
       formData.append("tags[]", selectedTag[i].value);

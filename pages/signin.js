@@ -2,14 +2,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import Layout from "../src/components/client/layout";
-import { showErr } from "../__lib__/helpers/ErrHandler";
-import { postData } from "../__lib__/helpers/HttpService";
-import toast from "react-hot-toast";
-import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
-
+import { useDispatch, useSelector } from "react-redux";
+import Cookies from "universal-cookie";
+import { postData } from "../__lib__/helpers/HttpService";
+import { userLogin } from "../store/users/actions";
 export default function SignIn() {
   const [showPass, setShowPass] = useState(false);
+  const dispatch = useDispatch()
   const [disable, setDisable] = useState(false);
   const {
     register,
@@ -21,7 +21,6 @@ export default function SignIn() {
   const router = useRouter();
 
   const onSubmit = (data) => {
-      console.log(data)
     setDisable(true);
     postData("/user/login", data, setDisable).then((res) => {
       if (res?.success) {
@@ -29,7 +28,6 @@ export default function SignIn() {
           "_info",
           JSON.stringify({
             token: res.token,
-            user: res.user,
           }),
           { path: "/" }
         );
@@ -37,6 +35,8 @@ export default function SignIn() {
         router.push({
           pathname: "/",
         });
+        dispatch(userLogin(res.user))
+        console.log(res.user)
       }
     });
   };
