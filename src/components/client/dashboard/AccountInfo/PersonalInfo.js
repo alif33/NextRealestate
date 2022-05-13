@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   authPost,
   updateData,
@@ -9,6 +9,7 @@ import InfoInput from "./InfoInput";
 import Cookies from "universal-cookie";
 
 const PersonalInfo = () => {
+  const dispatch = useDispatch();
   const cookies = new Cookies();
   const [disable, setDisable] = useState(true);
   const { users } = useSelector((state) => state);
@@ -22,29 +23,47 @@ const PersonalInfo = () => {
     setHandleData((values) => ({ ...values, [name]: value }));
   };
   console.log(handleData);
+  const userInfo = cookies.get("_info");
   const handleSave = () => {
-    const userInfo = cookies.get("_info");
+    
     if (!handleData) {
       console.log(handleData);
       toast.error("something wrong");
     } else {
-      const newData = {
-        name: handleData?.name || user.name,
-        email: handleData?.email || user.email,
-        phoneNumber: handleData?.phoneNumber || user?.phone || "",
-        updatePassword: handleData?.password || user.password,
-        image: "",
-        wishlists: user.wishlists,
-      };
-
-      updateData("/user/profile", newData, userInfo.token).then((res) => {
-        if (res.success) {
-          toast.success(res.message);
-        } else {
-          toast.error("something wrong");
-        }
-      });
+      if (handleData?.updatedPassword) {
+        const newData = {
+          name: handleData?.name || user.name,
+          email: handleData?.email || user.email,
+          phoneNumber: handleData?.phoneNumber || user?.phone || "",
+          updatePassword: handleData.updatedPassword,
+          password: handleData.updatedPassword,
+          image: "",
+          wishlists: user.wishlists,
+        };
+        submitData(newData);
+      } else {
+        const newData = {
+          name: handleData?.name || user.name,
+          email: handleData?.email || user.email,
+          phoneNumber: handleData?.phoneNumber || user?.phone || "",
+          password: user.password,
+          image: "",
+          wishlists: user.wishlists,
+        };
+        submitData(newData);
+      }
     }
+  };
+
+  const submitData = (data) => {
+    updateData("/user/profile", data, userInfo.token).then((res) => {
+      if (res.success) {
+        toast.success(res.message);
+        console.log(res)
+      } else {
+        toast.error("something wrong");
+      }
+    });
   };
 
   return (
@@ -64,7 +83,7 @@ const PersonalInfo = () => {
           <InfoInput
             handleForm={handleForm}
             label="Full name"
-            propertyValue={user.name}
+            propertyValue={user?.name}
             fieldName="name"
             fieldtype="text"
             collapse="#name-collapse"
@@ -83,18 +102,18 @@ const PersonalInfo = () => {
           <InfoInput
             handleForm={handleForm}
             label="Email"
-            propertyValue={user.email}
+            propertyValue={user?.email}
             fieldName="email"
             fieldtype="text"
             collapse="#email-collapse"
           />
           <InfoInput
             handleForm={handleForm}
-            label="Password"
+            label="New password"
             propertyValue="********"
-            fieldName="password"
-            fieldtype="password"
-            collapse="#passwrod-collapse"
+            fieldName="updatePassword"
+            fieldtype="updatePassword"
+            collapse="#password-collapse"
           />
         </div>
         <div className="d-flex align-items-center justify-content-between mt-4">

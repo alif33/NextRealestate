@@ -4,10 +4,16 @@ import { setCategories } from "../../../../store/catrgories/actions";
 import styles from "./BlogUPload.module.css";
 import Select from "react-select";
 import { setTags } from "../../../../store/tags/actions";
+import "suneditor/dist/css/suneditor.min.css";
+import dynamic from "next/dynamic";
 
+const SunEditor = dynamic(() => import("suneditor-react"), {
+  ssr: false,
+});
 
 const BlogUPload = (props) => {
-  const { handleForm, handleFormData, selectedTag, setSelectedTag, isValid } = props;
+  const { handleForm, handleFormData, selectedTag, setSelectedTag, isValid, setBody, body } =
+    props;
   const dispatch = useDispatch();
   const { categories, tags } = useSelector((state) => state);
   const { categoryList } = categories;
@@ -26,7 +32,7 @@ const BlogUPload = (props) => {
     label: tag.tagName,
     value: tag.tagSlug,
   }));
-  const {blogTitle, category, description, image} = handleFormData;
+  const { blogTitle, category, description, image } = handleFormData;
   return (
     <>
       <form>
@@ -42,22 +48,19 @@ const BlogUPload = (props) => {
             onChange={(e) => handleForm(e)}
             className="form-control"
           />
-          {!blogTitle && isValid && isValid && <span className="text-danger">Blog title requried</span>  }
+          {!blogTitle && isValid && isValid && (
+            <span className="text-danger">Blog title requried</span>
+          )}
         </div>
 
         <div className="mt-2">
           <label className="form-label" htmlFor="description">
             Blog Description
           </label>
-          <textarea
-            type="text-area"
-            id="description"
-            name="description"
-            placeholder="Enter your blog description ..."
-            className="form-control"
-            onChange={(e) => handleForm(e)}
-          />
-          {!description && isValid && <span className="text-danger">Description requried</span> }
+          <SunEditor height="160px" onChange={(e) => setBody(e)} />
+          {!body && isValid && (
+            <span className="text-danger">Description requried</span>
+          )}
         </div>
 
         <div className="mt-2">
@@ -72,7 +75,9 @@ const BlogUPload = (props) => {
             accept="image/png, image/gif, image/jpeg"
             onChange={(e) => handleForm(e)}
           />
-          {!image && isValid && <span className="text-danger">Image requried</span>}
+          {!image && isValid && (
+            <span className="text-danger">Image requried</span>
+          )}
         </div>
         <div>
           <label className={styles.selector} htmlFor="category">
@@ -87,12 +92,14 @@ const BlogUPload = (props) => {
           >
             <option selected>Choice Category</option>
             {categoryList?.map((cate) => (
-              <option key={cate._id} value={cate.Id}>
+              <option key={cate._id} value={cate._id}>
                 {cate.categoryName}
               </option>
             ))}
           </select>
-          {!category && isValid && <span className="text-danger">Selct category</span>}
+          {!category && isValid && (
+            <span className="text-danger">Selct category</span>
+          )}
         </div>
 
         <div>
@@ -105,7 +112,9 @@ const BlogUPload = (props) => {
             className="basic-multi-select"
             classNamePrefix="select"
           />
-          {!selectedTag && isValid && <span className="text-danger">Tag requried</span>}
+          {!selectedTag && isValid && (
+            <span className="text-danger">Tag requried</span>
+          )}
         </div>
         {/* <input type="submit" className={[styles.input2, styles.input3]} value="Submit" /> */}
       </form>

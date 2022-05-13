@@ -6,6 +6,8 @@ const handler = nc();
 
 handler.post(async (req, res) => {
     const { title, body, postedBy, category, tags } = req.body;
+    
+    console.log(req.body);
     await db.connect();
 
     const blog = new Blog({

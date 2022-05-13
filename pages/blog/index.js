@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Layout from "../../src/components/client/layout";
 
 function Blog(){
@@ -6,7 +7,11 @@ function Blog(){
             <div className="container mt-5 pt-5">
             <nav className="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">
                 <ol className="breadcrumb">
-                <li className="breadcrumb-item"><a href="job-board-home-v1.html">Home</a></li>
+                <li className="breadcrumb-item">
+                   <Link href='/'>
+                   <a >Home</a>
+                   </Link>
+                    </li>
                 <li className="breadcrumb-item active" aria-current="page">Blog</li>
                 </ol>
             </nav>

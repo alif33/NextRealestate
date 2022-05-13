@@ -30,7 +30,7 @@ const InfoInput = (props) => {
           id={collapse?.slice(1, collapse?.length)}
           data-bs-parent="#personal-info"
         >
-          {fieldtype !== "password" && (
+          {fieldtype !== "updatePassword" && (
             <input
               name={fieldName}
               id={fieldName}
@@ -43,7 +43,7 @@ const InfoInput = (props) => {
             />
           )}
 
-          {fieldtype === "password" && (
+          {fieldtype === "updatePassword" && (
             <div className="password-toggle mt-3">
               <input
                 name={fieldName}
@@ -52,8 +52,6 @@ const InfoInput = (props) => {
                 id="pass-visibility"
                 onChange={(e) => handleForm(e)}
                 placeholder="Password"
-                defaultValue=""
-                autoComplete="off"
               />
               <label
                 className="password-toggle-btn"
