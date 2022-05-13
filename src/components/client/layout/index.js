@@ -7,7 +7,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Head>
-      <link rel="stylesheet" href="/css/theme.min.css" />
+      
       </Head>
       <main className="page-wrapper">
         {" "}

@@ -1,45 +1,79 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Backdrop from "../../ui/Backdrop";
 import Modal from "../../ui/Modal";
 import BlogUPload from "../input-forms/BlogUPload";
+import Cookies from "universal-cookie";
+import { authPost, postData } from "../../../../__lib__/helpers/HttpService";
+import toast from "react-hot-toast";
 
 const AddBlog = () => {
-    const [modal, setModal] = useState(false);
+  const cookies = new Cookies();
+  const [modal, setModal] = useState(false);
+  const [selectedTag, setSelectedTag] = useState(null);
+  const [isValid, setIsValid] = useState(false);
+  // inputs ----------------
+  const [handleFormData, setHandleFormData] = useState({
+    blogTitle: null,
+    description: null,
+    image: null,
+    category: null,
+  });
 
-    // inputs ----------------
-    const [title, setTitle] = useState();
-    const [description, setDescription] = useState();
-    const [image, setImage] = useState();
-    const [category, setCategory] = useState();
-  
-    const closeModal = () => {
-      setTitle();
-      setDescription();
-      setImage();
-      setCategory();
-      setModal(false);
-    };
-  
-    const showModal = () => {
-      setModal(true);
-    };
-  
-    const clickedBackdrop = () => {
-      setModal(false);
-    };
-  
-    const imageHandler = (e) => {
-      setImage(e.target.files[0]);
-    };
-  
-    const save = () => {
-      setTitle();
-      setDescription();
-      setImage();
-      setCategory();
-      setModal(true);
-    };
-  
+  const handleForm = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setHandleFormData((values) => ({ ...values, [name]: value }));
+  };
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  const showModal = () => {
+    setModal(true);
+  };
+
+  const clickedBackdrop = () => {
+    setModal(false);
+  };
+
+  const imageHandler = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const userInfo = cookies.get("_info");
+  const { blogTitle, description, image, category } = handleFormData;
+  const save = async () => {
+    const formData = await new FormData();
+    formData.append("title", handleFormData.blogTitle);
+    formData.append("body", handleFormData.description);
+    formData.append("postedBy", userInfo.user._id);
+    formData.append("image", handleFormData.image[0]);
+    for (let i = 0; i < selectedTag?.length; i++) {
+      formData.append("tags[]", selectedTag[i].value);
+    }
+
+    if (!blogTitle || !description || !image || !category || !selectedTag) {
+      setIsValid(true);
+    } else {
+      await submitData(formData);
+    }
+    setModal(true);
+  };
+  const submitData = async (data) => {
+    // setDisable(true);
+    const admins = await cookies.get("_admin");
+    authPost("/user/blog", data, userInfo.token).then((res) => {
+      if (res.success) {
+        toast.success(res.message);
+        reset();
+        // setDisable(false);
+      } else {
+        toast.error("Unsuccessfully");
+        // setDisable(false);
+      }
+    });
+  };
+
   return (
     <>
       <div className="tab-pane fade" id="addblog" role="tabpanel">
@@ -52,7 +86,7 @@ const AddBlog = () => {
         >
           Add a new blog
         </button>
-        <Backdrop  show={modal} clicked={clickedBackdrop} />
+        <Backdrop show={modal} clicked={clickedBackdrop} />
         <Modal
           show={modal}
           close={closeModal}
@@ -60,13 +94,11 @@ const AddBlog = () => {
           save={save}
         >
           <BlogUPload
-            title={title}
-            setTitle={setTitle}
-            description={description}
-            setDescription={setDescription}
-            imageHandler={imageHandler}
-            category={category}
-            setCategory={setCategory}
+            setSelectedTag={setSelectedTag}
+            handleFormData={handleFormData}
+            handleForm={handleForm}
+            selectedTag={selectedTag}
+            isValid={isValid}
           />
         </Modal>
       </div>

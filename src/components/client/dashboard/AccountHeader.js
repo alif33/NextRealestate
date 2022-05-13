@@ -1,6 +1,18 @@
+import { useRouter } from "next/router";
 import React from "react";
-
+import toast from "react-hot-toast";
+import Cookies from "universal-cookie";
 const AccountHeader = () => {
+    const router = useRouter()
+    const cookies = new Cookies()
+
+    const handleLogOut = () => {
+        cookies.remove('_info', { path: '/' });
+        if (!cookies.get('_info')) {
+          toast.success('Logout success')
+          router.push(router.pathname)
+        }
+      }
   return (
     <>
       <div className="d-flex align-items-center justify-content-between pb-4 mb-2">
@@ -32,7 +44,7 @@ const AccountHeader = () => {
             </span>
           </div>
         </div>
-        <a className="nav-link p-0 d-none d-md-block" href="#">
+        <a onClick={() => handleLogOut()} type="button" className="nav-link p-0 d-none d-md-block" href="#">
           <i className="fi-logout mt-n1 me-2" />
           Sign out
         </a>

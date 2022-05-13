@@ -39,7 +39,7 @@ class MyDocument extends Document {
             href="/vendor/tiny-slider/dist/tiny-slider.css"
           />
       
-          
+      <link rel="stylesheet" href="/css/theme.min.css" />
         </Head>
         <body>
           <Main />

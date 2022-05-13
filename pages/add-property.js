@@ -15,6 +15,7 @@ import {
 } from "../store/property/actions";
 import { FillData, propertyFields } from "../__lib__/config/index";
 import { postData } from "../__lib__/helpers/HttpService";
+import { userAuth } from "../__lib__/helpers/requireAuthentication";
 
 function AddProperty() {
   const [disable, setDisable] = useState(0);
@@ -243,3 +244,8 @@ function AddProperty() {
 }
 
 export default AddProperty;
+export const getServerSideProps = userAuth((context) => {
+  return {
+    props: {},
+  };
+});
