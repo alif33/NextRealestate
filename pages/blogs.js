@@ -11,7 +11,7 @@ import BlogTags from "../src/components/client/Blogs/Tags/BlogTags";
 import Layout from "../src/components/client/layout";
 import { getData } from "../__lib__/helpers/HttpService";
 
-function Blogs({ blogs, tags }) {
+function Blogs({ blogs, tags, categories }) {
   const [search, setSearch] = useState(null);
   const shorted = blogs.slice(blogs?.length - 2, blogs?.length);
   const shorted2 = blogs.slice(1, blogs.length - 2);
@@ -30,9 +30,6 @@ function Blogs({ blogs, tags }) {
       return val;
     }
   });
-  console.log(search);
-  console.log(filtered.length === blogs.length || filtered.length === 0);
-
   return (
     <Layout>
       <div className="container mt-5 mb-md-4 py-5">
@@ -69,8 +66,7 @@ function Blogs({ blogs, tags }) {
                 reversed.map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
               {search && (filtered.length === blogs.length || filtered.length === 0 ? <div>Blog not found</div> :
                 filtered.map((blog, i) => <BlogCard2 key={i} blog={blog} />))}
-              {/* {search && filtered.length === blogs.length || filtered.length === 0 ? <div>Blog not found</div> :
-                filtered.map((blog, i) => <BlogCard2 key={i} blog={blog} />)} */}
+             
             </div>
             {/* Pagination*/}
             <BlogPagination />
@@ -95,7 +91,7 @@ function Blogs({ blogs, tags }) {
                 {/* Search*/}
                 <BlogSearch handleSearch={handleSearch} />
                 {/* Categories*/}
-                <BlogCategory blogs={blogs} />
+                <BlogCategory categories={categories} blogs={blogs} />
                 {/* Tags*/}
                 <BlogTags tags={tags} />
                 {/* Fetured posts (carousel)*/}
@@ -115,11 +111,12 @@ export default Blogs;
 export async function getServerSideProps() {
   const blogs = await getData("/blogs");
   const tags = await getData("/tags");
-
+  const categories = await getData("/categories");
   return {
     props: {
       blogs,
       tags,
+      categories
     },
   };
 }
