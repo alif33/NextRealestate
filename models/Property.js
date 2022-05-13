@@ -107,11 +107,6 @@ const categorySchema = new mongoose.Schema(
             required: true,
             trim: true
         },
-        tenantsPreferred: {
-            type: String,
-            required: true,
-            trim: true
-        },
         vegPermission: {
             type: String,
             required: true,
@@ -132,10 +127,6 @@ const categorySchema = new mongoose.Schema(
             type: Number,
             required: true
         },
-        monthlyRent: {
-            type: Number,
-            required: true
-        },
         maintenanceCharges: {
             type: Number,
             required: true
@@ -148,8 +139,14 @@ const categorySchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        author: {
-
+        image: {
+            type: String,
+            required: true 
+        },
+        _owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
         }
     },
     { timestamps: true }
@@ -157,3 +154,5 @@ const categorySchema = new mongoose.Schema(
 
 
 export default mongoose.models.Property || mongoose.model('Property', categorySchema);
+
+

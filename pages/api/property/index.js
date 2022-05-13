@@ -22,26 +22,24 @@ export const config = {
 const handler = nc();
 const upload = multer();
 
-handler.use(isAuth).post(async (req, res) => {
+handler.use(isAuth, upload.single('image')).post(async (req, res) => {
     const data = req.body;
 
-    // const streamUpload = (req) => {
-    //     return new Promise((resolve, reject) => {
-    //       const stream = cloudinary.uploader.upload_stream((error, result) => {
-    //         if (result) {
-    //           resolve(result);
-    //         } else {
-    //           reject(error);
-    //         }
-    //       });
-    //       streamifier.createReadStream(req.file.buffer).pipe(stream);
-    //     });
-    //   };
+    const streamUpload = (req) => {
+        return new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream((error, result) => {
+            if (result) {
+              resolve(result);
+            } else {
+              reject(error);
+            }
+          });
+          streamifier.createReadStream(req.file.buffer).pipe(stream);
+        });
+      };
+    const { url } = await streamUpload(req);
 
-
-    // const { url } = await streamUpload(req);
-
-    // if(url){
+    if(url){
         await db.connect();
     
         const property = new Property({
@@ -57,7 +55,7 @@ handler.use(isAuth).post(async (req, res) => {
                 message: 'Submitted successfully'
             })
         }
-    // }
+    }
 
 });
 

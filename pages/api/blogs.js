@@ -7,7 +7,12 @@ const handler = nc();
 handler.get(async (req, res) => {
   await db.connect();
   const blogs = await Blog.find({})
-    .populate('category');
+    .populate({
+      path: 'category'
+    })
+    .populate({
+      path: 'postedBy'
+    });
   await db.disconnect();
   res.send(blogs);
 });
