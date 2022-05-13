@@ -12,11 +12,6 @@ const blogSchema = new mongoose.Schema(
             required: true,
             trim: true
         },
-        postedBy: {
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'User', 
-            required: true 
-        },
         category: {
             type: mongoose.Schema.Types.ObjectId, 
             ref: 'Category', 
@@ -33,6 +28,11 @@ const blogSchema = new mongoose.Schema(
         image: {
             type: String,
             // required: true
+        },
+        postedBy: {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: 'User', 
+            required: true 
         }
     },
     { timestamps: true }
