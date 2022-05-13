@@ -1,6 +1,6 @@
 import Layout from "../src/components/client/layout";
 import PersonalInfo from "../src/components/client/dashboard/PersonalInfo";
-import MyListings from "../src/components/client/dashboard/MyListings";
+import MyListings from "../src/components/client/dashboard/MyListing/MyListings";
 import Wishlist from "../src/components/client/dashboard/Wishlist";
 import AddBlog from "../src/components/client/dashboard/AddBlog";
 import AccountHeader from "../src/components/client/dashboard/AccountHeader";
