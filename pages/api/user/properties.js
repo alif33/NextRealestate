@@ -10,12 +10,7 @@ handler.use(isAuth).get(async (req, res) => {
   const properties = await Property.find({
     _owner: req.user._id
   })
-    // .populate({
-    //   path: 'category'
-    // })
-    // .populate({
-    //   path: 'postedBy'
-    // });
+
   await db.disconnect();
   res.send(properties);
 });
