@@ -46,7 +46,7 @@ handler.use(isAuth).post(async (req, res) => {
     
         const property = new Property({
             ...data,
-            image: url,
+            // image: url,
             _owner: req.user._id
         });
         
