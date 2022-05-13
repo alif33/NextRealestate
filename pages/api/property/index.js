@@ -1,19 +1,11 @@
 import nc from 'next-connect';
-<<<<<<< HEAD
-import Property from '../../models/Property';
-import { v2 as cloudinary } from 'cloudinary';
-import streamifier from 'streamifier';
-import { isAuth } from '../../utils/auth';
-import db from '../../utils/db';
-import multer from 'multer'
-=======
 import multer from 'multer';
 import Property from '../../../models/Property';
 import { v2 as cloudinary } from 'cloudinary';
 import streamifier from 'streamifier';
 import { isAuth } from '../../../utils/auth';
 import db from '../../../utils/db';
->>>>>>> f75617bb40ca4f3797b284e546d977945e7a8a31
+
 
 
 cloudinary.config({
