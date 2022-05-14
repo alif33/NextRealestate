@@ -1,6 +1,22 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const ReviewStatics = () => {
+  const { reviews } = useSelector((state) => state);
+  const { reviewList } = reviews;
+
+  const fiveSatar = reviewList?.filter((review) => review.rating === 5);
+  const fourSatar = reviewList?.filter((review) => review.rating === 4);
+  const threeSatar = reviewList?.filter((review) => review.rating === 3);
+  const twoSatar = reviewList?.filter((review) => review.rating === 2);
+  const oneSatar = reviewList?.filter((review) => review.rating === 1);
+
+const fiveStarPercent = (fiveSatar.length * 100) / reviewList?.length
+const fourStarPercent = (fourSatar.length * 100) / reviewList?.length
+const threeStarPercent = (threeSatar.length * 100) / reviewList?.length
+const twoStarPercent = (twoSatar.length * 100) / reviewList?.length
+const onceStarPercent = (oneSatar.length * 100) / reviewList?.length
+//   console.log((fiveSatar.length * 100) / reviewList?.length);
   return (
     <>
       <div className="d-flex align-items-center mb-2">
@@ -11,8 +27,8 @@ const ReviewStatics = () => {
           <div
             className="progress-bar bg-warning"
             role="progressbar"
-            style={{ width: "70%" }}
-            aria-valuenow={70}
+            style={{ width: `${fiveStarPercent}%` }}
+            aria-valuenow={fiveStarPercent}
             aria-valuemin={0}
             aria-valuemax={100}
           />
@@ -21,7 +37,7 @@ const ReviewStatics = () => {
           className="flex-shrink-0 flex-grow-1 fs-sm text-end ps-2"
           style={{ width: "3rem" }}
         >
-          70%
+          {parseInt(fiveStarPercent)}%
         </div>
       </div>
       <div className="d-flex align-items-center mb-2">
@@ -32,8 +48,8 @@ const ReviewStatics = () => {
           <div
             className="progress-bar bg-warning"
             role="progressbar"
-            style={{ width: "15%" }}
-            aria-valuenow={15}
+            style={{ width: `${fourStarPercent}%` }}
+            aria-valuenow={fourStarPercent}
             aria-valuemin={0}
             aria-valuemax={100}
           />
@@ -42,7 +58,7 @@ const ReviewStatics = () => {
           className="flex-shrink-0 flex-grow-1 fs-sm text-end ps-2"
           style={{ width: "3rem" }}
         >
-          15%
+          {parseInt(fourStarPercent)}%
         </div>
       </div>
       <div className="d-flex align-items-center mb-2">
@@ -53,8 +69,8 @@ const ReviewStatics = () => {
           <div
             className="progress-bar bg-warning"
             role="progressbar"
-            style={{ width: 0 }}
-            aria-valuenow={0}
+            style={{ width: `${threeStarPercent}%` }}
+            aria-valuenow={threeStarPercent}
             aria-valuemin={0}
             aria-valuemax={100}
           />
@@ -63,7 +79,7 @@ const ReviewStatics = () => {
           className="flex-shrink-0 flex-grow-1 fs-sm text-end ps-2"
           style={{ width: "3rem" }}
         >
-          0%
+          {parseInt(threeStarPercent)}%
         </div>
       </div>
       <div className="d-flex align-items-center mb-2">
@@ -74,8 +90,8 @@ const ReviewStatics = () => {
           <div
             className="progress-bar bg-warning"
             role="progressbar"
-            style={{ width: "10%" }}
-            aria-valuenow={10}
+            style={{ width: `${twoStarPercent}%` }}
+            aria-valuenow={twoStarPercent}
             aria-valuemin={0}
             aria-valuemax={100}
           />
@@ -84,7 +100,7 @@ const ReviewStatics = () => {
           className="flex-shrink-0 flex-grow-1 fs-sm text-end ps-2"
           style={{ width: "3rem" }}
         >
-          10%
+          {parseInt(twoStarPercent)}%
         </div>
       </div>
       <div className="d-flex align-items-center mb-2">
@@ -95,8 +111,8 @@ const ReviewStatics = () => {
           <div
             className="progress-bar bg-warning"
             role="progressbar"
-            style={{ width: "5%" }}
-            aria-valuenow={5}
+            style={{ width: `${onceStarPercent}%` }}
+            aria-valuenow={onceStarPercent}
             aria-valuemin={0}
             aria-valuemax={100}
           />
@@ -105,7 +121,7 @@ const ReviewStatics = () => {
           className="flex-shrink-0 flex-grow-1 fs-sm text-end ps-2"
           style={{ width: "3rem" }}
         >
-          5%
+          {parseInt(onceStarPercent)}%
         </div>
       </div>
     </>
