@@ -170,7 +170,7 @@ export default function Properties({ properties }){
                               </div>
                               <div className="form-check">
                                 <input className="form-check-input" type="checkbox" id="spa-lounge" />
-                                <label className="form-check-label fs-sm" htmlFor="spa-lounge">Children's play area</label>
+                                <label className="form-check-label fs-sm" htmlFor="spa-lounge">Children&apos;s play area</label>
                               </div>
                               <div className="form-check">
                                 <input className="form-check-input" type="checkbox" id="bar" />
