@@ -1,15 +1,16 @@
 import nc from 'next-connect';
 import Review from '../../models/Review';
+import { isAuth } from '../../utils/auth';
 import db from '../../utils/db';
 
 const handler = nc();
 
-handler.post(async (req, res) => {
-    const { _id, rating, body } = req.body;
+handler.use(isAuth).post(async (req, res) => {
+    const { rating, body } = req.body;
     await db.connect();
 
     const review = new Review({
-        user: _id, rating, body
+        user: req.user_id, rating, body
     });
     
     if(await review.save()){
