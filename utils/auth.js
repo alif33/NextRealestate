@@ -5,8 +5,7 @@ const signToken = (user) => {
     {
       _id: user._id,
       name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
+      email: user.email
     },
 
     process.env.JWT_SECRET,

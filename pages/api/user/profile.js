@@ -1,18 +1,19 @@
 import nc from 'next-connect';
 import User from '../../../models/User';
-import { isAuth } from '../../../utils/auth';
+import { isAuth, signToken } from '../../../utils/auth';
 import db from '../../../utils/db';
 
 const handler = nc();
 handler.use(isAuth);
+
 
 handler.use(isAuth).put(async (req, res) => {
     const { name, email, phoneNumber, password, updatePassword, image, wishlists } = req.body;
     await db.connect();
     if(updatePassword){
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(updatePassword, salt);
-        const update = await User.updateOne(
+        const hashedPassword = await bcrypt.hash(updatedPassword, salt);
+        User.updateOne(
             { "_id": req.user._id }, 
             { $set: { 
                 "name": name,
@@ -21,36 +22,40 @@ handler.use(isAuth).put(async (req, res) => {
                 "password": hashedPassword,
                 "image": image,
                 "wishlists": wishlists
-            } }
-            )
-
-        if(update.modifiedCount){
-            await db.disconnect();
-            res.send({
-                success: true,
-                message: 'User updated successfully'
+            }},
+            {returnOriginal: false})
+            .then(user=>{
+                if(user){
+                    const token = signToken(user);
+                    res.send({
+                      success: true,
+                      token,
+                      user
+                    });
+                }
             })
-        }
     }else{
-        const update = await User.updateOne(
+        User.findOneAndUpdate(
             { "_id": req.user._id }, 
             { $set: { 
                 "name": name,
                 "email": email,
-                "phoneNumber": phoneNumber,
+                "phone": phoneNumber,
                 "password": password,
                 "image": image,
                 "wishlists": wishlists
-            } }
-            )
-
-        if(update.modifiedCount){
-            await db.disconnect();
-            res.send({
-                success: true,
-                message: 'User updated successfully'
+            }},
+            {returnOriginal: false})
+            .then(user=>{
+                if(user){
+                    const token = signToken(user);
+                    res.send({
+                      success: true,
+                      token,
+                      user
+                    });
+                }
             })
-        }
     }
 });
 
