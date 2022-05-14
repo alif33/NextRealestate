@@ -10,9 +10,7 @@ import { userAuthStatus } from '../__lib__/helpers/Cookiehandler';
 import { getData } from '../__lib__/helpers/HttpService';
  
 export default function Home({properties}) {
-  useEffect(async()=>{
-   const user = await userAuthStatus();
-  },[])
+ 
   return (
     <>
       <Head>

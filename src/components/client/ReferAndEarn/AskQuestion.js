@@ -28,7 +28,7 @@ const AskQuestion = () => {
                       aria-expanded="true"
                       aria-controls="collapse-1"
                     >
-                      Why my referrel's listing got rejected?
+                      Why my referrel&apos;s listing got rejected?
                     </button>
                   </h2>
                   <div
@@ -54,7 +54,7 @@ const AskQuestion = () => {
                       aria-expanded="false"
                       aria-controls="collapse-2"
                     >
-                      Why didn't I recive money for my referral?
+                      Why didn&apos;t I recive money for my referral?
                     </button>
                   </h2>
                   <div

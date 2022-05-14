@@ -131,7 +131,7 @@ function Blog(){
                         </div>
                         <div className="d-flex align-items-start"><a className="flex-shrink-0" href="#"><img className="rounded-3" src="img/rokye-website/blog/thumbs/03.jpg" width={80} alt="Image" /></a>
                             <div className="ps-3"><a className="fs-xs text-uppercase text-primary text-decoration-none" href="#">Lfestyle</a>
-                            <h4 className="fs-base pt-1 mb-2"><a className="nav-link" href="#">You Are Never "Done" Innovating</a></h4>
+                            <h4 className="fs-base pt-1 mb-2"><a className="nav-link" href="#">You Are Never &quot;Done&quot; Innovating</a></h4>
                             <div className="d-flex fs-xs"><span className="me-2 pe-1"><i className="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle" />Mar 19</span><span><i className="fi-chat-circle opacity-70 mt-n1 me-1 align-middle" />15 comments</span></div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@ function Blog(){
                     {/* Fetured posts carousel widget*/}
                     <div className="card card-flush pb-3 pb-lg-0 mb-4">
                         <div className="card-body">
-                        <h4 className="h5">Editor's Choice</h4>
+                        <h4 className="h5">Editor&apos;s Choice</h4>
                         <div className="tns-carousel-wrapper mx-n3">
                             <div className="tns-carousel-inner d-block" data-carousel-options="{&quot;nav&quot;: false, &quot;autoHeight&quot;: true, &quot;controlsContainer&quot;: &quot;#externalControls&quot;}">
                             <article className="px-3 pb-4">
