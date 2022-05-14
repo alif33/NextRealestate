@@ -1,6 +1,30 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import ClipLoader from "react-spinners/ClipLoader";
+import { postData } from "../../../../__lib__/helpers/HttpService";
 const Subcriber = () => {
+  const [disable, setDisable] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    setDisable(true)
+    postData('/subscriber', {email: data.email}, setDisable)
+    .then(res => {
+      if (res.success) {
+        toast.success(res.message)
+        setDisable(false)
+        reset()
+      }else{
+        setDisable(false)
+      }
+    })
+  };
   return (
     <>
       <div className="card card-flush mb-4">
@@ -10,32 +34,55 @@ const Subcriber = () => {
             Subscribe to our newsletter and be the first to see the latest posts
             and tips.
           </p>
-          <form className="form-group">
-            <div className="input-group input-group-sm">
-              <span className="input-group-text text-muted">
-                <i className="fi-mail" />
-              </span>
-              <input
-                className="form-control"
-                type="email"
-                placeholder="Your email"
-              />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div
+              className={`form-group ${
+                errors.email?.type === "required" && "border-danger"
+              }`}
+            >
+              <div className="input-group input-group-sm">
+                <span className="input-group-text text-muted">
+                  <i className="fi-mail" />
+                </span>
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="Your email"
+                  name="email"
+                  {...register("email", {
+                    required: true,
+                    pattern: /\S+@\S+\.\S+/,
+                  })}
+                />
+              </div>
+              {disable ? (
+                <button className="btn btn-primary btn-sm" type="button">
+                  <ClipLoader color={"black"} loading={true} size={15} />
+                </button>
+              ) : (
+                <button className="btn btn-primary btn-sm" type="submit">
+                  Sign up
+                </button>
+              )}
             </div>
-            <button className="btn btn-primary btn-sm" type="button">
-              Sign up
-            </button>
+            {errors.email?.type === "pattern" && (
+              <span className="text-danger p-1">Please valid email</span>
+            )}
+            <div className="form-check pt-3">
+              <input
+                className={`form-check-input ${
+                  errors.isAgree && "border-danger"
+                }`}
+                id="form-submit"
+                type="checkbox"
+                {...register("isAgree", { required: true })}
+              />
+              <label className="form-check-label" htmlFor="agree-to-terms">
+                I agree to the <a href="#">Terms of use</a> and{" "}
+                <a href="#">Privacy policy</a>
+              </label>
+            </div>
           </form>
-          <div className="form-check pt-3">
-            <input
-              className="form-check-input"
-              id="form-submit"
-              type="checkbox"
-            />
-            <label className="form-check-label" htmlFor="agree-to-terms">
-              I agree to the <a href="#">Terms of use</a> and{" "}
-              <a href="#">Privacy policy</a>
-            </label>
-          </div>
         </div>
       </div>
     </>

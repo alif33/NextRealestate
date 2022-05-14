@@ -296,7 +296,6 @@ export default function Properties({ properties }){
 export async function getServerSideProps() {
 
   const properties = await getData('/properties')
-  console.log(properties)
   return {
     props: {
         properties

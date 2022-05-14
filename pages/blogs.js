@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BlogCard from "../src/components/client/Blogs/BlogCard";
 import BlogCard2 from "../src/components/client/Blogs/BlogCard2";
-import BlogPagination from "../src/components/client/Blogs/BlogPagination";
 import BlogSearch from "../src/components/client/Blogs/BlogSearch";
 import BlogShorted from "../src/components/client/Blogs/BlogShorted";
 import BlogCategory from "../src/components/client/Blogs/Category/BlogCategory";
 import FeturedPosts from "../src/components/client/Blogs/FeturedPost/BlogFeturedPosts";
+import BlogPagination from "../src/components/client/Blogs/Pagination/BlogPagination";
 import Subcriber from "../src/components/client/Blogs/Subcriber";
 import BlogTags from "../src/components/client/Blogs/Tags/BlogTags";
 import Layout from "../src/components/client/layout";
 import { getData } from "../__lib__/helpers/HttpService";
 
-function Blogs({ blogs, tags, categories }) {
+function Blogs({ blogs, tags }) {
+  console.log(blogs);
   const [search, setSearch] = useState(null);
   const shorted = blogs.slice(blogs?.length - 2, blogs?.length);
   const shorted2 = blogs.slice(1, blogs.length - 2);
@@ -48,6 +49,7 @@ function Blogs({ blogs, tags, categories }) {
           Real estate journey
         </h1>
         <div className="row">
+          {blogs.length === 0 && <div>No blog available</div>}
           {/* List of articles*/}
           <div className="col-lg-8">
             {!search && (
@@ -64,12 +66,15 @@ function Blogs({ blogs, tags, categories }) {
               {/* Item*/}
               {!search &&
                 reversed.map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
-              {search && (filtered.length === blogs.length || filtered.length === 0 ? <div>Blog not found</div> :
-                filtered.map((blog, i) => <BlogCard2 key={i} blog={blog} />))}
-             
+              {search &&
+                (filtered.length === blogs.length || filtered.length === 0 ? (
+                  <div>Blog not found</div>
+                ) : (
+                  filtered.map((blog, i) => <BlogCard2 key={i} blog={blog} />)
+                ))}
             </div>
             {/* Pagination*/}
-            <BlogPagination />
+            {blogs.length > 0 && <BlogPagination blogs={blogs} />}
           </div>
           {/* Sidebar*/}
           <aside className="col-lg-4">
@@ -91,7 +96,7 @@ function Blogs({ blogs, tags, categories }) {
                 {/* Search*/}
                 <BlogSearch handleSearch={handleSearch} />
                 {/* Categories*/}
-                <BlogCategory categories={categories} blogs={blogs} />
+                {/* <BlogCategory categories={categories} blogs={blogs} /> */}
                 {/* Tags*/}
                 <BlogTags tags={tags} />
                 {/* Fetured posts (carousel)*/}
@@ -111,12 +116,11 @@ export default Blogs;
 export async function getServerSideProps() {
   const blogs = await getData("/blogs");
   const tags = await getData("/tags");
-  const categories = await getData("/categories");
   return {
     props: {
-      blogs,
-      tags,
-      categories
+      blogs: blogs || [],
+      tags: tags || [],
+      // categories
     },
   };
 }

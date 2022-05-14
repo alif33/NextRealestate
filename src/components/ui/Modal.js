@@ -1,21 +1,26 @@
 import { X } from "react-feather";
 import styles from "./Modal.module.css";
+import ClipLoader from 'react-spinners/ClipLoader'
 const Modal = (props) => {
-  const { show, title, close, save } = props;
+  const { show, title, close, save, disable } = props;
+  console.log(save);
   return (
     <>
       {show && (
         <div
-        className={styles.modal}
-        //   className="modal fade"
+          className={styles.modal}
+          //   className="modal fade"
           id="exampleModalCenter"
           tabIndex="-1"
           role="dialog"
           aria-labelledby="exampleModalCenterTitle"
-        //   aria-hidden="true"
+          //   aria-hidden="true"
         >
           <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content" style={{overflowY: 'scroll', height: '600px'}}>
+            <div
+              className="modal-content"
+              style={{ overflowY: "scroll", height: "600px" }}
+            >
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLongTitle">
                   {title}
@@ -27,7 +32,9 @@ const Modal = (props) => {
                   aria-label="Close"
                   onClick={close}
                 >
-                  <span aria-hidden="true"><X/></span>
+                  <span aria-hidden="true">
+                    <X />
+                  </span>
                 </button>
               </div>
               <div className="modal-body">{props.children}</div>
@@ -40,9 +47,17 @@ const Modal = (props) => {
                 >
                   Close
                 </button>
-                {save && (
-                  <button type="button" className="btn btn-primary" onClick={save}>
+                {!disable ? (
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={save}
+                  >
                     Save
+                  </button>
+                ) : (
+                  <button className="btn btn-primary">
+                    <ClipLoader color={"black"} loading={true} size={18} />
                   </button>
                 )}
               </div>

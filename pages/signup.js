@@ -2,17 +2,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import Layout from "../src/components/client/layout";
-import { showErr } from "../__lib__/helpers/ErrHandler";
 import { postData } from "../__lib__/helpers/HttpService";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
-import { yupResolver } from "@hookform/resolvers/yup";
-
-
-
-
-
-
 export default function SignUp() {
   const [disable, setDisable] = useState(false);
 

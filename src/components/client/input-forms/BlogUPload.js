@@ -12,7 +12,7 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
 });
 
 const BlogUPload = (props) => {
-  const { handleForm, handleFormData, selectedTag, setSelectedTag, isValid, setBody, body } =
+  const { handleForm, handleFormData, images,setImages, selectedTag, setSelectedTag, isValid, setBody, body } =
     props;
   const dispatch = useDispatch();
   const { categories, tags } = useSelector((state) => state);
@@ -32,7 +32,7 @@ const BlogUPload = (props) => {
     label: tag.tagName,
     value: tag.tagSlug,
   }));
-  const { blogTitle, category, description, image } = handleFormData;
+  const { blogTitle, category, description } = handleFormData;
   return (
     <>
       <form>
@@ -73,9 +73,9 @@ const BlogUPload = (props) => {
             id="image"
             name="image"
             accept="image/png, image/gif, image/jpeg"
-            onChange={(e) => handleForm(e)}
+            onChange={(e) => setImages(e.target.files)}
           />
-          {!image && isValid && (
+          {!images && isValid && (
             <span className="text-danger">Image requried</span>
           )}
         </div>
