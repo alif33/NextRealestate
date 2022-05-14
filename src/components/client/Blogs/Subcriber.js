@@ -56,7 +56,7 @@ const Subcriber = () => {
                 />
               </div>
               {disable ? (
-                <button className="btn btn-primary btn-sm" type="button">
+                <button disabled className="btn btn-primary btn-sm" type="button">
                   <ClipLoader color={"black"} loading={true} size={15} />
                 </button>
               ) : (

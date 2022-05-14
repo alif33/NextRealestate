@@ -56,7 +56,7 @@ const Modal = (props) => {
                     Save
                   </button>
                 ) : (
-                  <button className="btn btn-primary">
+                  <button disabled className="btn btn-primary">
                     <ClipLoader color={"black"} loading={true} size={18} />
                   </button>
                 )}
