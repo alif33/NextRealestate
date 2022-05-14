@@ -1,31 +1,64 @@
 import nc from 'next-connect';
+import multer from 'multer';
+import { v2 as cloudinary } from 'cloudinary';
+import streamifier from 'streamifier';
 import Blog from '../../../models/Blog';
-import Contact from '../../../models/Contact';
-import { isAuth } from '../../../utils/auth';
 import db from '../../../utils/db';
+import { isAuth } from '../../../utils/auth';
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+  
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+};
 
 const handler = nc();
+const upload = multer();
 
-handler.use(isAuth).post(async (req, res) => {
+handler.use(isAuth, upload.single('image')).post(async (req, res) => {
+    const { title, body, postedBy, category, tags } = req.body;
 
-    const { title, body, category, tags, image } = req.body;
+    const streamUpload = (req) => {
+        return new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream((error, result) => {
+            if (result) {
+              resolve(result);
+            } else {
+              reject(error);
+            }
+          });
+          streamifier.createReadStream(req.file.buffer).pipe(stream);
+        });
+      };
+      const { url } = await streamUpload(req);
+      
+      if(url)
+      {
+        await db.connect();
 
-    await db.connect();
+        const blog = new Blog({
+            title, 
+            body, 
+            category, 
+            tags, 
+            image: url,
+            postedBy: req.user._id
+        });
+        if(await blog.save()){
+            await db.disconnect();
+            res.send({
+                success: true,
+                message: 'Blog submitted successfully'
+            })
+        }
+      }
 
-    const blog = new Blog({
-        title, 
-        body, 
-        category, 
-        tags, 
-        image,
-        postedBy: req.admin._id
-    });
-    if(await blog.save()){
-        await db.disconnect();
-        res.json({
-            message: 'Blog added successfully'
-        })
-    }
 });
 
 export default handler;

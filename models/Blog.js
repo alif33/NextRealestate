@@ -26,8 +26,7 @@ const blogSchema = new mongoose.Schema(
             "default" : []
         },
         image: {
-            type: String,
-            // required: true
+            type: String
         },
         postedBy: {
             type: mongoose.Schema.Types.ObjectId, 
