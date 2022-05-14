@@ -5,12 +5,14 @@ import BlogUPload from "../input-forms/BlogUPload";
 import Cookies from "universal-cookie";
 import { authPost, postData } from "../../../../__lib__/helpers/HttpService";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const AddBlog = () => {
   const cookies = new Cookies();
   const [modal, setModal] = useState(false);
   const [selectedTag, setSelectedTag] = useState(null);
   const [isValid, setIsValid] = useState(false);
+  const { users } = useSelector((state) => state);
   // inputs ----------------
   const [handleFormData, setHandleFormData] = useState({
     blogTitle: null,
@@ -41,34 +43,44 @@ const AddBlog = () => {
   };
 
   const userInfo = cookies.get("_info");
-  const { blogTitle, description, image, category } = handleFormData;
+  const { user } = users;
+  const [body, setBody] = useState(null)
+  const { blogTitle, image, category } = handleFormData;
+  console.log(category);
   const save = async () => {
-    const formData = await new FormData();
-    formData.append("title", handleFormData.blogTitle);
-    formData.append("body", handleFormData.description);
-    formData.append("postedBy", userInfo.user._id);
-    formData.append("image", handleFormData.image[0]);
-    for (let i = 0; i < selectedTag?.length; i++) {
-      formData.append("tags[]", selectedTag[i].value);
-    }
+    // const formData = await new FormData();
+    // formData.append("title", blogTitle);
+    // formData.append("body", description);
+    // formData.append("image",image[0]);
+    // for (let i = 0; i < selectedTag?.length; i++) {
+    //   formData.append("tags[]", selectedTag[i].value);
+    // }
 
-    if (!blogTitle || !description || !image || !category || !selectedTag) {
+    const newData = {
+      title: blogTitle,
+      body: body,
+      category: category,
+      postedBy: user?._id,
+      tags: selectedTag,
+    };
+    if (!blogTitle || !body || !image || !category || !selectedTag) {
       setIsValid(true);
     } else {
-      await submitData(formData);
+      await submitData(newData);
     }
     setModal(true);
   };
   const submitData = async (data) => {
     // setDisable(true);
-    const admins = await cookies.get("_admin");
-    authPost("/user/blog", data, userInfo.token).then((res) => {
+
+    authPost("/blog", data, userInfo.token).then((res) => {
       if (res.success) {
         toast.success(res.message);
-        reset();
+        setModal(false);
         // setDisable(false);
       } else {
         toast.error("Unsuccessfully");
+
         // setDisable(false);
       }
     });
@@ -99,6 +111,8 @@ const AddBlog = () => {
             handleForm={handleForm}
             selectedTag={selectedTag}
             isValid={isValid}
+            setBody={setBody}
+            body={body}
           />
         </Modal>
       </div>

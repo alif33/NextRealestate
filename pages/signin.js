@@ -2,14 +2,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import Layout from "../src/components/client/layout";
-import { showErr } from "../__lib__/helpers/ErrHandler";
-import { postData } from "../__lib__/helpers/HttpService";
-import toast from "react-hot-toast";
-import Cookies from "universal-cookie";
 import { useRouter } from "next/router";
-
+import { useDispatch, useSelector } from "react-redux";
+import Cookies from "universal-cookie";
+import { postData } from "../__lib__/helpers/HttpService";
+import { userLogin } from "../store/users/actions";
 export default function SignIn() {
   const [showPass, setShowPass] = useState(false);
+  const dispatch = useDispatch();
   const [disable, setDisable] = useState(false);
   const {
     register,
@@ -21,22 +21,16 @@ export default function SignIn() {
   const router = useRouter();
 
   const onSubmit = (data) => {
-      console.log(data)
     setDisable(true);
     postData("/user/login", data, setDisable).then((res) => {
       if (res?.success) {
-        cookies.set(
-          "_info",
-          JSON.stringify({
-            token: res.token,
-            user: res.user,
-          }),
-          { path: "/" }
-        );
-        reset();
-        router.push({
-          pathname: "/",
+        cookies.set("_info", JSON.stringify({ token: res.token }), {
+          path: "/",
         });
+        reset();
+        router.push({  pathname: "/" });
+        dispatch(userLogin(res));
+        
       }
     });
   };
@@ -46,7 +40,7 @@ export default function SignIn() {
         <nav className="mb-4 pt-md-3" aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <Link href='/'>
+              <Link href="/">
                 <a>Home</a>
               </Link>
             </li>

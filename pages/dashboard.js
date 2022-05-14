@@ -1,5 +1,5 @@
 import Layout from "../src/components/client/layout";
-import PersonalInfo from "../src/components/client/dashboard/PersonalInfo";
+import PersonalInfo from "../src/components/client/dashboard/AccountInfo/PersonalInfo";
 import MyListings from "../src/components/client/dashboard/MyListing/MyListings";
 import Wishlist from "../src/components/client/dashboard/Wishlist";
 import AddBlog from "../src/components/client/dashboard/AddBlog";
@@ -11,6 +11,7 @@ const Dashboard = () => {
 
   return (
     <Layout>
+      
       {/* Page container*/}
       <div className="container mt-5 mb-md-4 py-5">
         {/* Breadcrumbs*/}

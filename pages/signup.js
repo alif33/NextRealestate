@@ -52,7 +52,6 @@ export default function SignUp() {
       });
     }
   };
-  console.log(errors);
   return (
     <Layout>
       <div className="container mt-5 mb-md-4 py-5">
