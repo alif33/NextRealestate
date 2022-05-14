@@ -5,8 +5,11 @@ import Layout from "../src/components/client/layout";
 import { postData } from "../__lib__/helpers/HttpService";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import ClipLoader from "react-spinners/ClipLoader";
+
 export default function SignUp() {
   const [disable, setDisable] = useState(false);
+  const [showPass, setShowPass] = useState(false)
 
   const {
     register,
@@ -25,10 +28,10 @@ export default function SignUp() {
       setDisable(true);
       const newData = {
         name: data.name,
-        email: data.email,
+        email: data.email.toLowerCase(),
         phone: data.phone,
         password: data.password,
-        role: data.role
+        role: data.role,
       };
       postData("/user/register", newData, setDisable).then((res) => {
         if (res?.success) {
@@ -38,8 +41,9 @@ export default function SignUp() {
           router.push({
             pathname: "/dashboard",
           });
-        }else{
-            toast.error('Email already exist')
+        } else {
+          toast.error("Email already exist");
+          setDisable(false)
         }
       });
     }
@@ -124,7 +128,7 @@ export default function SignUp() {
                       <option value="owner">Owner</option>
                       <option value="tenant">Tenant </option>
                     </select>
-                    {watch().role === 'true' && (
+                    {watch().role === "true" && (
                       <span className="text-danger">Role is required</span>
                     )}
                   </div>
@@ -166,7 +170,7 @@ export default function SignUp() {
                     <input
                       {...register("email", {
                         required: true,
-                        pattern: /\S+@\S+\.\S+/
+                        pattern: /\S+@\S+\.\S+/,
                       })}
                       className="form-control"
                       type="text"
@@ -174,10 +178,10 @@ export default function SignUp() {
                       placeholder="Enter email"
                       autoComplete="off"
                     />
-                    {errors?.email?.type === 'required' && (
+                    {errors?.email?.type === "required" && (
                       <span className="text-danger">Email is required.</span>
                     )}
-                    {errors?.email?.type === 'pattern' && (
+                    {errors?.email?.type === "pattern" && (
                       <span className="text-danger">Invalid email</span>
                     )}
                   </div>
@@ -191,20 +195,23 @@ export default function SignUp() {
                           required: true,
                         })}
                         className="form-control"
-                        type="password"
+                        type={showPass ? 'text' : 'password'}
                         id="password"
                         placeholder="Enter password"
                         autoComplete="off"
                       />
-                       {errors?.password?.type === 'required' && (
-                      <span className="text-danger">Password is required.</span>
-                    )}
-                     
+                      {errors?.password?.type === "required" && (
+                        <span className="text-danger">
+                          Password is required.
+                        </span>
+                      )}
+
                       <label
                         className="password-toggle-btn"
                         aria-label="Show/hide password"
                       >
                         <input
+                        onClick={() => setShowPass(!showPass)}
                           className="password-toggle-check"
                           type="checkbox"
                         />
@@ -231,13 +238,18 @@ export default function SignUp() {
                       <a href="#">Privacy policy</a>
                     </label>
                   </div>
-                  <button
-                    disabled={disable}
-                    className="btn btn-primary btn-lg w-100"
-                    type="submit"
-                  >
-                    Sign up
-                  </button>
+                  {disable ? (
+                    <button disabled className="btn btn-primary btn-lg w-100">
+                      <ClipLoader color={"black"} loading={true} size={15} />
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-primary btn-lg w-100"
+                      type="submit"
+                    >
+                      Sign up
+                    </button>
+                  )}
                 </form>
               </div>
             </div>

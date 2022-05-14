@@ -12,7 +12,6 @@ import ReviewPagination from "../src/components/client/Reviews/ReviewPagination/
 import ReviewCard from "../src/components/client/Reviews/ReviewCard";
 import { getData } from "../__lib__/helpers/HttpService";
 const Reviews = ({reviews}) => {
-  console.log(reviews)
 
   return (
     <Layout>
@@ -54,7 +53,7 @@ export default Reviews;
 
 export async function getServerSideProps() {
   const reviews = await getData("/reviews");
-
+  console.log(reviews)
   return {
     props: {
       reviews: reviews || [],
