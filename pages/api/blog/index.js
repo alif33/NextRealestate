@@ -22,7 +22,7 @@ const handler = nc();
 const upload = multer();
 
 handler.use(isAuth, upload.single('image')).post(async (req, res) => {
-    const { title, body, postedBy, category, tags } = req.body;
+    const { title, body, category, tags } = req.body;
 
     const streamUpload = (req) => {
         return new Promise((resolve, reject) => {
