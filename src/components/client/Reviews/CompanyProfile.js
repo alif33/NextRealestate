@@ -1,6 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const CompanyProfile = () => {
+    const {reviews} = useSelector(state => state)
   return (
     <>
       <aside className="col-lg-3 col-md-4 mb-5">
@@ -23,7 +25,7 @@ const CompanyProfile = () => {
               <i className="star-rating-icon fi-star-filled active" />
               <i className="star-rating-icon fi-star-filled active" />
             </span>
-            <div className="text-muted ms-2">(45 reviews)</div>
+            <div className="text-muted ms-2">({reviews.reviewList?.length} reviews)</div>
           </div>
           <div className="border-bottom pb-4 mb-4">
             <p className="fs-sm mb-0">

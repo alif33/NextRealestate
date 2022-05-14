@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 // import { useRouter } from 'next/router';
 // import { useState } from 'react';
 // import toast from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
 import { userLogout } from "../../../store/users/actions";
 
@@ -17,7 +17,7 @@ const Header = () => {
   // const [smallDevice, setSmallDevice] = useState(false)
   const router = useRouter();
   // const { users } = useSelector(state => state)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   // const handleDashboard = () => {
   //   if (!users?.token)
@@ -25,13 +25,13 @@ const Header = () => {
   // }
 
   const handleLogOut = () => {
-    cookies.remove('_info', { path: '/' });
-    if (!cookies.get('_info')) {
-      toast.success('Logout success')
-      router.push(router.pathname)
+    cookies.remove("_info", { path: "/" });
+    if (!cookies.get("_info")) {
+      toast.success("Logout success");
+      router.push(router.pathname);
     }
-    dispatch(userLogout())
-  }
+    dispatch(userLogout());
+  };
 
   const userInfo = cookies.get("_info");
   return (
@@ -63,11 +63,13 @@ const Header = () => {
         </button>
         {userInfo?.token ? (
           <a
-          onClick={() => handleLogOut()}
+            onClick={() => handleLogOut()}
             className="nav-link text-primary ms-2 order-lg-3"
             role="button"
             aria-expanded="false"
-          ><LogOut size={18}/> Sign out</a>
+          >
+            <LogOut size={18} /> Sign out
+          </a>
         ) : (
           <Link href="/signin">
             <a
@@ -139,9 +141,9 @@ const Header = () => {
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="job-board-single.html">
-                    Reviews
-                  </a>
+                  <Link href="/reviews">
+                    <a className="dropdown-item">Reviews</a>
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -185,15 +187,11 @@ const Header = () => {
               </a>
               <ul className="dropdown-menu dropdown-menu-light">
                 <li>
-                  <a className="dropdown-item" >
-                    FAQs
-                  </a>
+                  <a className="dropdown-item">FAQs</a>
                 </li>
                 <li>
-                  <Link href='/blogs'>
-                  <a className="dropdown-item" >
-                    Blogs
-                  </a>
+                  <Link href="/blogs">
+                    <a className="dropdown-item">Blogs</a>
                   </Link>
                 </li>
               </ul>

@@ -23,9 +23,11 @@ export default function SignUp() {
   const onSubmit = (data) => {
     if (data.role === "true") {
       setDisable(false);
+      console.log('click hocche')
     }
     if (data.isAgree && data.role === ("owner" || "tenant")) {
       setDisable(true);
+      console.log('click hocche')
       const newData = {
         name: data.name,
         email: data.email.toLowerCase(),
