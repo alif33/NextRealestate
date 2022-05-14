@@ -1,10 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const ReviewTitle = () => {
+  const { reviews } = useSelector((state) => state);
+
   return (
     <>
       <div className="d-flex align-items-center justify-content-between mb-4 pb-2">
-        <h1 className="h2 text-center text-sm-start mb-0">Reviews (45)</h1>
+        <h1 className="h2 text-center text-sm-start mb-0">Reviews ({reviews.reviewList?.length})</h1>
         <a
           className="btn btn-link btn-sm px-0"
           href="real-estate-vendor-properties.html"

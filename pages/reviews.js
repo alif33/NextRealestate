@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Layout from "../src/components/client/layout";
-import Cookies from "universal-cookie";
 import ContactUsModal from "../src/components/client/Reviews/ContactUsModal";
 import AddReviewModal from "../src/components/client/Reviews/AddReviewModal/AddReviewModal";
 import ReviewHeader from "../src/components/client/Reviews/ReviewHeader";
@@ -10,8 +9,18 @@ import ReviewStatics from "../src/components/client/Reviews/ReviewStatics/Review
 import ShortAndReviewButton from "../src/components/client/Reviews/ShortAndReviewButton";
 import ReviewPagination from "../src/components/client/Reviews/ReviewPagination/ReviewPagination";
 import ReviewCard from "../src/components/client/Reviews/ReviewCard";
-import { getData } from "../__lib__/helpers/HttpService";
-const Reviews = ({reviews}) => {
+import { userAuth } from "../__lib__/helpers/requireAuthentication";
+import { useDispatch, useSelector } from "react-redux";
+import { setReviews } from "../store/reviews/actions";
+const Reviews = () => {
+
+  const dispatch = useDispatch();
+  const {reviews} = useSelector(state => state)
+  const {reviewList} = reviews;
+
+  useEffect(() => {
+    dispatch(setReviews())
+  },[])
 
   return (
     <Layout>
@@ -36,7 +45,7 @@ const Reviews = ({reviews}) => {
               {/* Sorting + add review button*/}
               <ShortAndReviewButton />
               {/* Review*/}
-              <ReviewCard />
+            {reviewList?.map((review, i) =>   <ReviewCard key={i} review={review} />)}
 
               {/* Pagination*/}
               <ReviewPagination />
@@ -49,16 +58,11 @@ const Reviews = ({reviews}) => {
 };
 
 export default Reviews;
-
-
-export async function getServerSideProps() {
-  const reviews = await getData("/reviews");
-  console.log(reviews)
+export const getServerSideProps =  userAuth((context) => {
   return {
     props: {
-      reviews: reviews || [],
-  
     
     },
   };
-}
+});
+

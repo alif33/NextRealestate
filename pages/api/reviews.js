@@ -8,7 +8,7 @@ handler.get(async (req, res) => {
   await db.connect();
   const reviews = await Review.find({});
   await db.disconnect();
-  res.send(reviews);
+  res.send(reviews.reverse());
 });
 
 export default handler;

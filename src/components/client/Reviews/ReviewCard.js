@@ -1,6 +1,11 @@
 import React from "react";
-
-const ReviewCard = () => {
+import dateFormat from "dateformat";
+const ReviewCard = ({review}) => {
+    const {name, body, createdAt, rating} = review;
+    const ratingArray =[]
+    for (let i = 1; i <= rating; i++) {
+        ratingArray.push(i)
+    }
   return (
     <>
       <div className="mb-4 pb-4 border-bottom">
@@ -13,19 +18,16 @@ const ReviewCard = () => {
               alt="Avatar"
             />
             <div className="ps-2">
-              <h6 className="fs-base mb-0">Kristin Watson</h6>
+              <h6 className="fs-base mb-0 text-capitalize">{name}</h6>
               <span className="star-rating">
-                <i className="star-rating-icon fi-star-filled active" />
+                {ratingArray.map((rat, i) => <i key={i} className="star-rating-icon fi-star-filled active" />)}
               </span>
             </div>
           </div>
-          <span className="text-muted fs-sm">Jan 17, 2021</span>
+          <span className="text-muted fs-sm">{dateFormat(createdAt, "mmmm dd, yyyy")}</span>
         </div>
         <p>
-          Elementum ut quam tincidunt egestas vitae elit, hendrerit. Ullamcorper
-          nulla amet lobortis elit, nibh condimentum enim. Aliquam felis nisl
-          tellus sodales lectus dictum tristique proin vitae. Odio fermentum
-          viverra tortor quis.
+         {body}
         </p>
         {/* <div className="d-flex align-items-center">
           <button className="btn-like" type="button">

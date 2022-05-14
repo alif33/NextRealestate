@@ -1,11 +1,11 @@
 import nc from 'next-connect';
-import Review from '../../models/Review';
-import { isAuth } from '../../utils/auth';
-import db from '../../utils/db';
+import Review from '../../../models/Review';
+import db from '../../../utils/db';
+
 
 const handler = nc();
 
-handler.use(isAuth).post(async (req, res) => {
+handler.post(async (req, res) => {
     const { name, email, rating, body,  } = req.body;
     await db.connect();
 

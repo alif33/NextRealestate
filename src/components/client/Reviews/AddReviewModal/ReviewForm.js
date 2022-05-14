@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader";
+import { setReviews } from "../../../../../store/reviews/actions";
 import { postData } from "../../../../../__lib__/helpers/HttpService";
 
 const ReviewForm = () => {
   const [disable, setDisable] = useState(false);
   const [rating, setRating] = useState(false);
+  const dispatch= useDispatch()
   const {
     register,
     handleSubmit,
@@ -26,6 +29,7 @@ const ReviewForm = () => {
         if (res.success) {
           toast.success(res.message);
           setDisable(false);
+            dispatch(setReviews())
           reset()
         }
       });
