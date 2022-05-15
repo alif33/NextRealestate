@@ -19,7 +19,7 @@ handler.post(async (req, res) => {
       {returnOriginal: false}
   ).then(blog=>res.send({
     success: true,
-    message: 'Comment added successfully'
+    message: 'Comment added sucessfully'
   }))
   }
 });
