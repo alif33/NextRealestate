@@ -125,8 +125,8 @@ export default function SignUp() {
                       <option value disabled selected>
                         Choose
                       </option>
-                      <option value="owner">Owner</option>
-                      <option value="tenant">Tenant </option>
+                      <option value="OWNER">Owner</option>
+                      <option value="TENANT">Tenant </option>
                     </select>
                     {watch().role === "true" && (
                       <span className="text-danger">Role is required</span>
