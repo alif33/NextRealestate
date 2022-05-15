@@ -19,7 +19,9 @@ function Blogs({ blogs, tags }) {
   const [selectedTag, setSelectedTag] = useState(null)
 
   const handleSearch = (e) => {
+    setSelectedTag(null)
     setSearch(e);
+ 
   };
   const filtered = blogs?.filter((val) => {
     if (!search) {
@@ -39,7 +41,7 @@ function Blogs({ blogs, tags }) {
     }
   });
   console.log(tagFilter)
-  console.log(selectedTag)
+
 
 
 
@@ -65,7 +67,7 @@ function Blogs({ blogs, tags }) {
           {blogs.length === 0 && <div>No blog available</div>}
           {/* List of articles*/}
           <div className="col-lg-8">
-            {!search || !selectedTag && (
+            {!search && !selectedTag && (
               <div className="border-bottom pb-2">
                 <div className="row">
                   {/* Item*/}
@@ -77,16 +79,16 @@ function Blogs({ blogs, tags }) {
             )}
             <div className="pt-4 pb-2 mt-2">
               {/* Item*/}
-              {!search || !selectedTag &&
+              {!search && !selectedTag &&
                 reversed.map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
-              {search &&
+              {search && !selectedTag &&
                 (filtered.length === blogs.length || filtered.length === 0 ? (
                   <div>Blog not found</div>
                 ) : (
                   filtered.map((blog, i) => <BlogCard2 key={i} blog={blog} />)
                 ))}
 
-              {selectedTag &&
+              {selectedTag && !search &&
                 (tagFilter.length === blogs.length || tagFilter.length === 0 ? (
                   <div>Blog not found</div>
                 ) : (
