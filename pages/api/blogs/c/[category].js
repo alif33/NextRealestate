@@ -13,7 +13,7 @@ handler.get(async (req, res) => {
       path: 'category'
     })
     .populate({
-      path: 'postedBy'
+      path: 'postedBy',
     });
   await db.disconnect();
   res.send(blogs);
