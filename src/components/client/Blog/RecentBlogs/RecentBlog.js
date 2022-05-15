@@ -15,7 +15,7 @@ const RecentBlog = ({ blog }) => {
             Guide
           </a>
           <h4 className="fs-base pt-1 mb-2">
-            <a className="nav-link" href="#">
+            <a className="nav-link text-capitalize" href="#">
               {blog.title}
             </a>
           </h4>
