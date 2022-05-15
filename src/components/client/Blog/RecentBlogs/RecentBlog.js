@@ -1,5 +1,5 @@
 import React from "react";
-
+import dateFormat from "dateformat";
 const RecentBlog = ({ blog }) => {
   return (
     <>
@@ -22,7 +22,7 @@ const RecentBlog = ({ blog }) => {
           <div className="d-flex fs-xs">
             <span className="me-2 pe-1">
               <i className="fi-calendar-alt opacity-70 mt-n1 me-1 align-middle" />
-              May 08
+             {dateFormat(blog?.createdAt, "mmm dd")}
             </span>
             <span>
               <i className="fi-chat-circle opacity-70 mt-n1 me-1 align-middle" />
