@@ -8,12 +8,12 @@ const handler = nc();
 
 handler.post(async (req, res) => {
   if(req.query._id){
-    const { name, email, comment } = req.body;
+    const { name, email, comment, _time } = req.body;
     await Blog.findOneAndUpdate(
       { "_id": req.query._id }, 
       { $push: { 
           "comments": {
-            name, email, comment
+            name, email, comment, _time
           }
       }},
       {returnOriginal: false}
