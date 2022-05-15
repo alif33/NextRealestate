@@ -1,7 +1,7 @@
 import React from "react";
 
 const BlogAuthor = ({postedBy}) => {
-    console.log(postedBy);
+ 
   return (
     <>
       <div className="card card-flush pb-3 pb-lg-0 mb-4">
