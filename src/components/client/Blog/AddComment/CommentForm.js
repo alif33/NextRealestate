@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { postData } from "../../../../../__lib__/helpers/HttpService";
-import ClipLoader from 'react-spinners/ClipLoader'
-
+import ClipLoader from "react-spinners/ClipLoader";
 
 const CommentForm = () => {
   const [disable, setDisable] = useState();
@@ -17,14 +16,12 @@ const CommentForm = () => {
   } = useForm();
   const onSubmit = (data) => {
     setDisable(true);
-    postData(`/blog/${query.id}`, data, setDisable)
-    .then((res) => {
+    postData(`/blog/${query.id}`, data, setDisable).then((res) => {
+   
       if (res.success) {
-          setDisable(false)
+        setDisable(false);
         toast.success(res.message);
-      }else(
-          setDisable(false)
-      )
+      } else setDisable(false);
     });
   };
   return (
@@ -86,11 +83,7 @@ const CommentForm = () => {
             </button>
           ) : (
             <button disabled className="btn btn-lg btn-primary">
-              <ClipLoader
-                color={'black'}
-                loading={true}
-                size={20}
-              />
+              <ClipLoader color={"black"} loading={true} size={20} />
             </button>
           )}
         </div>

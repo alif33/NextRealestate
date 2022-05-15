@@ -22,7 +22,7 @@ const BlogCard = ({blog}) => {
               </span>
               <img
                 className="d-block"
-                src="img/rokye-website/blog/01.jpg"
+                src={blog?.image}
                 alt="Image"
               />
             </a>

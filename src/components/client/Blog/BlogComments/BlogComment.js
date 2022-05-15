@@ -1,15 +1,13 @@
 import React from "react";
 import BlogComReply from "./BlogComReply";
-
-const BlogComment = () => {
+import TimeAgo from 'react-timeago'
+const BlogComment = ({comment}) => {
+  console.log(comment)
   return (
     <>
       <div className="border-bottom pb-4 mb-4">
         <p>
-          Elementum ut quam tincidunt egestas vitae elit, hendrerit. Ullamcorper
-          nulla amet lobortis elit, nibh condimentum enim. Aliquam felis nisl
-          tellus sodales lectus dictum tristique proin vitae. Odio fermentum
-          viverra tortor quis reprehenderit in voluptate velit.
+          {comment?.comment}
         </p>
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center pe-2">
@@ -20,17 +18,19 @@ const BlogComment = () => {
               alt="Avatar"
             />
             <div className="ps-2">
-              <h6 className="fs-base mb-0">Daniel Adams</h6>
-              <span className="text-muted fs-sm">3 days ago</span>
+              <h6 className="fs-base mb-0">{comment.name}</h6>
+              <span className="text-muted fs-sm">
+              <TimeAgo date={new Date()} />
+                </span>
             </div>
           </div>
-          <button className="btn btn-link btn-sm" type="button">
+          {/* <button className="btn btn-link btn-sm" type="button">
             <i className="fi-reply fs-lg me-2" />
             <span className="fw-normal">Reply</span>
-          </button>
+          </button> */}
         </div>
         {/* Reply to comment*/}
-       <BlogComReply/>
+       {/* <BlogComReply/> */}
       </div>
     </>
   );

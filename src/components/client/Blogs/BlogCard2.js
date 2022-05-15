@@ -14,7 +14,7 @@ const BlogCard2 = ({ blog }) => {
         <Link href={`/blog?${query}`}>
           <a
             className="card-img-top"
-            style={{ backgroundImage: "url(img/rokye-website/06.jpg)" }}
+            style={{ backgroundImage: `url(${blog?.image})` }}
           />
         </Link>
         <div className="card-body">

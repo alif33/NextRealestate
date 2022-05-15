@@ -6,7 +6,7 @@ import { isAuth } from '../../../utils/auth';
 const handler = nc();
 
 
-handler.use(isAuth).post(async (req, res) => {
+handler.post(async (req, res) => {
   if(req.query._id){
     const { name, email, comment } = req.body;
     await Blog.findOneAndUpdate(
@@ -17,7 +17,10 @@ handler.use(isAuth).post(async (req, res) => {
           }
       }},
       {returnOriginal: false}
-  ).then(blog=>res.send(blog))
+  ).then(blog=>res.send({
+    success: true,
+    message: 'Comment added successfully'
+  }))
   }
 });
 

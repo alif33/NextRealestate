@@ -1,16 +1,22 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import AddComment from "../../src/components/client/Blog/AddComment/AddComment";
-import BlogComment from "../../src/components/client/Blog/BlogComment/BlogComment";
+import BlogComents from "../../src/components/client/Blog/BlogComments/BlogComents";
+import BlogComment from "../../src/components/client/Blog/BlogComments/BlogComment";
 import BlogMeta from "../../src/components/client/Blog/BlogMeta";
 import BlogTagShare from "../../src/components/client/Blog/BlogTagShare";
 import SingleBlogSidebar from "../../src/components/client/Blog/SingleBlogSidebar";
 import Layout from "../../src/components/client/layout";
+import { setBlog } from "../../store/blog/actions";
 import { getData } from "../../__lib__/helpers/HttpService";
 
-function Blog({blog}) {
-
+function Blog({ blog }) {
+  const dispatch = useDispatch();
+ useEffect(()=> {
+    dispatch(setBlog(blog));
+ },[])
   return (
     <Layout>
       <div className="container mt-5 pt-5">
@@ -29,11 +35,7 @@ function Blog({blog}) {
         <h1 className="h2 pb-3 text-capitalize" style={{ color: "grey" }}>
           {blog?.title}
         </h1>
-        <img
-          className="rounded-3"
-          src="img/rokye-website/blog/14.jpg"
-          alt="Image"
-        />
+        <img className="rounded-3" src={blog?.image} alt="Image" />
         <div className="row mt-4 pt-3">
           {/* Post content*/}
           <p>{blog?.body}</p>
@@ -43,11 +45,7 @@ function Blog({blog}) {
             {/* Tags + Sharing*/}
             <BlogTagShare tags={blog?.tags} />
             {/* Comments*/}
-            <div className="mb-4 mb-md-5" id="comments">
-              <h3 className="mb-4 pb-2">3 comments</h3>
-              {/* Comment*/}
-              <BlogComment />
-            </div>
+            <BlogComents/>
           </div>
           {/* Sidebar*/}
           <SingleBlogSidebar postedBy={blog?.postedBy} />
@@ -60,11 +58,10 @@ function Blog({blog}) {
 export default Blog;
 
 export async function getServerSideProps(context) {
-    const blog = await getData(`/blog/${context.query.id}`)
-      return {
-        props: {
-            blog: blog || {}
-        },
-      };
-    }
-    
+  const blog = await getData(`/blog/${context.query.id}`);
+  return {
+    props: {
+      blog: blog || {},
+    },
+  };
+}
