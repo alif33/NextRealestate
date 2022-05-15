@@ -13,10 +13,7 @@ import { setBlog } from "../../store/blog/actions";
 import { getData } from "../../__lib__/helpers/HttpService";
 
 function Blog({ blog }) {
-  const dispatch = useDispatch();
- useEffect(()=> {
-    dispatch(setBlog(blog));
- },[])
+
   return (
     <Layout>
       <div className="container mt-5 pt-5">
@@ -51,7 +48,7 @@ function Blog({ blog }) {
           <SingleBlogSidebar postedBy={blog?.postedBy} />
         </div>
       </div>
-      <AddComment />
+      <AddComment blog={blog} />
     </Layout>
   );
 }

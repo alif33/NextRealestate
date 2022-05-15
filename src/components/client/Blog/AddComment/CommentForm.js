@@ -1,26 +1,31 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { postData } from "../../../../../__lib__/helpers/HttpService";
+import { getData, postData } from "../../../../../__lib__/helpers/HttpService";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useDispatch } from "react-redux";
+import { setBlog } from "../../../../../store/blog/actions";
 
 const CommentForm = () => {
   const [disable, setDisable] = useState();
+  const dispatch = useDispatch()
   const { query } = useRouter();
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     setDisable(true);
     postData(`/blog/${query.id}`, data, setDisable).then((res) => {
-   
       if (res.success) {
+        dispatch(setBlog(query.id))
         setDisable(false);
         toast.success(res.message);
+        reset()
       } else setDisable(false);
     });
   };

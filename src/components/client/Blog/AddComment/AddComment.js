@@ -9,7 +9,7 @@ const AddComment = () => {
           <div className="row justify-content-center">
             <div className="col-md-10 col-xl-8">
               <h3 className="text-center mb-4 pb-sm-2">Leave your comment</h3>
-              <CommentForm/>
+              <CommentForm />
             </div>
           </div>
         </div>
