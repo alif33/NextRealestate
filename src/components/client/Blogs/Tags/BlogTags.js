@@ -8,7 +8,7 @@ const BlogTags = ({tags, setSelectedTag}) => {
         <div className="card-body">
           <h4 className="h5">Popular Tags</h4>
           <div className="d-flex flex-wrap mb-n1">
-            {tags.map((tag, i) => <button onClick={() => setSelectedTag(tag.tagName)} key={i} className="btn btn-xs btn-outline-secondary rounded-pill fs-sm fw-normal me-2 mb-2">
+            {tags?.map((tag, i) => <button onClick={() => setSelectedTag(tag.tagName)} key={i} className="btn btn-xs btn-outline-secondary rounded-pill fs-sm fw-normal me-2 mb-2">
               {tag.tagName}
             </button>)}
             

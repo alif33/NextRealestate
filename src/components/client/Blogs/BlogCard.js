@@ -10,7 +10,7 @@ const BlogCard = ({blog}) => {
   const {title, body, _id, postedBy, createdAt, category}= blog;
  
   const newBody = firstNWord(body, 15)
-  const query  = queryString.stringify({id: _id, title: title})
+  const query  = queryString.stringify({title: title, id: _id}, {sort: false})
   return (
     <>
       <article className="col-sm-6 mb-4">

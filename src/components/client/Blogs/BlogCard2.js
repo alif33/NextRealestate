@@ -7,7 +7,7 @@ import dateFormat from "dateformat";
 const BlogCard2 = ({ blog }) => {
   const { title, body, _id, createdAt, postedBy, category } = blog;
   const newBody = firstNWord(body, 15);
-  const query = queryString.stringify({ id: _id, title: title });
+  const query = queryString.stringify({  title: title, id: _id, }, {sort: false});
   return (
     <>
       <article className="card border-0 shadow-sm card-hover card-horizontal mb-4">
