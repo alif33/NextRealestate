@@ -3,7 +3,6 @@ import styles from "./Modal.module.css";
 import ClipLoader from 'react-spinners/ClipLoader'
 const Modal = (props) => {
   const { show, title, close, save, disable } = props;
-  console.log(save);
   return (
     <>
       {show && (

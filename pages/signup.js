@@ -26,13 +26,12 @@ export default function SignUp() {
     }
     if (data.isAgree && data.role !== "true") {
       setDisable(true);
-      console.log('click hocche')
       const newData = {
         name: data.name,
         email: data.email.toLowerCase(),
         phone: data.phone,
         password: data.password,
-        role: data.role,
+        role: data.role
       };
       postData("/user/register", newData, setDisable).then((res) => {
         if (res?.success) {
@@ -152,17 +151,20 @@ export default function SignUp() {
                   </div>
                   <div className="mb-4">
                     <label className="form-label" htmlFor="phone">
-                      Phone number
+                      Phone number<span className="text-danger">*</span>
                     </label>
                     <input
                       {...register("phone", {
-                        required: false,
+                        required: true,
                       })}
                       className="form-control"
-                      type="tel"
+                      type="number"
                       id="phone"
                       placeholder="Enter phone"
                     />
+                    {errors?.phone && <span className="text-danger">Email is required.</span> }
+                      
+                   
                   </div>
                   <div className="mb-4">
                     <label className="form-label" htmlFor="email">

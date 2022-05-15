@@ -12,11 +12,11 @@ import Layout from "../src/components/client/layout";
 import { getData } from "../__lib__/helpers/HttpService";
 
 function Blogs({ blogs, tags }) {
-  console.log(blogs);
   const [search, setSearch] = useState(null);
   const shorted = blogs.slice(blogs?.length - 2, blogs?.length);
   const shorted2 = blogs.slice(1, blogs.length - 2);
   const reversed = shorted2.reverse();
+  const [selectedTag, setSelectedTag] = useState(null)
 
   const handleSearch = (e) => {
     setSearch(e);
@@ -31,6 +31,19 @@ function Blogs({ blogs, tags }) {
       return val;
     }
   });
+  const tagFilter = blogs?.filter((val) => {
+    if (!selectedTag) {
+      return [];
+    } else if (val.tags.includes(selectedTag)) {
+      return val;
+    }
+  });
+  console.log(tagFilter)
+  console.log(selectedTag)
+
+
+
+
   return (
     <Layout>
       <div className="container mt-5 mb-md-4 py-5">
@@ -52,7 +65,7 @@ function Blogs({ blogs, tags }) {
           {blogs.length === 0 && <div>No blog available</div>}
           {/* List of articles*/}
           <div className="col-lg-8">
-            {!search && (
+            {!search || !selectedTag && (
               <div className="border-bottom pb-2">
                 <div className="row">
                   {/* Item*/}
@@ -64,7 +77,7 @@ function Blogs({ blogs, tags }) {
             )}
             <div className="pt-4 pb-2 mt-2">
               {/* Item*/}
-              {!search &&
+              {!search || !selectedTag &&
                 reversed.map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
               {search &&
                 (filtered.length === blogs.length || filtered.length === 0 ? (
@@ -72,6 +85,14 @@ function Blogs({ blogs, tags }) {
                 ) : (
                   filtered.map((blog, i) => <BlogCard2 key={i} blog={blog} />)
                 ))}
+
+              {selectedTag &&
+                (tagFilter.length === blogs.length || tagFilter.length === 0 ? (
+                  <div>Blog not found</div>
+                ) : (
+                  tagFilter.map((blog, i) => <BlogCard2 key={i} blog={blog} />)
+                ))}
+
             </div>
             {/* Pagination*/}
             {blogs.length > 0 && <BlogPagination blogs={blogs} />}
@@ -98,9 +119,9 @@ function Blogs({ blogs, tags }) {
                 {/* Categories*/}
                 {/* <BlogCategory categories={categories} blogs={blogs} /> */}
                 {/* Tags*/}
-                <BlogTags tags={tags} />
+                <BlogTags setSelectedTag={setSelectedTag} tags={tags} />
                 {/* Fetured posts (carousel)*/}
-                <FeturedPosts />
+                {/* <FeturedPosts /> */}
                 {/* Subscription form*/}
                 <Subcriber />
               </div>
