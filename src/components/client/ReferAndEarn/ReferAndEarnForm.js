@@ -7,14 +7,14 @@ const ReferAndEarnForm = () => {
     const [disable, setDisable] = useState(false);
     const {
       register,
-      reset,
+      reset, 
       handleSubmit,
       formState: { errors },
     } = useForm();
   
     const onSubmit = (data) => {
       setDisable(true);
-      postData("/refer", data, setDisable).then((res) => {
+    postData("/refer", data, setDisable).then((res) => {
         if (res?.success) {
           setDisable(false);
           toast.success(`${res.message}`);
