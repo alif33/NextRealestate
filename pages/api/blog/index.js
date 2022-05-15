@@ -5,6 +5,7 @@ import streamifier from 'streamifier';
 import Blog from '../../../models/Blog';
 import db from '../../../utils/db';
 import { isAuth } from '../../../utils/auth';
+import slugify from 'slugify';
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -43,7 +44,8 @@ handler.use(isAuth, upload.single('image')).post(async (req, res) => {
         await db.connect();
 
         const blog = new Blog({
-            title, 
+            title,
+            slug: slugify(title, '-'), 
             body, 
             category, 
             tags, 
