@@ -1,8 +1,25 @@
 import nc from 'next-connect';
 import db from '../../../utils/db';
 import Blog from '../../../models/Blog';
+import { isAuth } from '../../../utils/auth';
 
 const handler = nc();
+
+
+handler.use(isAuth).post(async (req, res) => {
+  if(req.query._id){
+    const { name, email, comment } = req.body;
+    await Blog.findOneAndUpdate(
+      { "_id": req.query._id }, 
+      { $push: { 
+          "comments": {
+            name, email, comment
+          }
+      }},
+      {returnOriginal: false}
+  ).then(blog=>res.send(blog))
+  }
+});
 
 handler.get(async (req, res) => {
     if(req.query._id){
