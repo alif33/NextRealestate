@@ -1,6 +1,16 @@
-import React from "react";
-
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setBlog } from "../../../../store/blog/actions";
+import dateFormat from "dateformat";
 const BlogMeta = () => {
+  const dispatch = useDispatch();
+  const { query } = useRouter();
+  const { blog } = useSelector(state => state);
+
+  useEffect(() => {
+    dispatch(setBlog(query.id));
+  }, [query.id]);
   return (
     <>
       <div className="d-flex flex-wrap border-bottom pb-3 mb-4">
@@ -12,7 +22,7 @@ const BlogMeta = () => {
         </a>
         <div className="d-flex align-items-center border-end pe-3 me-3 mb-2">
           <i className="fi-calendar-alt opacity-70 me-2" />
-          <span>May 19</span>
+          <span>{dateFormat(blog.blogData?.createdAt, 'mmm dd')}</span>
         </div>
         <div className="d-flex align-items-center border-end pe-3 me-3 mb-2">
           <i className="fi-clock opacity-70 me-2" />
@@ -24,7 +34,7 @@ const BlogMeta = () => {
           data-scroll
         >
           <i className="fi-chat-circle opacity-70 me-2" />
-          <span>3 comments</span>
+          <span>{blog.blogData?.comments?.length} comments</span>
         </a>
       </div>
     </>

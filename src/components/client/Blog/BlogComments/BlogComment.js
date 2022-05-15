@@ -2,7 +2,6 @@ import React from "react";
 import BlogComReply from "./BlogComReply";
 import TimeAgo from 'react-timeago'
 const BlogComment = ({comment}) => {
-  console.log(comment)
   return (
     <>
       <div className="border-bottom pb-4 mb-4">

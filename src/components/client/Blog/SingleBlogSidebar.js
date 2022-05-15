@@ -1,7 +1,7 @@
 import React from "react";
 import Subcriber from "../Blogs/Subcriber";
 import BlogAuthor from "./BlogAuthor";
-import RecentBlogs from "./RecentBlogs";
+import RecentBlogs from "./RecentBlogs/RecentBlogs";
 
 const SingleBlogSidebar = ({postedBy}) => {
   return (
