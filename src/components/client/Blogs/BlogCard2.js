@@ -5,7 +5,7 @@ import parse from "html-react-parser";
 import queryString from "query-string";
 import dateFormat from "dateformat";
 const BlogCard2 = ({ blog }) => {
-  const { title, body, _id, createdAt, postedBy, category } = blog;
+  const { title, body, _id, createdAt, postedBy, category, comments } = blog;
   const newBody = firstNWord(body, 15);
   const query = queryString.stringify({  title: title, id: _id, }, {sort: false});
   return (
@@ -46,7 +46,7 @@ const BlogCard2 = ({ blog }) => {
                 </span>
                 <span>
                   <i className="fi-chat-circle opacity-70 me-1" />
-                  No comments
+                 {comments?.length > 0 ? comments?.length :  "No" } comments
                 </span>
               </div>
             </div>

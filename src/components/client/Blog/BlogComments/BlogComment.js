@@ -19,7 +19,7 @@ const BlogComment = ({comment}) => {
             <div className="ps-2">
               <h6 className="fs-base mb-0">{comment.name}</h6>
               <span className="text-muted fs-sm">
-              <TimeAgo date={new Date()} />
+              <TimeAgo date={comment?._time} />
                 </span>
             </div>
           </div>

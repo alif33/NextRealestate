@@ -7,7 +7,7 @@ import dateFormat from "dateformat";
 
 const BlogCard = ({blog}) => {
 
-  const {title, body, _id, postedBy, createdAt, category}= blog;
+  const {title, body, _id, postedBy, createdAt, category, comments} = blog;
  
   const newBody = firstNWord(body, 15)
   const query  = queryString.stringify({title: title, id: _id}, {sort: false})
@@ -62,7 +62,8 @@ const BlogCard = ({blog}) => {
                   {dateFormat(createdAt, 'mmm dd')}
                 </span>
                 <span>
-                  <i className="fi-chat-circle opacity-70 me-1" />4 comments
+                  <i className="fi-chat-circle opacity-70 me-1" />
+                  {comments?.length > 0 ? comments?.length :  "No" } comments
                 </span>
               </div>
             </div>
