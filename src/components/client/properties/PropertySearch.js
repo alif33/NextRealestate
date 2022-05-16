@@ -1,32 +1,37 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch } from "../../../../store/propertySearch/actions";
 const PropertySearch = () => {
+    const dispatch = useDispatch();
+    const {search} = useSelector(state => state)
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        dispatch(setSearch(data.search.toLowerCase()))
+       
+    };
   return (
     <>
       <div className="offcanvas-header d-block pt-0 pt-lg-4 px-lg-0">
-        <form className="form-group mb-lg-2">
+        <form className={`form-group mb-lg-2 ${errors.search && 'border-danger'}`} onSubmit={handleSubmit(onSubmit)}>
           <div className="input-group">
             <span className="input-group-text text-muted">
               <i className="fi-search" />
             </span>
             <input
+            {...register("search", {required: true})}
               className="form-control"
               type="text"
               placeholder="Enter Locality"
             />
           </div>
-          <button
-            className="btn btn-primary d-lg-inline-block d-none"
-            type="button"
+         <button
+            className="btn btn-primary d-lg-inline-block"
+            type="submit"
           >
             Search
           </button>
-          <button
-            className="btn btn-icon btn-primary rounded-circle flex-shrink-0 d-lg-none d-inline-flex"
-            type="button"
-          >
-            <i className="fi-search mt-n2" />
-          </button>
+        
         </form>
       </div>
     </>

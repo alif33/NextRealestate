@@ -9,9 +9,10 @@ const PropertyCategories = () => {
   const handleCategory = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setCategory((values) => ({ ...values, [name]: value }));
+    setCategory((values) => ({ [name]: value }));
   };
   dispatch(setSelectedCategory(category));
+
   return (
     <div>
       <div

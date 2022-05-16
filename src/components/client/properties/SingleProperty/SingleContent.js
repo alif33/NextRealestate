@@ -11,7 +11,7 @@ const SingleContent = ({property}) => {
             {property.bedrooms} Bed {property.propertyType}| 1500 sq.ft
           </a>
         </h3>
-        <p className="mb-4 fs-sm text-muted">Devnandan residency in Adalaj</p>
+        <p className="mb-4 fs-sm text-muted text-capitalize">{property.areaName} {property.city} in {property.state}</p>
        <Feature property={property}/>
        <Costing property={property}/>
       </div>

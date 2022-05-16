@@ -4,10 +4,11 @@ import Property from "./SingleProperty/Property";
 import PropertySorting from "./PropertySorting";
 import { useSelector } from "react-redux";
 
+
 const MainContent = ({ properties }) => {
-  const { selectedCategory } = useSelector((state) => state);
+  const { selectedCategory, search}  = useSelector((state) => state);
   const { selected } = selectedCategory;
-  console.log(selected);
+  
   const filtered = properties?.filter((val) => {
     if (!selected) {
       return [];
@@ -29,9 +30,24 @@ const MainContent = ({ properties }) => {
       return val;
     }
   });
+   
 
-  console.log(filtered);
 
+  const searchFilter = properties?.filter((val) => {
+    if (!search.searchText) {
+      return [];
+    } else if (
+      val.city.toLowerCase().includes(search.searchText?.toLowerCase()) ||
+      val.areaName.toLowerCase().includes(search.searchText?.toLowerCase()) ||
+      val.state.toLowerCase().includes(search.searchText?.toLowerCase()) 
+    ) {
+      return val;
+    }
+  });
+
+console.log(search)
+console.log(searchFilter)
+  
   return (
     <>
       <div className="col-lg-8 col-xl-7 position-relative overflow-hidden pb-5 pt-4 px-3 px-xl-4 px-xxl-5">
@@ -59,11 +75,18 @@ const MainContent = ({ properties }) => {
         {/* Sorting*/}
         <PropertySorting />
 
-        {filtered.length > 0 ? filtered?.map((item, index) => (
+        {!search.searchText && (filtered.length > 0 ? filtered?.map((item, index) => (
           <Property key={index} property={item} />
-        )) : <div>Property Not found</div>}
+        )) : <div>Property Not found</div>)}
+
+        {search.searchText &&  (searchFilter.length > 0 ? searchFilter?.map((item, index) => (
+          <Property key={index} property={item} />
+        )) : <div>Property Not found</div>)}
+
+
         {/* pagination here */}
-       {filtered.length > 0 &&  <PropertiesPagination />}
+       {!search.searchText && filtered.length > 0  &&  <PropertiesPagination />}
+       {search.searchText && filtered.length > 0  &&  <PropertiesPagination />}
       </div>
     </>
   );
