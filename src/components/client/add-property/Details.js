@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setDetails } from "../../../../store/property/actions";
-
+import { setDetails, _setAmenities } from "../../../../store/property/actions";
+import {amenitesArray} from '../../../../__lib__/config/index'
+import Amenitie from "./Amenitie";
 function Details({ isValid }) {
-  const [amenities, setAmenities] = useState([]);
+  // const [amenities, setAmenities] = useState([]);
   const dispatch = useDispatch();
   const { property } = useSelector((state) => state);
   const { details } = property;
-
   const {
     ageConstruction,
     availability,
@@ -24,18 +24,28 @@ function Details({ isValid }) {
     tenantsPreferred,
     totalFloors,
     vegPermission,
+    amenities
   } = details;
+
+  // dispatch((amenities))
 
   const checkAvailability = (arr, val) => {
     return arr.some((arrValue) => val === arrValue);
   };
 
   const handleCheckBox = (e) => {
-    if (!checkAvailability(amenities, e.target.value)) {
-      setAmenities([...amenities, e.target.value]);
+    if (e.target.checked) {
+      if (!checkAvailability(amenities, e.target.value)) {
+        // setAmenities([...amenities, e.target.value]);
+        dispatch(_setAmenities([...amenities, e.target.value]));
+      }
+    }else{
+      const filtered = amenities.filter((amenite) => amenite !== e.target.value)
+      dispatch(_setAmenities(filtered))
     }
   };
 
+  console.log(amenities)
 
   return (
     <div className="bg-light rounded-3 p-4 p-md-5 mb-3">
@@ -249,301 +259,24 @@ function Details({ isValid }) {
       <div className="border-top pt-4">
         <label className="form-label fw-bold pb-1 mb-2">Amenities</label>
         <div className="row row-cols-sm-2 row-cols-md-4 gx-3 gx-lg-4 mb-4">
+          
+          
           <div className="col">
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                className="form-check-input"
-                type="checkbox"
-                id="accounting"
-                value="Lift"
-              />
-              <label className="form-check-label" htmlFor="accounting">
-                Lift
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Gas pipeline"
-                className="form-check-input"
-                type="checkbox"
-                id="marketing"
-              />
-              <label className="form-check-label" htmlFor="marketing">
-                Gas pipeline
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="24X7 Water supply"
-                className="form-check-input"
-                type="checkbox"
-                id="medicine"
-              />
-              <label className="form-check-label" htmlFor="medicine">
-                24X7 Water supply
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="24X7 Security"
-                className="form-check-input"
-                type="checkbox"
-                id="agriculture"
-              />
-              <label className="form-check-label" htmlFor="agriculture">
-                24X7 Security
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="24X7 Security"
-                className="form-check-input"
-                type="checkbox"
-                id="it"
-              />
-              <label className="form-check-label" htmlFor="it">
-                Car parking
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Visitor parking"
-                className="form-check-input"
-                type="checkbox"
-                id="security"
-              />
-              <label className="form-check-label" htmlFor="security">
-                Visitor parking
-              </label>
-            </div>
+          {amenitesArray.slice(0, 6).map((amenitie, i) => <Amenitie handleCheckBox={handleCheckBox} amenitie={amenitie} key={i}/>)}
           </div>
           <div className="col">
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Children's play area"
-                className="form-check-input"
-                type="checkbox"
-                id="management"
-              />
-              <label className="form-check-label" htmlFor="management">
-                Children`&apos;s play area
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Landscape garden"
-                className="form-check-input"
-                type="checkbox"
-                id="horeca"
-              />
-              <label className="form-check-label" htmlFor="horeca">
-                Landscape garden
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Tree planting"
-                className="form-check-input"
-                type="checkbox"
-                id="design"
-              />
-              <label className="form-check-label" htmlFor="design">
-                Tree planting
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Air conditioning"
-                className="form-check-input"
-                type="checkbox"
-                id="sport"
-              />
-              <label className="form-check-label" htmlFor="sport">
-                Air conditioning
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="CCTV"
-                className="form-check-input"
-                type="checkbox"
-                id="beauty"
-              />
-              <label className="form-check-label" htmlFor="beauty">
-                CCTV
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Fire safety"
-                className="form-check-input"
-                type="checkbox"
-                id="culture"
-              />
-              <label className="form-check-label" htmlFor="culture">
-                Fire safety
-              </label>
-            </div>
+          {amenitesArray.slice(6, 12).map((amenitie, i) => <Amenitie handleCheckBox={handleCheckBox} amenitie={amenitie} key={i}/>)}
           </div>
           <div className="col">
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Internet services"
-                className="form-check-input"
-                type="checkbox"
-                id="music"
-              />
-              <label className="form-check-label" htmlFor="music">
-                Internet services
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Gym"
-                className="form-check-input"
-                type="checkbox"
-                id="logistics"
-              />
-              <label className="form-check-label" htmlFor="logistics">
-                Gym
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Club house"
-                className="form-check-input"
-                type="checkbox"
-                id="education"
-              />
-              <label className="form-check-label" htmlFor="education">
-                Club house
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Swimming pool"
-                className="form-check-input"
-                type="checkbox"
-                id="industry"
-              />
-              <label className="form-check-label" htmlFor="industry">
-                Swimming pool
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="House keeping"
-                className="form-check-input"
-                type="checkbox"
-                id="transportation"
-              />
-              <label className="form-check-label" htmlFor="transportation">
-                House keeping
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Power backup"
-                className="form-check-input"
-                type="checkbox"
-                id="sales"
-              />
-              <label className="form-check-label" htmlFor="sales">
-                Power backup
-              </label>
-            </div>
+          {amenitesArray.slice(12, 18).map((amenitie, i) => <Amenitie handleCheckBox={handleCheckBox} amenitie={amenitie} key={i}/>)}
           </div>
           <div className="col">
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Sewage treatment plant"
-                className="form-check-input"
-                type="checkbox"
-                id="insurance"
-              />
-              <label className="form-check-label" htmlFor="insurance">
-                Sewage treatment plant
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Rain water harvesting"
-                className="form-check-input"
-                type="checkbox"
-                id="construction"
-              />
-              <label className="form-check-label" htmlFor="construction">
-                Rain water harvesting
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Shopping center"
-                className="form-check-input"
-                type="checkbox"
-                id="architecture"
-              />
-              <label className="form-check-label" htmlFor="architecture">
-                Shopping center
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                onChange={(e) => handleCheckBox(e)}
-                name="amenities"
-                value="Park"
-                className="form-check-input"
-                type="checkbox"
-                id="hr"
-              />
-              <label className="form-check-label" htmlFor="hr">
-                Park
-              </label>
-            </div>
+          {amenitesArray.slice(18, amenitesArray.length).map((amenitie, i) => <Amenitie handleCheckBox={handleCheckBox} amenitie={amenitie} key={i}/>)}
           </div>
+
         </div>
+        {amenities.length === 0 && isValid && <div className="text-danger">Please minimum one amenite select</div>}
+        
         {/* Description */}
         <div className="border-top pt-4">
           <label className="form-label fw-bold pb-1 mb-2" htmlFor="description">Description</label>

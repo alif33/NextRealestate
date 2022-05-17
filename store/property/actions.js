@@ -14,6 +14,12 @@ export const setBasic = e => (dispatch) => {
     }
 }
 
+export const _setAmenities = value => (dispatch) => {
+    dispatch(slice.setDetails({
+        amenities: value
+    }))
+}
+
 export const setLocation = e => (dispatch) => {
     if(e.target.value.toUpperCase()==="CHOOSE")
     {   

@@ -55,6 +55,7 @@ function AddProperty() {
     tenantsPreferred,
     totalFloors,
     vegPermission,
+    amenities
   } = details;
   const { email, firstName, lastName, phoneNumber } = contact;
   const handleValidation = () => {
@@ -93,6 +94,7 @@ function AddProperty() {
       }
     } else if (property.position === 2) {
       if (
+        !amenities||
         !ageConstruction ||
         !availability ||
         !basis ||
@@ -120,7 +122,7 @@ function AddProperty() {
     }
   };
 
-  console.log("property", property);
+  // console.log("property", property);
   const Appear = () => {
     switch (property.position) {
       case 0:
