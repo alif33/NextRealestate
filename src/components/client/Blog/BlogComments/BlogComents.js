@@ -12,7 +12,6 @@ const BlogComents = () => {
   useEffect(() => {
     dispatch(setBlog(query.id))
   }, [query.id]);
-  console.log(blogData)
   return (
     <>
       <div className="mb-4 mb-md-5" id="comments">

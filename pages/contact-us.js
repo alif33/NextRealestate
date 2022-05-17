@@ -20,7 +20,7 @@ function Contact() {
     if (data.role === "true") {
       setDisable(false);
     }
-    if (data.isAgree && data.role === "owner" || "tenant") {
+    if (data.isAgree && data.role === "OWNER" || "TENANT") {
       setDisable(true);
       const newData = {
         name: data.name,

@@ -33,6 +33,7 @@ function Blogs({ blogs, tags }) {
       return val;
     }
   });
+  
   const tagFilter = blogs?.filter((val) => {
     if (!selectedTag) {
       return [];

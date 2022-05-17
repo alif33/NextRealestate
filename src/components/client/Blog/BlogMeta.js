@@ -34,7 +34,7 @@ const BlogMeta = () => {
           data-scroll
         >
           <i className="fi-chat-circle opacity-70 me-2" />
-          <span>{blog.blogData?.comments?.length} comments</span>
+          <span>{blog.blogData?.comments?.length > 0 ? blog.blogData?.comments?.length : "No"} comments</span>
         </a>
       </div>
     </>

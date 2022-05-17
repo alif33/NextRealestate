@@ -20,7 +20,7 @@ const CommentForm = () => {
   } = useForm();
   const onSubmit = (data) => {
     setDisable(true);
-    postData(`/blog/${query.id}`, data, setDisable).then((res) => {
+    postData(`/blog/${query.id}`, {...data, _time: new Date()}, setDisable).then((res) => {
       if (res.success) {
         dispatch(setBlog(query.id))
         setDisable(false);

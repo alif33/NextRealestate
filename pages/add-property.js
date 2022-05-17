@@ -142,7 +142,8 @@ function AddProperty() {
         return <></>;
     }
   };
-  const userInfo = cookies.get("_info")
+  const userInfo = cookies.get("_info");
+  
   const onSubmit = (data) => {
     setDisable(true);
     if (!firstName || !lastName || !phoneNumber || !email) {
