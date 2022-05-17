@@ -62,23 +62,7 @@ handler.use(isAuth).post(async (req, res) => {
         email
     } = req.body;
 
-    // const streamUpload = (req) => {
-    //     return new Promise((resolve, reject) => {
-    //       const stream = cloudinary.uploader.upload_stream((error, result) => {
-    //         if (result) {
-    //           resolve(result);
-    //         } else {
-    //           reject(error);
-    //         }
-    //       });
-    //       streamifier.createReadStream(req.file.buffer).pipe(stream);
-    //     });
-    //   };
 
-
-    // const { url } = await streamUpload(req);
-
-    // if(url){
         await db.connect();
     
         const property = new Property({
@@ -123,13 +107,11 @@ handler.use(isAuth).post(async (req, res) => {
         
         if(await property.save()){
             await db.disconnect();
-            res.send({
+            res.status(201).json({
                 success: true,
                 message: 'Submitted successfully'
             })
         }
-    // }
-
 });
 
 export default handler;
