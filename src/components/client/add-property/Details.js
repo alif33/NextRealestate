@@ -138,10 +138,10 @@ function Details({ isValid }) {
             id="balconies"
           >
             <option selected>Choose</option>
-            <option value="Associate Degree">1</option>
-            <option value="Associate Degree">2</option>
-            <option value="Associate Degree">3</option>
-            <option value="Associate Degree">3+</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">3+</option>
           </select>
           {!balconies &&  isValid && <div className='text-danger'>Balconies is required</div>}
         </div>
