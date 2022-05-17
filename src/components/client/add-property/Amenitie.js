@@ -15,7 +15,7 @@ const Amenitie = ({amenitie, handleCheckBox}) => {
           value={amenitie}
           checked={property?.details?.amenities.includes(amenitie)}
         />
-        <label className="form-check-label" htmlFor={amenitie}>
+        <label className="form-check-label" htmlFor={slugify(amenitie)}>
           {amenitie}
         </label>
       </div>
