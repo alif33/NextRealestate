@@ -45,7 +45,6 @@ function Details({ isValid }) {
     }
   };
 
-  console.log(amenities)
 
   return (
     <div className="bg-light rounded-3 p-4 p-md-5 mb-3">

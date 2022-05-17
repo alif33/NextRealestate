@@ -56,6 +56,17 @@ export const propertySlice = createSlice({
             }
  
         },
+        setMedia: (state, action) => {
+            console.log(action.payload)
+            return {
+                ...state,
+                media: {
+                    propertyVideo: null,
+                    propertyImage: [...state.media.propertyImage, action.payload]
+                }
+            }
+ 
+        },
 
         forwordStep: (state, action) => {
 

@@ -55,7 +55,7 @@ export const propertyFields = {
         basis: null
     },
     media: {
-        propertyImage: null,
+        propertyImage: [],
         propertyVideo: null
     },
     contact: {

@@ -1,11 +1,17 @@
+import { useState } from "react";
 import { Image } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
+import { setMedia } from "../../../../store/property/actions";
 
 function Media({ isValid }) {
   const dispatch = useDispatch();
   const { property } = useSelector((state) => state);
   const { media } = property;
-
+  const handleImages = (e) => {
+    if (e.target.files) {
+      dispatch(setMedia(e.target.files[0]))
+    }
+  }
   return (
     <div className="bg-light rounded-3 p-4 p-md-5 mb-3">
       <h2 className="h4 mb-4">
@@ -30,16 +36,22 @@ function Media({ isValid }) {
           <input
             className="file-uploader file-uploader-grid d-none"
             type="file"
+            onChange={(e) => handleImages(e)}
             multiple
             id="image"
             data-max-file-size="10MB"
             accept="image/png, image/gif, image/jpeg"
             data-label-idle='<div class="btn btn-primary mb-3"><i class="fi-cloud-upload me-1"></i>Upload photos / video</div><br>or drag them in'
           />
-          <div>Image Preview</div>
+          <div>
+            <span>Image Preview</span>
+
+            <img src="https://media.istockphoto.com/vectors/a-colorful-trendy-card-design-vector-illustration-vector-id1193323373?k=20&m=1193323373&s=612x612&w=0&h=2FmXahDQKYY2zPpdrgzh5QxWqPu3RTCoduKebKNfQRg=" alt="images"/>
+
+          </div>
           {!media.propertyImage ||
             (!media.propertyVideo && isValid && (
-              <div className="text-danger">Pin code is required</div>
+              <div className="text-danger"> Image is required</div>
             ))}
         </div>
       </div>

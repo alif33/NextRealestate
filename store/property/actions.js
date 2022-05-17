@@ -58,6 +58,21 @@ export const setContact = e => (dispatch) => {
         }))
     }
 }
+export const setMedia = imageUrl => (dispatch) => {
+    // if(e.target.value.toUpperCase()==="CHOOSE")
+    // {   
+    //     dispatch(slice.setContact({
+    //         [e.target.name]: null
+    //     }))
+    // }else{
+    //     dispatch(slice.setContact({
+    //         [e.target.name]: e.target.value
+    //     }))
+    // }
+    dispatch(slice.setMedia(imageUrl))
+        
+   
+}
 
 export const forwordStep = () => (dispatch) => {
     dispatch(slice.forwordStep())

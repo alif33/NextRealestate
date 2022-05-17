@@ -38,7 +38,7 @@ function AddProperty() {
   } = basic;
 
   const { areaName, city, houseNumber, pinCode, societyName, state } = location;
-
+  console.log(media)
   const {
     ageConstruction,
     availability,
@@ -123,7 +123,6 @@ function AddProperty() {
     }
   };
 
-  // console.log("property", property);
   const Appear = () => {
     switch (property.position) {
       case 0:
@@ -152,14 +151,13 @@ function AddProperty() {
     if (!firstName || !lastName || !phoneNumber || !email) {
       setIsValid(true);
     } else {
-      console.log(  { ...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media })
       authPost(
         "/property",
         { ...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media },
         userInfo.token
       ).then((res) => {
         if (res?.success) {
-          // dispatch(submitData());
+          dispatch(submitData());
           toast.success(res.message);
         }
       });
