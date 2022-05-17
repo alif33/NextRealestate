@@ -9,8 +9,8 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 export default function SignUp() {
   const [disable, setDisable] = useState(false);
-  const [showPass, setShowPass] = useState(false)
-
+  const [showPass, setShowPass] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const {
     register,
     reset,
@@ -23,15 +23,15 @@ export default function SignUp() {
   const onSubmit = (data) => {
     if (data.role === "true") {
       setDisable(false);
-    }
-    if (data.isAgree && data.role !== "true") {
+      setIsValid(true);
+    } else {
       setDisable(true);
       const newData = {
         name: data.name,
         email: data.email.toLowerCase(),
         phone: data.phone,
         password: data.password,
-        role: data.role
+        role: data.role,
       };
       postData("/user/register", newData, setDisable).then((res) => {
         if (res?.success) {
@@ -43,11 +43,12 @@ export default function SignUp() {
           });
         } else {
           toast.error("Email already exist");
-          setDisable(false)
+          setDisable(false);
         }
       });
     }
   };
+
   return (
     <Layout>
       <div className="container mt-5 mb-md-4 py-5">
@@ -128,7 +129,7 @@ export default function SignUp() {
                       <option value="OWNER">Owner</option>
                       <option value="TENANT">Tenant </option>
                     </select>
-                    {watch().role === "true" && (
+                    {watch().role === "true" && isValid && (
                       <span className="text-danger">Role is required</span>
                     )}
                   </div>
@@ -162,9 +163,9 @@ export default function SignUp() {
                       id="phone"
                       placeholder="Enter phone"
                     />
-                    {errors?.phone && <span className="text-danger">Email is required.</span> }
-                      
-                   
+                    {errors?.phone && (
+                      <span className="text-danger">Email is required.</span>
+                    )}
                   </div>
                   <div className="mb-4">
                     <label className="form-label" htmlFor="email">
@@ -198,7 +199,7 @@ export default function SignUp() {
                           required: true,
                         })}
                         className="form-control"
-                        type={showPass ? 'text' : 'password'}
+                        type={showPass ? "text" : "password"}
                         id="password"
                         placeholder="Enter password"
                         autoComplete="off"
@@ -214,7 +215,7 @@ export default function SignUp() {
                         aria-label="Show/hide password"
                       >
                         <input
-                        onClick={() => setShowPass(!showPass)}
+                          onClick={() => setShowPass(!showPass)}
                           className="password-toggle-check"
                           type="checkbox"
                         />

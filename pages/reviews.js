@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import Layout from "../src/components/client/layout";
-import ContactUsModal from "../src/components/client/Reviews/ContactUsModal";
 import AddReviewModal from "../src/components/client/Reviews/AddReviewModal/AddReviewModal";
 import ReviewHeader from "../src/components/client/Reviews/ReviewHeader";
 import CompanyProfile from "../src/components/client/Reviews/CompanyProfile";
@@ -12,6 +11,7 @@ import ReviewCard from "../src/components/client/Reviews/ReviewCard";
 import { userAuth } from "../__lib__/helpers/requireAuthentication";
 import { useDispatch, useSelector } from "react-redux";
 import { setReviews } from "../store/reviews/actions";
+import ContactUsModal from "../src/components/client/Reviews/ContactUsModal/ContactUsModal";
 const Reviews = () => {
 
   const dispatch = useDispatch();

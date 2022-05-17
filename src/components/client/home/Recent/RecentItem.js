@@ -1,10 +1,12 @@
 import React from "react";
 
-const RecentItem = ({recent}) => {
-    const {bedrooms} = recent
+const RecentItem = ({ recent }) => {
+  const { bedrooms, propertyType, monthlyRent, furnishedStatus, areaName, city, state } = recent;
+  console.log(recent)
+  
   return (
     <>
-      <div className="px-2">
+      <div className="px-3">
         <div className="position-relative">
           <div className="position-relative mb-3">
             <button
@@ -24,17 +26,17 @@ const RecentItem = ({recent}) => {
           </div>
           <h3 className="mb-2 fs-lg">
             <a className="nav-link" href="#">
-              2 Bed Apartment | ₹ 25000
+              {bedrooms} Bed {propertyType} | ₹ {monthlyRent}
             </a>
           </h3>
           <ul className="list-inline mb-0 fs-xs">
             <li className="list-inline-item pe-1">
-              <i className="fi-map-pin mt-n1 me-1 fs-base text-muted align-middle" />
-              Om Residncy in Adalaj
+              <i className="fi-map-pin mt-n1 me-1 fs-base text-muted align-middle " />
+              <span className="text-capitalize">{areaName} {city} in {state}</span>
             </li>
             <li className="list-inline-item pe-1">
               <i className="fi-bed mt-n1 me-1 fs-base text-muted align-middle" />
-              Semi-furnished
+              {furnishedStatus}
             </li>
           </ul>
         </div>

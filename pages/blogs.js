@@ -72,7 +72,7 @@ function Blogs({ blogs, tags }) {
               <div className="border-bottom pb-2">
                 <div className="row">
                   {/* Item*/}
-                  {shorted.map((short, i) => (
+                  {shorted.reverse().map((short, i) => (
                     <BlogCard key={i} blog={short} />
                   ))}
                 </div>

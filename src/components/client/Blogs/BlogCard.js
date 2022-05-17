@@ -21,6 +21,7 @@ const BlogCard = ({blog}) => {
                 New
               </span>
               <img
+                style={{height: '250px', width: '100%'}}
                 className="d-block"
                 src={blog?.image}
                 alt="Image"

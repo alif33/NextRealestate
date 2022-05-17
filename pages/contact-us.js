@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Layout from "../src/components/client/layout";
-import { showErr } from "../__lib__/helpers/ErrHandler";
 import { postData } from "../__lib__/helpers/HttpService";
 import toast from "react-hot-toast";
 
@@ -29,6 +28,7 @@ function Contact() {
         role: data.role,
         message: data.message
       };
+      console.log(newData)
       postData("/contact", newData, setDisable).then((res) => {
         if (res?.success) {
           toast.success(`${res.message}`);

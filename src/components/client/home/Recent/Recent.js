@@ -20,12 +20,7 @@ function Recent({ properties }) {
       </div>
 
       <Slider {...settings}>
-        {properties?.map((recent, i) => (
-          <div key={i} className="px-2">
-            {" "}
-            <Card type="home" item={recent} />
-          </div>
-        ))}
+        {properties?.map((recent, i) =>  <RecentItem  key={i} recent={recent} />  )}
       </Slider>
     </section>
   );

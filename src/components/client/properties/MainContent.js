@@ -3,10 +3,10 @@ import PropertiesPagination from "./Pagination/PropertiesPagination";
 import Property from "./SingleProperty/Property";
 import PropertySorting from "./PropertySorting";
 import { useSelector } from "react-redux";
-
+import Link from "next/link";
 
 const MainContent = ({ properties }) => {
-  const { selectedCategory, search}  = useSelector((state) => state);
+  const { selectedCategory, search } = useSelector((state) => state);
   const { selected } = selectedCategory;
   const filtered = properties?.filter((val) => {
     if (!selected) {
@@ -29,8 +29,6 @@ const MainContent = ({ properties }) => {
       return val;
     }
   });
-   
-
 
   const searchFilter = properties?.filter((val) => {
     if (!search.searchText) {
@@ -38,15 +36,12 @@ const MainContent = ({ properties }) => {
     } else if (
       val.city.toLowerCase().includes(search.searchText?.toLowerCase()) ||
       val.areaName.toLowerCase().includes(search.searchText?.toLowerCase()) ||
-      val.state.toLowerCase().includes(search.searchText?.toLowerCase()) 
+      val.state.toLowerCase().includes(search.searchText?.toLowerCase())
     ) {
       return val;
     }
   });
 
-console.log(search)
-console.log(searchFilter)
-  
   return (
     <>
       <div className="col-lg-8 col-xl-7 position-relative overflow-hidden pb-5 pt-4 px-3 px-xl-4 px-xxl-5">
@@ -54,7 +49,9 @@ console.log(searchFilter)
         <nav className="mb-3 pt-md-2" aria-label="Breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <a href="#">Home</a>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
               Property list
@@ -74,18 +71,27 @@ console.log(searchFilter)
         {/* Sorting*/}
         <PropertySorting />
 
-        {!search.searchText && (filtered.length > 0 ? filtered?.map((item, index) => (
-          <Property key={index} property={item} />
-        )) : <div>Property Not found</div>)}
+        {!search.searchText &&
+          (filtered.length > 0 ? (
+            filtered?.map((item, index) => (
+              <Property key={index} property={item} />
+            ))
+          ) : (
+            <div>Property Not found</div>
+          ))}
 
-        {search.searchText &&  (searchFilter.length > 0 ? searchFilter?.map((item, index) => (
-          <Property key={index} property={item} />
-        )) : <div>Property Not found</div>)}
-
+        {search.searchText &&
+          (searchFilter.length > 0 ? (
+            searchFilter?.map((item, index) => (
+              <Property key={index} property={item} />
+            ))
+          ) : (
+            <div>Property Not found</div>
+          ))}
 
         {/* pagination here */}
-       {!search.searchText && filtered.length > 0  &&  <PropertiesPagination />}
-       {search.searchText && filtered.length > 0  &&  <PropertiesPagination />}
+        {!search.searchText && filtered.length > 0 && <PropertiesPagination />}
+        {search.searchText && filtered.length > 0 && <PropertiesPagination />}
       </div>
     </>
   );
