@@ -25,7 +25,7 @@ function AddProperty() {
   const [isValid, setIsValid] = useState(false);
   const dispatch = useDispatch();
   const { property } = useSelector((state) => state);
-  const { basic, location, details, contact } = property;
+  const { basic, location, details, contact, media } = property;
   const {
     propertyCategory,
     propertyType,
@@ -57,6 +57,7 @@ function AddProperty() {
     vegPermission,
     amenities
   } = details;
+
   const { email, firstName, lastName, phoneNumber } = contact;
   const handleValidation = () => {
     if (property.position === 0) {
@@ -151,13 +152,14 @@ function AddProperty() {
     if (!firstName || !lastName || !phoneNumber || !email) {
       setIsValid(true);
     } else {
+      console.log(  { ...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media })
       authPost(
         "/property",
-        { ...property.basic, ...property.location, ...property.details },
+        { ...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media },
         userInfo.token
       ).then((res) => {
         if (res?.success) {
-          dispatch(submitData());
+          // dispatch(submitData());
           toast.success(res.message);
         }
       });
