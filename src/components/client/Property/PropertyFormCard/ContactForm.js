@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { postData } from "../../../../../__lib__/helpers/HttpService";
+import ClipLoader from "react-spinners/ClipLoader";
+import toast from "react-hot-toast";
 const ContactForm = () => {
   const [disable, setDisable] = useState(false);
   const {
@@ -12,78 +14,77 @@ const ContactForm = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    
     if (data.role === "true") {
       setDisable(false);
     }
-    if (data.isAgree && data.role === "OWNER" || "TENANT") {
+    if ((data.isAgree && data.role === "OWNER") || "TENANT") {
       setDisable(true);
       const newData = {
         name: data.name,
         email: data.email,
         phone: data.phone,
         role: data.role,
-        message: data.message
+        message: data.message,
       };
       postData("/contact", newData, setDisable).then((res) => {
         if (res?.success) {
           toast.success(`${res.message}`);
           setDisable(false);
           reset();
-        }else{
-            
+        } else {
         }
       });
     }
   };
 
-  console.log(watch())
+  console.log(watch());
   return (
     <>
       <form className="needs-validation" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
-          <label className="form-label" htmlFor="pr-study-field">
+          <label className="form-label" htmlFor="role">
             I am
             <span className="text-danger" />
           </label>
           <select
-          {...register('role',{required: true})}
-            className={`form-select form-select-lg ${watch().role === "true" && 'border-danger'}`}
-            id="pr-education-level"
+            {...register("role", { required: true })}
+            className={`form-select form-select-lg ${
+              watch().role === "true" && "border-danger"
+            }`}
+            id="role"
           >
             <option value disabled selected>
               Choose
             </option>
-            <option value="Associate Degree">Owner</option>
-            <option value="Associate Degree">Tenant </option>
+            <option value="OWNER">Owner</option>
+            <option value="TENANT">Tenant </option>
           </select>
         </div>
         <div className="mb-3">
           <input
-            className="form-control"
+            {...register("name", { required: true })}
+            className={`form-control ${errors.name && "border-danger"}`}
             type="text"
             placeholder="Name*"
-       
           />
-          <div className="invalid-feedback">Please enter your name!</div>
         </div>
         <div className="mb-3">
           <input
-            className="form-control mb-3"
-            type="tel"
+            {...register("phone", { required: true })}
+            className={`form-control ${errors.phone && "border-danger"}`}
+            type="number"
             placeholder="Phone*"
           />
-          <div className="invalid-feedback">Invalid email address!</div>
         </div>
         <input
-          className="form-control mb-3"
-          type="email"
+          {...register("email", { required: true })}
+          className={`form-control mb-3 ${errors.email && "border-danger"}`}
+          type="text"
           placeholder="Email*"
-         
         />
-        <div className="invalid-feedback">Invalid phone number!</div>
         <textarea
-          className="form-control mb-3"
+          {...register("message", { required: true })}
+          className={`form-control mb-3 ${errors.message && "border-danger"}`}
           rows={3}
           placeholder="Message"
           style={{ resize: "none" }}
@@ -91,18 +92,23 @@ const ContactForm = () => {
         />
         <div className="form-check mb-4">
           <input
-            className="form-check-input"
+            {...register("isAgree", { required: true })}
+            className={`form-check-input ${errors.isAgree && "border-danger"}`}
             id="form-submit"
             type="checkbox"
           />
-          <label className="form-check-label" htmlFor="agree-to-terms">
+          <label className="isAgree" htmlFor="agree-to-terms">
             I agree to the <a href="#">Terms of use</a> and{" "}
             <a href="#">Privacy policy</a>
           </label>
         </div>
-        <button className="btn btn-lg btn-primary d-block w-100" type="submit">
+       {!disable ?  <button className="btn btn-lg btn-primary d-block w-100" type="submit">
           Send request
-        </button>
+        </button>: 
+         <button disabled className="btn btn-lg btn-primary d-block w-100" type="button">
+         <ClipLoader color={'black'} loading={true}  size={25} />
+       </button>
+        }
       </form>
     </>
   );

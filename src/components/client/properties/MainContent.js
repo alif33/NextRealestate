@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 const MainContent = ({ properties }) => {
   const { selectedCategory, search}  = useSelector((state) => state);
   const { selected } = selectedCategory;
-  console.log(properties)
   const filtered = properties?.filter((val) => {
     if (!selected) {
       return [];

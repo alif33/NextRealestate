@@ -43,7 +43,7 @@ const SemilarProperties = () => {
 
   return (
     <>
-      <section className="container pb-5 mb-lg-4">
+      <section className="container pb-5 mb-lg-4 overflow-hidden">
         <div className="d-flex align-items-center justify-content-between pb-2">
           <h2 className="h3 pt-5 pb-3 mt-md-4">Similar properties</h2>
           <a

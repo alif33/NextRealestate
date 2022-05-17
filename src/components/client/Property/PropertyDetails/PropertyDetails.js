@@ -1,6 +1,16 @@
 import React from "react";
 
-const PropertyDetails = () => {
+const PropertyDetails = ({property}) => {
+  const {monthlyRent, securityAmount, maintenanceCharges,
+     propertyType, bedrooms, bathrooms, balconies, 
+     furnishedStatus, carParking, availability, 
+     ageConstruction,carpetArea, superArea,
+     floorNo, totalFloors,
+     tenantsPreferred,
+     facing, vegPermission,petsPermission
+
+    } = property;
+  console.log(property)
   return (
     <>
       <div className="pb-4 mb-3">
@@ -21,13 +31,13 @@ const PropertyDetails = () => {
                 Maintenance
               </li>
               <li className="col">
-                <i className="mt-n1 me-2 fs-lg align-middle" />₹ 50000
+                <i className="mt-n1 me-2 fs-lg align-middle" />₹ {monthlyRent}
               </li>
               <li className="col">
-                <i className="t-n1 me-2 fs-lg align-middle" />₹ 10000
+                <i className="t-n1 me-2 fs-lg align-middle" />₹ {securityAmount}
               </li>
               <li className="col">
-                <i className="mt-n1 me-2 fs-lg align-middle" />₹ 1000 quarterly
+                <i className="mt-n1 me-2 fs-lg align-middle" />₹ {maintenanceCharges} quarterly
               </li>
             </ul>
           </div>
@@ -46,13 +56,13 @@ const PropertyDetails = () => {
                 Balconies
               </li>
               <li className="col">
-                <i className="mt-n1 me-2 fs-lg align-middle" />2 BHK Apartment
+                <i className="mt-n1 me-2 fs-lg align-middle" />{bedrooms} BHK {propertyType}
               </li>
               <li className="col">
-                <i className="t-n1 me-2 fs-lg align-middle" />2 bath
+                <i className="t-n1 me-2 fs-lg align-middle" />{bathrooms} bath
               </li>
               <li className="col">
-                <i className="mt-n1 me-2 fs-lg align-middle" />2 balconies
+                <i className="mt-n1 me-2 fs-lg align-middle" />{balconies} balconies
               </li>
             </ul>
           </div>
@@ -72,14 +82,14 @@ const PropertyDetails = () => {
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-                Semi-furnished{" "}
+                {furnishedStatus}
               </li>
               <li className="col">
-                <i className="mt-n1 me-2 fs-lg align-middle" />2 car 1 bike
+                <i className="mt-n1 me-2 fs-lg align-middle" />{carParking} cars
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-                Within 30 days
+                {availability}
               </li>
             </ul>
           </div>
@@ -99,15 +109,15 @@ const PropertyDetails = () => {
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-                10+ years old
+               {ageConstruction}
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-                1000 sq.ft
+                {carpetArea} sq.ft
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-                800 sq.ft
+                {superArea} sq.ft
               </li>
             </ul>
           </div>
@@ -127,15 +137,15 @@ const PropertyDetails = () => {
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-                Basement
+                {floorNo}
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-                10 floors
+                 {totalFloors} floors
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-                Bachelors/Family
+               {tenantsPreferred}
               </li>
             </ul>
           </div>
@@ -154,15 +164,15 @@ const PropertyDetails = () => {
             </li>
             <li className="col">
               <i className="mt-n1 me-2 fs-lg align-middle" />
-              North-East
+              {facing}
             </li>
             <li className="col">
               <i className="mt-n1 me-2 fs-lg align-middle" />
-              Not allowed{" "}
+              {vegPermission === '0' ? "Allowed": "Not allowed"}
             </li>
             <li className="col">
               <i className="mt-n1 me-2 fs-lg align-middle" />
-              Allowed
+              {petsPermission === '0' ? "Allowed": "Not allowed"}
             </li>
           </ul>
         </div>

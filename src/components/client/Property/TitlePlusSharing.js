@@ -1,6 +1,6 @@
 import React from "react";
 
-const TitlePlusSharing = () => {
+const TitlePlusSharing = ({property}) => {
   return (
     <>
       <div
@@ -8,8 +8,8 @@ const TitlePlusSharing = () => {
         style={{ zIndex: 1025 }}
       >
         <div className="me-3">
-          <h2 className="h6 text-dark pt-4 mt-3">
-            2 BHK Apartment in Om Residency, Adalaj
+          <h2 className="h6 text-dark pt-4 mt-3 text-capitalize">
+            {property.bedrooms} BHK {property.propertyType} in {property.areaName} {property.city}, {property.state}
           </h2>
           <div className="d-md-none">
             <div className="d-flex align-items-center mb-3"></div>

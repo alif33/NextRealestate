@@ -8,6 +8,7 @@ import { reviewSlice } from './reviews/slice';
 import { blogSlice } from './blog/slice';
 import { propertyCategorySlice } from './propertyCategory/slice';
 import { propertySearchSlice } from './propertySearch/slice';
+import { singlePropertySlice } from './singleProperty/slice';
 
 export const rootReducer = combineReducers({
     users: userSlice.reducer,
@@ -18,5 +19,6 @@ export const rootReducer = combineReducers({
     reviews: reviewSlice.reducer,
     blog: blogSlice.reducer,
     selectedCategory: propertyCategorySlice.reducer,
-    search: propertySearchSlice.reducer
+    search: propertySearchSlice.reducer,
+    singleProperty: singlePropertySlice.reducer
 })

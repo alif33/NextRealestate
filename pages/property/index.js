@@ -9,26 +9,27 @@ import PropertyGalary from "../../src/components/client/Property/PropertyGalary/
 import PropertyMeta from "../../src/components/client/Property/PropertyMeta";
 import SemilarProperties from "../../src/components/client/Property/SemilarProperties/SemilarProperties";
 import TitlePlusSharing from "../../src/components/client/Property/TitlePlusSharing";
+import { getData } from "../../__lib__/helpers/HttpService";
 
-const Property = () => {
+const Property = ({property}) => {
   return (
     <Layout>
       <div className="container mt-5 mb-md-4 py-5">
         {/* <!-- Breadcrumb--> */}
         <PropertyBreadcrumb />
         {/* <!-- Title + Sharing--> */}
-        <TitlePlusSharing />
+        <TitlePlusSharing property={property}/>
 
         <div className="row">
           <div className="col-md-7">
             {/* Gallery*/}
             <PropertyGalary />
             {/* Property details*/}
-            <PropertyDetails />
+            <PropertyDetails property={property} />
             {/* Amenities*/}
-            <Amenities />
+            <Amenities property={property} />
             {/* Description*/}
-            <PropertyDescription />
+            <PropertyDescription property={property}/>
             {/* Post meta*/}
             <PropertyMeta />
           </div>
@@ -45,3 +46,12 @@ const Property = () => {
 };
 
 export default Property;
+
+export async function getServerSideProps(context) {
+  const property = await getData(`/property/${context.query?.id}`);
+  return {
+    props: {
+      property,
+    },
+  };
+}
