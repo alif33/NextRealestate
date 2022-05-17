@@ -117,7 +117,9 @@ const categorySchema = new mongoose.Schema(
             required: true,
             trim: true
         },
-        // amenities: [],
+        amenities: {
+            type: Array
+        },
         description: {
             type: String,
             required: true,
