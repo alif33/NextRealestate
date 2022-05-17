@@ -141,10 +141,9 @@ const categorySchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        // image: {
-        //     type: String,
-        //     required: true 
-        // },
+        image: {
+            type: Array,
+        },
         _owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
