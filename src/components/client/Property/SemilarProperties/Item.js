@@ -1,7 +1,6 @@
 import React from "react";
 
-const RecentItem = ({recent}) => {
-    const {bedrooms} = recent
+const Item = () => {
   return (
     <>
       <div className="px-2">
@@ -17,8 +16,9 @@ const RecentItem = ({recent}) => {
               <i className="fi-heart" />
             </button>
             <img
+              style={{ height: "222px" }}
               className="rounded-3"
-              src="img/rokye-website/catalog/09.jpg"
+              src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80"
               alt="Article img"
             />
           </div>
@@ -43,4 +43,4 @@ const RecentItem = ({recent}) => {
   );
 };
 
-export default RecentItem;
+export default Item;

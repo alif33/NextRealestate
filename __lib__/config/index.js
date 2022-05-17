@@ -66,3 +66,29 @@ export const propertyFields = {
     },
     position: 0
 }
+
+
+export const amenitesArray = [
+    "Lift",
+    "Gas pipeline",
+    "24X7 Water supply",
+    "24X7 Security",
+    "Car parking",
+    "Visitor parking",
+    "Children's play area",
+    "Landscape garden",
+    "Tree planting",
+    "Air conditioning",
+    "CCTV",
+    "Fire safety",
+    "Internet services",
+    "Gym",
+    "Club house",
+    "Swimming pool",
+    "House keeping",
+    "Power backup",
+    "Sewage treatment plant",
+    "Rain water harvesting",
+    "Shopping center",
+    "Park"
+]

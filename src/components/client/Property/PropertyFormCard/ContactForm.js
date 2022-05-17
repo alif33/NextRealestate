@@ -1,18 +1,55 @@
-import React from "react";
-
+import React, {useState} from "react";
+import { useForm } from "react-hook-form";
+import { postData } from "../../../../../__lib__/helpers/HttpService";
 const ContactForm = () => {
+  const [disable, setDisable] = useState(false);
+  const {
+    register,
+    reset,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    
+    if (data.role === "true") {
+      setDisable(false);
+    }
+    if (data.isAgree && data.role === "OWNER" || "TENANT") {
+      setDisable(true);
+      const newData = {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        role: data.role,
+        message: data.message
+      };
+      postData("/contact", newData, setDisable).then((res) => {
+        if (res?.success) {
+          toast.success(`${res.message}`);
+          setDisable(false);
+          reset();
+        }else{
+            
+        }
+      });
+    }
+  };
+
+  console.log(watch())
   return (
     <>
-      <form className="needs-validation" noValidate>
+      <form className="needs-validation" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
           <label className="form-label" htmlFor="pr-study-field">
             I am
             <span className="text-danger" />
           </label>
           <select
-            className="form-select form-select-lg"
+          {...register('role',{required: true})}
+            className={`form-select form-select-lg ${watch().role === "true" && 'border-danger'}`}
             id="pr-education-level"
-            required
           >
             <option value disabled selected>
               Choose
@@ -26,7 +63,7 @@ const ContactForm = () => {
             className="form-control"
             type="text"
             placeholder="Name*"
-            required
+       
           />
           <div className="invalid-feedback">Please enter your name!</div>
         </div>
@@ -42,7 +79,7 @@ const ContactForm = () => {
           className="form-control mb-3"
           type="email"
           placeholder="Email*"
-          required
+         
         />
         <div className="invalid-feedback">Invalid phone number!</div>
         <textarea
