@@ -23,42 +23,95 @@ const handler = nc();
 // const upload = multer();
 
 handler.use(isAuth).post(async (req, res) => {
-    const data = req.body;
+    const {
+        propertyCategory,
+        propertyType,
+        bedrooms,
+        bathrooms,
+        bikeParking,
+        carParking,
+        carpetArea,
+        superArea,
+        houseNumber,
+        areaName,
+        state,
+        societyName,
+        city,
+        pinCode,
+        floorNo,
+        facing,
+        furnishedStatus,
+        availability,
+        totalFloors,
+        balconies,
+        ageConstruction,
+        tenantsPreferred,
+        vegPermission,
+        petsPermission,
+        amenities,
+        description,
+        monthlyRent,
+        maintenanceCharges,
+        securityAmount,
+        basis,
+        propertyImage,
+        propertyVideo,
+        firstName,
+        lastName,
+        phoneNumber,
+        email
+    } = req.body;
 
-    // const streamUpload = (req) => {
-    //     return new Promise((resolve, reject) => {
-    //       const stream = cloudinary.uploader.upload_stream((error, result) => {
-    //         if (result) {
-    //           resolve(result);
-    //         } else {
-    //           reject(error);
-    //         }
-    //       });
-    //       streamifier.createReadStream(req.file.buffer).pipe(stream);
-    //     });
-    //   };
 
-
-    // const { url } = await streamUpload(req);
-
-    // if(url){
         await db.connect();
     
         const property = new Property({
-            ...data,
-            // image: url,
+            propertyCategory,
+            propertyType,
+            bedrooms,
+            bathrooms,
+            bikeParking,
+            carParking,
+            carpetArea,
+            superArea,
+            houseNumber,
+            areaName,
+            state,
+            societyName,
+            city,
+            pinCode,
+            floorNo,
+            facing,
+            furnishedStatus,
+            availability,
+            totalFloors,
+            balconies,
+            ageConstruction,
+            tenantsPreferred,
+            vegPermission,
+            petsPermission,
+            amenities,
+            description,
+            monthlyRent,
+            maintenanceCharges,
+            securityAmount,
+            basis,
+            propertyImage,
+            propertyVideo,
+            firstName,
+            lastName,
+            phoneNumber,
+            email,
             _owner: req.user._id
         });
         
         if(await property.save()){
             await db.disconnect();
-            res.send({
+            res.status(201).json({
                 success: true,
                 message: 'Submitted successfully'
             })
         }
-    // }
-
 });
 
 export default handler;
