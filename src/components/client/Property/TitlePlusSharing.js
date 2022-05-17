@@ -1,6 +1,7 @@
 import React from "react";
 
 const TitlePlusSharing = ({property}) => {
+  console.log(property.amenities)
   return (
     <>
       <div

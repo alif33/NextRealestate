@@ -13,7 +13,6 @@ const SingleContent = ({ property }) => {
     },
     { sort: false }
   );
-  console.log(query);
   return (
     <>
       <div className="card-body position-relative pb-3">

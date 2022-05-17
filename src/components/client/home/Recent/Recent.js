@@ -8,7 +8,7 @@ import { settings } from "./SlickSetting";
 
 function Recent({ properties }) {
   return (
-    <section className="container pb-5 mb-lg-4 pt-5">
+    <section className="container pb-5 mb-lg-4 pt-5 overflow-hidden">
       <div className="d-flex align-items-center justify-content-between pb-2">
         <h2 className="h3 mt-md-4">Recently added</h2>
         <Link href='/properties'>
