@@ -17,7 +17,8 @@ const SingleImage = ({ property }) => {
     <>
       <div
         className="card-img-top position-relative"
-        style={{ backgroundImage: "url(img/rokye-website/catalog/16.jpg)" }}
+        style={{ backgroundImage: `url(${property.images.length > 0 ?
+            property?.images[0] : 'img/rokye-website/catalog/16.jpg'})` }}
       >
         <Link href={`property?${query}`}>
           <a className="stretched-link" href="" />

@@ -2,7 +2,6 @@ import Layout from "../src/components/client/layout";
 import FilterSidebar from "../src/components/client/properties/FilterSidebar";
 import MainContent from "../src/components/client/properties/MainContent";
 import { getData } from "../__lib__/helpers/HttpService";
-import { useState } from "react";
 
 export default function Properties({ properties }) {
   return (

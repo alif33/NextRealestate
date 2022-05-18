@@ -10,7 +10,7 @@ const imageData = [
 ]
 
 
-const PropertyGalary = ({image}) => {
+const PropertyGalary = ({property}) => {
     const settings = {
         customPaging: function(i) {
             return (
@@ -31,12 +31,12 @@ const PropertyGalary = ({image}) => {
         <>
             <div className="tns-carousel-wrapper">
               <div className="tns-slides-count text-dark">
-                <i className="fi-image fs-lg me-2" />
+                {/* <i className="fi-image fs-lg me-2" />
                 <div className="ps-1">
                   <span className="tns-current-slide fs-5 fw-bold" />
                   <span className="fs-5 fw-bold">/</span>
                   <span className="tns-total-slides fs-5 fw-bold" />
-                </div>
+                </div> */}
               </div>
               <Slider {...settings}>
                   {imageData.map((image, i) => <SliderItem image={image} key={i}/>)}
