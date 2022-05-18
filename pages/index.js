@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import About from '../src/components/client/home/About';
 import Hero from '../src/components/client/home/Hero';
 import Recent from '../src/components/client/home/Recent/Recent';
-import Review from '../src/components/client/home/Review';
+import Review from '../src/components/client/home/Review/Review';
 import Layout from '../src/components/client/layout';
 import { userAuthStatus } from '../__lib__/helpers/Cookiehandler';
 import { getData } from '../__lib__/helpers/HttpService';

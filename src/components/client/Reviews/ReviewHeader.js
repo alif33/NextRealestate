@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const ReviewHeader = () => {
@@ -6,7 +7,9 @@ const ReviewHeader = () => {
       <nav className="mb-4 pt-md-3" aria-label="Breadcrumb">
         <ol className="breadcrumb">
           <li className="breadcrumb-item">
-            <a href="real-estate-home.html">Home</a>
+          <Link href='/'>
+          <a>Home</a>
+          </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
             Reviews

@@ -62,7 +62,7 @@ const BlogCard = ({ data }) => {
               </div>
               <div>
                 <h5 className="mx-2">Category</h5>
-                <button className="btn btn-outline-primary rounded-pill text-success text-capitalize mx-2">
+                <button className="btn btn-outline-warning rounded text-success text-capitalize mx-2">
                   {category?.categoryName}
                 </button>
               </div>

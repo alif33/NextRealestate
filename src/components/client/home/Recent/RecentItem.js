@@ -2,8 +2,6 @@ import React from "react";
 
 const RecentItem = ({ recent }) => {
   const { bedrooms, propertyType, monthlyRent, furnishedStatus, areaName, city, state } = recent;
-  console.log(recent)
-  
   return (
     <>
       <div className="px-3">

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GridLoader } from "react-spinners";
 import { setReviews } from "../../../../store/reviews/actions";
-import { getData } from "../../../../__lib__/helpers/HttpService";
 import ReviewCard from "./ReviewCard";
 
 const AllReviews = () => {
