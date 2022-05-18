@@ -19,7 +19,7 @@ import { authPost, postData } from "../__lib__/helpers/HttpService";
 import { userAuth } from "../__lib__/helpers/requireAuthentication";
 
 function AddProperty() {
-  const cookies = new Cookies()
+  const cookies = new Cookies();
   const [disable, setDisable] = useState(0);
   const [data, setData] = useState(propertyFields);
   const [isValid, setIsValid] = useState(false);
@@ -38,7 +38,7 @@ function AddProperty() {
   } = basic;
 
   const { areaName, city, houseNumber, pinCode, societyName, state } = location;
-  console.log(media)
+  console.log(media);
   const {
     ageConstruction,
     availability,
@@ -55,7 +55,7 @@ function AddProperty() {
     tenantsPreferred,
     totalFloors,
     vegPermission,
-    amenities
+    amenities,
   } = details;
 
   const { email, firstName, lastName, phoneNumber } = contact;
@@ -95,7 +95,7 @@ function AddProperty() {
       }
     } else if (property.position === 2) {
       if (
-        !amenities||
+        !amenities ||
         !ageConstruction ||
         !availability ||
         !basis ||
@@ -145,22 +145,28 @@ function AddProperty() {
     }
   };
   const userInfo = cookies.get("_info");
-  
+
   const onSubmit = (data) => {
+    const formData = new FormData();
+    formData.append("image", media.propertyImage);
+    authPost("/property/images", formData, userInfo.token).then((res) =>
+      console.log(res)
+    );
     setDisable(true);
     if (!firstName || !lastName || !phoneNumber || !email) {
       setIsValid(true);
     } else {
-      authPost(
-        "/property",
-        { ...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media },
-        userInfo.token
-      ).then((res) => {
-        if (res?.success) {
-          dispatch(submitData());
-          toast.success(res.message);
-        }
-      });
+      // console.log({...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media })
+      // authPost(
+      //   "/property",
+      //   { ...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media },
+      //   userInfo.token
+      // ).then((res) => {
+      //   if (res?.success) {
+      //     dispatch(submitData());
+      //     toast.success(res.message);
+      //   }
+      // });
     }
   };
 

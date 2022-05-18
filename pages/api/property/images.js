@@ -1,6 +1,5 @@
 import nc from 'next-connect';
 import multer from 'multer';
-import Property from '../../../models/Property';
 import { v2 as cloudinary } from 'cloudinary';
 import streamifier from 'streamifier';
 import { isAuth } from '../../../utils/auth';
