@@ -176,7 +176,7 @@ function AddProperty() {
           userInfo.token
         ).then((res) => {
           if (res?.success) {
-            // dispatch(submitData());
+            dispatch(submitData());
             toast.success(res.message);
           }
         });

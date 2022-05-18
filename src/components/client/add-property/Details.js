@@ -358,10 +358,10 @@ function Details({ isValid }) {
                   id="basis"
                 >
                   <option selected>Choose</option>
-                  <option value="Associate Degree">Monthly</option>
-                  <option value="Associate Degree">Quarterly</option>
-                  <option value="Associate Degree">Yearly</option>
-                  <option value="Associate Degree">One-time</option>
+                  <option value="Monthly">Monthly</option>
+                  <option value="Quarterly">Quarterly</option>
+                  <option value="Yearly">Yearly</option>
+                  <option value="One-time">One-time</option>
                 </select>
                 {!basis &&  isValid && <div className='text-danger'>Basis is required</div>}
               </div>

@@ -7,7 +7,7 @@ const handler = nc();
 handler.get(async (req, res) => {
   await db.connect();
   const blogs = await Blog.find({
-    
+    category
   })
     .populate({
       path: 'category'
