@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import dateFormat from "dateformat";
-import { MoreVertical } from "react-feather";
+import { ChevronDown, ChevronUp, MoreVertical } from "react-feather";
 const ContactsCard = ({ data, index }) => {
   const {
     _id,
@@ -35,6 +35,7 @@ const ContactsCard = ({ data, index }) => {
     petPermission,
   } = data;
 
+  const [collapse, setCollapse] = useState(false)
   return (
     <div className="col-12">
       <div className="card mb-4">
@@ -65,13 +66,14 @@ const ContactsCard = ({ data, index }) => {
             </div>
             <div id="heading-1" className="text-end mt-4">
               <button
+              onClick={() => setCollapse(!collapse)}
                 data-bs-toggle="collapse"
                 data-bs-target={`#collapse-${index + 1}`}
                 aria-expanded='true'
                 aria-controls={`collapse-${index + 1}`}
                 className="btn"
               >
-                <MoreVertical />
+                {collapse ? <ChevronUp /> : <ChevronDown />}
               </button>
             </div>
             <div
