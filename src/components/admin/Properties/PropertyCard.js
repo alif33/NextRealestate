@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import dateFormat from "dateformat";
-import { ChevronDown, ChevronUp, MoreVertical } from "react-feather";
+import { ChevronDown, ChevronUp } from "react-feather";
 const ContactsCard = ({ data, index }) => {
   const {
     _id,

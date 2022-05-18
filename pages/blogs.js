@@ -41,12 +41,6 @@ function Blogs({ blogs, tags }) {
       return val;
     }
   });
-  console.log(tagFilter)
-
-
-
-
-
   return (
     <Layout>
       <div className="container mt-5 mb-md-4 py-5">

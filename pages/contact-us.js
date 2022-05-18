@@ -28,7 +28,6 @@ function Contact() {
         role: data.role,
         message: data.message
       };
-      console.log(newData)
       postData("/contact", newData, setDisable).then((res) => {
         if (res?.success) {
           toast.success(`${res.message}`);

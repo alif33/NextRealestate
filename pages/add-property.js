@@ -38,7 +38,6 @@ function AddProperty() {
   } = basic;
 
   const { areaName, city, houseNumber, pinCode, societyName, state } = location;
-  console.log(media);
   const {
     ageConstruction,
     availability,
@@ -152,18 +151,10 @@ function AddProperty() {
       formData.append("image", media.propertyImage[i]);
     }
     authPost("/property/images", formData, userInfo.token).then((res) => {
-      console.log(res);
       setDisable(true);
       if (!firstName || !lastName || !phoneNumber || !email) {
         setIsValid(true);
       } else {
-        console.log({
-          ...property.basic,
-          ...property.location,
-          ...property.details,
-          ...property.contact,
-          images: res,
-        });
         authPost(
           "/property",
           {
