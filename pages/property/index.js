@@ -31,7 +31,7 @@ const Property = ({property}) => {
             {/* Description*/}
             <PropertyDescription property={property}/>
             {/* Post meta*/}
-            <PropertyMeta />
+            {/* <PropertyMeta /> */}
           </div>
           {/* Card*/}
           <PropertyFormCard />
