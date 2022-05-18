@@ -37,7 +37,6 @@ const ContactForm = () => {
     }
   };
 
-  console.log(watch());
   return (
     <>
       <form className="needs-validation" onSubmit={handleSubmit(onSubmit)}>

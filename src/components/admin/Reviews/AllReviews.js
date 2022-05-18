@@ -12,7 +12,6 @@ const AllReviews = () => {
     dispatch(setReviews())
   }, []);
 
-  console.log(reviewList);
   return (
     <secttion>
       <div className="row">

@@ -12,7 +12,6 @@ const AllReferAndEarn = () => {
     getData("/refers").then((res) => setRefers(res));
   }, []);
 
-  console.log(refers);
   return (
     <secttion>
       <div className="row">

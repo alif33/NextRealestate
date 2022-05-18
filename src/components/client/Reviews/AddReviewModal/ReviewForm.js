@@ -20,7 +20,6 @@ const ReviewForm = () => {
  
 
   const onSubmit = (data) => {
-      console.log(data.rating)
     if (data.rating === "true") {
       setRating(true);
     } else {

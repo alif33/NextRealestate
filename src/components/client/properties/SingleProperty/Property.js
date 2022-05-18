@@ -2,8 +2,6 @@ import SingleContent from "./SingleContent";
 import SingleImage from "./SingleImage";
 
 export default function Property({ property }){
-    console.log(property)
-
     return(
         <div className="card card-hover card-horizontal border-0 shadow-sm mb-4">
            {/* image */}

@@ -29,19 +29,33 @@ const MainContent = ({ properties }) => {
       return val;
     }
   });
-
   const searchFilter = properties?.filter((val) => {
-    if (!search.searchText) {
+    if (!search.search?.keywords) {
       return [];
     } else if (
-      val.city.toLowerCase().includes(search.searchText?.toLowerCase()) ||
-      val.areaName.toLowerCase().includes(search.searchText?.toLowerCase()) ||
-      val.state.toLowerCase().includes(search.searchText?.toLowerCase())
+      val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+      val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+      val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase())  &&
+      !search?.search?.bedroom && !search?.search?.budget
+
+    ) {
+      return val;
+    }else if (
+      val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+      val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+      val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase()) &&
+      val.bedrooms === parseInt(search.search?.bedroom?.toLowerCase())
+    ) {
+      return val;
+    }else if (
+      val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+      val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+      val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase()) &&
+      val.bedrooms === parseInt(search.search?.bedroom?.toLowerCase())
     ) {
       return val;
     }
   });
-
   return (
     <>
       <div className="col-lg-8 col-xl-7 position-relative overflow-hidden pb-5 pt-4 px-3 px-xl-4 px-xxl-5">
@@ -71,7 +85,7 @@ const MainContent = ({ properties }) => {
         {/* Sorting*/}
         <PropertySorting />
 
-        {!search.searchText &&
+        {!search.search &&
           (filtered.length > 0 ? (
             filtered?.map((item, index) => (
               <Property key={index} property={item} />
@@ -80,7 +94,7 @@ const MainContent = ({ properties }) => {
             <div>Property Not found</div>
           ))}
 
-        {search.searchText &&
+        {search.search &&
           (searchFilter.length > 0 ? (
             searchFilter?.map((item, index) => (
               <Property key={index} property={item} />
@@ -90,8 +104,8 @@ const MainContent = ({ properties }) => {
           ))}
 
         {/* pagination here */}
-        {!search.searchText && filtered.length > 0 && <PropertiesPagination />}
-        {search.searchText && filtered.length > 0 && <PropertiesPagination />}
+        {!search.search && filtered.length > 0 && <PropertiesPagination />}
+        {search.search && filtered.length > 0 && <PropertiesPagination />}
       </div>
     </>
   );

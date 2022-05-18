@@ -57,7 +57,6 @@ export const propertySlice = createSlice({
  
         },
         setMedia: (state, action) => {
-            console.log(action.payload)
             return {
                 ...state,
                 media: {

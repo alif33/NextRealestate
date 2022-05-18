@@ -1,8 +1,6 @@
 import React from "react";
 import dateFormat from "dateformat";
 const ReviewCard = ({ data }) => {
-    console.log(data);
-
     const ratingArray =[]
     for (let i = 1; i <= data.rating; i++) {
         ratingArray.push(i)

@@ -6,9 +6,6 @@ import {useSelector} from 'react-redux'
 
 const Refers = () => {
 const {users} = useSelector(state => state)
-  console.log(users);
-
-
   return (
     <Layout>
       <div>

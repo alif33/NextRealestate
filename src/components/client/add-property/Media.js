@@ -7,7 +7,6 @@ function Media({ isValid }) {
   const dispatch = useDispatch();
   const { property } = useSelector((state) => state);
   const { media } = property;
-  console.log(media)
   const handleImages = (e) => {
     if (e.target.files) {
       dispatch(setMedia(e.target.files[0]));

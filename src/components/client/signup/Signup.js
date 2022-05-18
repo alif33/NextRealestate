@@ -42,7 +42,6 @@ export default function Signup() {
     watch,
     formState: { errors },
   } = useForm(formOptions);
-  console.log(errors);
   const onSubmit = (data) => {
     setDisable(true);
 

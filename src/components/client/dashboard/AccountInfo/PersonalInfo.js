@@ -22,12 +22,10 @@ const PersonalInfo = () => {
     const value = e.target.value;
     setHandleData((values) => ({ ...values, [name]: value }));
   };
-  console.log(handleData);
   const userInfo = cookies.get("_info");
   const handleSave = () => {
     
     if (!handleData) {
-      console.log(handleData);
       toast.error("something wrong");
     } else {
       if (handleData?.updatedPassword) {
@@ -59,7 +57,6 @@ const PersonalInfo = () => {
     updateData("/user/profile", data, userInfo.token).then((res) => {
       if (res.success) {
         toast.success(res.message);
-        console.log(res)
       } else {
         toast.error("something wrong");
       }
