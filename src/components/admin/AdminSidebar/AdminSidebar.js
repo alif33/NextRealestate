@@ -1,13 +1,21 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Disc, X } from "react-feather";
+import { Disc, X, LogOut } from "react-feather";
+import { useDispatch } from "react-redux";
+import { adminLogout } from "../../../../store/admins/actions";
 import MenuList from "./MenuList";
 import { menuItem } from "./sideMenu";
+import Cookies from "universal-cookie";
+import toast from "react-hot-toast";
+
+
+
 
 const AdminSidebar = ({ toggle, setToggle }) => {
-
-   
-  useEffect(() => {
+  const cookies = new Cookies()
+  const dispatch = useDispatch()
+  const router = useRouter()
+  // useEffect(() => {
     // const closeSidebar = (e) => {
     //   console.log(e)
     //   if (e.path[1].tagName !== "shape") {
@@ -16,8 +24,16 @@ const AdminSidebar = ({ toggle, setToggle }) => {
     // };
     // document.body.addEventListener("click", closeSidebar);
     // return () => document.body.removeEventListener("click", closeSidebar);
-  }, []);
+  // }, []);
 
+  const handleLogOut = (e) => {
+    cookies.remove("_admin", { path: "/" });
+    if (!cookies.get("_admin")) {
+      toast.success("Logout success");
+      router.push(router.pathname);
+    }
+    dispatch(adminLogout());
+  }
 
   return (
     <div
@@ -135,9 +151,23 @@ const AdminSidebar = ({ toggle, setToggle }) => {
           id="main-menu-navigation"
           data-menu="menu-navigation"
         >
-          {menuItem.map((item, i) => <MenuList key={i} item={item}/>)}
-           
-        
+          {menuItem.map((item, i) => (
+            <MenuList key={i} item={item} />
+          ))}
+          <li
+            className={`nav-item mt-1 position-relative mt-5`}
+          >
+            <a
+            onClick={() => handleLogOut()}
+              href="#"
+              className="d-flex align-items-center text-decoration-none"
+            >
+              <LogOut/>
+              <span className="menu-title text-truncate" data-i18n="Dashboards">
+                Logout
+              </span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

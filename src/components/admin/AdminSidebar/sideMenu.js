@@ -1,5 +1,5 @@
 import {
-  CheckSquare, Circle, FileText, Home, List, Tag, BookOpen, Users, Mail
+  CheckSquare, Circle, FileText, Home, List, Tag, BookOpen, Users, Mail, Clipboard, Book
 } from "react-feather";
 
 export const menuItem = [
@@ -25,16 +25,34 @@ export const menuItem = [
       icon: <Tag/>,
      },
      {id: 4,
+      url: '/admin/properties',
+      title: 'Properties',
+      size: '140px',
+      icon: <List/>,
+     },
+     {id: 5,
+      url: '/admin/blogs',
+      title: 'Blogs',
+      size: '140px',
+      icon: <Clipboard/>,
+     },
+     {id: 6,
       url: '/admin/contacts',
       title: 'Contacts',
       size: '140px',
       icon: <Mail/>,
      },
-     {id: 4,
+     {id: 7,
       url: '/admin/refers-earns',
       title: 'Refers',
       size: '140px',
       icon: <BookOpen/>,
+     },
+     {id: 8,
+      url: '/admin/reviews',
+      title: 'Reviews',
+      size: '140px',
+      icon: <Book/>,
      }
   
   

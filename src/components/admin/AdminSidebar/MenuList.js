@@ -36,7 +36,7 @@ const MenuList = ({item}) => {
                   </a>
               </Link>
 
-              {item.children?.length > 0 && (
+              {/* {item.children?.length > 0 && (
                 <ul className="menu-content">
                   {item.children?.map((children, index) => (
                     <li key={index}>
@@ -58,7 +58,7 @@ const MenuList = ({item}) => {
                     </li>
                   ))}
                 </ul>
-              )}
+              )} */}
             </li>
         </>
     );

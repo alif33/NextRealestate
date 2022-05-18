@@ -34,7 +34,10 @@ const AdminNav = ({ toggle, setToggle }) => {
   }, []);
   return (
     <>
-      <nav className="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
+      <nav
+      style={{background: 'white'}}
+       className="header-navbar navbar navbar-expand-lg
+        align-items-center floating-nav navbar-light navbar-shadow container-xxl z-index-5">
         <div className="navbar-container d-flex content">
           <div className="bookmark-wrapper d-flex align-items-center">
             <ul className="nav navbar-nav d-xl-none">
@@ -574,7 +577,7 @@ const AdminNav = ({ toggle, setToggle }) => {
                   <span className="avatar-status-online" />
                 </span>
               </a>
-              <div
+              {/* <div
                 className={`dropdown-menu dropdown-menu-end ${
                   showProfile ? "show" : ""
                 }`}
@@ -616,7 +619,7 @@ const AdminNav = ({ toggle, setToggle }) => {
                   <Power className="me-50"/>
                   Logout
                 </a>
-              </div>
+              </div> */}
             </li>
           </ul>
         </div>
