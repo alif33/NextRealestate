@@ -1,7 +1,7 @@
 import React from "react";
 import dateFormat from "dateformat";
 const ContactsCard = ({ data }) => {
-    console.log(data);
+    // console.log(data);
   return (
     <div className="col-12">
       <div className="card mb-4">

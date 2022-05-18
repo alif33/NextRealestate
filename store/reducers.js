@@ -4,11 +4,13 @@ import { userSlice } from './users/slice';
 import { propertySlice } from './property/slice';
 import { categorySlice } from './catrgories/slice';
 import { tagSlice } from './tags/slice';
-import { reviewSlice } from './reviews/slice';
+import { reviewSlice, reviewsSlice } from './reviews/slice';
 import { blogSlice } from './blog/slice';
 import { propertyCategorySlice } from './propertyCategory/slice';
 import { propertySearchSlice } from './propertySearch/slice';
 import { singlePropertySlice } from './singleProperty/slice';
+import { blogsSlice } from './blogs/slice';
+import { propertiesSlice } from './properties/slice';
 
 export const rootReducer = combineReducers({
     users: userSlice.reducer,
@@ -16,9 +18,11 @@ export const rootReducer = combineReducers({
     property: propertySlice.reducer,
     categories: categorySlice.reducer,
     tags: tagSlice.reducer,
-    reviews: reviewSlice.reducer,
     blog: blogSlice.reducer,
     selectedCategory: propertyCategorySlice.reducer,
     search: propertySearchSlice.reducer,
-    singleProperty: singlePropertySlice.reducer
+    singleProperty: singlePropertySlice.reducer,
+    blogs: blogsSlice.reducer,
+    properties: propertiesSlice.reducer,
+    reviews: reviewsSlice.reducer
 })

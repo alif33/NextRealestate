@@ -12,7 +12,7 @@ const AllContacts = () => {
     getData("/contacts").then((res) => setContacts(res));
   }, []);
 
-  console.log(contacts);
+  // console.log(contacts);
   return (
     <secttion>
       <div className="row">

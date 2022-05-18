@@ -35,7 +35,7 @@ const AdminNav = ({ toggle, setToggle }) => {
   return (
     <>
       <nav
-      style={{background: 'white'}}
+      style={{background: 'white', padding: '0'}}
        className="header-navbar navbar navbar-expand-lg
         align-items-center floating-nav navbar-light navbar-shadow container-xxl z-index-5">
         <div className="navbar-container d-flex content">

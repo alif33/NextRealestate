@@ -1,6 +1,6 @@
 import { getData } from '../../__lib__/helpers/HttpService';
-import { reviewSlice } from "./slice";
-const { actions: slice } = reviewSlice;
+import { reviewsSlice } from "./slice";
+const { actions: slice } = reviewsSlice;
 
 export const setReviews = () => (dispatch) => {
   getData('/reviews')
