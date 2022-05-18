@@ -148,26 +148,40 @@ function AddProperty() {
 
   const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append("image", media.propertyImage);
-    authPost("/property/images", formData, userInfo.token).then((res) =>
-      console.log(res)
-    );
-    setDisable(true);
-    if (!firstName || !lastName || !phoneNumber || !email) {
-      setIsValid(true);
-    } else {
-      // console.log({...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media })
-      // authPost(
-      //   "/property",
-      //   { ...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media },
-      //   userInfo.token
-      // ).then((res) => {
-      //   if (res?.success) {
-      //     dispatch(submitData());
-      //     toast.success(res.message);
-      //   }
-      // });
+    for (let i = 0; i < media.propertyImage?.length; i++) {
+      formData.append("image", media.propertyImage[i]);
     }
+    authPost("/property/images", formData, userInfo.token).then((res) => {
+      console.log(res);
+      setDisable(true);
+      if (!firstName || !lastName || !phoneNumber || !email) {
+        setIsValid(true);
+      } else {
+        console.log({
+          ...property.basic,
+          ...property.location,
+          ...property.details,
+          ...property.contact,
+          images: res,
+        });
+        authPost(
+          "/property",
+          {
+            ...property.basic,
+            ...property.location,
+            ...property.details,
+            ...property.contact,
+            images: res,
+          },
+          userInfo.token
+        ).then((res) => {
+          if (res?.success) {
+            // dispatch(submitData());
+            toast.success(res.message);
+          }
+        });
+      }
+    });
   };
 
   return (
