@@ -1,6 +1,7 @@
 import React from "react";
 import queryString from "query-string";
 import Link from "next/link";
+import slugify from "slugify";
 const RecentItem = ({ recent }) => {
   const {
     bedrooms,
@@ -17,7 +18,9 @@ const RecentItem = ({ recent }) => {
     {
       bedrooms: recent.bedrooms + " " + "bed",
       propertyType: recent.propertyType,
-      addresss: recent.areaName + " " + recent.city + " " + recent.state,
+      areaName: recent.areaName , 
+      city: recent.city,
+      state:  recent.state,
       id: recent._id,
     },
     { sort: false }

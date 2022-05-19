@@ -1,24 +1,24 @@
 import Link from "next/link";
 import React from "react";
 import queryString from "query-string";
+import slugify from "slugify";
 const SingleImage = ({ property }) => {
-
-
-    const query = queryString.stringify(
-        {
-          bedrooms: property.bedrooms + " " + "bed",
-          propertyType: property.propertyType,
-          addresss: property.areaName + " " + property.city + " " + property.state,
-          id: property._id,
-        },
-        { sort: false }
-      );
+  const query = queryString.stringify(
+    {
+      bedrooms: property.bedrooms + " " + "bed",
+      propertyType: property.propertyType,
+      areaName: property.areaName , 
+      city: property.city,
+      state:  property.state,
+      id: property._id,
+    },
+    { sort: false }
+  );
   return (
     <>
       <div
         className="card-img-top position-relative"
         style={{ backgroundImage: `url(${property?.images[0]})` }}
-            
       >
         <Link href={`property?${query}`}>
           <a className="stretched-link" href="" />

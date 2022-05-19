@@ -3,12 +3,15 @@ import React from "react";
 import Costing from "./Costing";
 import Feature from "./Feature";
 import queryString from "query-string";
+import slugify from "slugify";
 const SingleContent = ({ property }) => {
   const query = queryString.stringify(
     {
       bedrooms: property.bedrooms + " " + "bed",
       propertyType: property.propertyType,
-      addresss: property.areaName + " " + property.city + " " + property.state,
+      areaName: property.areaName , 
+      city: property.city,
+      state:  property.state,
       id: property._id,
     },
     { sort: false }

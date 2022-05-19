@@ -10,6 +10,7 @@ const MainContent = ({ properties }) => {
   const { selectedCategory, search } = useSelector((state) => state);
   const dispatch = useDispatch()
   const { selected } = selectedCategory;
+
   const filtered = properties?.filter((val) => {
     if (!selected) {
       return [];
@@ -31,7 +32,6 @@ const MainContent = ({ properties }) => {
       return val;
     }
   });
-  console.log(search)
 
   const searchFilter = properties?.filter((val) => {
     if (!search.search?.keywords) {
