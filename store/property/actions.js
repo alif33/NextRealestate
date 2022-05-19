@@ -73,6 +73,22 @@ export const setMedia = imageUrl => (dispatch) => {
         
    
 }
+export const setRemoveMedia = newArray => (dispatch) => {
+    // if(e.target.value.toUpperCase()==="CHOOSE")
+    // {   
+    //     dispatch(slice.setContact({
+    //         [e.target.name]: null
+    //     }))
+    // }else{
+    //     dispatch(slice.setContact({
+    //         [e.target.name]: e.target.value
+    //     }))
+    // }
+    dispatch(slice.setRemoveMedia(newArray))
+        
+   
+}
+
 
 export const forwordStep = () => (dispatch) => {
     dispatch(slice.forwordStep())

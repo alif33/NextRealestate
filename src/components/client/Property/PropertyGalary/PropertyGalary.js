@@ -11,11 +11,12 @@ const imageData = [
 
 
 const PropertyGalary = ({property}) => {
+  console.log
     const settings = {
         customPaging: function(i) {
             return (
               <li className='tns-thumbnail w-100'>
-                <img style={{height: '95px', width: '140px'}} src={imageData[i]} />
+                <img style={{height: '95px', width: '140px'}} src={property.images[i]} />
               </li>
             );
           },
@@ -39,18 +40,18 @@ const PropertyGalary = ({property}) => {
                 </div> */}
               </div>
               <Slider {...settings}>
-                  {imageData.map((image, i) => <SliderItem image={image} key={i}/>)}
+                  {property.images?.map((image, i) => <SliderItem image={image} key={i}/>)}
               </Slider>
             </div>
-            {/* <ul className="tns-thumbnails" id="thumbnails">
-              <li className="tns-thumbnail">
-                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" alt="Thumbnail" />
-              </li>
-              <li className="tns-thumbnail">
-                <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80" alt="Thumbnail" />
-              </li>
-              
-            </ul>  */}
+           {
+             property.images?.length === 1 &&  <ul className="tns-thumbnails" id="thumbnails">
+             <li className="tns-thumbnail">
+               <img 
+               style={{height: '95px', width: '140px'}}
+               src={property.images} alt="Thumbnail" />
+             </li>
+           </ul> 
+           }
         </>
     );
 };

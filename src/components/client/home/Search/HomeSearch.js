@@ -3,6 +3,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setSearch } from "../../../../../store/propertySearch/actions";
+import queryString from 'query-string'
+
+
+
 const HomeSearch = () => {
   const dispatch = useDispatch();
   const router = useRouter()
@@ -12,9 +16,12 @@ const HomeSearch = () => {
     watch,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     dispatch(setSearch(data));
-    router.push('/properties')
+   
+    const query = queryString.stringify(data, {sort: false})
+    router.push(`/properties?${query}`)
   };
   return (
     <>

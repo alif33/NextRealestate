@@ -66,6 +66,16 @@ export const propertySlice = createSlice({
             }
  
         },
+        setRemoveMedia: (state, action) => {
+            return {
+                ...state,
+                media: {
+                    propertyVideo: null,
+                    propertyImage: action.payload
+                }
+            }
+ 
+        },
 
         forwordStep: (state, action) => {
 

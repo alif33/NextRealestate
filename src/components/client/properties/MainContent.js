@@ -2,11 +2,13 @@ import React from "react";
 import PropertiesPagination from "./Pagination/PropertiesPagination";
 import Property from "./SingleProperty/Property";
 import PropertySorting from "./PropertySorting";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
+import { setSearch } from "../../../../store/propertySearch/actions";
 
 const MainContent = ({ properties }) => {
   const { selectedCategory, search } = useSelector((state) => state);
+  const dispatch = useDispatch()
   const { selected } = selectedCategory;
   const filtered = properties?.filter((val) => {
     if (!selected) {
@@ -29,29 +31,35 @@ const MainContent = ({ properties }) => {
       return val;
     }
   });
+  console.log(search)
+
   const searchFilter = properties?.filter((val) => {
     if (!search.search?.keywords) {
       return [];
     } else if (
       val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
       val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-      val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase())  &&
-      !search?.search?.bedroom && !search?.search?.budget
-
+      val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase())
+      
     ) {
+     console.log( val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+     val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+     val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase()) &&
+     !search?.search?.budget)
       return val;
     }else if (
       val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
       val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
       val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase()) &&
       val.bedrooms === parseInt(search.search?.bedroom?.toLowerCase())
+     
     ) {
       return val;
     }else if (
       val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
       val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
       val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase()) &&
-      val.bedrooms === parseInt(search.search?.bedroom?.toLowerCase())
+      val.bedrooms >= parseInt(search.search?.bedroom?.toLowerCase())
     ) {
       return val;
     }
@@ -68,7 +76,12 @@ const MainContent = ({ properties }) => {
               </Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              Property list
+            <Link href="/properties">
+                <a>
+                Property list
+                </a>
+              </Link>
+              
             </li>
           </ol>
         </nav>
