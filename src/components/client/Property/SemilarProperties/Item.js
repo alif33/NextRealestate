@@ -30,11 +30,11 @@ const Item = ({property}) => {
           <ul className="list-inline mb-0 fs-xs">
             <li className="list-inline-item pe-1">
               <i className="fi-map-pin mt-n1 me-1 fs-base text-muted align-middle" />
-              Om Residncy in Adalaj
+              {property.areaName} {property.city} in {property.state}
             </li>
             <li className="list-inline-item pe-1">
               <i className="fi-bed mt-n1 me-1 fs-base text-muted align-middle" />
-              Semi-furnished
+              {property.furnishedStatus}
             </li>
           </ul>
         </div>

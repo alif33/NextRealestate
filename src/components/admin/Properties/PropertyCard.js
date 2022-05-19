@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import dateFormat from "dateformat";
-import { ChevronDown, ChevronUp } from "react-feather";
+import { CheckSquare, ChevronDown, ChevronUp } from "react-feather";
 const ContactsCard = ({ data, index }) => {
   const {
     _id,
@@ -84,41 +84,13 @@ const ContactsCard = ({ data, index }) => {
               <div className="my-4">
                 <h4>Images</h4>
                 <ul className="tns-thumbnails" id="thumbnails">
-                  <li className="tns-thumbnail">
+               {data.images?.map((img ,i ) =>  <li key={i} className="tns-thumbnail">
                     <img
                       style={{ height: "120px" }}
-                      src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+                      src={img}
                       alt="Thumbnail"
                     />
-                  </li>
-                  <li className="tns-thumbnail">
-                    <img
-                      style={{ height: "120px" }}
-                      src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80"
-                      alt="Thumbnail"
-                    />
-                  </li>
-                  <li className="tns-thumbnail">
-                    <img
-                      style={{ height: "120px" }}
-                      src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80"
-                      alt="Thumbnail"
-                    />
-                  </li>
-                  <li className="tns-thumbnail">
-                    <img
-                      style={{ height: "120px" }}
-                      src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80"
-                      alt="Thumbnail"
-                    />
-                  </li>
-                  <li className="tns-thumbnail">
-                    <img
-                      style={{ height: "120px" }}
-                      src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80"
-                      alt="Thumbnail"
-                    />
-                  </li>
+                  </li>)}
                 </ul>
               </div>
               <div className="my-4">
@@ -175,6 +147,15 @@ const ContactsCard = ({ data, index }) => {
                     <li>Property Category: {propertyCategory}</li>
                   </ul>
                 </div>
+              </div>
+              <div className="">
+                <h4>Amenities</h4>
+                <ul className="list-unstyled row row-cols-lg-3 row-cols-md-2 row-cols-1 gy-1 mb-1 text-nowrap">
+                  {data.amenities?.map((amenitie, i) => <li key={i} className="col d-flex align-items-center my-2">
+                      <CheckSquare className="me-1"/>
+                      {amenitie}
+                  </li>)}
+                </ul>
               </div>
             </div>
           </div>
