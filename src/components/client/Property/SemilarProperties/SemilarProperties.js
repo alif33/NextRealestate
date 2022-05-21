@@ -22,6 +22,9 @@ const SemilarProperties = () => {
     slidesToShow: 3,
     slidesToScroll: 3,
     initialSlide: 3,
+    autoplay: true,
+    speed: 1500,
+    autoplaySpeed: 4000,
     responsive: [
       {
         breakpoint: 1024,
@@ -58,18 +61,13 @@ const SemilarProperties = () => {
       slugify(val.areaName.toLowerCase()).includes(
         slugify(areaName.toLowerCase())
       ) ||
-      slugify(val.state.toLowerCase()).includes(
-        slugify(state.toLowerCase())
-      ) ||
-      slugify(val.city.toLowerCase()).includes(
-        slugify(city.toLowerCase())
-      ) ||
+      slugify(val.state.toLowerCase()).includes(slugify(state.toLowerCase())) ||
+      slugify(val.city.toLowerCase()).includes(slugify(city.toLowerCase())) ||
       val.bedrooms === parseInt(bedroomsArray[0]?.toLowerCase())
     ) {
       return val;
     }
   });
-
 
   return (
     <>
@@ -87,8 +85,9 @@ const SemilarProperties = () => {
 
         {/* Item*/}
         <Slider {...settings}>
-          {filtered.map((semilar, i) => <Item key={i} property={semilar} />) }
-       
+          {filtered.map((semilar, i) => (
+            <Item key={i} property={semilar} />
+          ))}
         </Slider>
       </section>
     </>

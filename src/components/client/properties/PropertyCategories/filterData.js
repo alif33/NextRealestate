@@ -54,8 +54,8 @@ export const filterData = [
     name: "Furnishing",
     options: [
       { id: 36, opName: "Furnished", value: "Furnished" },
-      { id: 37, opName: "Unfurnished", value: "Semi-furnished" },
-      { id: 38, opName: "Semi-furnished", value: "Unfurnished" },
+      { id: 37, opName: "Semi-furnished", value: "Semi-furnished" },
+      { id: 38, opName: "Unfurnished", value: "Unfurnished" },
     ],
   },
   {

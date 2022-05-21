@@ -4,7 +4,6 @@ import Property from "./SingleProperty/Property";
 import PropertySorting from "./PropertySorting";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { setSearch } from "../../../../store/propertySearch/actions";
 
 const MainContent = ({ properties }) => {
   const { selectedCategory, search, propertySort } = useSelector(
@@ -12,7 +11,6 @@ const MainContent = ({ properties }) => {
   );
   const dispatch = useDispatch();
   const { selected } = selectedCategory;
-
   const filtered = properties?.filter((val) => {
     if (!selected) {
       return [];
@@ -83,7 +81,17 @@ const MainContent = ({ properties }) => {
     }
   });
 
-  console.log(selected, search);
+  const [pageNumber, setPageNumber] = useState(0);
+  const propertyPerPage = 5;
+  const pagesVisited = pageNumber * propertyPerPage;
+
+  const filterData = Math.ceil(filtered.length / propertyPerPage);
+  const searchData = Math.ceil(search.search && searchFilter.length / propertyPerPage);
+  const sort = Math.ceil(propertySort.sortData?.length / propertyPerPage);
+ 
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   return (
     <>
@@ -123,9 +131,9 @@ const MainContent = ({ properties }) => {
         {!search.search &&
           !propertySort.sortData &&
           (filtered.length > 0 ? (
-            filtered?.map((item, index) => (
-              <Property key={index} property={item} />
-            ))
+            filtered
+              .slice(pagesVisited, pagesVisited + propertyPerPage)
+              ?.map((item, index) => <Property key={index} property={item} />)
           ) : (
             <div>Property Not found</div>
           ))}
@@ -133,23 +141,26 @@ const MainContent = ({ properties }) => {
         {!search.search &&
           !selected &&
           propertySort.sortData?.length > 0 &&
-          propertySort.sortData?.map((item, i) => (
-            <Property key={item._id} property={item} />
-          ))}
+          propertySort.sortData
+            ?.slice(pagesVisited, pagesVisited + propertyPerPage)
+            ?.map((item, i) => <Property key={item._id} property={item} />)}
 
         {search.search &&
           !propertySort.sortData &&
           (searchFilter.length > 0 ? (
-            searchFilter?.map((item, index) => (
-              <Property key={index} property={item} />
-            ))
+            searchFilter
+              .slice(pagesVisited, pagesVisited + propertyPerPage)
+              ?.map((item, index) => <Property key={index} property={item} />)
           ) : (
             <div>Property Not found</div>
           ))}
 
         {/* pagination here */}
-        {!search.search && filtered.length > 0 && <PropertiesPagination />}
-        {search.search && filtered.length > 0 && <PropertiesPagination />}
+       {!search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={filterData} changePage={changePage}/>}
+       {!search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={searchData} changePage={changePage}/>}
+       {!search.search && selected &&  !propertySort.sortData && <PropertiesPagination pageCount={filterData} changePage={changePage}/>}
+       {!search.search && !selected &&  propertySort.sortData && <PropertiesPagination pageCount={sort} changePage={changePage}/>}
+
       </div>
     </>
   );

@@ -9,9 +9,6 @@ const PropertySorting = ({ properties, searchFilter, filtered }) => {
   const { selectedCategory, search, propertySort } = useSelector(
     (state) => state
   );
-
-  console.log(selectedCategory, search, propertySort);
-
   const handleSort = (e) => {
     if (e === "newest") {
       const reversed = properties.slice().reverse();
