@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropertiesPagination from "./Pagination/PropertiesPagination";
 import Property from "./SingleProperty/Property";
 import PropertySorting from "./PropertySorting";
@@ -8,8 +8,9 @@ import { setSearch } from "../../../../store/propertySearch/actions";
 
 const MainContent = ({ properties }) => {
   const { selectedCategory, search } = useSelector((state) => state);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { selected } = selectedCategory;
+  const [selectedSort, setSelectedSort] = useState(null);
 
   const filtered = properties?.filter((val) => {
     if (!selected) {
@@ -38,32 +39,50 @@ const MainContent = ({ properties }) => {
       return [];
     } else if (
       val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-      val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+      val.areaName
+        .toLowerCase()
+        .includes(search.search?.keywords?.toLowerCase()) ||
       val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase())
-      
     ) {
-     console.log( val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-     val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-     val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase()) &&
-     !search?.search?.budget)
+      console.log(
+        val.city
+          .toLowerCase()
+          .includes(search.search?.keywords?.toLowerCase()) ||
+          val.areaName
+            .toLowerCase()
+            .includes(search.search?.keywords?.toLowerCase()) ||
+          (val.state
+            .toLowerCase()
+            .includes(search.search?.keywords?.toLowerCase()) &&
+            !search?.search?.budget)
+      );
       return val;
-    }else if (
+    } else if (
       val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-      val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-      val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase()) &&
-      val.bedrooms === parseInt(search.search?.bedroom?.toLowerCase())
-     
+      val.areaName
+        .toLowerCase()
+        .includes(search.search?.keywords?.toLowerCase()) ||
+      (val.state
+        .toLowerCase()
+        .includes(search.search?.keywords?.toLowerCase()) &&
+        val.bedrooms === parseInt(search.search?.bedroom?.toLowerCase()))
     ) {
       return val;
-    }else if (
+    } else if (
       val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-      val.areaName.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-      val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase()) &&
-      val.bedrooms >= parseInt(search.search?.bedroom?.toLowerCase())
+      val.areaName
+        .toLowerCase()
+        .includes(search.search?.keywords?.toLowerCase()) ||
+      (val.state
+        .toLowerCase()
+        .includes(search.search?.keywords?.toLowerCase()) &&
+        val.bedrooms >= parseInt(search.search?.bedroom?.toLowerCase()))
     ) {
       return val;
     }
   });
+
+  console.log(selectedSort);
   return (
     <>
       <div className="col-lg-8 col-xl-7 position-relative overflow-hidden pb-5 pt-4 px-3 px-xl-4 px-xxl-5">
@@ -76,12 +95,9 @@ const MainContent = ({ properties }) => {
               </Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-            <Link href="/properties">
-                <a>
-                Property list
-                </a>
+              <Link href="/properties">
+                <a>Property list</a>
               </Link>
-              
             </li>
           </ol>
         </nav>
@@ -96,9 +112,13 @@ const MainContent = ({ properties }) => {
           />
         </div>
         {/* Sorting*/}
-        <PropertySorting />
+        <PropertySorting
+          setSelectedSort={setSelectedSort}
+          properties={properties}
+        />
 
         {!search.search &&
+          !selectedSort &&
           (filtered.length > 0 ? (
             filtered?.map((item, index) => (
               <Property key={index} property={item} />
@@ -106,8 +126,13 @@ const MainContent = ({ properties }) => {
           ) : (
             <div>Property Not found</div>
           ))}
+        {selectedSort?.length > 0 &&
+          selectedSort?.map((item, i) => (
+            <Property key={item._id} property={item} />
+          ))}
 
         {search.search &&
+          !selectedSort &&
           (searchFilter.length > 0 ? (
             searchFilter?.map((item, index) => (
               <Property key={index} property={item} />

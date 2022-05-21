@@ -13,6 +13,7 @@ const PropertyCategories = () => {
   };
   dispatch(setSelectedCategory(category));
 
+
   return (
     <div>
       <div

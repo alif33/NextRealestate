@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
-const BlogShorted = ({blogs}) => {
+const BlogShorted = ({handleSelected }) => {
 
  
-  
   return (
     <>
       <div className="d-flex align-items-center mb-4">
@@ -11,10 +10,15 @@ const BlogShorted = ({blogs}) => {
           <i className="fi-arrows-sort mt-n1 me-2 align-middle opacity-70" />
           Sort by:
         </label>
-        <select className="form-select" id="sortby">
-          <option>Newest</option>
-          <option>Oldest</option>
-          <option>Popular</option>
+        <select
+          onChange={(e) => handleSelected(e.target.value)}
+          className="form-select"
+          id="sortby"
+        >
+        <option selected disabled>Choise</option>
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          {/* <option value="popular">Popular</option> */}
         </select>
       </div>
     </>

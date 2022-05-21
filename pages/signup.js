@@ -37,7 +37,7 @@ export default function SignUp() {
         if (res?.success) {
           toast.success(`${res.message}`);
           setDisable(false);
-          reset();
+          // reset();
           router.push({
             pathname: "/dashboard",
           });

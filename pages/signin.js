@@ -27,9 +27,9 @@ export default function SignIn() {
         cookies.set("_info", JSON.stringify({ token: res.token }), {
           path: "/",
         });
-        reset();
         router.push({  pathname: "/" });
         dispatch(userLogin(res));
+        // reset()
         
       }
     });

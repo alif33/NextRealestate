@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { setSelectedCategory } from "../../../../store/propertyCategory/actions";
 import { setSearch } from "../../../../store/propertySearch/actions";
 
 const PropertiesNavTab = () => {
@@ -24,8 +25,9 @@ const PropertiesNavTab = () => {
           <li className="nav-item">
             <button
               onClick={() => {
-                router.push("/properties")
+                // location.reload()
                 dispatch(setSearch(null))
+                dispatch(setSelectedCategory(null))
               }}
               className="nav-link d-flex align-items-center"
             >

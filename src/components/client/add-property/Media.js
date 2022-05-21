@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Image, X } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import { setMedia, setRemoveMedia } from "../../../../store/property/actions";
@@ -10,21 +10,29 @@ function Media({ isValid }) {
   const [selectedImages, setSelectedImages] = useState([]);
 
   const handleImages = (e) => {
-   
     if (e.target.files.length > 0) {
-      const newUrl =  [...selectedImages]
-     for (let i = 0; i < e.target.files.length; i++) {
-       const element = e.target.files[i];
-       dispatch(setMedia(element));
-       newUrl.push(URL.createObjectURL(element))
-      
-     }
-     setSelectedImages(newUrl)
+      const newUrl = [...selectedImages];
+      for (let i = 0; i < e.target.files.length; i++) {
+        const element = e.target.files[i];
+        dispatch(setMedia(element));
+        newUrl.push(URL.createObjectURL(element));
+      }
+      setSelectedImages(newUrl);
     }
   };
 
-  console.log(media.propertyImage)
-  console.log(selectedImages)
+  useEffect(() => {
+    window.onbeforeunload = function() {
+      dispatch(setRemoveMedia([]))
+        return true;
+    };
+
+    return () => {
+        window.onbeforeunload = null;
+    };
+}, []);
+
+console.log(media)
 
   return (
     <div className="bg-light rounded-3 p-4 p-md-5 mb-3">
@@ -58,7 +66,8 @@ function Media({ isValid }) {
           />
           <div className="mt-3">
             <ul className="list-unstyled d-flex py-2 flex-wrap">
-              {selectedImages?.map((image, i) => <li key={i} className="position-relative p-2">
+              {selectedImages?.map((image, i) => (
+                <li key={i} className="position-relative p-2">
                   <img
                     className="rounded-md"
                     style={{ height: "120px" }}
@@ -66,20 +75,23 @@ function Media({ isValid }) {
                     alt="Thumbnail"
                   />
                   <button
-                  onClick={() => {
-                    const newArray = selectedImages.filter((img, index) => i !== index )
-                    const newArray2 = media.propertyImage.filter((img, index) => index !== i) 
-                    setSelectedImages(newArray)
-                    dispatch(setRemoveMedia(newArray2))
-                  }}
+                    onClick={() => {
+                      const newArray = selectedImages.filter(
+                        (img, index) => i !== index
+                      );
+                      const newArray2 = media.propertyImage.filter(
+                        (img, index) => index !== i
+                      );
+                      setSelectedImages(newArray);
+                      dispatch(setRemoveMedia(newArray2));
+                    }}
                     style={{ right: "4%" }}
                     className="btn btn-danger px-2 py-1 position-absolute"
                   >
                     <X />
                   </button>
                 </li>
-              )}
-             
+              ))}
             </ul>
           </div>
           {!media.propertyImage ||

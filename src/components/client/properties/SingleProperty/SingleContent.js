@@ -22,7 +22,7 @@ const SingleContent = ({ property }) => {
         <h3 className="h6 mb-2 fs-base">
           <Link href={`property?${query}`}>
             <a className="nav-link stretched-link">
-              {property.bedrooms} Bed {property.propertyType}| 1500 sq.ft
+              {property.bedrooms} Bed {property.propertyType}| {property.superArea} sq.ft
             </a>
           </Link>
         </h3>

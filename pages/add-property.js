@@ -244,7 +244,8 @@ function AddProperty() {
                 </a>
               )}
               {property.position !== 4 && (
-                <a
+                <button
+                
                   onClick={() => {
                     handleValidation();
                   }}
@@ -252,11 +253,11 @@ function AddProperty() {
                 >
                   Next step
                   <i className="fi-chevron-right fs-sm ms-2" />
-                </a>
+                </button>
               )}
               {property.position === 4 && (
-                <a
-                  disable={disable}
+                <button
+                  disabled={disable}
                   onClick={onSubmit}
                   className="btn btn-primary btn-lg ms-sm-auto"
                 >
@@ -269,7 +270,7 @@ function AddProperty() {
                     "Submit"
                   )}
                {!disable &&    <i className="fi-chevron-right fs-sm ms-2" />}
-                </a>
+                </button>
               )}
             </div>
           </div>

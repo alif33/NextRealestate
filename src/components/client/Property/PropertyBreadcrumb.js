@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const PropertyBreadcrumb = () => {
@@ -6,7 +7,9 @@ const PropertyBreadcrumb = () => {
       <nav className="mb-3 pt-md-3" aria-label="Breadcrumb">
         <ol className="breadcrumb breadcrumb-dark">
           <li className="breadcrumb-item">
-            <a href="car-finder-home.html">Home</a>
+           <Link href="/">
+           <a >Home</a>
+           </Link>
           </li>
           <li className="breadcrumb-item active" aria-current="page">
             Property Single

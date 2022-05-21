@@ -6,6 +6,9 @@ function Info({isValid}){
     const { property }= useSelector(state=>state); 
     const { basic } = property;
     const {propertyCategory, propertyType, bedrooms, bathrooms, bikeParking, carParking, carpetArea, superArea, }  = basic;
+    
+    
+ 
     return(
         <div className="bg-light rounded-3 p-4 p-md-5 mb-3">
             <h2 className="h4 mb-4"><i className="fi-info-circle text-primary fs-4 mt-n1 me-2 pe-1" />Basic info</h2>

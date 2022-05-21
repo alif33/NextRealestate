@@ -14,10 +14,14 @@ import { getData } from "../__lib__/helpers/HttpService";
 function Blogs({ blogs, tags }) {
   const [search, setSearch] = useState(null);
   const shorted = blogs.slice(blogs?.length - 2, blogs?.length);
-  const shorted2 = blogs.slice(1, blogs.length - 2);
+  const shorted2 = blogs.slice(0, blogs.length - 2);
   const reversed = shorted2.reverse();
   const [selectedTag, setSelectedTag] = useState(null)
+  const [selectedSort, setSelectedSort] = useState([])
 
+
+
+  
   const handleSearch = (e) => {
     setSelectedTag(null)
     setSearch(e);
@@ -41,6 +45,20 @@ function Blogs({ blogs, tags }) {
       return val;
     }
   });
+  const handleSelected = (e) => {
+    console.log(e)
+    if (e === "oldest") {
+      setSelectedSort(blogs);
+    } else if (e === "newest") {
+      const reversed = [...blogs].reverse()
+      setSelectedSort(reversed);
+    }else{
+      setSelectedSort([])
+    }
+  };
+
+
+  console.log(selectedSort, "out of funtion")
   return (
     <Layout>
       <div className="container mt-5 mb-md-4 py-5">
@@ -62,7 +80,7 @@ function Blogs({ blogs, tags }) {
           {blogs.length === 0 && <div>No blog available</div>}
           {/* List of articles*/}
           <div className="col-lg-8">
-            {!search && !selectedTag && (
+            {!search && !selectedTag && selectedSort.length === 0 && (
               <div className="border-bottom pb-2">
                 <div className="row">
                   {/* Item*/}
@@ -74,8 +92,14 @@ function Blogs({ blogs, tags }) {
             )}
             <div className="pt-4 pb-2 mt-2">
               {/* Item*/}
-              {!search && !selectedTag &&
+              {!search && !selectedTag && selectedSort.length === 0 &&
                 reversed.map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
+
+                
+              {!search && !selectedTag && selectedSort.length > 0 &&
+                selectedSort.map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
+
+
               {search && !selectedTag &&
                 (filtered.length === blogs.length || filtered.length === 0 ? (
                   <div>Blog not found</div>
@@ -110,7 +134,7 @@ function Blogs({ blogs, tags }) {
               </div>
               <div className="offcanvas-body">
                 {/* Sort*/}
-                <BlogShorted blogs={blogs} />
+                <BlogShorted handleSelected={handleSelected}/>
                 {/* Search*/}
                 <BlogSearch handleSearch={handleSearch} />
                 {/* Categories*/}
