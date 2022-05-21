@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { setSelectedCategory } from "../../../../store/propertyCategory/actions";
 import { setSearch } from "../../../../store/propertySearch/actions";
 const PropertySearch = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const PropertySearch = () => {
       bedroom: null
     }
     dispatch(setSearch(searchData));
+    dispatch(setSelectedCategory(null))
   };
   return (
     <>

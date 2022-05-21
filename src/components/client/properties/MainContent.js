@@ -7,10 +7,11 @@ import Link from "next/link";
 import { setSearch } from "../../../../store/propertySearch/actions";
 
 const MainContent = ({ properties }) => {
-  const { selectedCategory, search } = useSelector((state) => state);
+  const { selectedCategory, search, propertySort } = useSelector(
+    (state) => state
+  );
   const dispatch = useDispatch();
   const { selected } = selectedCategory;
-  const [selectedSort, setSelectedSort] = useState(null);
 
   const filtered = properties?.filter((val) => {
     if (!selected) {
@@ -82,7 +83,8 @@ const MainContent = ({ properties }) => {
     }
   });
 
-  console.log(selectedSort);
+  console.log(selected, search);
+
   return (
     <>
       <div className="col-lg-8 col-xl-7 position-relative overflow-hidden pb-5 pt-4 px-3 px-xl-4 px-xxl-5">
@@ -113,12 +115,13 @@ const MainContent = ({ properties }) => {
         </div>
         {/* Sorting*/}
         <PropertySorting
-          setSelectedSort={setSelectedSort}
+          filtered={filtered}
+          searchFilter={searchFilter}
           properties={properties}
         />
 
         {!search.search &&
-          !selectedSort &&
+          !propertySort.sortData &&
           (filtered.length > 0 ? (
             filtered?.map((item, index) => (
               <Property key={index} property={item} />
@@ -126,13 +129,16 @@ const MainContent = ({ properties }) => {
           ) : (
             <div>Property Not found</div>
           ))}
-        {selectedSort?.length > 0 &&
-          selectedSort?.map((item, i) => (
+
+        {!search.search &&
+          !selected &&
+          propertySort.sortData?.length > 0 &&
+          propertySort.sortData?.map((item, i) => (
             <Property key={item._id} property={item} />
           ))}
 
         {search.search &&
-          !selectedSort &&
+          !propertySort.sortData &&
           (searchFilter.length > 0 ? (
             searchFilter?.map((item, index) => (
               <Property key={index} property={item} />

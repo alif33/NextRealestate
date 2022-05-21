@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setSelectedCategory } from "../../../../store/propertyCategory/actions";
 import { setSearch } from "../../../../store/propertySearch/actions";
+import { setSortProperty } from "../../../../store/propertySort/actions";
 
 const PropertiesNavTab = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const PropertiesNavTab = () => {
                 // location.reload()
                 dispatch(setSearch(null))
                 dispatch(setSelectedCategory(null))
+                dispatch(setSortProperty(null))
               }}
               className="nav-link d-flex align-items-center"
             >
