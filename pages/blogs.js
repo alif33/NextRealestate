@@ -19,14 +19,13 @@ function Blogs({ blogs, tags }) {
   const [selectedTag, setSelectedTag] = useState(null)
   const [selectedSort, setSelectedSort] = useState([])
 
-
-
-  
   const handleSearch = (e) => {
     setSelectedTag(null)
     setSearch(e);
  
   };
+
+
   const filtered = blogs?.filter((val) => {
     if (!search) {
       return [];
@@ -46,7 +45,6 @@ function Blogs({ blogs, tags }) {
     }
   });
   const handleSelected = (e) => {
-    console.log(e)
     if (e === "oldest") {
       setSelectedSort(blogs);
     } else if (e === "newest") {
@@ -57,8 +55,22 @@ function Blogs({ blogs, tags }) {
     }
   };
 
+  console.log(tagFilter)
 
-  console.log(selectedSort, "out of funtion")
+  const [pageNumber, setPageNumber] = useState(0);
+  const blogPerPage = 5;
+  const pagesVisited = pageNumber * blogPerPage;
+
+  const reversedData = Math.ceil(reversed.length / blogPerPage);
+  const searchData = Math.ceil(filtered.length / blogPerPage);
+  const tagFilterData = Math.ceil(tagFilter.length / blogPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
+
+
   return (
     <Layout>
       <div className="container mt-5 mb-md-4 py-5">
@@ -93,30 +105,31 @@ function Blogs({ blogs, tags }) {
             <div className="pt-4 pb-2 mt-2">
               {/* Item*/}
               {!search && !selectedTag && selectedSort.length === 0 &&
-                reversed.map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
-
+                reversed.slice(pagesVisited, pagesVisited + blogPerPage).map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
                 
               {!search && !selectedTag && selectedSort.length > 0 &&
-                selectedSort.map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
-
+                selectedSort.slice(pagesVisited, pagesVisited + blogPerPage).map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
 
               {search && !selectedTag &&
                 (filtered.length === blogs.length || filtered.length === 0 ? (
                   <div>Blog not found</div>
                 ) : (
-                  filtered.map((blog, i) => <BlogCard2 key={i} blog={blog} />)
+                  filtered.slice(pagesVisited, pagesVisited + blogPerPage).map((blog, i) => <BlogCard2 key={i} blog={blog} />)
                 ))}
 
               {selectedTag && !search &&
                 (tagFilter.length === blogs.length || tagFilter.length === 0 ? (
                   <div>Blog not found</div>
                 ) : (
-                  tagFilter.map((blog, i) => <BlogCard2 key={i} blog={blog} />)
+                  tagFilter.slice(pagesVisited, pagesVisited + blogPerPage).map((blog, i) => <BlogCard2 key={i} blog={blog} />)
                 ))}
 
             </div>
             {/* Pagination*/}
-            {blogs.length > 0 && <BlogPagination blogs={blogs} />}
+            {!search && !selectedTag && reversed.length > 0  && <BlogPagination  pageCount={reversedData} changePage={changePage} />}
+            {search && !selectedTag && <BlogPagination  pageCount={searchData} changePage={changePage} />}
+            {!search && selectedTag && <BlogPagination  pageCount={tagFilterData} changePage={changePage} />}
+         
           </div>
           {/* Sidebar*/}
           <aside className="col-lg-4">
