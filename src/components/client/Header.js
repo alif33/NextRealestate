@@ -110,14 +110,16 @@ const Header = () => {
               </Link>
             </li>
             <li className="nav-item dropdown">
+              <Link href="/properties">
               <a
                 className="nav-link"
-                href="#"
+                
                 role="button"
                 aria-expanded="false"
               >
-                Our Plans
+               Properties
               </a>
+              </Link>
             </li>
             <li className="nav-item dropdown">
               <a
