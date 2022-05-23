@@ -177,11 +177,15 @@ function AddProperty() {
             dispatch(submitData());
             toast.success(res.message);
             setDisable(false);
+          }else{
+            setDisable(false)
           }
         });
       }
      }else{
        toast.error('Image not selected')
+       setDisable(false)
+       dispatch(setRemoveMedia(null))
      }
     });
   };

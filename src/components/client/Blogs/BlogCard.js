@@ -8,7 +8,7 @@ import dateFormat from "dateformat";
 const BlogCard = ({blog}) => {
 
   const {title, body, _id, postedBy, createdAt, category, comments} = blog;
- 
+ console.log(blog)
   const newBody = firstNWord(body, 15)
   const query  = queryString.stringify({title: title, id: _id}, {sort: false})
   return (

@@ -157,7 +157,7 @@ const MainContent = ({ properties }) => {
 
         {/* pagination here */}
        {!search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={filterData} changePage={changePage}/>}
-       {!search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={searchData} changePage={changePage}/>}
+       {search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={searchData} changePage={changePage}/>}
        {!search.search && selected &&  !propertySort.sortData && <PropertiesPagination pageCount={filterData} changePage={changePage}/>}
        {!search.search && !selected &&  propertySort.sortData && <PropertiesPagination pageCount={sort} changePage={changePage}/>}
 

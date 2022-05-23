@@ -54,7 +54,7 @@ const AddBlog = () => {
     } else {
       const formData = await new FormData();
       formData.append("title", blogTitle);
-      formData.append("body", description);
+      formData.append("body", body);
       formData.append("image", images[0]);
       formData.append("category", category);
       for (let i = 0; i < selectedTag?.length; i++) {
