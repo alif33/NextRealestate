@@ -1,6 +1,6 @@
 import React from "react";
 
-const Item = () => {
+const Item = ({property}) => {
   return (
     <>
       <div className="px-2">
@@ -16,25 +16,25 @@ const Item = () => {
               <i className="fi-heart" />
             </button>
             <img
-              style={{ height: "222px" }}
+              style={{ height: "222px", width: '100%' }}
               className="rounded-3"
-              src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dmlld3xlbnwwfHwwfHw%3D&w=1000&q=80"
+              src={property.images[0]}
               alt="Article img"
             />
           </div>
           <h3 className="mb-2 fs-lg">
             <a className="nav-link" href="#">
-              2 Bed Apartment | ₹ 25000
+              {property.bedrooms} Bed {property.propertyType} | ₹ {property.monthlyRent}
             </a>
           </h3>
           <ul className="list-inline mb-0 fs-xs">
             <li className="list-inline-item pe-1">
               <i className="fi-map-pin mt-n1 me-1 fs-base text-muted align-middle" />
-              Om Residncy in Adalaj
+              {property.areaName} {property.city} in {property.state}
             </li>
             <li className="list-inline-item pe-1">
               <i className="fi-bed mt-n1 me-1 fs-base text-muted align-middle" />
-              Semi-furnished
+              {property.furnishedStatus}
             </li>
           </ul>
         </div>

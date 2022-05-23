@@ -1,6 +1,13 @@
+import { useRouter } from "next/router";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setSelectedCategory } from "../../../../store/propertyCategory/actions";
+import { setSearch } from "../../../../store/propertySearch/actions";
+import { setSortProperty } from "../../../../store/propertySort/actions";
 
 const PropertiesNavTab = () => {
+  const dispatch = useDispatch()
+  const router = useRouter();
   return (
     <>
       <div className="offcanvas-header d-block py-lg-0 py-0 px-lg-0">
@@ -15,6 +22,19 @@ const PropertiesNavTab = () => {
               <i className="fi-list me-2" />
               Filters
             </a>
+          </li>
+          <li className="nav-item">
+            <button
+              onClick={() => {
+                // location.reload()
+                dispatch(setSearch(null))
+                dispatch(setSelectedCategory(null))
+                dispatch(setSortProperty(null))
+              }}
+              className="nav-link d-flex align-items-center"
+            >
+              All
+            </button>
           </li>
           {/* <li className="nav-item">
             <a

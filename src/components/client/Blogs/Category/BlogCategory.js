@@ -1,7 +1,6 @@
 import React from "react";
 
 const BlogCategory = ({blogs, categories}) => {
-  console.log(categories);
   return (
     <>
       <div className="card card-flush pb-2 pb-lg-0 mb-4">

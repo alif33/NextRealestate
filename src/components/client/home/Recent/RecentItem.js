@@ -1,7 +1,31 @@
 import React from "react";
-
+import queryString from "query-string";
+import Link from "next/link";
+import slugify from "slugify";
 const RecentItem = ({ recent }) => {
-  const { bedrooms, propertyType, monthlyRent, furnishedStatus, areaName, city, state } = recent;
+  const {
+    bedrooms,
+    propertyType,
+    monthlyRent,
+    furnishedStatus,
+    areaName,
+    city,
+    state,
+    images,
+  } = recent;
+
+  const query = queryString.stringify(
+    {
+      bedrooms: recent.bedrooms + " " + "bed",
+      propertyType: recent.propertyType,
+      areaName: recent.areaName , 
+      city: recent.city,
+      state:  recent.state,
+      id: recent._id,
+    },
+    { sort: false }
+  );
+
   return (
     <>
       <div className="px-3">
@@ -16,21 +40,23 @@ const RecentItem = ({ recent }) => {
             >
               <i className="fi-heart" />
             </button>
-            <img
-              className="rounded-3"
-              src="img/rokye-website/catalog/09.jpg"
-              alt="Article img"
-            />
+            <img 
+            style={{height: '250px', width: '100%'}}
+            className="rounded-3" src={images[0]} alt="Article img" />
           </div>
           <h3 className="mb-2 fs-lg">
-            <a className="nav-link" href="#">
-              {bedrooms} Bed {propertyType} | ₹ {monthlyRent}
-            </a>
+            <Link href={`property?${query}`}>
+              <a className="nav-link">
+                {bedrooms} Bed {propertyType} | ₹ {monthlyRent}
+              </a>
+            </Link>
           </h3>
           <ul className="list-inline mb-0 fs-xs">
             <li className="list-inline-item pe-1">
               <i className="fi-map-pin mt-n1 me-1 fs-base text-muted align-middle " />
-              <span className="text-capitalize">{areaName} {city} in {state}</span>
+              <span className="text-capitalize">
+                {areaName} {city} in {state}
+              </span>
             </li>
             <li className="list-inline-item pe-1">
               <i className="fi-bed mt-n1 me-1 fs-base text-muted align-middle" />

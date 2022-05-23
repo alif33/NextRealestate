@@ -14,15 +14,18 @@ import { getData } from "../__lib__/helpers/HttpService";
 function Blogs({ blogs, tags }) {
   const [search, setSearch] = useState(null);
   const shorted = blogs.slice(blogs?.length - 2, blogs?.length);
-  const shorted2 = blogs.slice(1, blogs.length - 2);
+  const shorted2 = blogs.slice(0, blogs.length - 2);
   const reversed = shorted2.reverse();
   const [selectedTag, setSelectedTag] = useState(null)
+  const [selectedSort, setSelectedSort] = useState([])
 
   const handleSearch = (e) => {
     setSelectedTag(null)
     setSearch(e);
  
   };
+
+
   const filtered = blogs?.filter((val) => {
     if (!search) {
       return [];
@@ -41,9 +44,30 @@ function Blogs({ blogs, tags }) {
       return val;
     }
   });
+  const handleSelected = (e) => {
+    if (e === "oldest") {
+      setSelectedSort(blogs);
+    } else if (e === "newest") {
+      const reversed = [...blogs].reverse()
+      setSelectedSort(reversed);
+    }else{
+      setSelectedSort([])
+    }
+  };
+
   console.log(tagFilter)
 
+  const [pageNumber, setPageNumber] = useState(0);
+  const blogPerPage = 5;
+  const pagesVisited = pageNumber * blogPerPage;
 
+  const reversedData = Math.ceil(reversed.length / blogPerPage);
+  const searchData = Math.ceil(filtered.length / blogPerPage);
+  const tagFilterData = Math.ceil(tagFilter.length / blogPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
 
 
@@ -68,7 +92,7 @@ function Blogs({ blogs, tags }) {
           {blogs.length === 0 && <div>No blog available</div>}
           {/* List of articles*/}
           <div className="col-lg-8">
-            {!search && !selectedTag && (
+            {!search && !selectedTag && selectedSort.length === 0 && (
               <div className="border-bottom pb-2">
                 <div className="row">
                   {/* Item*/}
@@ -80,25 +104,32 @@ function Blogs({ blogs, tags }) {
             )}
             <div className="pt-4 pb-2 mt-2">
               {/* Item*/}
-              {!search && !selectedTag &&
-                reversed.map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
+              {!search && !selectedTag && selectedSort.length === 0 &&
+                reversed.slice(pagesVisited, pagesVisited + blogPerPage).map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
+                
+              {!search && !selectedTag && selectedSort.length > 0 &&
+                selectedSort.slice(pagesVisited, pagesVisited + blogPerPage).map((blog, i) => <BlogCard2 key={i} blog={blog} />)}
+
               {search && !selectedTag &&
                 (filtered.length === blogs.length || filtered.length === 0 ? (
                   <div>Blog not found</div>
                 ) : (
-                  filtered.map((blog, i) => <BlogCard2 key={i} blog={blog} />)
+                  filtered.slice(pagesVisited, pagesVisited + blogPerPage).map((blog, i) => <BlogCard2 key={i} blog={blog} />)
                 ))}
 
               {selectedTag && !search &&
                 (tagFilter.length === blogs.length || tagFilter.length === 0 ? (
                   <div>Blog not found</div>
                 ) : (
-                  tagFilter.map((blog, i) => <BlogCard2 key={i} blog={blog} />)
+                  tagFilter.slice(pagesVisited, pagesVisited + blogPerPage).map((blog, i) => <BlogCard2 key={i} blog={blog} />)
                 ))}
 
             </div>
             {/* Pagination*/}
-            {blogs.length > 0 && <BlogPagination blogs={blogs} />}
+            {!search && !selectedTag && reversed.length > 0  && <BlogPagination  pageCount={reversedData} changePage={changePage} />}
+            {search && !selectedTag && <BlogPagination  pageCount={searchData} changePage={changePage} />}
+            {!search && selectedTag && <BlogPagination  pageCount={tagFilterData} changePage={changePage} />}
+         
           </div>
           {/* Sidebar*/}
           <aside className="col-lg-4">
@@ -116,7 +147,7 @@ function Blogs({ blogs, tags }) {
               </div>
               <div className="offcanvas-body">
                 {/* Sort*/}
-                <BlogShorted blogs={blogs} />
+                <BlogShorted handleSelected={handleSelected}/>
                 {/* Search*/}
                 <BlogSearch handleSearch={handleSearch} />
                 {/* Categories*/}

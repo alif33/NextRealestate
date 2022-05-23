@@ -57,12 +57,21 @@ export const propertySlice = createSlice({
  
         },
         setMedia: (state, action) => {
-            console.log(action.payload)
             return {
                 ...state,
                 media: {
                     propertyVideo: null,
                     propertyImage: [...state.media.propertyImage, action.payload]
+                }
+            }
+ 
+        },
+        setRemoveMedia: (state, action) => {
+            return {
+                ...state,
+                media: {
+                    propertyVideo: null,
+                    propertyImage: action.payload
                 }
             }
  

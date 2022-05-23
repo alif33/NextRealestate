@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Footer() {
+  const router = useRouter()
   return (
     <footer className="footer bg-dark pt-2">
       <div className="border-bottom border-light py-4">
@@ -20,7 +22,7 @@ export default function Footer() {
             <p className="fs-sm text-light opacity-70">
               Don’t miss any relevant offers!
             </p>
-            <button className="btn btn-primary w-80" type="submit">
+            <button onClick={() => router.push('/contact-us')} className="btn btn-primary w-80" type="submit">
               Contact us
             </button>
           </div>
@@ -48,9 +50,11 @@ export default function Footer() {
             <h3 className="fs-base text-light">About</h3>
             <ul className="list-unstyled fs-sm">
               <li>
-                <a className="nav-link-light" href="#">
+                <Link href='/contact-us'>
+                <a className="nav-link-light" >
                   Contact Us
                 </a>
+                </Link>
               </li>
               <li>
                 <a className="nav-link-light" href="#">

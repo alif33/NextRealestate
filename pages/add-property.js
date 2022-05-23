@@ -12,15 +12,16 @@ import Layout from "../src/components/client/layout";
 import {
   backwordStep,
   forwordStep,
+  setRemoveMedia,
   submitData,
 } from "../store/property/actions";
 import { FillData, propertyFields } from "../__lib__/config/index";
 import { authPost, postData } from "../__lib__/helpers/HttpService";
 import { userAuth } from "../__lib__/helpers/requireAuthentication";
-
+import ClipLoader from "react-spinners/ClipLoader";
 function AddProperty() {
   const cookies = new Cookies();
-  const [disable, setDisable] = useState(0);
+  const [disable, setDisable] = useState(false);
   const [data, setData] = useState(propertyFields);
   const [isValid, setIsValid] = useState(false);
   const dispatch = useDispatch();
@@ -38,7 +39,6 @@ function AddProperty() {
   } = basic;
 
   const { areaName, city, houseNumber, pinCode, societyName, state } = location;
-  console.log(media);
   const {
     ageConstruction,
     availability,
@@ -118,8 +118,12 @@ function AddProperty() {
         setIsValid(false);
       }
     } else if (property.position === 3) {
-      dispatch(forwordStep());
-      setIsValid(false);
+      if (!media.propertyImage || media.propertyImage?.length === 0) {
+        setIsValid(true);
+      } else {
+        dispatch(forwordStep());
+        setIsValid(false);
+      }
     }
   };
 
@@ -148,27 +152,40 @@ function AddProperty() {
 
   const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append("image", media.propertyImage);
-    authPost("/property/images", formData, userInfo.token).then((res) =>
-      console.log(res)
-    );
-    setDisable(true);
-    if (!firstName || !lastName || !phoneNumber || !email) {
-      setIsValid(true);
-    } else {
-      // console.log({...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media })
-      // authPost(
-      //   "/property",
-      //   { ...property.basic, ...property.location, ...property.details, ...property.contact, ...property.media },
-      //   userInfo.token
-      // ).then((res) => {
-      //   if (res?.success) {
-      //     dispatch(submitData());
-      //     toast.success(res.message);
-      //   }
-      // });
+    for (let i = 0; i < media.propertyImage?.length; i++) {
+      formData.append("image", media.propertyImage[i]);
     }
+    setDisable(true);
+    authPost("/property/images", formData, userInfo.token).then((res) => {
+     if (res.length > 0) {
+      setDisable(false)
+      if (!firstName || !lastName || !phoneNumber || !email) {
+        setIsValid(true);
+      } else {
+        authPost(
+          "/property",
+          {
+            ...property.basic,
+            ...property.location,
+            ...property.details,
+            ...property.contact,
+            images: res,
+          },
+          userInfo.token
+        ).then((res) => {
+          if (res?.success) {
+            dispatch(submitData());
+            toast.success(res.message);
+            setDisable(false);
+          }
+        });
+      }
+     }else{
+       toast.error('Image not selected')
+     }
+    });
   };
+
 
   return (
     <Layout>
@@ -227,7 +244,8 @@ function AddProperty() {
                 </a>
               )}
               {property.position !== 4 && (
-                <a
+                <button
+                
                   onClick={() => {
                     handleValidation();
                   }}
@@ -235,16 +253,24 @@ function AddProperty() {
                 >
                   Next step
                   <i className="fi-chevron-right fs-sm ms-2" />
-                </a>
+                </button>
               )}
-              {property.position == 4 && (
-                <a
+              {property.position === 4 && (
+                <button
+                  disabled={disable}
                   onClick={onSubmit}
                   className="btn btn-primary btn-lg ms-sm-auto"
                 >
-                  Submit
-                  <i className="fi-chevron-right fs-sm ms-2" />
-                </a>
+                  {disable ? (
+                    <ClipLoader
+                      loading={true}
+                      size={20}
+                    />
+                  ) : (
+                    "Submit"
+                  )}
+               {!disable &&    <i className="fi-chevron-right fs-sm ms-2" />}
+                </button>
               )}
             </div>
           </div>

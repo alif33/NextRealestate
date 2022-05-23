@@ -6,7 +6,6 @@ import AdminSidebar from "../AdminSidebar/AdminSidebar";
 
 const AdminLayout = ({ children }) => {
   const [toggle, setToggle] = useState(false);
-  // console.log(toggle)
   const [windowWidth, setWindowWidth] = useState(1200);
   useEffect(() => {
     window.addEventListener("resize", () => {

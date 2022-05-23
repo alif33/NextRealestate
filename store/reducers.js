@@ -11,6 +11,7 @@ import { propertySearchSlice } from './propertySearch/slice';
 import { singlePropertySlice } from './singleProperty/slice';
 import { blogsSlice } from './blogs/slice';
 import { propertiesSlice } from './properties/slice';
+import { propertySortSlice } from './propertySort/slice';
 
 export const rootReducer = combineReducers({
     users: userSlice.reducer,
@@ -24,5 +25,6 @@ export const rootReducer = combineReducers({
     singleProperty: singlePropertySlice.reducer,
     blogs: blogsSlice.reducer,
     properties: propertiesSlice.reducer,
-    reviews: reviewsSlice.reducer
+    reviews: reviewsSlice.reducer,
+    propertySort: propertySortSlice.reducer
 })

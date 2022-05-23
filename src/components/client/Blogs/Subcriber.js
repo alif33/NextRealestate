@@ -61,7 +61,7 @@ const Subcriber = () => {
                 </button>
               ) : (
                 <button className="btn btn-primary btn-sm" type="submit">
-                  Sign up
+                  Subcribe
                 </button>
               )}
             </div>

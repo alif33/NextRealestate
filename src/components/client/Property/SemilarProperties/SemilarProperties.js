@@ -1,18 +1,30 @@
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick/lib/slider";
+import slugify from "slugify";
+import { setProperties } from "../../../../../store/properties/actions";
 import Item from "./Item";
 
-
-
 const SemilarProperties = () => {
+  const dispatch = useDispatch();
+  const { properties } = useSelector((state) => state);
+  const { propertyList } = properties;
+
+  useEffect(() => {
+    dispatch(setProperties());
+  }, []);
   var settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    initialSlide: 3,
+    autoplay: true,
+    speed: 1500,
+    autoplaySpeed: 4000,
     responsive: [
       {
         breakpoint: 1024,
@@ -41,6 +53,22 @@ const SemilarProperties = () => {
     ],
   };
 
+  const { query } = useRouter();
+  const { areaName, state, city, bedrooms, propertyType } = query;
+  const bedroomsArray = bedrooms;
+  const filtered = propertyList?.filter((val) => {
+    if (
+      slugify(val.areaName.toLowerCase()).includes(
+        slugify(areaName.toLowerCase())
+      ) ||
+      slugify(val.state.toLowerCase()).includes(slugify(state.toLowerCase())) ||
+      slugify(val.city.toLowerCase()).includes(slugify(city.toLowerCase())) ||
+      val.bedrooms === parseInt(bedroomsArray[0]?.toLowerCase())
+    ) {
+      return val;
+    }
+  });
+
   return (
     <>
       <section className="container pb-5 mb-lg-4 overflow-hidden">
@@ -57,13 +85,9 @@ const SemilarProperties = () => {
 
         {/* Item*/}
         <Slider {...settings}>
-         <Item/>
-         <Item/>
-         <Item/>
-         <Item/>
-         <Item/>
-         <Item/>
-         
+          {filtered.map((semilar, i) => (
+            <Item key={i} property={semilar} />
+          ))}
         </Slider>
       </section>
     </>

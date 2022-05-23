@@ -4,12 +4,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import AddComment from "../../src/components/client/Blog/AddComment/AddComment";
 import BlogComents from "../../src/components/client/Blog/BlogComments/BlogComents";
-import BlogComment from "../../src/components/client/Blog/BlogComments/BlogComment";
 import BlogMeta from "../../src/components/client/Blog/BlogMeta";
 import BlogTagShare from "../../src/components/client/Blog/BlogTagShare";
 import SingleBlogSidebar from "../../src/components/client/Blog/SingleBlogSidebar";
 import Layout from "../../src/components/client/layout";
-import { setBlog } from "../../store/blog/actions";
 import { getData } from "../../__lib__/helpers/HttpService";
 
 function Blog({ blog }) {

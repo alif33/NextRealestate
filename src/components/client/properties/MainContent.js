@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import PropertiesPagination from "./Pagination/PropertiesPagination";
 import Property from "./SingleProperty/Property";
 import PropertySorting from "./PropertySorting";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 
 const MainContent = ({ properties }) => {
-  const { selectedCategory, search } = useSelector((state) => state);
+  const { selectedCategory, search, propertySort } = useSelector(
+    (state) => state
+  );
+  const dispatch = useDispatch();
   const { selected } = selectedCategory;
   const filtered = properties?.filter((val) => {
     if (!selected) {
@@ -31,16 +34,64 @@ const MainContent = ({ properties }) => {
   });
 
   const searchFilter = properties?.filter((val) => {
-    if (!search.searchText) {
+    if (!search.search?.keywords) {
       return [];
     } else if (
-      val.city.toLowerCase().includes(search.searchText?.toLowerCase()) ||
-      val.areaName.toLowerCase().includes(search.searchText?.toLowerCase()) ||
-      val.state.toLowerCase().includes(search.searchText?.toLowerCase())
+      val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+      val.areaName
+        .toLowerCase()
+        .includes(search.search?.keywords?.toLowerCase()) ||
+      val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase())
+    ) {
+      console.log(
+        val.city
+          .toLowerCase()
+          .includes(search.search?.keywords?.toLowerCase()) ||
+          val.areaName
+            .toLowerCase()
+            .includes(search.search?.keywords?.toLowerCase()) ||
+          (val.state
+            .toLowerCase()
+            .includes(search.search?.keywords?.toLowerCase()) &&
+            !search?.search?.budget)
+      );
+      return val;
+    } else if (
+      val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+      val.areaName
+        .toLowerCase()
+        .includes(search.search?.keywords?.toLowerCase()) ||
+      (val.state
+        .toLowerCase()
+        .includes(search.search?.keywords?.toLowerCase()) &&
+        val.bedrooms === parseInt(search.search?.bedroom?.toLowerCase()))
+    ) {
+      return val;
+    } else if (
+      val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+      val.areaName
+        .toLowerCase()
+        .includes(search.search?.keywords?.toLowerCase()) ||
+      (val.state
+        .toLowerCase()
+        .includes(search.search?.keywords?.toLowerCase()) &&
+        val.bedrooms >= parseInt(search.search?.bedroom?.toLowerCase()))
     ) {
       return val;
     }
   });
+
+  const [pageNumber, setPageNumber] = useState(0);
+  const propertyPerPage = 5;
+  const pagesVisited = pageNumber * propertyPerPage;
+
+  const filterData = Math.ceil(filtered.length / propertyPerPage);
+  const searchData = Math.ceil(search.search && searchFilter.length / propertyPerPage);
+  const sort = Math.ceil(propertySort.sortData?.length / propertyPerPage);
+ 
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   return (
     <>
@@ -54,7 +105,9 @@ const MainContent = ({ properties }) => {
               </Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
-              Property list
+              <Link href="/properties">
+                <a>Property list</a>
+              </Link>
             </li>
           </ol>
         </nav>
@@ -69,29 +122,45 @@ const MainContent = ({ properties }) => {
           />
         </div>
         {/* Sorting*/}
-        <PropertySorting />
+        <PropertySorting
+          filtered={filtered}
+          searchFilter={searchFilter}
+          properties={properties}
+        />
 
-        {!search.searchText &&
+        {!search.search &&
+          !propertySort.sortData &&
           (filtered.length > 0 ? (
-            filtered?.map((item, index) => (
-              <Property key={index} property={item} />
-            ))
+            filtered
+              .slice(pagesVisited, pagesVisited + propertyPerPage)
+              ?.map((item, index) => <Property key={index} property={item} />)
           ) : (
             <div>Property Not found</div>
           ))}
 
-        {search.searchText &&
+        {!search.search &&
+          !selected &&
+          propertySort.sortData?.length > 0 &&
+          propertySort.sortData
+            ?.slice(pagesVisited, pagesVisited + propertyPerPage)
+            ?.map((item, i) => <Property key={item._id} property={item} />)}
+
+        {search.search &&
+          !propertySort.sortData &&
           (searchFilter.length > 0 ? (
-            searchFilter?.map((item, index) => (
-              <Property key={index} property={item} />
-            ))
+            searchFilter
+              .slice(pagesVisited, pagesVisited + propertyPerPage)
+              ?.map((item, index) => <Property key={index} property={item} />)
           ) : (
             <div>Property Not found</div>
           ))}
 
         {/* pagination here */}
-        {!search.searchText && filtered.length > 0 && <PropertiesPagination />}
-        {search.searchText && filtered.length > 0 && <PropertiesPagination />}
+       {!search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={filterData} changePage={changePage}/>}
+       {!search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={searchData} changePage={changePage}/>}
+       {!search.search && selected &&  !propertySort.sortData && <PropertiesPagination pageCount={filterData} changePage={changePage}/>}
+       {!search.search && !selected &&  propertySort.sortData && <PropertiesPagination pageCount={sort} changePage={changePage}/>}
+
       </div>
     </>
   );

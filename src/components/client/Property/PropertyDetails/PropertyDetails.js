@@ -1,16 +1,27 @@
 import React from "react";
 
-const PropertyDetails = ({property}) => {
-  const {monthlyRent, securityAmount, maintenanceCharges,
-     propertyType, bedrooms, bathrooms, balconies, 
-     furnishedStatus, carParking, availability, 
-     ageConstruction,carpetArea, superArea,
-     floorNo, totalFloors,
-     tenantsPreferred,
-     facing, vegPermission,petsPermission
-
-    } = property;
-  console.log(property)
+const PropertyDetails = ({ property }) => {
+  const {
+    monthlyRent,
+    securityAmount,
+    maintenanceCharges,
+    propertyType,
+    bedrooms,
+    bathrooms,
+    balconies,
+    furnishedStatus,
+    carParking,
+    availability,
+    ageConstruction,
+    carpetArea,
+    superArea,
+    floorNo,
+    totalFloors,
+    tenantsPreferred,
+    facing,
+    vegPermission,
+    petsPermission,
+  } = property;
   return (
     <>
       <div className="pb-4 mb-3">
@@ -37,7 +48,8 @@ const PropertyDetails = ({property}) => {
                 <i className="t-n1 me-2 fs-lg align-middle" />₹ {securityAmount}
               </li>
               <li className="col">
-                <i className="mt-n1 me-2 fs-lg align-middle" />₹ {maintenanceCharges} quarterly
+                <i className="mt-n1 me-2 fs-lg align-middle" />₹{" "}
+                {maintenanceCharges} quarterly
               </li>
             </ul>
           </div>
@@ -56,13 +68,16 @@ const PropertyDetails = ({property}) => {
                 Balconies
               </li>
               <li className="col">
-                <i className="mt-n1 me-2 fs-lg align-middle" />{bedrooms} BHK {propertyType}
+                <i className="mt-n1 me-2 fs-lg align-middle" />
+                {bedrooms} BHK {propertyType}
               </li>
               <li className="col">
-                <i className="t-n1 me-2 fs-lg align-middle" />{bathrooms} bath
+                <i className="t-n1 me-2 fs-lg align-middle" />
+                {bathrooms} bath
               </li>
               <li className="col">
-                <i className="mt-n1 me-2 fs-lg align-middle" />{balconies} balconies
+                <i className="mt-n1 me-2 fs-lg align-middle" />
+                {balconies} balconies
               </li>
             </ul>
           </div>
@@ -85,7 +100,8 @@ const PropertyDetails = ({property}) => {
                 {furnishedStatus}
               </li>
               <li className="col">
-                <i className="mt-n1 me-2 fs-lg align-middle" />{carParking} cars
+                <i className="mt-n1 me-2 fs-lg align-middle" />
+                {carParking} cars
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
@@ -109,7 +125,7 @@ const PropertyDetails = ({property}) => {
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-               {ageConstruction}
+                {ageConstruction}
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
@@ -141,11 +157,11 @@ const PropertyDetails = ({property}) => {
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-                 {totalFloors} floors
+                {totalFloors} floors
               </li>
               <li className="col">
                 <i className="mt-n1 me-2 fs-lg align-middle" />
-               {tenantsPreferred}
+                {tenantsPreferred}
               </li>
             </ul>
           </div>
@@ -168,11 +184,11 @@ const PropertyDetails = ({property}) => {
             </li>
             <li className="col">
               <i className="mt-n1 me-2 fs-lg align-middle" />
-              {vegPermission === '0' ? "Allowed": "Not allowed"}
+              {vegPermission === "0" ? "Allowed" : "Not allowed"}
             </li>
             <li className="col">
               <i className="mt-n1 me-2 fs-lg align-middle" />
-              {petsPermission === '0' ? "Allowed": "Not allowed"}
+              {petsPermission === "0" ? "Allowed" : "Not allowed"}
             </li>
           </ul>
         </div>

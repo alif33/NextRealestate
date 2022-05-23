@@ -17,7 +17,7 @@ const AllProperties = () => {
     <secttion>
       <div className="row">
         {propertyList?.length > 0 ? (
-          propertyList?.map((cont, i) => <PropertyCard key={i} data={cont} />)
+          propertyList?.map((cont, i) => <PropertyCard index={i} key={i} data={cont} />)
         ) : (
           <div className="p-4">
             <div className="d-flex justify-content-center align-items-center">

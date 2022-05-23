@@ -23,7 +23,7 @@ const Property = ({property}) => {
         <div className="row">
           <div className="col-md-7">
             {/* Gallery*/}
-            <PropertyGalary />
+            <PropertyGalary property={property} />
             {/* Property details*/}
             <PropertyDetails property={property} />
             {/* Amenities*/}
@@ -31,7 +31,7 @@ const Property = ({property}) => {
             {/* Description*/}
             <PropertyDescription property={property}/>
             {/* Post meta*/}
-            <PropertyMeta />
+            {/* <PropertyMeta /> */}
           </div>
           {/* Card*/}
           <PropertyFormCard />

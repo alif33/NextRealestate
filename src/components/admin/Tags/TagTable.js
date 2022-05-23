@@ -15,7 +15,6 @@ const TagTable = (props) => {
   const { tags } = useSelector((state) => state);
   const dispatch = useDispatch();
   const { tagList } = tags;
-  console.log(tags)
   useEffect(() => {
     dispatch(setTags());
   }, []);
