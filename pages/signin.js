@@ -59,7 +59,7 @@ export default function SignIn() {
             <div className="row mx-0 align-items-center">
               <div
                 className="col-md-5 border-end-md p-4 p-sm-5"
-                style={{ marginLeft: "120px" }}
+                // style={{ marginLeft: "120px" }}
               >
                 <h2 className="h3 mb-4 mb-sm-5">
                   Hey there!
