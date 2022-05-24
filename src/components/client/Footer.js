@@ -57,9 +57,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a className="nav-link-light" href="#">
+                <Link href="/about-us">
+                <a className="nav-link-light" >
                   About Us
                 </a>
+                </Link>
               </li>
               <li>
                 <a className="nav-link-light" href="#">

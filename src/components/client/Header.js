@@ -133,9 +133,11 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="job-board-single.html">
+                  <Link href="/about-us">
+                  <a className="dropdown-item" >
                     About us
                   </a>
+                  </Link>
                 </li>
                 <li>
                   <Link href="/reviews">
