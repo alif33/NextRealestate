@@ -8,9 +8,9 @@ const FilterSidebar = () => {
         <>
              <aside
             className="col-lg-4 col-xl-3 border-top-lg border-end-lg shadow-sm px-3 px-xl-4 px-xxl-5 pt-lg-2"
-            style={{ marginLeft: "160px" }}
+            // style={{ marginLeft: "160px" }}
           >
-            <div className="sticky-top pt-5">
+            <div className="sticky-top">
               <div
                 className="offcanvas offcanvas-start offcanvas-collapse"
                 id="filters-sidebar"
