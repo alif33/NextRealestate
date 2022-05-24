@@ -74,6 +74,7 @@ const SemilarProperties = () => {
       <section className="container pb-5 mb-lg-4 overflow-hidden">
         <div className="d-flex align-items-center justify-content-between pb-2">
           <h2 className="h3 pt-5 pb-3 mt-md-4">Similar properties</h2>
+          <Link href="/properties">
           <a
             className="btn btn-link fw-normal ms-sm-3 p-0"
             href="city-guide-catalog.html"
@@ -81,6 +82,7 @@ const SemilarProperties = () => {
             View all
             <i className="fi-arrow-long-right ms-2" />
           </a>
+          </Link>
         </div>
 
         {/* Item*/}
