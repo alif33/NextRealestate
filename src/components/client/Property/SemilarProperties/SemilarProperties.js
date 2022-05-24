@@ -85,7 +85,7 @@ const SemilarProperties = () => {
 
         {/* Item*/}
         <Slider {...settings}>
-          {filtered.map((semilar, i) => (
+          {filtered?.map((semilar, i) => (
             <Item key={i} property={semilar} />
           ))}
         </Slider>

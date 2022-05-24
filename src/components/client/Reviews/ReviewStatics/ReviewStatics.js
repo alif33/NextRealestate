@@ -11,11 +11,11 @@ const ReviewStatics = () => {
   const twoSatar = reviewList?.filter((review) => review.rating === 2);
   const oneSatar = reviewList?.filter((review) => review.rating === 1);
 
-const fiveStarPercent = (fiveSatar.length * 100) / reviewList?.length
-const fourStarPercent = (fourSatar.length * 100) / reviewList?.length
-const threeStarPercent = (threeSatar.length * 100) / reviewList?.length
-const twoStarPercent = (twoSatar.length * 100) / reviewList?.length
-const onceStarPercent = (oneSatar.length * 100) / reviewList?.length
+const fiveStarPercent = (fiveSatar?.length * 100) / reviewList?.length
+const fourStarPercent = (fourSatar?.length * 100) / reviewList?.length
+const threeStarPercent = (threeSatar?.length * 100) / reviewList?.length
+const twoStarPercent = (twoSatar?.length * 100) / reviewList?.length
+const onceStarPercent = (oneSatar?.length * 100) / reviewList?.length
 //   console.log((fiveSatar.length * 100) / reviewList?.length);
   return (
     <>
