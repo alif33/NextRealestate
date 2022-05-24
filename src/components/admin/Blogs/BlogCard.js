@@ -1,8 +1,28 @@
 import React from "react";
 import dateFormat from "dateformat";
 import { User } from "react-feather";
+import { removeData } from "../../../../__lib__/helpers/HttpService";
+import Cookies from "universal-cookie";
+import toast from "react-hot-toast";
 const BlogCard = ({ data }) => {
+  const cookies = new Cookies();
   const { _id, tags, category, title, image, body, postedBy } = data;
+  const admin = cookies.get('_admin')
+  console.log(admin)
+  const blogRemove = id => {
+    const isTrue = confirm('Are you sure')
+    console.log(id)
+        if (isTrue) {
+          removeData(`/blog/${id}`, admin.token)
+          .then(res => {
+            if (res.success) {
+              toast.success(res.message)
+            }else{
+              toast.error('Something wrong')
+            }
+          })
+    }
+  }
   return (
     <div className="col-12">
       <div className="card mb-4">
@@ -20,7 +40,7 @@ const BlogCard = ({ data }) => {
                   {dateFormat(data.createdAt, "mmm d, yyyy")}
                 </h6>
                 <button
-                  onClick={() => confirm("Are you sure")}
+                  onClick={() => blogRemove(_id)}
                   className="btn btn-danger"
                 >
                   Remove

@@ -22,6 +22,7 @@ const PersonalInfo = () => {
     const value = e.target.value;
     setHandleData((values) => ({ ...values, [name]: value }));
   };
+  // console.log(handleData)
   const userInfo = cookies.get("_info");
   const handleSave = () => {
     

@@ -45,3 +45,18 @@ handler.get(async (req, res) => {
 });
 
 export default handler;
+
+
+
+handler.delete(async (req, res) => {
+  await db.connect();
+  const blog = await Blog.findById(req.query.id);
+  if (blog) {
+    await blog.remove();
+    await db.disconnect();
+    res.send({ message: 'Blog Deleted' });
+  } else {
+    await db.disconnect();
+    res.status(404).send({ message: 'Blog Not Found' });
+  }
+});
