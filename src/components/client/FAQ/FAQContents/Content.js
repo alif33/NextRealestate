@@ -64,7 +64,7 @@ const Content = () => {
             </div>
             <div className="pb-md-2">
               <h3 className="h5">
-                What's the rent that I can get for my property?
+                What&apos;s the rent that I can get for my property?
               </h3>
               <p>
                 Your Relationship Manager has city level knowledge of rents in
