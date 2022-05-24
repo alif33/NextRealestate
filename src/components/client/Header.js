@@ -186,7 +186,9 @@ const Header = () => {
               </a>
               <ul className="dropdown-menu dropdown-menu-light">
                 <li>
+                  <Link href="/faqs">
                   <a className="dropdown-item">FAQs</a>
+                  </Link>
                 </li>
                 <li>
                   <Link href="/blogs">

@@ -64,9 +64,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a className="nav-link-light" href="#">
+              <Link  href="/faqs">
+              <a className="nav-link-light">
                   FAQs
                 </a>
+              </Link>
               </li>
             </ul>
           </div>
