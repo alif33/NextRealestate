@@ -1,18 +1,20 @@
 import { useRouter } from "next/router";
 import React from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import Cookies from "universal-cookie";
 const AccountHeader = () => {
-    const router = useRouter()
-    const cookies = new Cookies()
+  const router = useRouter();
+  const cookies = new Cookies();
+  const { users } = useSelector((state) => state);
 
-    const handleLogOut = () => {
-        cookies.remove('_info', { path: '/' });
-        if (!cookies.get('_info')) {
-          toast.success('Logout success')
-          router.push(router.pathname)
-        }
-      }
+  const handleLogOut = () => {
+    cookies.remove("_info", { path: "/" });
+    if (!cookies.get("_info")) {
+      toast.success("Logout success");
+      router.push(router.pathname);
+    }
+  };
   return (
     <>
       <div className="d-flex align-items-center justify-content-between pb-4 mb-2">
@@ -34,7 +36,7 @@ const AccountHeader = () => {
             </button>
           </div>
           <div className="ps-3 ps-sm-4">
-            <h3 className="h4 mb-2">Annette Black</h3>
+            <h3 className="h4 mb-2 text-capitalize">{users.user?.name}</h3>
             <span className="star-rating">
               <i className="star-rating-icon fi-star-filled active" />
               <i className="star-rating-icon fi-star-filled active" />
@@ -44,7 +46,12 @@ const AccountHeader = () => {
             </span>
           </div>
         </div>
-        <a onClick={() => handleLogOut()} type="button" className="nav-link p-0 d-none d-md-block" href="#">
+        <a
+          onClick={() => handleLogOut()}
+          type="button"
+          className="nav-link p-0 d-none d-md-block"
+          href="#"
+        >
           <i className="fi-logout mt-n1 me-2" />
           Sign out
         </a>

@@ -43,18 +43,7 @@ const MainContent = ({ properties }) => {
         .includes(search.search?.keywords?.toLowerCase()) ||
       val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase())
     ) {
-      console.log(
-        val.city
-          .toLowerCase()
-          .includes(search.search?.keywords?.toLowerCase()) ||
-          val.areaName
-            .toLowerCase()
-            .includes(search.search?.keywords?.toLowerCase()) ||
-          (val.state
-            .toLowerCase()
-            .includes(search.search?.keywords?.toLowerCase()) &&
-            !search?.search?.budget)
-      );
+    
       return val;
     } else if (
       val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||

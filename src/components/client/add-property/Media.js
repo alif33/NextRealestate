@@ -32,7 +32,6 @@ function Media({ isValid }) {
     };
 }, []);
 
-console.log(media)
 
   return (
     <div className="bg-light rounded-3 p-4 p-md-5 mb-3">

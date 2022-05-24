@@ -17,7 +17,6 @@ const AdminSidebar = ({ toggle, setToggle }) => {
   const router = useRouter()
   // useEffect(() => {
     // const closeSidebar = (e) => {
-    //   console.log(e)
     //   if (e.path[1].tagName !== "shape") {
     //     setToggle(false);
     //   }

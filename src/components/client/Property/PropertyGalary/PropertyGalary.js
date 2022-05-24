@@ -3,7 +3,6 @@ import Slider from "react-slick/lib/slider";
 import SliderItem from "./SliderItem";
 
 const PropertyGalary = ({ property }) => {
-  console.log;
   const settings = {
     customPaging: function (i) {
       return (

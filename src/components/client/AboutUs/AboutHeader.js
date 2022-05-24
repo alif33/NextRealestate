@@ -5,7 +5,7 @@ const AboutHeader = () => {
     <>
       <section className="container mb-5 pb-lg-5">
         <div className="row align-items-center justify-content-lg-start justify-content-center flex-lg-nowrap gy-4">
-          <div className="col-lg-9" style={{ overflow: "hidden" }}>
+          <div className="col-lg-8" style={{ overflow: "hidden" }}>
             <img
               className="rounded-3"
               src="img/rokye-website/02.jpg"

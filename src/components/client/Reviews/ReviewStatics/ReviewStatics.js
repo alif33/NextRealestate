@@ -16,7 +16,6 @@ const fourStarPercent = (fourSatar?.length * 100) / reviewList?.length
 const threeStarPercent = (threeSatar?.length * 100) / reviewList?.length
 const twoStarPercent = (twoSatar?.length * 100) / reviewList?.length
 const onceStarPercent = (oneSatar?.length * 100) / reviewList?.length
-//   console.log((fiveSatar.length * 100) / reviewList?.length);
   return (
     <>
       <div className="d-flex align-items-center mb-2">
