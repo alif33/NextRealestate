@@ -15,6 +15,8 @@ const MyListings = () => {
       setLists(res)
     );
   }, []);
+  console.log(lists)
+
 
   return (
     <>

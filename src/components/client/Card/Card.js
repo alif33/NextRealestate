@@ -1,7 +1,7 @@
 import React from "react";
 
 const Card = ({item, type}) => {
-   const {bedrooms, propertyType, monthlyRent, furnishedStatus, areaName, city, state, pinCode} = item
+   const {bedrooms, images, propertyType, monthlyRent, furnishedStatus, areaName, city, state, pinCode} = item
   return (
     <>
       <div className="col pt-2">
@@ -18,7 +18,7 @@ const Card = ({item, type}) => {
             </button>}
             <img
               className="rounded-3"
-              src="img/rokye-website/catalog/07.jpg"
+              src={images[0]}
               alt="Article img"
             />
           </div>
