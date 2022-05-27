@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCategory } from "../../../../store/propertyCategory/actions";
 import { setSearch } from "../../../../store/propertySearch/actions";
+import queryString from 'query-string'
 const PropertySearch = () => {
   const dispatch = useDispatch();
   const { search } = useSelector((state) => state);
-
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -14,19 +16,17 @@ const PropertySearch = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    const searchData = {
-      keywords: data.keywords,
-      budget: null,
-      bedroom: null
-    }
-    dispatch(setSearch(searchData));
-    dispatch(setSelectedCategory(null))
+    const queryUrl = queryString.stringify({location: data.location, bedrooms: '', budgets: ''}, {sort: false})
+    router.push(`/properties?${queryUrl}`)
+  
+    // dispatch(setSearch(searchData));
+    // dispatch(setSelectedCategory(null))
   };
   return (
     <>
       <div className="offcanvas-header d-block pt-0 pt-lg-4 px-lg-0">
         <form
-          className={`form-group mb-lg-2 ${errors.keywords && "border-danger"}`}
+          className={`form-group mb-lg-2 ${errors.location && "border-danger"}`}
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="input-group">
@@ -34,7 +34,7 @@ const PropertySearch = () => {
               <i className="fi-search" />
             </span>
             <input
-              {...register("keywords", { required: true })}
+              {...register("location", { required: true })}
               className="form-control"
               type="text"
               placeholder="Enter Locality"

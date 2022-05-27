@@ -11,9 +11,12 @@ const PropertyCategories = () => {
   const handleCategory = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setCategory((values) => ({ [name]: value }));
+    if (name === "bedrooms" || name === "bathrooms") {
+      setCategory((values) => ({ ...values, [name]: Number(value) }));
+    } else {
+      setCategory((values) => ({ ...values, [name]: value }));
+    }
   };
-
   useEffect(() => {
     dispatch(setSelectedCategory(category));
     dispatch(setSortProperty(null));

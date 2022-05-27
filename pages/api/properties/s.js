@@ -5,15 +5,15 @@ import Property from "../../../models/Property";
 const handler = nc();
 
 handler.get(async (req, res) => {
-  const { location, bathrooms, budgets } = req.query;
- 
+  const { location, bedrooms, budgets } = req.query;
+ console.log(req.query)
 
   await db.connect();
   //   await db.properties.createIndex({areaName: "text", city: "text", state: "text"});
 
-  if (Boolean(bathrooms) && Boolean(budgets)) {
+  if (Boolean(bedrooms) && Boolean(budgets)) {
     const budgestSplit = budgets.split("-");
-    const properties = await Property.find({ bathrooms: bathrooms,
+    const properties = await Property.find({ bedrooms: bedrooms,
       monthlyRent: {$gte: Number(budgestSplit[0]), $lte: Number(budgestSplit[1])},
       $or: [
         { areaName: new RegExp(location, "i") },
@@ -23,9 +23,9 @@ handler.get(async (req, res) => {
     });
     await db.disconnect();
     res.send(properties);
-  }else if(Boolean(bathrooms) && Boolean(!budgets)){
+  }else if(Boolean(bedrooms) && Boolean(!budgets)){
     
-    const properties = await Property.find({ bathrooms: bathrooms,
+    const properties = await Property.find({ bedrooms: bedrooms,
       $or: [
         { areaName: new RegExp(location, "i") },
         { state: new RegExp(location, "i") },
@@ -34,7 +34,7 @@ handler.get(async (req, res) => {
     });
     await db.disconnect();
     res.send(properties);
-  }else if(Boolean(!bathrooms) && Boolean(budgets)){
+  }else if(Boolean(!bedrooms) && Boolean(budgets)){
     const budgestSplit = budgets.split("-");
     const properties = await Property.find({
       monthlyRent: {$gte: Number(budgestSplit[0]), $lte: Number(budgestSplit[1])},

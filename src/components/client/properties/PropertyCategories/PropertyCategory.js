@@ -1,17 +1,15 @@
 import React from "react";
 
 const PropertyCategory = ({ data, handleCategory }) => {
-  const names = data.name.split(" ");
-  const name = names.join("").toLowerCase();
-
+ 
   return (
     <>
       <select
-        name={name}
+        name={data.inputName}
         onChange={(e) => handleCategory(e)}
         className="form-select mb-2"
       >
-        <option value disabled selected>
+        <option value="" selected>
           {data.name}
         </option>
         {data.options?.map((option, i) => (
