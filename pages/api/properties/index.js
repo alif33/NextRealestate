@@ -1,7 +1,6 @@
 import nc from 'next-connect';
-import db from '../../utils/db';
-import Property from '../../models/Property';
-
+import db from '../../../utils/db';
+import Property from '../../../models/Property';
 const handler = nc();
 
 handler.get(async (req, res) => {

@@ -12,18 +12,8 @@ import { userLogout } from "../../../store/users/actions";
 
 const Header = () => {
   const cookies = new Cookies();
-  // const [start, setStart] = useState(false)
-  // const [status, setStatus] = useState(false)
-  // const [smallDevice, setSmallDevice] = useState(false)
   const router = useRouter();
-  // const { users } = useSelector(state => state)
   const dispatch = useDispatch();
-
-  // const handleDashboard = () => {
-  //   if (!users?.token)
-  //     router.push('/login')
-  // }
-
   const handleLogOut = () => {
     cookies.remove("_info", { path: "/" });
     if (!cookies.get("_info")) {
@@ -32,6 +22,7 @@ const Header = () => {
     }
     dispatch(userLogout());
   };
+
 
   const userInfo = cookies.get("_info");
   return (
@@ -102,21 +93,28 @@ const Header = () => {
             style={{ maxHeight: "35rem" }}
           >
             {/* Menu items*/}
-            <li className="nav-item dropdown active">
+            <li className={`nav-item dropdown ${router.pathname === '/' ? 'active' : ''}`}>
               <Link href="/">
                 <a className="nav-link" role="button" aria-expanded="false">
                   Home
                 </a>
               </Link>
             </li>
-            <li className="nav-item dropdown">
+            
+            <li className={`nav-item dropdown ${router.pathname === '/our-plans' ? 'active' : ''}`}>
               <Link href="/our-plans">
                 <a className="nav-link" role="button" aria-expanded="false">
                   Our Plans
                 </a>
               </Link>
             </li>
-            <li className="nav-item dropdown">
+            <li className={`nav-item dropdown
+             ${router.pathname === '/contact-us' ||
+              router.pathname === '/reviews' ||
+              router.pathname === '/about-us' ? 'active' : ''}`}
+
+             
+             >
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -127,26 +125,26 @@ const Header = () => {
                 Contact
               </a>
               <ul className="dropdown-menu dropdown-menu-light">
-                <li>
+                <li className={`${router.pathname === '/contact-us' ? 'active' : ''}`}>
                   <Link href="/contact-us">
                     <a className="dropdown-item">Contact us</a>
                   </Link>
                 </li>
-                <li>
+                <li className={`${router.pathname === '/about-us' ? 'active' : ''}`}>
                   <Link href="/about-us">
                   <a className="dropdown-item" >
                     About us
                   </a>
                   </Link>
                 </li>
-                <li>
+                <li className={`${router.pathname === '/reviews' ? 'active' : ''}`}>
                   <Link href="/reviews">
                     <a className="dropdown-item">Reviews</a>
                   </Link>
                 </li>
               </ul>
             </li>
-            <li className="nav-item dropdown">
+            <li className={`nav-item dropdown ${router.pathname === '/dashboard' ? 'active' : ''}`}>
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -174,7 +172,10 @@ const Header = () => {
                 </li>
               </ul>
             </li>
-            <li className="nav-item dropdown">
+            <li className={`nav-item dropdown
+             ${router.pathname === '/faqs' ||
+             router.pathname === '/blogs'
+              ? 'active' : ''}`}>
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -185,12 +186,12 @@ const Header = () => {
                 FAQs
               </a>
               <ul className="dropdown-menu dropdown-menu-light">
-                <li>
+                <li className={`  ${router.pathname === '/faqs' ? 'active' : ''}`}>
                   <Link href="/faqs">
                   <a className="dropdown-item">FAQs</a>
                   </Link>
                 </li>
-                <li>
+                <li  className={`  ${router.pathname === '/blogs' ? 'active' : ''}`}>
                   <Link href="/blogs">
                     <a className="dropdown-item">Blogs</a>
                   </Link>

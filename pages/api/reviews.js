@@ -1,7 +1,6 @@
 import nc from 'next-connect';
 import db from '../../utils/db';
 import Review from '../../models/Review';
-
 const handler = nc();
 
 handler.get(async (req, res) => {

@@ -1,82 +1,90 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropertiesPagination from "./Pagination/PropertiesPagination";
 import Property from "./SingleProperty/Property";
 import PropertySorting from "./PropertySorting";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
+import { setProperties } from "../../../../store/properties/actions";
 
 const MainContent = ({ properties }) => {
-  const { selectedCategory, search, propertySort } = useSelector(
+  const { selectedCategory, search, propertySort,  } = useSelector(
     (state) => state
   );
-  const dispatch = useDispatch();
-  const { selected } = selectedCategory;
-  const filtered = properties?.filter((val) => {
-    if (!selected) {
-      return [];
-    } else if (
-      val.bedrooms === parseInt(selected?.bedroom) ||
-      val.propertyType?.toLowerCase() ===
-        selected?.propertytype?.toLowerCase() ||
-      val.bathrooms === parseInt(selected?.bathroom) ||
-      val.monthlyRent <= parseInt(selected?.budget) ||
-      val.furnishedStatus.toLowerCase() ===
-        selected?.furnishing?.toLowerCase() ||
-      val.tenantsPreferred.toLowerCase() ===
-        selected?.tenantpreferred?.toLowerCase() ||
-      val.availability.toLowerCase() ===
-        selected?.availability?.toLowerCase() ||
-      val.ageConstruction.toLowerCase() ===
-        selected?.ageofconstruction?.toLowerCase()
-    ) {
-      return val;
-    }
-  });
 
-  const searchFilter = properties?.filter((val) => {
-    if (!search.search?.keywords) {
-      return [];
-    } else if (
-      val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-      val.areaName
-        .toLowerCase()
-        .includes(search.search?.keywords?.toLowerCase()) ||
-      val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase())
-    ) {
+  console.log(properties)
+  const dispatch = useDispatch();
+
+  useEffect(()=> {
+    // dispatch(setProperties())
     
-      return val;
-    } else if (
-      val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-      val.areaName
-        .toLowerCase()
-        .includes(search.search?.keywords?.toLowerCase()) ||
-      (val.state
-        .toLowerCase()
-        .includes(search.search?.keywords?.toLowerCase()) &&
-        val.bedrooms === parseInt(search.search?.bedroom?.toLowerCase()))
-    ) {
-      return val;
-    } else if (
-      val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-      val.areaName
-        .toLowerCase()
-        .includes(search.search?.keywords?.toLowerCase()) ||
-      (val.state
-        .toLowerCase()
-        .includes(search.search?.keywords?.toLowerCase()) &&
-        val.bedrooms >= parseInt(search.search?.bedroom?.toLowerCase()))
-    ) {
-      return val;
-    }
-  });
+  }, )
+  const { selected } = selectedCategory;
+  // const filtered = properties?.filter((val) => {
+  //   if (!selected) {
+  //     return [];
+  //   } else if (
+  //     val.bedrooms === parseInt(selected?.bedroom) ||
+  //     val.propertyType?.toLowerCase() ===
+  //       selected?.propertytype?.toLowerCase() ||
+  //     val.bathrooms === parseInt(selected?.bathroom) ||
+  //     val.monthlyRent <= parseInt(selected?.budget) ||
+  //     val.furnishedStatus.toLowerCase() ===
+  //       selected?.furnishing?.toLowerCase() ||
+  //     val.tenantsPreferred.toLowerCase() ===
+  //       selected?.tenantpreferred?.toLowerCase() ||
+  //     val.availability.toLowerCase() ===
+  //       selected?.availability?.toLowerCase() ||
+  //     val.ageConstruction.toLowerCase() ===
+  //       selected?.ageofconstruction?.toLowerCase()
+  //   ) {
+  //     return val;
+  //   }
+  // });
+
+  // const searchFilter = properties?.filter((val) => {
+  //   if (!search.search?.keywords) {
+  //     return [];
+  //   } else if (
+  //     val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+  //     val.areaName
+  //       .toLowerCase()
+  //       .includes(search.search?.keywords?.toLowerCase()) ||
+  //     val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase())
+  //   ) {
+    
+  //     return val;
+  //   } else if (
+  //     val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+  //     val.areaName
+  //       .toLowerCase()
+  //       .includes(search.search?.keywords?.toLowerCase()) ||
+  //     (val.state
+  //       .toLowerCase()
+  //       .includes(search.search?.keywords?.toLowerCase()) &&
+  //       val.bedrooms === parseInt(search.search?.bedroom?.toLowerCase()))
+  //   ) {
+  //     return val;
+  //   } else if (
+  //     val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
+  //     val.areaName
+  //       .toLowerCase()
+  //       .includes(search.search?.keywords?.toLowerCase()) ||
+  //     (val.state
+  //       .toLowerCase()
+  //       .includes(search.search?.keywords?.toLowerCase()) &&
+  //       val.bedrooms >= parseInt(search.search?.bedroom?.toLowerCase()))
+  //   ) {
+  //     return val;
+  //   }
+  // });
 
   const [pageNumber, setPageNumber] = useState(0);
   const propertyPerPage = 5;
   const pagesVisited = pageNumber * propertyPerPage;
 
-  const filterData = Math.ceil(filtered.length / propertyPerPage);
-  const searchData = Math.ceil(search.search && searchFilter.length / propertyPerPage);
-  const sort = Math.ceil(propertySort.sortData?.length / propertyPerPage);
+  const propertiesPageNumber = Math.ceil(properties.length / propertyPerPage);
+  // const searchData = Math.ceil(search.search && searchFilter.length / propertyPerPage);
+  // const sort = Math.ceil(propertySort.sortData?.length / propertyPerPage);
  
   const changePage = ({ selected }) => {
     setPageNumber(selected);
@@ -111,30 +119,29 @@ const MainContent = ({ properties }) => {
           />
         </div>
         {/* Sorting*/}
-        <PropertySorting
+        {/* <PropertySorting
           filtered={filtered}
           searchFilter={searchFilter}
           properties={properties}
-        />
+        /> */}
 
-        {!search.search &&
-          !propertySort.sortData &&
-          (filtered.length > 0 ? (
-            filtered
+        {
+          (properties.length > 0 ? (
+            properties
               .slice(pagesVisited, pagesVisited + propertyPerPage)
               ?.map((item, index) => <Property key={index} property={item} />)
           ) : (
             <div>Property Not found</div>
           ))}
 
-        {!search.search &&
+        {/* {!search.search &&
           !selected &&
           propertySort.sortData?.length > 0 &&
           propertySort.sortData
             ?.slice(pagesVisited, pagesVisited + propertyPerPage)
-            ?.map((item, i) => <Property key={item._id} property={item} />)}
+            ?.map((item, i) => <Property key={item._id} property={item} />)} */}
 
-        {search.search &&
+        {/* {search.search &&
           !propertySort.sortData &&
           (searchFilter.length > 0 ? (
             searchFilter
@@ -142,13 +149,13 @@ const MainContent = ({ properties }) => {
               ?.map((item, index) => <Property key={index} property={item} />)
           ) : (
             <div>Property Not found</div>
-          ))}
+          ))} */}
 
         {/* pagination here */}
-       {!search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={filterData} changePage={changePage}/>}
-       {search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={searchData} changePage={changePage}/>}
-       {!search.search && selected &&  !propertySort.sortData && <PropertiesPagination pageCount={filterData} changePage={changePage}/>}
-       {!search.search && !selected &&  propertySort.sortData && <PropertiesPagination pageCount={sort} changePage={changePage}/>}
+       { <PropertiesPagination pageCount={propertiesPageNumber} changePage={changePage}/>}
+       {/* {search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={searchData} changePage={changePage}/>} */}
+       {/* {!search.search && selected &&  !propertySort.sortData && <PropertiesPagination pageCount={filterData} changePage={changePage}/>} */}
+       {/* {!search.search && !selected &&  propertySort.sortData && <PropertiesPagination pageCount={sort} changePage={changePage}/>} */}
 
       </div>
     </>

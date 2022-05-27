@@ -104,7 +104,8 @@ handler.use(isAuth).post(async (req, res) => {
             email,
             _owner: req.user._id
         });
-        
+
+
         if(await property.save()){
             await db.disconnect();
             res.status(201).json({

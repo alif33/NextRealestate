@@ -36,10 +36,10 @@ const HomeSearch = () => {
                 <i className="fi-search" />
               </span>
               <input
-                {...register("keywords", { required: true })}
+                {...register("location", { required: true })}
                 className="form-control"
                 type="text"
-                name="keywords"
+                name="location"
                 placeholder="Enter city or locality name"
               />
             </div>
@@ -49,10 +49,10 @@ const HomeSearch = () => {
               data-bs-toggle="select"
             >
               <select
-                {...register("bedroom", { required: false })}
+                {...register("bedrooms", { required: false })}
                 className="form-select"
               >
-                <option value="bedroom" selected>
+                <option value="" selected>
                   Bedroom
                 </option>
                 <option value="1">1 BHK</option>
@@ -63,23 +63,23 @@ const HomeSearch = () => {
             <hr className="d-sm-none my-2" />
             <div className="dropdown w-sm-50" data-bs-toggle="select">
               <select
-                {...register("budget", { required: false })}
+                {...register("budgets", { required: false })}
                 className="form-select"
               >
-                <option value="budget" selected>
+                <option value="" selected>
                   Budget
                 </option>
-                <option value="10000">₹5000 - ₹10000</option>
-                <option value="15000">₹10000 - ₹15000</option>
-                <option value="25000">₹20000 - ₹25000</option>
-                <option value="30000">₹25000 - ₹30000</option>
-                <option value="40000">₹30000 - ₹40000</option>
-                <option value="50000">₹50000 - ₹50000</option>
-                <option value="60000">₹50000 - ₹60000</option>
-                <option value="70000">₹60000 - ₹70000</option>
-                <option value="100000">₹75000 - ₹1 Lac</option>
-                <option value="200000">₹1 Lac - ₹2 Lac</option>
-                <option value="300000">₹2 Lac - ₹3 Lac</option>
+                <option value="5000-10000">₹5000 - ₹10000</option>
+                <option value="10000-15000">₹10000 - ₹15000</option>
+                <option value="20000-25000">₹20000 - ₹25000</option>
+                <option value="25000-30000">₹25000 - ₹30000</option>
+                <option value="30000-40000">₹30000 - ₹40000</option>
+                <option value="40000-50000">₹50000 - ₹50000</option>
+                <option value="50000-60000">₹50000 - ₹60000</option>
+                <option value="60000-70000">₹60000 - ₹70000</option>
+                <option value="75000-100000">₹75000 - ₹1 Lac</option>
+                <option value="100000-200000">₹1 Lac - ₹2 Lac</option>
+                <option value="200000-300000">₹2 Lac - ₹3 Lac</option>
               </select>
             </div>
           </div>

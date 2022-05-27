@@ -32,6 +32,8 @@ function Media({ isValid }) {
     };
 }, []);
 
+console.log(media)
+
 
   return (
     <div className="bg-light rounded-3 p-4 p-md-5 mb-3">
@@ -51,7 +53,7 @@ function Media({ isValid }) {
             </div>
           </div>
           <label className="btn btn-primary py-3" htmlFor="image">
-            <Image size={25} />
+            <Image size={25} alt="image"/>
             {"  "}
             Upload Image
           </label>
