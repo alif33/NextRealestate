@@ -32,7 +32,7 @@ const MainContent = ({ properties }) => {
   useEffect(() => {
     // dispatch(setProperties())
     getData(`/properties/s?${queryUrl}`).then((res) => {
-      if (res.length > 0) {
+      if (res?.length > 0) {
         setSearchProperty({ founded: true, data: res });
       } else {
         setSearchProperty({ founded: false, data: [] });
@@ -46,8 +46,7 @@ const MainContent = ({ properties }) => {
     
   }, [queryUrl, selected]);
 
-  console.log(categoryData)
-  console.log(selected)
+ 
 
   // const filtered = properties?.filter((val) => {
   //   if (!selected) {
@@ -162,20 +161,21 @@ const MainContent = ({ properties }) => {
             ?.map((item, index) => <Property key={index} property={item} />)
         ) } */}
 
-        {!selected && searchProperty.data?.length > 0 ? (
+        {!selected && categoryData.length === 0 && ( searchProperty.data?.length > 0 ? (
           searchProperty?.data
             ?.slice(pagesVisited, pagesVisited + propertyPerPage)
             ?.map((item, i) => <Property key={item._id} property={item} />)
         ) : (
           <div>Property not found</div>
-        )}
-        {selected && categoryData.length > 0 ? (
-          searchProperty?.data
+        ))}
+
+        {selected && ( categoryData.length > 0 ? (
+          categoryData
             ?.slice(pagesVisited, pagesVisited + propertyPerPage)
-            ?.map((item, i) => <Property key={item._id} property={item} />)
+            ?.map((item, i) => <Property key={i} property={item} />)
         ) : (
           <div>Property not found</div>
-        )}
+        ))}
         {/* {search.search &&
           !propertySort.sortData &&
           (searchFilter.length > 0 ? (

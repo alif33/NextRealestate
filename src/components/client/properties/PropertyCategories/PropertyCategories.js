@@ -11,11 +11,20 @@ const PropertyCategories = () => {
   const handleCategory = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+   
+  if (Boolean(!value)) {
+    setCategory((category) => {
+      const newData = {...category}
+      delete newData[name]
+      return newData;
+    })
+  }else{
     if (name === "bedrooms" || name === "bathrooms") {
       setCategory((values) => ({ ...values, [name]: Number(value) }));
     } else {
       setCategory((values) => ({ ...values, [name]: value }));
     }
+  }
   };
   useEffect(() => {
     dispatch(setSelectedCategory(category));
