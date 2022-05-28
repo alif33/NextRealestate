@@ -112,12 +112,16 @@ export default function Footer() {
       </div>
       <div className="container d-lg-flex align-items-center justify-content-between fs-sm pb-3">
         <div className="d-flex flex-wrap justify-content-center order-lg-2 mb-3">
-          <a className="nav-link nav-link-light fw-normal" href="#">
+          <Link href="/terms">
+          <a className="nav-link nav-link-light fw-normal" >
             Terms of use
           </a>
-          <a className="nav-link nav-link-light fw-normal" href="#">
+          </Link>
+         <Link href="/privacy-policy">
+         <a className="nav-link nav-link-light fw-normal">
             Privacy policy
           </a>
+         </Link>
           <Link href="/blogs">
           <a className="nav-link nav-link-light fw-normal">
             Blogs
