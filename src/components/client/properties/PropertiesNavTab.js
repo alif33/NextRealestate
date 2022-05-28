@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { setPremiumSelected } from "../../../../store/premiumSelect/actions";
 import { setSelectedCategory } from "../../../../store/propertyCategory/actions";
 import { setSearch } from "../../../../store/propertySearch/actions";
 import { setSortProperty } from "../../../../store/propertySort/actions";
 
-const PropertiesNavTab = () => {
+const PropertiesNavTab = ({setFilterTab}) => {
   const dispatch = useDispatch()
   const router = useRouter();
   return (
@@ -14,6 +15,10 @@ const PropertiesNavTab = () => {
         <ul className="nav nav-pills" role="tablist">
           <li className="nav-item">
             <a
+            onClick={() => {
+              // dispatch(setPremiumSelected(null));
+
+              setFilterTab('filter')}}
               className="nav-link d-flex align-items-center active"
               href="#categories"
               data-bs-toggle="tab"
@@ -23,7 +28,7 @@ const PropertiesNavTab = () => {
               Filters
             </a>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <button
               onClick={() => {
                 // location.reload()
@@ -35,9 +40,12 @@ const PropertiesNavTab = () => {
             >
               All
             </button>
-          </li>
-          {/* <li className="nav-item">
+          </li> */}
+          <li className="nav-item">
             <a
+            onClick={()=>{
+              // dispatch(setSelectedCategory(null));
+              setFilterTab('premium')}}
               className="nav-link d-flex align-items-center"
               href="#filters"
               data-bs-toggle="tab"
@@ -46,7 +54,7 @@ const PropertiesNavTab = () => {
               <i className="fi-filter-alt-horizontal me-2" />
               Premium Filters
             </a>
-          </li> */}
+          </li>
         </ul>
       </div>
     </>

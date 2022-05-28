@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PremiumFilters from './PremiumFilters/PremiumFilters';
 import PropertiesNavTab from './PropertiesNavTab';
 import PropertyCategories from './PropertyCategories/PropertyCategories';
 import PropertySearch from './PropertySearch';
 
 const FilterSidebar = () => {
+  const [filterTab, setFilterTab] = useState('filter')
     return (
         <>
              <aside
@@ -26,14 +28,14 @@ const FilterSidebar = () => {
                 {/* Search form*/}
                 <PropertySearch />
                 {/* Nav tabs*/}
-                <PropertiesNavTab />
+                <PropertiesNavTab setFilterTab={setFilterTab} />
                 <div className="offcanvas-body py-lg-4">
                   {/* Tabs content*/}
                   <div className="tab-content">
                     {/* Categories*/}
-                    <PropertyCategories />
+                    <PropertyCategories filterTab={filterTab} />
                     {/* Filters*/}
-                    {/* <PremiumFilters /> */}
+                    <PremiumFilters filterTab={filterTab} />
                   </div>
                 </div>
               </div>

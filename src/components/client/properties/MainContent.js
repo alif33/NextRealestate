@@ -11,42 +11,45 @@ import {
   getDataWithReq,
 } from "../../../../__lib__/helpers/HttpService";
 import queryString from "query-string";
+import { setFilterData } from "../../../../store/propertyFilterData/actions";
 
 const MainContent = ({ properties }) => {
-  const { selectedCategory, search, propertySort } = useSelector(
-    (state) => state
-  );
+  const {
+    selectedCategory,
+    search,
+    filterData,
+    propertySort,
+    premiumSelected,
+  } = useSelector((state) => state);
 
   const [searchProperty, setSearchProperty] = useState({
     founded: false,
-    data: [],
+    data: null,
   });
 
   const [categoryData, setCategoryData] = useState([]);
   const dispatch = useDispatch();
   const { query } = useRouter();
-  
 
   const queryUrl = queryString.stringify(query, { sort: false });
-  const { selected } = selectedCategory;
+  const searchTrue = !!query.location || !!query.bedrooms || !!query.budgets
+  console.log(searchTrue)
   useEffect(() => {
-    // dispatch(setProperties())
-    getData(`/properties/s?${queryUrl}`).then((res) => {
-      if (res?.length > 0) {
-        setSearchProperty({ founded: true, data: res });
-      } else {
-        setSearchProperty({ founded: false, data: [] });
-      }
-    });
-   if (selected) {
-    getDataWithReq("/properties/c", selected)
-    .then((res) => setCategoryData(res));
-      
-   }
-    
-  }, [queryUrl, selected]);
+    if (
+      Boolean(query.location) ||
+      Boolean(query.bedrooms) ||
+      Boolean(query.budgets)
+    ) {
+      getData(`/properties/s?${queryUrl}`).then((res) => {
+        if (res?.length > 0) {
+          setSearchProperty({ founded: true, data: res });
+        } else {
+          setSearchProperty({ founded: false, data: [] });
+        }
+      });
+    }
+  }, [query.location, query.bedrooms, query.budgets, queryUrl]);
 
- 
 
   // const filtered = properties?.filter((val) => {
   //   if (!selected) {
@@ -113,7 +116,9 @@ const MainContent = ({ properties }) => {
 
   const propertiesPageNumber = Math.ceil(properties.length / propertyPerPage);
   const searchData = Math.ceil(searchProperty.data?.length / propertyPerPage);
-  const cateFilter = Math.ceil(categoryData?.length / propertyPerPage);
+  const filterPageNumber = Math.ceil(
+    filterData.dataList?.length / propertyPerPage
+  );
   // const sort = Math.ceil(propertySort.sortData?.length / propertyPerPage);
 
   const changePage = ({ selected }) => {
@@ -124,6 +129,7 @@ const MainContent = ({ properties }) => {
     <>
       <div className="col-lg-8 col-xl-7 position-relative overflow-hidden pb-5 pt-4 px-3 px-xl-4 px-xxl-5">
         {/* Breadcrumb*/}
+
         <nav className="mb-3 pt-md-2" aria-label="Breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
@@ -154,28 +160,30 @@ const MainContent = ({ properties }) => {
           searchFilter={searchFilter}
           properties={properties}
         /> */}
-        {/* 
-        {!searchProperty.founded  && properties.length > 0 && (
+        
+        { !filterData.dataList && !searchProperty?.data && properties.length > 0 && (
           properties
             .slice(pagesVisited, pagesVisited + propertyPerPage)
             ?.map((item, index) => <Property key={index} property={item} />)
-        ) } */}
+        ) }
 
-        {!selected && categoryData.length === 0 && ( searchProperty.data?.length > 0 ? (
-          searchProperty?.data
-            ?.slice(pagesVisited, pagesVisited + propertyPerPage)
-            ?.map((item, i) => <Property key={item._id} property={item} />)
-        ) : (
-          <div>Property not found</div>
-        ))}
+        {!filterData.dataList && searchProperty?.data &&
+          (searchProperty.data?.length > 0 ? (
+            searchProperty?.data
+              ?.slice(pagesVisited, pagesVisited + propertyPerPage)
+              ?.map((item, i) => <Property key={item._id} property={item} />)
+          ) : (
+            <div>Property not found</div>
+          ))}
 
-        {selected && ( categoryData.length > 0 ? (
-          categoryData
-            ?.slice(pagesVisited, pagesVisited + propertyPerPage)
-            ?.map((item, i) => <Property key={i} property={item} />)
-        ) : (
-          <div>Property not found</div>
-        ))}
+        {!searchTrue && filterData.dataList &&
+          (filterData.dataList.length > 0 ? (
+            filterData.dataList
+              ?.slice(pagesVisited, pagesVisited + propertyPerPage)
+              ?.map((item, i) => <Property key={i} property={item} />)
+          ) : (
+            <div>Property not found</div>
+          ))}
         {/* {search.search &&
           !propertySort.sortData &&
           (searchFilter.length > 0 ? (
@@ -187,21 +195,25 @@ const MainContent = ({ properties }) => {
           ))} */}
 
         {/* pagination here */}
-        { !selected &&
+        {searchTrue && !filterData.dataList && (
           <PropertiesPagination
             pageCount={searchData}
             changePage={changePage}
           />
-        }
-        {
-          selected && <PropertiesPagination
-          pageCount={cateFilter}
-          changePage={changePage}
+        )}
+        {!searchTrue && filterData.dataList && (
+          <PropertiesPagination
+            pageCount={filterPageNumber}
+            changePage={changePage}
           />
-        }
-        {/* {search.search && !selected &&  !propertySort.sortData && <PropertiesPagination pageCount={searchData} changePage={changePage}/>} */}
-        {/* {!search.search && selected &&  !propertySort.sortData && <PropertiesPagination pageCount={filterData} changePage={changePage}/>} */}
-        {/* {!search.search && !selected &&  propertySort.sortData && <PropertiesPagination pageCount={sort} changePage={changePage}/>} */}
+        )}
+        {!searchTrue && !filterData.dataList && !searchProperty?.data  && (
+          <PropertiesPagination
+            pageCount={propertiesPageNumber}
+            changePage={changePage}
+          />
+        )}
+       
       </div>
     </>
   );
