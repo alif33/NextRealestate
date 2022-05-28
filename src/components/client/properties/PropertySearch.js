@@ -17,7 +17,7 @@ const PropertySearch = () => {
   } = useForm();
   const onSubmit = (data) => {
     const queryUrl = queryString.stringify({location: data.location, bedrooms: '', budgets: ''}, {sort: false})
-    router.push(`/properties?${queryUrl}`)
+    router.push(`/properties/s?${queryUrl}`)
   
     // dispatch(setSearch(searchData));
     // dispatch(setSelectedCategory(null))

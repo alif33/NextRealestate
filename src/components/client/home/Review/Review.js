@@ -19,6 +19,9 @@ function Review(){
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
+      autoplay: true,
+      speed: 1500,
+      autoplaySpeed: 4000,
     };
 
     return(

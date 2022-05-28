@@ -1,6 +1,7 @@
 import Layout from "../../src/components/client/layout";
 import FilterSidebar from "../../src/components/client/properties/FilterSidebar";
 import MainContent from "../../src/components/client/properties/MainContent";
+import PropertySearchPage from "../../src/components/client/PropertySearchPage/PropertySearchPage";
 import { getData } from "../../__lib__/helpers/HttpService";
 
 export default function Search({ properties }) {
@@ -11,7 +12,7 @@ export default function Search({ properties }) {
           {/* Filters sidebar (Offcanvas on mobile)*/}
           {/* <FilterSidebar  /> */}
           {/* Page content*/}
-          <MainContent properties={properties} />
+          <PropertySearchPage/>
         </div>
       </div>
     </Layout>

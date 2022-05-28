@@ -4,9 +4,10 @@ import { setSelectedCategory } from "../../../../store/propertyCategory/actions"
 import { setSearch } from "../../../../store/propertySearch/actions";
 import { setSortProperty } from "../../../../store/propertySort/actions";
 
-const PropertySorting = ({ properties, searchFilter, filtered }) => {
+const PropertySorting = ({ properties, filterData }) => {
+  console.log(filterData)
   const dispatch = useDispatch();
-  const { selectedCategory, search, propertySort } = useSelector(
+  const { search } = useSelector(
     (state) => state
   );
   const handleSort = (e) => {
@@ -56,10 +57,8 @@ const PropertySorting = ({ properties, searchFilter, filtered }) => {
           <i className="fi-check-circle me-2" />
           <span className="fs-sm mt-n1">
             <span>
-              {search.search && searchFilter.length}
-              {selectedCategory.selected && filtered.length}
-              {propertySort.sortData && propertySort.sortData?.length}
-              {!search.search && !selectedCategory.selected && !propertySort.sortData && properties.length}
+              {!filterData && properties?.length}
+              {filterData && filterData?.length}
               {" "}
             </span>
             results

@@ -14,42 +14,7 @@ import queryString from "query-string";
 import { setFilterData } from "../../../../store/propertyFilterData/actions";
 
 const MainContent = ({ properties }) => {
-  const {
-    selectedCategory,
-    search,
-    filterData,
-    propertySort,
-    premiumSelected,
-  } = useSelector((state) => state);
-
-  const [searchProperty, setSearchProperty] = useState({
-    founded: false,
-    data: null,
-  });
-
-  const [categoryData, setCategoryData] = useState([]);
-  const dispatch = useDispatch();
-  const { query } = useRouter();
-
-  const queryUrl = queryString.stringify(query, { sort: false });
-  const searchTrue = !!query.location || !!query.bedrooms || !!query.budgets
-  console.log(searchTrue)
-  useEffect(() => {
-    if (
-      Boolean(query.location) ||
-      Boolean(query.bedrooms) ||
-      Boolean(query.budgets)
-    ) {
-      getData(`/properties/s?${queryUrl}`).then((res) => {
-        if (res?.length > 0) {
-          setSearchProperty({ founded: true, data: res });
-        } else {
-          setSearchProperty({ founded: false, data: [] });
-        }
-      });
-    }
-  }, [query.location, query.bedrooms, query.budgets, queryUrl]);
-
+  const {filterData} = useSelector((state) => state);
 
   // const filtered = properties?.filter((val) => {
   //   if (!selected) {
@@ -115,7 +80,6 @@ const MainContent = ({ properties }) => {
   const pagesVisited = pageNumber * propertyPerPage;
 
   const propertiesPageNumber = Math.ceil(properties.length / propertyPerPage);
-  const searchData = Math.ceil(searchProperty.data?.length / propertyPerPage);
   const filterPageNumber = Math.ceil(
     filterData.dataList?.length / propertyPerPage
   );
@@ -155,28 +119,19 @@ const MainContent = ({ properties }) => {
           />
         </div>
         {/* Sorting*/}
-        {/* <PropertySorting
-          filtered={filtered}
-          searchFilter={searchFilter}
+        <PropertySorting
+         
+          filterData={filterData.dataList}
           properties={properties}
-        /> */}
+        />
         
-        { !filterData.dataList && !searchProperty?.data && properties.length > 0 && (
+        { !filterData.dataList  && properties.length > 0 && (
           properties
             .slice(pagesVisited, pagesVisited + propertyPerPage)
             ?.map((item, index) => <Property key={index} property={item} />)
         ) }
 
-        {!filterData.dataList && searchProperty?.data &&
-          (searchProperty.data?.length > 0 ? (
-            searchProperty?.data
-              ?.slice(pagesVisited, pagesVisited + propertyPerPage)
-              ?.map((item, i) => <Property key={item._id} property={item} />)
-          ) : (
-            <div>Property not found</div>
-          ))}
-
-        {!searchTrue && filterData.dataList &&
+        { filterData.dataList &&
           (filterData.dataList.length > 0 ? (
             filterData.dataList
               ?.slice(pagesVisited, pagesVisited + propertyPerPage)
@@ -195,19 +150,14 @@ const MainContent = ({ properties }) => {
           ))} */}
 
         {/* pagination here */}
-        {searchTrue && !filterData.dataList && (
-          <PropertiesPagination
-            pageCount={searchData}
-            changePage={changePage}
-          />
-        )}
-        {!searchTrue && filterData.dataList && (
+      
+        {filterData.dataList && (
           <PropertiesPagination
             pageCount={filterPageNumber}
             changePage={changePage}
           />
         )}
-        {!searchTrue && !filterData.dataList && !searchProperty?.data  && (
+        { !filterData.dataList && (
           <PropertiesPagination
             pageCount={propertiesPageNumber}
             changePage={changePage}

@@ -21,7 +21,7 @@ const HomeSearch = () => {
     dispatch(setSearch(data));
    
     const query = queryString.stringify(data, {sort: false})
-    router.push(`/properties?${query}`)
+    router.push(`/properties/s?${query}`)
   };
   return (
     <>
