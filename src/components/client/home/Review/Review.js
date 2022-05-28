@@ -27,10 +27,12 @@ function Review(){
     return(
         <section className="container pt-lg-2 pb-5 mb-md-4" style={{marginTop: '-40px'}}>
         <div className="d-flex align-items-center justify-content-between mb-4 pb-2">
-          <h2 className="h3 mt-md-4">Testimonials</h2><a className="btn btn-link fw-normal ms-sm-3 p-0" href="city-guide-catalog.html">View all<i className="fi-arrow-long-right ms-2" /></a>
+          <h2 className="h3 mt-md-4">Testimonials</h2>
+          <a className="btn btn-link fw-normal ms-sm-3 p-0" href="city-guide-catalog.html">View all<i className="fi-arrow-long-right ms-2" /></a>
         </div>
         <div className="row">
-          <div className="col-md-4 mb-3 mb-md-0"><img className="d-block mx-auto" src="img/rokye-website/reviews.svg" alt="Illustration" /></div>
+          <div className="col-md-4 mb-3 mb-md-0">
+            <img className="d-block mx-auto" src="img/rokye-website/reviews.svg" alt="Illustration" /></div>
           <div className="col-lg-1 d-none d-lg-block">
             <hr className="hr-vertical mx-auto" />
           </div>

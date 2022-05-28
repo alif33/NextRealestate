@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const AboutPersonalized = () => {
@@ -20,13 +21,15 @@ const AboutPersonalized = () => {
               check and have accureate details of home condition, society,
               locality and all the other important features that tenants desire.
             </p>
+            <Link href='/'>
             <a
               className="btn btn-primary w-sm-auto w-100"
-              href="car-finder-catalog-grid.html"
+           
             >
               <i className="fi-search me-2" />
               Search home
             </a>
+            </Link>
           </div>
         </div>
       </section>

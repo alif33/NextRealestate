@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const SellingCondition = () => {
@@ -13,13 +14,16 @@ const SellingCondition = () => {
               tenants and make sure that your journey of renting a home will
               most straight-forward and enjoyable.
             </p>
-            <a
+           <Link href='/add-property'>
+           
+           <a
               className="btn btn-primary w-sm-auto w-100"
-              href="car-finder-sell-car.html"
+              
             >
               <i className="fi-plus me-2" />
               Add property
             </a>
+           </Link>
           </div>
           <div className="col-md-6 offset-lg-1 order-md-2 order-1">
             <img

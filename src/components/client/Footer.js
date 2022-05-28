@@ -30,19 +30,26 @@ export default function Footer() {
             <h3 className="fs-base text-light">Rental options</h3>
             <ul className="list-unstyled fs-sm">
               <li>
-                <a className="nav-link-light" href="#">
+                <Link href="/our-plans">
+                <a className="nav-link-light" 
+                >
                   Our Plans
                 </a>
+                </Link>
               </li>
               <li>
-                <a className="nav-link-light" href="#">
+               <Link href="/refer-earn">
+               <a className="nav-link-light">
                   Refer &amp; Earn
                 </a>
+               </Link>
               </li>
               <li>
-                <a className="nav-link-light" href="#">
+                <Link href="/reviews">
+                <a className="nav-link-light" >
                   Reviews
                 </a>
+                </Link>
               </li>
             </ul>
           </div>

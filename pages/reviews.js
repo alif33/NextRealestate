@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../src/components/client/layout";
 import AddReviewModal from "../src/components/client/Reviews/AddReviewModal/AddReviewModal";
 import ReviewHeader from "../src/components/client/Reviews/ReviewHeader";
@@ -21,6 +21,17 @@ const Reviews = () => {
   useEffect(() => {
     dispatch(setReviews())
   },[])
+
+  const [pageNumber, setPageNumber] = useState(0);
+  const propertyPerPage = 5;
+  const pagesVisited = pageNumber * propertyPerPage;
+
+  //how many pages
+    const reviewPage = Math.ceil(reviewList?.length / propertyPerPage);
+  // const sort = Math.ceil(propertySort.sortData?.length / propertyPerPage);
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   return (
     <Layout>
@@ -45,10 +56,13 @@ const Reviews = () => {
               {/* Sorting + add review button*/}
               <ShortAndReviewButton />
               {/* Review*/}
-            {reviewList?.map((review, i) =>   <ReviewCard key={i} review={review} />)}
+            {reviewList?.slice(pagesVisited, pagesVisited + propertyPerPage)?.map((review, i) =>   <ReviewCard key={i} review={review} />)}
 
               {/* Pagination*/}
-              <ReviewPagination />
+              <ReviewPagination 
+               pageCount={reviewPage}
+               changePage={changePage}
+              />
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const AboutHeader = () => {
@@ -22,13 +23,15 @@ const AboutHeader = () => {
                 without any advance payment, We believe in service first and pay
                 later policy.
               </p>
-              <a
+             <Link href='/'>
+             <a
                 className="btn btn-lg btn-primary w-sm-auto w-100"
-                href="car-finder-catalog-list.html"
+                
               >
                 <i className="fi-search me-2" />
                 Search home
               </a>
+             </Link>
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -92,14 +93,16 @@ const CompanyProfile = () => {
             </a>
           </div>
           <div className="text-center text-md-start pt-md-2 mt-4">
+            <Link href="/contact-us">
             <a
               className="btn btn-primary"
-              href="#message-modal"
-              data-bs-toggle="modal"
+              // href="#message-modal"
+              // data-bs-toggle="modal"
             >
               <i className="fi-chat-left fs-sm me-2" />
               Contact us
             </a>
+            </Link>
           </div>
         </div>
       </aside>
