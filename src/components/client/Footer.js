@@ -83,19 +83,25 @@ export default function Footer() {
             <h3 className="fs-base text-light">Profile</h3>
             <ul className="list-unstyled fs-sm">
               <li>
-                <a className="nav-link-light" href="#">
+                <Link href="/dashboard">
+                <a className="nav-link-light">
                   My account
                 </a>
+                </Link>
               </li>
               <li>
-                <a className="nav-link-light" href="#">
+              <Link href="/dashboard">
+              <a className="nav-link-light">
                   My listings
                 </a>
+            </Link>
               </li>
               <li>
-                <a className="nav-link-light" href="#">
+               <Link href="/dashboard">
+               <a className="nav-link-light" >
                   Wishlist
                 </a>
+               </Link>
               </li>
             </ul>
           </div>
@@ -112,9 +118,11 @@ export default function Footer() {
           <a className="nav-link nav-link-light fw-normal" href="#">
             Privacy policy
           </a>
-          <a className="nav-link nav-link-light fw-normal" href="#">
-            Blog
+          <Link href="/blogs">
+          <a className="nav-link nav-link-light fw-normal">
+            Blogs
           </a>
+          </Link>
         </div>
         <p className="text-center text-lg-start order-lg-1 mb-lg-0">
           <span className="text-light opacity-50">
