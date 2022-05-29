@@ -1,33 +1,46 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setSelectedCategory } from "../../../../store/propertyCategory/actions";
-import { setSearch } from "../../../../store/propertySearch/actions";
+import { useDispatch } from "react-redux";
 import { setSortProperty } from "../../../../store/propertySort/actions";
 
 const PropertySorting = ({ properties, filterData, amenitiesData }) => {
- 
-  console.log(amenitiesData, filterData)
-
+  const dispatch = useDispatch()
   const handleSort = (e) => {
     if (e === "newest") {
-      const reversed = properties.slice().reverse();
-      dispatch(setSortProperty(reversed));
-      dispatch(setSearch(null));
-      dispatch(setSelectedCategory(null));
+      if (filterData && !amenitiesData) {
+        const reversed = filterData.slice().reverse();
+        dispatch(setSortProperty(reversed));
+      } else if (!filterData && amenitiesData) {
+        const reversed = amenitiesData.slice().reverse();
+        dispatch(setSortProperty(reversed));
+      } else  {
+        const reversed = properties.slice().reverse();
+        dispatch(setSortProperty(reversed));
+      }
     } else if (e === "0") {
-      const lowToHigh = properties
-        .slice()
-        .sort((a, b) => a.monthlyRent - b.monthlyRent);
-      dispatch(setSortProperty(lowToHigh));
-      dispatch(setSelectedCategory(null));
-      dispatch(setSearch(null));
+      if (filterData && !amenitiesData) {
+        const lowToHigh = filterData.slice().sort((a, b) => a.monthlyRent - b.monthlyRent);
+        dispatch(setSortProperty(lowToHigh));
+        console.log(lowToHigh, "low to high")
+      } else if (!filterData && amenitiesData) {
+        const lowToHigh = amenitiesData.slice().sort((a, b) => a.monthlyRent - b.monthlyRent);
+        dispatch(setSortProperty(lowToHigh));
+      } else  {
+        const lowToHigh = properties.slice().sort((a, b) => a.monthlyRent - b.monthlyRent);
+       dispatch(setSortProperty(lowToHigh));
+      }
+
+     
     } else if (e === "1") {
-      const highToLow = properties
-        .slice()
-        .sort((a, b) => b.monthlyRent - a.monthlyRent);
-      dispatch(setSortProperty(highToLow));
-      dispatch(setSearch(null));
-      dispatch(setSelectedCategory(null));
+      if (filterData && !amenitiesData) {
+        const highToLow = filterData.slice().sort((a, b) => b.monthlyRent - a.monthlyRent);
+        dispatch(setSortProperty(highToLow))
+      } else if (!filterData && amenitiesData) {
+        const highToLow = amenitiesData.slice().sort((a, b) => b.monthlyRent - a.monthlyRent);
+        dispatch(setSortProperty(highToLow))
+      } else  {
+        const highToLow = properties.slice().sort((a, b) => b.monthlyRent - a.monthlyRent);
+        dispatch(setSortProperty(highToLow))
+      }
     }
   };
 
@@ -55,9 +68,9 @@ const PropertySorting = ({ properties, filterData, amenitiesData }) => {
           <i className="fi-check-circle me-2" />
           <span className="fs-sm mt-n1">
             <span>
-              {!filterData && properties?.length}
-              {filterData && filterData?.length}
-              {" "}
+              {!filterData && !amenitiesData && properties?.length}
+              {filterData && !amenitiesData && filterData?.length}
+              {!filterData && amenitiesData && amenitiesData?.length}{" "}
             </span>
             results
           </span>

@@ -1,22 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, { useState } from "react";
 import PropertiesPagination from "./Pagination/PropertiesPagination";
 import Property from "./SingleProperty/Property";
 import PropertySorting from "./PropertySorting";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Link from "next/link";
 
-
 const MainContent = ({ properties }) => {
-  const {filterData, amenitiesData} = useSelector((state) => state);
+  const { filterData, amenitiesData, propertySort } = useSelector(
+    (state) => state
+  );
   const [pageNumber, setPageNumber] = useState(0);
   const propertyPerPage = 5;
   const pagesVisited = pageNumber * propertyPerPage;
-  const propertiesPageNumber = Math.ceil(properties.length / propertyPerPage);
-  const filterPageNumber = Math.ceil(filterData.dataList?.length / propertyPerPage);
-  const ameniteFilterPage = Math.ceil(amenitiesData.dataList?.length / propertyPerPage);
-  // const sort = Math.ceil(propertySort.sortData?.length / propertyPerPage);
+  console.log(propertySort.sortData);
 
+  const propertiesPageNumber = Math.ceil(properties.length / propertyPerPage);
+  const filterPageNumber = Math.ceil(
+    filterData.dataList?.length / propertyPerPage
+  );
+  const ameniteFilterPage = Math.ceil(
+    amenitiesData.dataList?.length / propertyPerPage
+  );
+  const sortPage = Math.ceil(propertySort.sortData?.length / propertyPerPage);
+
+  console.log(!filterData.dataList &&
+    !amenitiesData.dataList &&
+    !propertySort.sortData)
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
@@ -52,19 +61,20 @@ const MainContent = ({ properties }) => {
         </div>
         {/* Sorting*/}
         <PropertySorting
-         
           filterData={filterData.dataList}
           properties={properties}
-          amenitiesData = {amenitiesData.dataList}
+          amenitiesData={amenitiesData.dataList}
         />
-        
-        { !filterData.dataList && !amenitiesData.dataList && properties.length > 0 && (
+
+        {!filterData.dataList &&
+          !amenitiesData.dataList &&
+          !propertySort.sortData &&
+          properties.length > 0 &&
           properties
             .slice(pagesVisited, pagesVisited + propertyPerPage)
-            ?.map((item, index) => <Property key={index} property={item} />)
-        ) }
+            ?.map((item, index) => <Property key={index} property={item} />)}
 
-        {filterData.dataList &&
+        {!propertySort.sortData && filterData.dataList &&
           (filterData.dataList.length > 0 ? (
             filterData.dataList
               ?.slice(pagesVisited, pagesVisited + propertyPerPage)
@@ -73,7 +83,7 @@ const MainContent = ({ properties }) => {
             <div>Property not found</div>
           ))}
 
-        {amenitiesData.dataList &&
+        {!propertySort.sortData && amenitiesData.dataList &&
           (amenitiesData.dataList.length > 0 ? (
             amenitiesData.dataList
               ?.slice(pagesVisited, pagesVisited + propertyPerPage)
@@ -81,10 +91,17 @@ const MainContent = ({ properties }) => {
           ) : (
             <div>Property not found</div>
           ))}
-      
+        {propertySort.sortData &&
+          (propertySort.sortData.length > 0 ? (
+            propertySort.sortData
+              ?.slice(pagesVisited, pagesVisited + propertyPerPage)
+              ?.map((item, i) => <Property key={i} property={item} />)
+          ) : (
+            <div>Property not found</div>
+          ))}
 
         {/* pagination here */}
-      
+
         {filterData.dataList && (
           <PropertiesPagination
             pageCount={filterPageNumber}
@@ -97,13 +114,12 @@ const MainContent = ({ properties }) => {
             changePage={changePage}
           />
         )}
-        { !filterData.dataList && !amenitiesData.dataList &&  (
+        {!filterData.dataList && !amenitiesData.dataList && (
           <PropertiesPagination
             pageCount={propertiesPageNumber}
             changePage={changePage}
           />
         )}
-       
       </div>
     </>
   );
