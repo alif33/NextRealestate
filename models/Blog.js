@@ -53,7 +53,7 @@ const blogSchema = new mongoose.Schema(
         image: {
             type: String
         },
-        comments: [commentSchema],
+        comments: [commentSchema]
     },
     { timestamps: true }
 );
