@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setAmenitiesData } from "../../../../../../store/catrgories copy/actions";
+import { setAmenitiesData } from "../../../../../../store/amenitiesData/actions";
 import { setFilterData } from "../../../../../../store/propertyFilterData/actions";
 import { amenitesArray } from "../../../../../../__lib__/config";
 import Amenities from "./Amenities";
-const PropertyAmenities = () => {
+const PropertyAmenities = ({amenities, setAmenities}) => {
 
-  const [amenities, setAmenities] = useState([])
   const dispatch = useDispatch()
-
   useEffect(()=> {
     dispatch(setAmenitiesData(amenities))
   }, [amenities, dispatch])
@@ -34,7 +32,7 @@ const PropertyAmenities = () => {
           data-simplebar-auto-hide="false"
           style={{ height: "11rem" }}
         >
-          {amenitesArray.map((value, i) => <Amenities handleAmenities={handleAmenities} key={i} value={value}/>)}
+          {amenitesArray.map((value, i) => <Amenities amenities={amenities} handleAmenities={handleAmenities} key={i} value={value}/>)}
         </div>
       </div>
     </>

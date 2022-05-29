@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setAmenitiesData } from "../../../../../store/catrgories copy/actions";
+import { setAmenitiesData } from "../../../../../store/amenitiesData/actions";
 import { setSelectedCategory } from "../../../../../store/propertyCategory/actions";
 import { setFilterData } from "../../../../../store/propertyFilterData/actions";
 import { setSearch } from "../../../../../store/propertySearch/actions";

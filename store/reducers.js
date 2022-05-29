@@ -14,7 +14,7 @@ import { propertiesSlice } from './properties/slice';
 import { propertySortSlice } from './propertySort/slice';
 import { premiumSelectedSlice } from './premiumSelect/slice';
 import { filterDataSlice } from './propertyFilterData/slice';
-import { amenitiesDataSlice } from './catrgories copy/slice';
+import { amenitiesDataSlice } from './amenitiesData/slice';
 
 export const rootReducer = combineReducers({
     users: userSlice.reducer,

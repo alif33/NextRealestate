@@ -6,10 +6,11 @@ import { setPremiumSelected } from "../../../../../store/premiumSelect/actions";
 import { useDispatch } from "react-redux";
 import { setSelectedCategory } from "../../../../../store/propertyCategory/actions";
 import { setFilterData } from "../../../../../store/propertyFilterData/actions";
-import { setAmenitiesData } from "../../../../../store/catrgories copy/actions";
+import { setAmenitiesData } from "../../../../../store/amenitiesData/actions";
 const PremiumFilters = ({ filterTab }) => {
   const dispatch = useDispatch();
   const [premium, setPremium] = useState(undefined);
+  const [amenities, setAmenities] = useState([])
 
 
   useEffect(() => {
@@ -52,9 +53,14 @@ const PremiumFilters = ({ filterTab }) => {
             />
           ))}
         </div>
-        <PropertyAmenities />
+        <PropertyAmenities setAmenities={setAmenities}  amenities={amenities}/>
         <div className="border-top py-2">
-          <button className="btn btn-outline-primary" type="button">
+          <button
+            onClick={() => {
+              setAmenities([])
+              dispatch(setAmenitiesData([]))
+            }}
+          className="btn btn-outline-primary" type="button">
             <i className="fi-rotate-right me-2" />
             Reset filters
           </button>
