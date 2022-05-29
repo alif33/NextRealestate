@@ -54,11 +54,6 @@ const blogSchema = new mongoose.Schema(
             type: String
         },
         comments: [commentSchema],
-        postedBy: {
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'User', 
-            required: true 
-        }
     },
     { timestamps: true }
 );

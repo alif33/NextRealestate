@@ -1,19 +1,20 @@
 import Link from "next/link";
-import BlogCard2 from "../../src/components/client/Blogs/BlogCard2";
-import BlogSearch from "../../src/components/client/Blogs/BlogSearch";
-import BlogShorted from "../../src/components/client/Blogs/BlogShorted";
-import BlogCategory from "../../src/components/client/Blogs/Category/BlogCategory";
-import BlogFeturedPosts from "../../src/components/client/Blogs/FeturedPost/BlogFeturedPosts";
-import BlogPagination from "../../src/components/client/Blogs/Pagination/BlogPagination";
-import Subcriber from "../../src/components/client/Blogs/Subcriber";
-import BlogTags from "../../src/components/client/Blogs/Tags/BlogTags";
-import Layout from "../../src/components/client/layout";
-import { getData } from "../../__lib__/helpers/HttpService";
+import BlogCard2 from "../../../src/components/client/Blogs/BlogCard2";
+import BlogSearch from "../../../src/components/client/Blogs/BlogSearch";
+import BlogShorted from "../../../src/components/client/Blogs/BlogShorted";
+import BlogCategory from "../../../src/components/client/Blogs/Category/BlogCategory";
+import BlogFeturedPosts from "../../../src/components/client/Blogs/FeturedPost/BlogFeturedPosts";
+import BlogPagination from "../../../src/components/client/Blogs/Pagination/BlogPagination";
+import Subcriber from "../../../src/components/client/Blogs/Subcriber";
+import BlogTags from "../../../src/components/client/Blogs/Tags/BlogTags";
+import Layout from "../../../src/components/client/layout";
+import { getData } from "../../../__lib__/helpers/HttpService";
 
 function CategorySlug({ blogs }) {
   const shorted = blogs.slice(blogs?.length - 2, blogs?.length);
   const shorted2 = blogs.slice(1, blogs.length - 2)
   const reversed = shorted2.reverse()
+  
   return (
     <Layout>
       <div className="container mt-5 mb-md-4 py-5">
@@ -82,10 +83,10 @@ export default CategorySlug;
 
 export async function getServerSideProps(context) {
 const categorySlug = context.params?.categorySlug;
-  const blogs = await getData("/blogs");
+  const blogs = await getData(`/blogs/c/${categorySlug}`);
   return {
     props: {
-      blogs,
+      blogs: blogs || []
     },
   };
 }

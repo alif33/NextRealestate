@@ -4,7 +4,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import streamifier from 'streamifier';
 import Blog from '../../../models/Blog';
 import db from '../../../utils/db';
-import { isAuth } from '../../../utils/auth';
+import { isAdmin } from '../../../utils/auth';
 import slugify from 'slugify';
 
 cloudinary.config({
@@ -22,7 +22,7 @@ export const config = {
 const handler = nc();
 const upload = multer();
 
-handler.use(isAuth, upload.single('image')).post(async (req, res) => {
+handler.use(isAdmin, upload.single('image')).post(async (req, res) => {
     const { title, body, category, tags } = req.body;
 
     const streamUpload = (req) => {
