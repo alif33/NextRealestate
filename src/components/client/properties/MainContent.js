@@ -5,84 +5,16 @@ import Property from "./SingleProperty/Property";
 import PropertySorting from "./PropertySorting";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { setProperties } from "../../../../store/properties/actions";
-import {
-  getData,
-  getDataWithReq,
-} from "../../../../__lib__/helpers/HttpService";
-import queryString from "query-string";
-import { setFilterData } from "../../../../store/propertyFilterData/actions";
+
 
 const MainContent = ({ properties }) => {
-  const {filterData} = useSelector((state) => state);
-
-  // const filtered = properties?.filter((val) => {
-  //   if (!selected) {
-  //     return [];
-  //   } else if (
-  //     val.bedrooms === parseInt(selected?.bedroom) ||
-  //     val.propertyType?.toLowerCase() ===
-  //       selected?.propertytype?.toLowerCase() ||
-  //     val.bathrooms === parseInt(selected?.bathroom) ||
-  //     val.monthlyRent <= parseInt(selected?.budget) ||
-  //     val.furnishedStatus.toLowerCase() ===
-  //       selected?.furnishing?.toLowerCase() ||
-  //     val.tenantsPreferred.toLowerCase() ===
-  //       selected?.tenantpreferred?.toLowerCase() ||
-  //     val.availability.toLowerCase() ===
-  //       selected?.availability?.toLowerCase() ||
-  //     val.ageConstruction.toLowerCase() ===
-  //       selected?.ageofconstruction?.toLowerCase()
-  //   ) {
-  //     return val;
-  //   }
-  // });
-
-  // const searchFilter = properties?.filter((val) => {
-  //   if (!search.search?.keywords) {
-  //     return [];
-  //   } else if (
-  //     val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-  //     val.areaName
-  //       .toLowerCase()
-  //       .includes(search.search?.keywords?.toLowerCase()) ||
-  //     val.state.toLowerCase().includes(search.search?.keywords?.toLowerCase())
-  //   ) {
-
-  //     return val;
-  //   } else if (
-  //     val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-  //     val.areaName
-  //       .toLowerCase()
-  //       .includes(search.search?.keywords?.toLowerCase()) ||
-  //     (val.state
-  //       .toLowerCase()
-  //       .includes(search.search?.keywords?.toLowerCase()) &&
-  //       val.bedrooms === parseInt(search.search?.bedroom?.toLowerCase()))
-  //   ) {
-  //     return val;
-  //   } else if (
-  //     val.city.toLowerCase().includes(search.search?.keywords?.toLowerCase()) ||
-  //     val.areaName
-  //       .toLowerCase()
-  //       .includes(search.search?.keywords?.toLowerCase()) ||
-  //     (val.state
-  //       .toLowerCase()
-  //       .includes(search.search?.keywords?.toLowerCase()) &&
-  //       val.bedrooms >= parseInt(search.search?.bedroom?.toLowerCase()))
-  //   ) {
-  //     return val;
-  //   }
-  // });
-
+  const {filterData, amenitiesData} = useSelector((state) => state);
   const [pageNumber, setPageNumber] = useState(0);
   const propertyPerPage = 5;
   const pagesVisited = pageNumber * propertyPerPage;
-
   const propertiesPageNumber = Math.ceil(properties.length / propertyPerPage);
-  const filterPageNumber = Math.ceil(
-    filterData.dataList?.length / propertyPerPage
-  );
+  const filterPageNumber = Math.ceil(filterData.dataList?.length / propertyPerPage);
+  const ameniteFilterPage = Math.ceil(amenitiesData.dataList?.length / propertyPerPage);
   // const sort = Math.ceil(propertySort.sortData?.length / propertyPerPage);
 
   const changePage = ({ selected }) => {
@@ -123,15 +55,16 @@ const MainContent = ({ properties }) => {
          
           filterData={filterData.dataList}
           properties={properties}
+          amenitiesData = {amenitiesData.dataList}
         />
         
-        { !filterData.dataList  && properties.length > 0 && (
+        { !filterData.dataList && !amenitiesData.dataList && properties.length > 0 && (
           properties
             .slice(pagesVisited, pagesVisited + propertyPerPage)
             ?.map((item, index) => <Property key={index} property={item} />)
         ) }
 
-        { filterData.dataList &&
+        {filterData.dataList &&
           (filterData.dataList.length > 0 ? (
             filterData.dataList
               ?.slice(pagesVisited, pagesVisited + propertyPerPage)
@@ -139,15 +72,16 @@ const MainContent = ({ properties }) => {
           ) : (
             <div>Property not found</div>
           ))}
-        {/* {search.search &&
-          !propertySort.sortData &&
-          (searchFilter.length > 0 ? (
-            searchFilter
-              .slice(pagesVisited, pagesVisited + propertyPerPage)
-              ?.map((item, index) => <Property key={index} property={item} />)
+
+        {amenitiesData.dataList &&
+          (amenitiesData.dataList.length > 0 ? (
+            amenitiesData.dataList
+              ?.slice(pagesVisited, pagesVisited + propertyPerPage)
+              ?.map((item, i) => <Property key={i} property={item} />)
           ) : (
-            <div>Property Not found</div>
-          ))} */}
+            <div>Property not found</div>
+          ))}
+      
 
         {/* pagination here */}
       
@@ -157,7 +91,13 @@ const MainContent = ({ properties }) => {
             changePage={changePage}
           />
         )}
-        { !filterData.dataList && (
+        {amenitiesData.dataList && (
+          <PropertiesPagination
+            pageCount={ameniteFilterPage}
+            changePage={changePage}
+          />
+        )}
+        { !filterData.dataList && !amenitiesData.dataList &&  (
           <PropertiesPagination
             pageCount={propertiesPageNumber}
             changePage={changePage}

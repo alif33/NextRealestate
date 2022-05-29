@@ -4,12 +4,10 @@ import { setSelectedCategory } from "../../../../store/propertyCategory/actions"
 import { setSearch } from "../../../../store/propertySearch/actions";
 import { setSortProperty } from "../../../../store/propertySort/actions";
 
-const PropertySorting = ({ properties, filterData }) => {
-  console.log(filterData)
-  const dispatch = useDispatch();
-  const { search } = useSelector(
-    (state) => state
-  );
+const PropertySorting = ({ properties, filterData, amenitiesData }) => {
+ 
+  console.log(amenitiesData, filterData)
+
   const handleSort = (e) => {
     if (e === "newest") {
       const reversed = properties.slice().reverse();

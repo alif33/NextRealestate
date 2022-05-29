@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { setAmenitiesData } from "../../../../../store/catrgories copy/actions";
 import { setSelectedCategory } from "../../../../../store/propertyCategory/actions";
 import { setFilterData } from "../../../../../store/propertyFilterData/actions";
 import { setSearch } from "../../../../../store/propertySearch/actions";
@@ -20,6 +21,7 @@ const PropertyCategories = ({ filterTab }) => {
 
 
   const handleCategory = (e) => {
+    dispatch(setAmenitiesData([]))
     const name = e.target.name;
     const value = e.target.value;
 

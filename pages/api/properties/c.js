@@ -4,9 +4,6 @@ import Property from "../../../models/Property";
 const handler = nc();
 
 handler.post(async (req, res) => {
-  
-
-  console.log(!req.body.monthlyRent);
   await db.connect();
 
   if (!req.body.monthlyRent) {
