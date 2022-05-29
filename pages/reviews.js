@@ -13,10 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setReviews } from "../store/reviews/actions";
 import ContactUsModal from "../src/components/client/Reviews/ContactUsModal/ContactUsModal";
 const Reviews = () => {
+  const [sortReviews, setSortReviews] = useState(null)
 
   const dispatch = useDispatch();
   const {reviews} = useSelector(state => state)
   const {reviewList} = reviews;
+
+
 
   useEffect(() => {
     dispatch(setReviews())
@@ -54,9 +57,12 @@ const Reviews = () => {
               <ReviewStatics />
 
               {/* Sorting + add review button*/}
-              <ShortAndReviewButton />
+              <ShortAndReviewButton
+              setSortReviews={setSortReviews}
+              reviews={reviewList}/>
               {/* Review*/}
-            {reviewList?.slice(pagesVisited, pagesVisited + propertyPerPage)?.map((review, i) =>   <ReviewCard key={i} review={review} />)}
+            {!sortReviews && reviewList?.slice(pagesVisited, pagesVisited + propertyPerPage)?.map((review, i) =>   <ReviewCard key={i} review={review} />)}
+            {sortReviews && sortReviews?.slice(pagesVisited, pagesVisited + propertyPerPage)?.map((review, i) =>   <ReviewCard key={i} review={review} />)}
 
               {/* Pagination*/}
               <ReviewPagination 
