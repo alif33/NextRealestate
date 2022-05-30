@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import BlogCard from "../src/components/client/Blogs/BlogCard";
-import BlogCard2 from "../src/components/client/Blogs/BlogCard2";
-import BlogSearch from "../src/components/client/Blogs/BlogSearch";
-import BlogShorted from "../src/components/client/Blogs/BlogShorted";
-import BlogCategory from "../src/components/client/Blogs/Category/BlogCategory";
-import FeturedPosts from "../src/components/client/Blogs/FeturedPost/BlogFeturedPosts";
-import BlogPagination from "../src/components/client/Blogs/Pagination/BlogPagination";
-import Subcriber from "../src/components/client/Blogs/Subcriber";
-import BlogTags from "../src/components/client/Blogs/Tags/BlogTags";
-import Layout from "../src/components/client/layout";
-import { getData } from "../__lib__/helpers/HttpService";
+import BlogCard2 from "../../src/components/client/Blogs/BlogCard2";
+import BlogCard from "../../src/components/client/Blogs/BlogCard";
+import BlogSearch from "../../src/components/client/Blogs/BlogSearch";
+import BlogShorted from "../../src/components/client/Blogs/BlogShorted";
+import BlogCategory from "../../src/components/client/Blogs/Category/BlogCategory";
+import FeturedPosts from "../../src/components/client/Blogs/FeturedPost/BlogFeturedPosts";
+import BlogPagination from "../../src/components/client/Blogs/Pagination/BlogPagination";
+import Subcriber from "../../src/components/client/Blogs/Subcriber";
+import BlogTags from "../../src/components/client/Blogs/Tags/BlogTags";
+import Layout from "../../src/components/client/layout";
+import { getData } from "../../__lib__/helpers/HttpService";
 
 function Blogs({ blogs, tags }) {
   const [search, setSearch] = useState(null);
