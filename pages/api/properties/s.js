@@ -6,7 +6,6 @@ const handler = nc();
 
 handler.get(async (req, res) => {
   const { location, bedrooms, budgets } = req.query;
- console.log(req.query)
 
   await db.connect();
   //   await db.properties.createIndex({areaName: "text", city: "text", state: "text"});
