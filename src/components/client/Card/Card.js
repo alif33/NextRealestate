@@ -17,6 +17,7 @@ const Card = ({item, type}) => {
               <i className="fi-heart" />
             </button>}
             <img
+            style={{height: '242px', width: '100%'}}
               className="rounded-3"
               src={images[0]}
               alt="Article img"

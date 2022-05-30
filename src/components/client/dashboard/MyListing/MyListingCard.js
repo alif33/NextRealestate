@@ -1,7 +1,16 @@
 import React from "react";
 
-const MyListingCard = ({item}) => {
-   const {bedrooms, propertyType, monthlyRent, furnishedStatus, areaName, city, state, pinCode} = item
+const MyListingCard = ({ item }) => {
+  const {
+    bedrooms,
+    propertyType,
+    monthlyRent,
+    furnishedStatus,
+    areaName,
+    city,
+    state,
+    pinCode,
+  } = item;
   return (
     <>
       <div className="col pt-2">
@@ -17,7 +26,8 @@ const MyListingCard = ({item}) => {
               <i className="fi-heart" />
             </button>
             <img
-              className="rounded-3"
+              style={{ height: "240px", width: "100%" }}
+              className="rounded-3 border"
               src="img/rokye-website/catalog/07.jpg"
               alt="Article img"
             />
@@ -34,7 +44,7 @@ const MyListingCard = ({item}) => {
             </li>
             <li className="list-inline-item pe-1">
               <i className="fi-bed mt-n1 me-1 fs-base text-muted align-middle" />
-             {furnishedStatus}
+              {furnishedStatus}
             </li>
           </ul>
         </div>
