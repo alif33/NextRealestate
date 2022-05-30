@@ -34,10 +34,10 @@ handler.delete(async (req, res) => {
   if (user) {
     await user.remove();
     await db.disconnect();
-    res.send({ message: 'User Deleted' });
+    res.send({ success: true,  message: 'User Deleted' });
   } else {
     await db.disconnect();
-    res.status(404).send({ message: 'User Not Found' });
+    res.send({success: false, message: 'User Not Found' });
   }
 });
 

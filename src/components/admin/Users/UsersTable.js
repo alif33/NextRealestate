@@ -1,56 +1,58 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import GridLoader from "react-spinners/GridLoader";
-import { setCategories } from "../../../../store/catrgories/actions";
-import { setTags } from "../../../../store/tags/actions";
-import { getData } from "../../../../__lib__/helpers/HttpService";
-import CategoryModal from "./TagModal";
-import TagTableList from "./TagTableList";
-import CategoryTableList from "./TagTableList";
+import { getData, getUserData } from "../../../../__lib__/helpers/HttpService";
+import UserTableList from "./UserTableList";
+import Cookies from "universal-cookie";
 
-const TagTable = (props) => {
-  const [trigger, setTrigger] = useState(false);
+
+const UsersTable = (props) => {
+  const cookies = new Cookies;
   const [loading, setLoading] = useState(true);
   const [color, setColor] = useState("#27d37f");
-  const { tags } = useSelector((state) => state);
-  const dispatch = useDispatch();
-  const { tagList } = tags;
+  const [users, setUsers] = useState({isLoading: true, userList: []})
+  const admin = cookies.get('_admin')
+  console.log(admin.token)
+
   useEffect(() => {
-    dispatch(setTags());
+    getUserData('/admin/users', admin.token)
+    .then(res => setUsers({isLoading: false, userList: res}))
+
   }, []);
+
   return (
     <div>
-      <CategoryModal setTrigger={setTrigger} trigger={trigger} />
       <div className="row" id="basic-table">
         <div className="col-12">
           <div className="card">
             <div className="card-header">
               <div className="">
-                <h4 className="card-title">Tag Lists</h4>
+                <h4 className="card-title">User Lists</h4>
               </div>
-              <button
+              {/* <button
                 onClick={() => setTrigger(true)}
                 className="btn btn-primary"
               >
                 Add Tag
-              </button>
+              </button> */}
             </div>
-            {tagList?.length > 0 ? (
+            {users.userList?.length > 0 ? (
               <div
                 className="table-responsive"
-                style={tagList?.length < 5 ? { height: "300px" } : {}}
+                style={users.userList?.length < 5 ? { height: "300px" } : {}}
               >
                 <table className="table">
                   <thead>
                     <tr>
                       <th>Id</th>
                       <th>Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {tagList?.map((cate, i) => (
-                      <TagTableList key={i} data={cate} />
+                    {users.userList?.map((user, i) => (
+                      <UserTableList setUsers={setUsers} key={i} user={user} />
                     ))}
                   </tbody>
                 </table>
@@ -58,12 +60,12 @@ const TagTable = (props) => {
             ) : (
               <div className="p-4">
                 <div className="d-flex justify-content-center align-items-center">
-                <h4>User not available</h4>
+                  <h4>User not available</h4>
                 </div>
               </div>
             )}
             {
-              tags.isLoading && <div className="p-4">
+              users.isLoading && <div className="p-4">
               <div className="d-flex justify-content-center align-items-center">
                 <GridLoader color={color} loading={loading} size={8} />
                 
@@ -77,4 +79,4 @@ const TagTable = (props) => {
   );
 };
 
-export default TagTable;
+export default UsersTable;

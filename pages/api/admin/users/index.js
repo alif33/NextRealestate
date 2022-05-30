@@ -4,8 +4,7 @@ import User from '../../../../models/User';
 import db from '../../../../utils/db';
 
 const handler = nc();
-handler.use(isAuth, isAdmin);
-
+handler.use( isAdmin);
 handler.get(async (req, res) => {
   await db.connect();
   const users = await User.find({});

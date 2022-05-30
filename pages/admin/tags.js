@@ -9,42 +9,9 @@ import TagTable from "../../src/components/admin/Tags/TagTable";
 import { Toaster } from "react-hot-toast";
 
 const Tags = (props) => {
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const [disable, setDisable] = useState(false);
-  const onError = (err) => showErr(err);
 
-  const [categories, setCategories] = useState();
-  const [modal, setModal] = useState(false);
 
-  const showModal = () => {
-    setModal(true);
-  };
 
-  const closeModal = () => {
-    setModal(false);
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getData("/categories");
-      setCategories(data);
-    };
-
-    fetchData();
-  }, []);
-
-  const onSubmit = (data) => {
-    postData("/admin/category", data, setDisable).then((res) => {
-      if (res?.success) {
-        closeModal();
-      }
-    });
-  };
 
   return (
     <AdminLayout>
