@@ -34,7 +34,7 @@ const CategoryTable = (props) => {
                 Add Category
               </button>
             </div>
-            {categoryList?.length > 0 ? (
+            {categoryList?.length > 0 && !categories?.isLoading ? (
               <div
                 className="table-responsive"
                 style={categoryList?.length < 5 ? { height: "300px" } : {}}

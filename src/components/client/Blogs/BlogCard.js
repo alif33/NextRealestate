@@ -28,7 +28,7 @@ const BlogCard = ({blog}) => {
             </a>
           </Link>
           <div className="card-body pb-3">
-          <Link href={`/category/${category.categorySlug}`}>
+          <Link href={`/blogs/category/${category.categorySlug}`}>
             <a className="fs-xs text-uppercase text-decoration-none">
               {category.categoryName}
             </a>
