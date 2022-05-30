@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { setCategories } from "../../../../store/catrgories/actions";
 import { setTags } from "../../../../store/tags/actions";
 import Select from "react-select";
+import { setBlogs } from "../../../../store/blogs/actions";
+import toast from "react-hot-toast";
 
 const AddBlogModal = ({ trigger, setTrigger }) => {
   const dispatch = useDispatch();
@@ -16,6 +18,8 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
   const { categories, tags } = useSelector((state) => state);
   const { categoryList } = categories;
   const { tagList } = tags;
+  const [isValid, setIsValid] = useState(false)
+
 
   useEffect(() => {
     dispatch(setCategories());
@@ -30,15 +34,30 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
     formState: { errors },
   } = useForm();
 
+  console.log(!!watch().category)
+
   const onSubmit = async (data) => {
+    setIsValid(true)
     setDisable(true);
+    const formData = await new FormData();
+    formData.append("title", data.title);
+    formData.append("body", data.body);
+    formData.append("image", data.image[0]);
+    formData.append("category", data.category);
+    for (let i = 0; i < selectedTag?.length; i++) {
+      formData.append("tags[]", selectedTag[i].value);
+    }
+    await submit(formData)
+  };
+  const submit = async (data) => {
     const admins = await cookies.get("_admin");
     authPost("/blog", data, admins.token).then((res) => {
       if (res.success) {
         toast.success(res.message);
         reset();
         setDisable(false);
-        dispatch(setCategories());
+        dispatch(setBlogs());
+        setTrigger(false)
       } else {
         setDisable(false);
         toast.error(res.message);
@@ -48,13 +67,12 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
 
   const handleSelectTag = (e) => {
     setSelectedTag(e);
-  }; 
-   const tagsOption = tagList?.map((tag) => ({
+  };
+  const tagsOption = tagList?.map((tag) => ({
     label: tag.tagName,
     value: tag.tagSlug,
   }));
-
-
+console.log(trigger)
   return (
     <>
       <Modals trigger={trigger} setTrigger={setTrigger} size={""}>
@@ -127,7 +145,7 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
                 name="category"
                 className="form-control text-capitalize add-credit-card-mask"
               >
-                <option disabled selected>
+                <option value disabled selected>
                   Category
                 </option>
                 {categoryList?.map((cate) => (
@@ -141,7 +159,7 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
                 ))}
               </select>
             </div>
-            {watch().category && (
+            {watch().category === 'true' && isValid && (
               <div className="text-danger">Category required </div>
             )}
           </div>

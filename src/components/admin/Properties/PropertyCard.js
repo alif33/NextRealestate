@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import dateFormat from "dateformat";
-import { CheckSquare, ChevronDown, ChevronUp } from "react-feather";
+import { CheckSquare, ChevronDown, ChevronUp, MapPin } from "react-feather";
+import { removeData } from "../../../../__lib__/helpers/HttpService";
+import toast from "react-hot-toast";
+import Cookies from "universal-cookie";
+import { useDispatch } from "react-redux";
+import { setProperties } from "../../../../store/properties/actions";
+
 const ContactsCard = ({ data, index }) => {
+  const cookies = new Cookies();
+  const [collapse, setCollapse] = useState(false)
+  const dispatch = useDispatch()
   const {
     _id,
     bedrooms,
@@ -35,7 +44,22 @@ const ContactsCard = ({ data, index }) => {
     petPermission,
   } = data;
 
-  const [collapse, setCollapse] = useState(false)
+const hanndleRemove = async (id) => {
+  const admin = cookies.get('_admin')
+  const isTrue = confirm('Are you sure?')
+  if (isTrue) {
+    removeData(`/property/${id}`, admin.token)
+    .then(res => {
+      if (res.success) {
+        dispatch(setProperties())
+        toast.success(res.message);
+      }else{
+        toast.error(res.message)
+      }
+    })
+  }
+}
+
   return (
     <div className="col-12">
       <div className="card mb-4">
@@ -48,7 +72,7 @@ const ContactsCard = ({ data, index }) => {
                   {bedrooms} Bed {propertyType} | {superArea} sq.ft
                 </h5>
                 <span className="text-capitalize">
-                  {areaName} {city} <span className="text-lowercase">in</span>{" "}
+                <MapPin size={13}/>  {areaName} {city} <span className="text-lowercase">in</span>{" "}
                   {state}
                 </span>
               </div>
@@ -57,7 +81,7 @@ const ContactsCard = ({ data, index }) => {
                   {dateFormat(data.createdAt, "mmm d, yyyy")}
                 </h6>
                 <button
-                  onClick={() => confirm("You agree")}
+                  onClick={() => hanndleRemove(_id)}
                   className="btn btn-danger"
                 >
                   Remove

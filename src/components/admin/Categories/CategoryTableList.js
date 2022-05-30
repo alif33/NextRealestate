@@ -1,9 +1,17 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
+import { setCategories } from "../../../../store/catrgories/actions";
+import { removeData } from "../../../../__lib__/helpers/HttpService";
 
 const CategoryTableList = ({ data }) => {
+  const cookies = new Cookies();
   const [toggle, setToggle] = useState(false);
+  const dispatch = useDispatch();
+
   useEffect(() => {
 
     const closeAction = (e) => {
@@ -15,12 +23,27 @@ const CategoryTableList = ({ data }) => {
     return () => document.body.removeEventListener("click", closeAction);
   }, []);
 
+  const hanndleRemove = async (id) => {
+    const admin = cookies.get('_admin')
+      removeData(`/admin/category/${id}`, admin.token)
+      .then(res => {
+        if (res.success) {
+          dispatch(setCategories())
+          toast.success(res.message);
+        }else{
+          toast.error(res.error)
+        }
+      })
+    
+  }
+  
+
   return (
     <>
       <tr>
         
         <td>{data._id}</td>
-        <td>{data.categoryName}</td>
+        <td className="text-capitalize">{data.categoryName}</td>
         <td>
           <div className="dropdown">
             <button
@@ -64,7 +87,7 @@ const CategoryTableList = ({ data }) => {
                   : {}
               }
             >
-              <Link  href={`/admin/bodyparts/edit/${data._id}`}>
+              {/* <Link  href={`/admin/bodyparts/edit/${data._id}`}>
                 <a className="dropdown-item" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -82,8 +105,10 @@ const CategoryTableList = ({ data }) => {
                   </svg>
                   <span>Edit</span>
                 </a>
-              </Link>
-              <a className="dropdown-item">
+              </Link> */}
+              <a 
+                onClick={() => hanndleRemove(data._id)}
+              className="dropdown-item">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width={14}

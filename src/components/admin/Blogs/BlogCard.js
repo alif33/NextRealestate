@@ -4,21 +4,26 @@ import { User } from "react-feather";
 import { removeData } from "../../../../__lib__/helpers/HttpService";
 import Cookies from "universal-cookie";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setBlogs } from "../../../../store/blogs/actions";
 const BlogCard = ({ data }) => {
   const cookies = new Cookies();
+  const dispatch = useDispatch();
   const { _id, tags, category, title, image, body, postedBy } = data;
   const admin = cookies.get('_admin')
-  console.log(admin)
+
+
   const blogRemove = id => {
     const isTrue = confirm('Are you sure')
-    console.log(id)
         if (isTrue) {
           removeData(`/blog/${id}`, admin.token)
           .then(res => {
             if (res.success) {
+              dispatch(setBlogs())
               toast.success(res.message)
             }else{
-              toast.error('Something wrong')
+              
+              toast.error(res.error)
             }
           })
     }
@@ -54,7 +59,7 @@ const BlogCard = ({ data }) => {
                 <img className="rounded" src={image} alt="image" />
               </div>
               <div className="col">
-                  <div>
+                  {/* <div>
                     <span 
                     style={{padding: '26px 11px'}}
                     className="bg-danger ms-4 rounded-circle">
@@ -63,7 +68,7 @@ const BlogCard = ({ data }) => {
                     <h5 className="mt-3">Author: {postedBy?.name}</h5>
                     <p className="card-text mb-0">Email: {postedBy?.email}</p>
                     <p className="card-text mb-0">Phone: {postedBy?.phone}</p>
-                  </div>
+                  </div> */}
               </div>
             </div>
             <div className="my-3 d-flex">

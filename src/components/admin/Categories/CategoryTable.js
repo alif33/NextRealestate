@@ -16,6 +16,7 @@ const CategoryTable = (props) => {
   useEffect(() => {
     dispatch(setCategories())
   },[])
+  console.log(trigger)
   return (
     <div>
       <CategoryModal setTrigger={setTrigger} trigger={trigger} />
@@ -56,10 +57,18 @@ const CategoryTable = (props) => {
             ) : (
               <div className="p-4">
                 <div className="d-flex justify-content-center align-items-center">
-                  <GridLoader color={color} loading={loading} size={8} />
+                  {/* <GridLoader color={color} loading={loading} size={8} /> */}
+                <h4>Category not available</h4>
                 </div>
               </div>
             )}
+            {
+              categories.isLoading && <div className="p-4">
+              <div className="d-flex justify-content-center align-items-center">
+                <GridLoader color={color} loading={loading} size={8} />
+              </div>
+            </div>
+            }
           </div>
         </div>
       </div>

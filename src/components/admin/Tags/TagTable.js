@@ -62,6 +62,14 @@ const TagTable = (props) => {
                 </div>
               </div>
             )}
+            {
+              tags.isLoadiing && <div className="p-4">
+              <div className="d-flex justify-content-center align-items-center">
+                <GridLoader color={color} loading={loading} size={8} />
+                
+              </div>
+            </div>
+            }
           </div>
         </div>
       </div>

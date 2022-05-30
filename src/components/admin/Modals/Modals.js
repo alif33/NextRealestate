@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 const Modals = ({trigger, setTrigger, children, size}) => {
+const ref = useRef()
+useEffect(()=> {
+    // const checkOutSideClick = (e) =>{
+    //   if (ref.current && !ref.current.contains(e.target)) {
+    //     setTrigger(false)
+    //   }
+    // } 
+    // document.addEventListener('click', checkOutSideClick);
+    // return () => {
+    //   document.removeEventListener('click', checkOutSideClick)
+    // }
+})
 
   return (
     <>
       <div
+      
         className={`modal fade ${trigger ? 'show': ''}`}
         id="addNewCard"
         tabIndex={-1}
@@ -12,7 +25,7 @@ const Modals = ({trigger, setTrigger, children, size}) => {
         style={{ display: `${trigger ? 'block': 'none'}`, background: '#000000a3', transition: 'all 0.5s'}}
         aria-hidden="true"
       >
-        <div className={`modal-dialog modal-dialog-centered ${size}`}>
+        <div ref={ref} className={`modal-dialog modal-dialog-centered ${size}`}>
           <div className="modal-content">
             <div className="modal-header bg-transparent">
               <button

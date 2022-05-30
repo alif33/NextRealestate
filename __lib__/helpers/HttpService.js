@@ -101,7 +101,7 @@ export const removeData = async (endPoint, token) => {
     });
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
+    // toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };

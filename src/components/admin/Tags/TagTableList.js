@@ -1,11 +1,18 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
+import { setTags } from "../../../../store/tags/actions";
+import { removeData } from "../../../../__lib__/helpers/HttpService";
 
 const TagTableList = ({ data }) => {
+  const cookies = new Cookies();
   const [toggle, setToggle] = useState(false);
-  useEffect(() => {
+  const dispatch = useDispatch();
 
+  useEffect(() => {
     const closeAction = (e) => {
       if (e.path[1].tagName !== "BUTTON") {
         setToggle(false);
@@ -15,12 +22,25 @@ const TagTableList = ({ data }) => {
     return () => document.body.removeEventListener("click", closeAction);
   }, []);
 
+  const hanndleRemove = async (id) => {
+    const admin = cookies.get('_admin')
+      removeData(`/admin/tag/${id}`, admin.token)
+      .then(res => {
+        if (res.success) {
+          dispatch(setTags())
+          toast.success(res.message);
+        }else{
+          toast.error(res.error)
+        }
+      })
+  }
+  
   return (
     <>
       <tr>
         
         <td>{data._id}</td>
-        <td>{data.tagName}</td>
+        <td className="text-capitalize">{data.tagName}</td>
         <td>
           <div className="dropdown">
             <button
@@ -64,7 +84,7 @@ const TagTableList = ({ data }) => {
                   : {}
               }
             >
-              <Link  href={`/admin/bodyparts/edit/${data._id}`}>
+              {/* <Link  href={`/admin/bodyparts/edit/${data._id}`}>
                 <a className="dropdown-item" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -82,8 +102,10 @@ const TagTableList = ({ data }) => {
                   </svg>
                   <span>Edit</span>
                 </a>
-              </Link>
-              <a className="dropdown-item">
+              </Link> */}
+              <a
+              onClick={() => hanndleRemove(data._id)}
+              className="dropdown-item">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width={14}

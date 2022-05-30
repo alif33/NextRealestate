@@ -12,19 +12,25 @@ const AllBlogs = () => {
   useEffect(() => {
     dispatch(setBlogs())
   }, []);
+  console.log(blogs)
 
   return (
     <secttion>
       <div className="row">
-        {blogList?.length > 0 ? (
+        {!blogs.isLoading && (blogList?.length > 0 ? (
           blogList?.map((cont, i) => <BlogCard key={i} data={cont} />)
         ) : (
           <div className="p-4">
             <div className="d-flex justify-content-center align-items-center">
-              <GridLoader color={"#27d37f"} loading={true} size={8} />
+              <h3>Blog not available</h3>
             </div>
           </div>
-        )}
+        ))}
+        {blogs.isLoading &&  <div className="p-4">
+            <div className="d-flex justify-content-center align-items-center">
+              <GridLoader color={"#27d37f"} loading={true} size={8} />
+            </div>
+          </div>}
       </div>
     </secttion>
   );
