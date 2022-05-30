@@ -3,7 +3,7 @@ import Subcriber from "../Blogs/Subcriber";
 import BlogAuthor from "./BlogAuthor";
 import RecentBlogs from "./RecentBlogs/RecentBlogs";
 
-const SingleBlogSidebar = ({postedBy}) => {
+const SingleBlogSidebar = ({}) => {
   return (
     <>
       <aside className="col-lg-4">
@@ -30,7 +30,7 @@ const SingleBlogSidebar = ({postedBy}) => {
               <i className="fi-search position-absolute top-50 end-0 translate-middle-y text-muted me-3" />
             </div>
             {/* Author widget*/}
-            <BlogAuthor postedBy={postedBy} />
+            <BlogAuthor />
             {/* Recent posts widget*/}
             <RecentBlogs />
             {/* Fetured posts carousel widget*/}

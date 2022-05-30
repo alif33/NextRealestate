@@ -1,6 +1,6 @@
 import React from "react";
 
-const BlogAuthor = ({postedBy}) => {
+const BlogAuthor = ({}) => {
  
   return (
     <>
@@ -14,7 +14,7 @@ const BlogAuthor = ({postedBy}) => {
               alt="Kristin Watson"
             />
             <div className="ps-3">
-              <h3 className="h5 mb-2">{postedBy?.name}</h3>
+              <h3 className="h5 mb-2">Author</h3>
               <p className="fs-sm text-muted">Creator</p>
               <div className="d-flex">
                 <a

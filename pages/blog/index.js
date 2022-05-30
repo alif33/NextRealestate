@@ -1,7 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import AddComment from "../../src/components/client/Blog/AddComment/AddComment";
 import BlogComents from "../../src/components/client/Blog/BlogComments/BlogComents";
 import BlogMeta from "../../src/components/client/Blog/BlogMeta";
@@ -43,7 +40,7 @@ function Blog({ blog }) {
             <BlogComents/>
           </div>
           {/* Sidebar*/}
-          <SingleBlogSidebar postedBy={blog?.postedBy} />
+          <SingleBlogSidebar  />
         </div>
       </div>
       <AddComment blog={blog} />

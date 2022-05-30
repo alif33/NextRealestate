@@ -45,7 +45,6 @@ handler.get(async (req, res) => {
   }
 });
 
-export default handler;
 
 handler.use(isAdmin).delete(async (req, res) => {
   try {
@@ -71,3 +70,6 @@ handler.use(isAdmin).delete(async (req, res) => {
     });
   }
 });
+
+
+export default handler;

@@ -48,7 +48,7 @@ const blogSchema = new mongoose.Schema(
         },
         tags: {
             type : Array , 
-            "default" : []
+            default : []
         },
         image: {
             type: String
