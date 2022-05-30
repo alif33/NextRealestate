@@ -47,7 +47,7 @@ const AccountNav = () => {
                 Wishlist
               </a>
             </li>
-            <li className="nav-item mb-md-0 me-md-2 pe-md-1">
+            {/* <li className="nav-item mb-md-0 me-md-2 pe-md-1">
               <a
                 className="nav-link d-flex align-items-center"
                 href="#addblog"
@@ -57,7 +57,7 @@ const AccountNav = () => {
                 <i className="fi-plus mt-n1 me-2 fs-base" />
                 Add Blog
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

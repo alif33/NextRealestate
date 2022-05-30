@@ -15,7 +15,6 @@ const handler = nc();
 // });
 
 handler.use(isAdmin).delete(async (req, res) => {
-    console.log(req.query.ID)
     try {
       await db.connect();
       const tag = await Tag.findByIdAndDelete({ _id: req.query.ID });

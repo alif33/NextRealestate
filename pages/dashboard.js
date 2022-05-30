@@ -43,7 +43,7 @@ const Dashboard = () => {
             {/* My Wishlist*/}
             <Wishlist/>
             {/* ----------------------Add blog section-------------------------------- */}
-            <AddBlog/>
+            {/* <AddBlog/> */}
            
           </div>
         </div>

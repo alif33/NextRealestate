@@ -1,5 +1,5 @@
 import nc from 'next-connect';
-import Category from '../../../../models/Category';
+import Contact from '../../../../models/Contact';
 import { isAdmin } from '../../../../utils/auth';
 import db from '../../../../utils/db';
 
@@ -17,24 +17,24 @@ const handler = nc();
 handler.use(isAdmin).delete(async (req, res) => {
     try {
       await db.connect();
-      const category = await Category.findByIdAndDelete({ _id: req.query.ID });
-      if (category) {
+      const contact = await Contact.findByIdAndDelete({ _id: req.query.id });
+      if (contact) {
         await db.disconnect();
         res.send({
           success: true,
-          message: "Category deleted successfully",
+          message: "Contact deleted successfully",
         });
       } else {
         await db.disconnect();
         res.send({
           success: false,
-          error: "Category not found",
+          error: "Contact not found",
         });
       }
     } catch (error) {
       await db.disconnect();
       res.send({
-        error: "Category not found",
+        error: "Contact not found",
       });
     }
   });

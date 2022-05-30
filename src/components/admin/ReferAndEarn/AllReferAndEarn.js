@@ -4,25 +4,32 @@ import { getData, getUserData } from "../../../../__lib__/helpers/HttpService";
 import ReferEarnCard from "./ReferEarnCard";
 
 const AllReferAndEarn = () => {
-  const [refers, setRefers] = useState([]);
+  const [refers, setRefers] = useState({isLoading: true, dataList: []});
   const [loading, setLoading] = useState(true);
   const [color, setColor] = useState("#27d37f");
 
   useEffect(() => {
-    getData("/refers").then((res) => setRefers(res));
+    getData("/refers").then((res) => setRefers({isLoading: false, dataList: res}));
   }, []);
 
   return (
     <secttion>
       <div className="row">
-        {refers.length > 0 ? (
-          refers?.map((refer, i) => <ReferEarnCard refer={refer} key={i} />)
+        {refers.dataList.length > 0 ? (
+          refers.dataList?.map((refer, i) => <ReferEarnCard setRefers={setRefers}  refer={refer} key={i} />)
         ) : (
           <div className="p-4">
             <div className="d-flex justify-content-center align-items-center">
-              <GridLoader color={color} loading={loading} size={8} />
+              <h4>Refer not abailable</h4>
             </div>
           </div>
+        )}
+        {refers.isLoading && (
+          <div className="p-4">
+          <div className="d-flex justify-content-center align-items-center">
+            <GridLoader color={color} loading={loading} size={8} />
+          </div>
+        </div>
         )}
       </div>
     </secttion>
