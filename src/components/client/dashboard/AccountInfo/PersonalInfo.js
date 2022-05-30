@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  authPost,
-  updateData,
-} from "../../../../../__lib__/helpers/HttpService";
+import { updateData } from "../../../../../__lib__/helpers/HttpService";
 import InfoInput from "./InfoInput";
 import Cookies from "universal-cookie";
+import { userLogin } from "../../../../../store/users/actions";
 
 const PersonalInfo = () => {
   const dispatch = useDispatch();
@@ -22,10 +20,8 @@ const PersonalInfo = () => {
     const value = e.target.value;
     setHandleData((values) => ({ ...values, [name]: value }));
   };
-  // console.log(handleData)
   const userInfo = cookies.get("_info");
   const handleSave = () => {
-    
     if (!handleData) {
       toast.error("something wrong");
     } else {
@@ -45,9 +41,9 @@ const PersonalInfo = () => {
           name: handleData?.name || user.name,
           email: handleData?.email || user.email,
           phoneNumber: handleData?.phoneNumber || user?.phone || "",
-          password: user.password,
+          password: user?.password,
           image: "",
-          wishlists: user.wishlists,
+          wishlists: user?.wishlists,
         };
         submitData(newData);
       }
@@ -57,7 +53,8 @@ const PersonalInfo = () => {
   const submitData = (data) => {
     updateData("/user/profile", data, userInfo.token).then((res) => {
       if (res.success) {
-        toast.success(res.message);
+        toast.success("Profile updated");
+        dispatch(userLogin(res));
       } else {
         toast.error("something wrong");
       }
