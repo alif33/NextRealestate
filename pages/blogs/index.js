@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import BlogCard from "../src/components/client/Blogs/BlogCard";
 import BlogCard2 from "../src/components/client/Blogs/BlogCard2";
@@ -77,7 +78,9 @@ function Blogs({ blogs, tags }) {
         <nav className="mb-3 mb-md-4 pt-md-3" aria-label="Breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <a href="job-board-home-v1.html">Home</a>
+               <Link href="/">
+               <a >Home</a>
+               </Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
               Blog

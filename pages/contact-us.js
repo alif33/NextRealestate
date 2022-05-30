@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import Layout from "../src/components/client/layout";
 import { postData } from "../__lib__/helpers/HttpService";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 function Contact() {
   const [disable, setDisable] = useState(false);
@@ -46,7 +47,9 @@ function Contact() {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb pt-3 mb-4">
             <li className="breadcrumb-item">
-              <a href="city-guide-home-v1.html">Home</a>
+             <Link>
+             <a >Home</a>
+             </Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
               Contact us

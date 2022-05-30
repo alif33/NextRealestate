@@ -6,6 +6,7 @@ import AddBlog from "../src/components/client/dashboard/AddBlog";
 import AccountHeader from "../src/components/client/dashboard/AccountHeader";
 import { userAuth } from "../__lib__/helpers/requireAuthentication";
 import AccountNav from "../src/components/client/dashboard/AccountNav";
+import Link from "next/link";
 
 const Dashboard = () => {
 
@@ -18,10 +19,15 @@ const Dashboard = () => {
         <nav className="mb-4 pt-md-3" aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <a href="city-guide-home-v1.html">Home</a>
+            <Link>
+             <a >Home</a>
+             </Link>
             </li>
             <li className="breadcrumb-item">
-              <a href="city-guide-account-info.html">Account</a>
+            <Link href="/dashboard">
+            <a >Account</a>
+             </Link>
+             
             </li>
             <li className="breadcrumb-item active" aria-current="page">
               Personal info

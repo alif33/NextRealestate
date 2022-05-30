@@ -2,10 +2,11 @@ import Layout from "../src/components/client/layout";
 import HowWorks from "../src/components/client/ReferAndEarn/HowWorks";
 import AskQuestion from "../src/components/client/ReferAndEarn/AskQuestion";
 import ReferAndEarnForm from "../src/components/client/ReferAndEarn/ReferAndEarnForm";
-import {useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
+import Link from "next/link";
 
 const Refers = () => {
-const {users} = useSelector(state => state)
+  const { users } = useSelector((state) => state);
   return (
     <Layout>
       <div>
@@ -13,7 +14,9 @@ const {users} = useSelector(state => state)
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb pt-3 mb-4">
               <li className="breadcrumb-item">
-                <a href="city-guide-home-v1.html">Home</a>
+                <Link>
+                  <a>Home</a>
+                </Link>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
                 Refer &amp; Earn
@@ -28,14 +31,14 @@ const {users} = useSelector(state => state)
                 alt="Cover"
               />
             </div>
-           {/* Refer form */}
-           <ReferAndEarnForm/>
+            {/* Refer form */}
+            <ReferAndEarnForm />
           </div>
         </section>
-      {/* works section */}
-      <HowWorks/>
-     {/* Question section */}
-     <AskQuestion/>
+        {/* works section */}
+        <HowWorks />
+        {/* Question section */}
+        <AskQuestion />
       </div>
     </Layout>
   );

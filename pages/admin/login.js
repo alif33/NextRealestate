@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -64,7 +65,8 @@ const Login = () => {
                 {/* Login basic */}
                 <div className="card mb-0">
                   <div className="card-body">
-                    <a href="index.html" className="brand-logo">
+                   <Link href="/admin/dashboard">
+                   <a  className="brand-logo">
                       <svg
                         viewBox="0 0 139 95"
                         version="1.1"
@@ -149,6 +151,7 @@ const Login = () => {
                       </svg>
                       <h2 className="brand-text text-primary ms-1">Vuexy</h2>
                     </a>
+                   </Link>
                     <h4 className="card-title mb-1">Welcome to Vuexy! 👋</h4>
                     <p className="card-text mb-2">
                       Please sign-in to your account and start the adventure
