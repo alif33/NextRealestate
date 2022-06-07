@@ -55,7 +55,7 @@ export default function SignUp() {
         <nav className="mb-4 pt-md-3" aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-            <Link>
+            <Link href="/">
                   <a>Home</a>
                 </Link>
             </li>
