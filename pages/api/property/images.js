@@ -31,6 +31,7 @@ handler.use(isAuth, upload.array('image')).post(async (req, res) => {
                     reject(error);
                 }
             });
+            console.log(file.buffer)
             streamifier.createReadStream(file.buffer).pipe(stream);
         });
     };
