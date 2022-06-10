@@ -1,10 +1,10 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const ROOT_URL = `https://next-realestate-xi.vercel.app/`
-export const APP_URL = `https://next-realestate-xi.vercel.app/`
-// export const ROOT_URL = `http://localhost:3000/`;
-// export const APP_URL = `http://localhost:3000/`;
+// export const ROOT_URL = `https://next-realestate-xi.vercel.app/`
+// export const APP_URL = `https://next-realestate-xi.vercel.app/`
+export const ROOT_URL = `http://localhost:3000/`;
+export const APP_URL = `http://localhost:3000/`;
 export const IMAGE_URL = `${APP_URL}storage`;
 export const API_URL = `${APP_URL}api/`;
 
@@ -43,6 +43,17 @@ export const getUserData = async (endPoint, token) => {
     return data;
   } catch (error) {
     toast.error(`${error?.response?.data?.message}`);
+    return error;
+  }
+};
+
+export const updateUserInfo = async (endPoint, token) => {
+  try {
+    const { data } = await api.put(endPoint, {
+      headers: authHeader(token),
+    });
+    return data;
+  } catch (error) {
     return error;
   }
 };

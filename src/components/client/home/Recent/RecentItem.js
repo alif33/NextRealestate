@@ -2,7 +2,12 @@ import React from "react";
 import queryString from "query-string";
 import Link from "next/link";
 import slugify from "slugify";
+import Cookies from "universal-cookie";
+import {useRouter} from 'next/router';
+import { updateUserInfo } from "../../../../../__lib__/helpers/HttpService";
+
 const RecentItem = ({ recent }) => {
+  const cookies = new Cookies();
   const {
     bedrooms,
     propertyType,
@@ -12,6 +17,7 @@ const RecentItem = ({ recent }) => {
     city,
     state,
     images,
+    _id
   } = recent;
 
   const query = queryString.stringify(
@@ -26,12 +32,24 @@ const RecentItem = ({ recent }) => {
     { sort: false }
   );
 
+  const router = useRouter()
+  const addWishlist = async (propertyId) => {
+    const user  = await cookies.get('_info')
+    if(user.token){
+     const res = await updateUserInfo(`/user/wishlist/${propertyId}`, user.token)
+        console.log(res)
+    }else{
+      router.push('/signin')
+    }
+  }
+
   return (
     <>
       <div className="px-3">
         <div className="position-relative">
           <div className="position-relative mb-3">
             <button
+            onClick={() => addWishlist(_id)}
               className="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5"
               type="button"
               data-bs-toggle="tooltip"
