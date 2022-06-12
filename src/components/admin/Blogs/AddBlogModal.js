@@ -34,12 +34,11 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
     formState: { errors },
   } = useForm();
 
-  console.log(!!watch().category)
 
   const onSubmit = async (data) => {
     setIsValid(true)
     setDisable(true);
-    const formData = await new FormData();
+    const formData =  new FormData();
     formData.append("title", data.title);
     formData.append("body", data.body);
     formData.append("image", data.image[0]);
@@ -72,7 +71,6 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
     label: tag.tagName,
     value: tag.tagSlug,
   }));
-console.log(trigger)
   return (
     <>
       <Modals trigger={trigger} setTrigger={setTrigger} size={""}>

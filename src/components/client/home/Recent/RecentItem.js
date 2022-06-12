@@ -1,7 +1,6 @@
 import React from "react";
 import queryString from "query-string";
 import Link from "next/link";
-import slugify from "slugify";
 import Cookies from "universal-cookie";
 import {useRouter} from 'next/router';
 import { updateUserInfo } from "../../../../../__lib__/helpers/HttpService";

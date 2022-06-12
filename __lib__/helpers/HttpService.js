@@ -48,6 +48,8 @@ export const getUserData = async (endPoint, token) => {
 };
 
 export const updateUserInfo = async (endPoint, token) => {
+  
+  
   try {
     const { data } = await api.put(endPoint, {
       headers: authHeader(token),

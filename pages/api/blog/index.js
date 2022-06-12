@@ -23,9 +23,8 @@ const handler = nc();
 const upload = multer();
 
 handler.use(isAdmin, upload.single("image")).post(async (req, res) => {
-  console.log(req.body)
-  const { title, body, category, tags } = req.body;
   
+  const { title, body, category, tags } = req.body;
   const streamUpload = (req) => {
     return new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream((error, result) => {
@@ -42,7 +41,6 @@ handler.use(isAdmin, upload.single("image")).post(async (req, res) => {
 
   if (url) {
     await db.connect();
-
     const blog = new Blog({
       title,
       slug: slugify(title, "-"),
