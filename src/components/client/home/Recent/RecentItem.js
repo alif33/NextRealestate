@@ -34,7 +34,7 @@ const RecentItem = ({ recent }) => {
   );
   const { users } = useSelector((state) => state);
   const dispatch = useDispatch();
-  console.log(users);
+
   const router = useRouter();
 
   const addWishlist = async (propertyId) => {
@@ -62,7 +62,8 @@ const RecentItem = ({ recent }) => {
           <div className="position-relative mb-3">
             <button
               onClick={() => addWishlist(_id)}
-              className="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5"
+              className={` ${users.user.wishlists.includes(_id) ? 'active' : ''} btn btn-icon btn-light-primary btn-xs text-primary
+              rounded-circle position-absolute top-0 end-0 m-3 zindex-5`}
               type="button"
               data-bs-toggle="tooltip"
               data-bs-placement="left"

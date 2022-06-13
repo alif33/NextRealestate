@@ -7,6 +7,8 @@ const handler = nc();
 
 handler.use(isAuth).put(async (req, res) => {
   const { authorization } = req.headers;
+  const token = authorization.slice(7, authorization.length);
+
   const { PID } = req.query;
   await db.connect();
   const property = await Property.find({ _id: PID });
@@ -27,8 +29,6 @@ handler.use(isAuth).put(async (req, res) => {
       await db.disconnect();
 
       if (userUpdate) {
-        const token = authorization.slice(7, authorization.length);
-
         res.send({
           success: true,
           message: "Added wishlist",
@@ -41,8 +41,24 @@ handler.use(isAuth).put(async (req, res) => {
         });
       }
     } else {
+      const removed = alreadyExists.wishlists?.filter((wish) => wish !== PID);
+      console.log(removed, PID);
+      const userUpdate = await User.findByIdAndUpdate(
+        { _id: req.user._id },
+        {
+          $set: {
+            wishlists: removed,
+          },
+        },
+        { returnOriginal: false }
+      );
+
+      await db.disconnect();
       res.send({
-        error: "Already added on wishlist",
+        success: true,
+        message: "Wishlist removed",
+        token: token,
+        update: userUpdate,
       });
     }
   } else {
