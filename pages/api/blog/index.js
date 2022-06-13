@@ -25,6 +25,7 @@ const upload = multer();
 handler.use(isAdmin, upload.single("image")).post(async (req, res) => {
   
   const { title, body, category, tags } = req.body;
+  
   const streamUpload = (req) => {
     return new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream((error, result) => {
