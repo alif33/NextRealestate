@@ -8,7 +8,6 @@ const handler = nc();
 
 handler.use(isAuth).put(async (req, res) => {
     const { PID } = req.query;
-
     if(req.query?.PID){
         await db.connect();
         User.updateOne(

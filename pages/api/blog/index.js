@@ -1,11 +1,11 @@
-import nc from "next-connect";
-import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
+import multer from "multer";
+import nc from "next-connect";
+import slugify from "slugify";
 import streamifier from "streamifier";
 import Blog from "../../../models/Blog";
-import db from "../../../utils/db";
 import { isAdmin } from "../../../utils/auth";
-import slugify from "slugify";
+import db from "../../../utils/db";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -23,9 +23,8 @@ const handler = nc();
 const upload = multer();
 
 handler.use(isAdmin, upload.single("image")).post(async (req, res) => {
-  console.log(req.body)
-  const { title, body, category, tags } = req.body;
   
+  const { title, body, category, tags } = req.body;
   const streamUpload = (req) => {
     return new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream((error, result) => {
