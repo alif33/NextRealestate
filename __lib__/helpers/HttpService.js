@@ -12,6 +12,8 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
+
+
 const authHeader = (token) => {
   return {
     Authorization: `Bearer ${token}`,
@@ -43,19 +45,6 @@ export const getUserData = async (endPoint, token) => {
     return data;
   } catch (error) {
     toast.error(`${error?.response?.data?.message}`);
-    return error;
-  }
-};
-
-export const updateUserInfo = async (endPoint, token) => {
-  
-  
-  try {
-    const { data } = await axios.put(API_URL + endPoint, {
-      headers: authHeader(token),
-    });
-    return data;
-  } catch (error) {
     return error;
   }
 };
@@ -97,7 +86,7 @@ export const authPost = async (endPoint, formData, token) => {
 
 export const updateData = async (endPoint, formData, token) => {
   try {
-    const { data } = await axios.put(API_URL + endPoint, formData, {
+    const { data } = await axios.put( API_URL + endPoint, formData, {
       headers: authHeader(token),
     });
     return data;
@@ -106,6 +95,21 @@ export const updateData = async (endPoint, formData, token) => {
     return error;
   }
 };
+
+// export const updateUserInfo = async (endPoint, token) => {
+//   console.log(token);
+//   try {
+//     const { data } = await api.put(API_URL + endPoint, {
+//       headers: {
+//         Authorization: `Bearer`,
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     return data;
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
 export const removeData = async (endPoint, token) => {
   try {

@@ -1,9 +1,9 @@
-import React from "react";
-import queryString from "query-string";
 import Link from "next/link";
+import { useRouter } from 'next/router';
+import queryString from "query-string";
+import { useSelector } from 'react-redux';
 import Cookies from "universal-cookie";
-import {useRouter} from 'next/router';
-import { updateUserInfo } from "../../../../../__lib__/helpers/HttpService";
+import { updateData } from "../../../../../__lib__/helpers/HttpService";
 
 const RecentItem = ({ recent }) => {
   const cookies = new Cookies();
@@ -30,13 +30,16 @@ const RecentItem = ({ recent }) => {
     },
     { sort: false }
   );
-
+  const {users} = useSelector(state => state);
+  console.log(users)
   const router = useRouter()
+
+
   const addWishlist = async (propertyId) => {
+  
     const user  = await cookies.get('_info')
-    console.log(user)
     if(user?.token){
-     const res = await updateUserInfo(`/user/wishlist/${propertyId}`, user.token)
+     const res = await updateData(`/user/wishlist/${propertyId}`, {}, user.token)
         console.log(res)
     }else{
       router.push('/signin')
