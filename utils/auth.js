@@ -17,7 +17,6 @@ const signToken = (user) => {
 
 const isAuth = async (req, res, next) => {
   const { authorization } = req.headers;
-  console.log(req.headers)
   if (authorization) {
     // Bearer xxx => xxx
     const token = authorization.slice(7, authorization.length);
@@ -37,7 +36,6 @@ const isAuth = async (req, res, next) => {
 
 const isAdmin = async (req, res, next) => {
   const { authorization } = req.headers;
-  console.log(authorization);
   if (authorization) {
     // Bearer xxx => xxx
     const token = authorization.slice(7, authorization.length);
@@ -55,3 +53,4 @@ const isAdmin = async (req, res, next) => {
 };
 
 export { signToken, isAuth, isAdmin };
+

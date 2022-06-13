@@ -1,9 +1,11 @@
-import React from "react";
-import queryString from "query-string";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import queryString from "query-string";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
-import {useRouter} from 'next/router';
-import { updateUserInfo } from "../../../../../__lib__/helpers/HttpService";
+import { userLogin } from "../../../../../store/users/actions";
+import { updateData } from "../../../../../__lib__/helpers/HttpService";
 
 const RecentItem = ({ recent }) => {
   const cookies = new Cookies();
@@ -16,40 +18,52 @@ const RecentItem = ({ recent }) => {
     city,
     state,
     images,
-    _id
+    _id,
   } = recent;
 
   const query = queryString.stringify(
     {
       bedrooms: recent.bedrooms + " " + "bed",
       propertyType: recent.propertyType,
-      areaName: recent.areaName , 
+      areaName: recent.areaName,
       city: recent.city,
-      state:  recent.state,
+      state: recent.state,
       id: recent._id,
     },
     { sort: false }
   );
+  const { users } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
-  const router = useRouter()
+  const router = useRouter();
+
   const addWishlist = async (propertyId) => {
-    const user  = await cookies.get('_info')
-    console.log(user)
-    if(user?.token){
-     const res = await updateUserInfo(`/user/wishlist/${propertyId}`, user.token)
-        console.log(res)
-    }else{
-      router.push('/signin')
+    const user = await cookies.get("_info");
+    if (user?.token) {
+      const res = await updateData(
+        `/user/wishlist/${propertyId}`,
+        {},
+        user.token
+      );
+      if (res.success) {
+        toast.success(res.message);
+        dispatch(userLogin({success: res.success, token: res.token, user: res.update}));
+      } else {
+        toast.error(res.error);
+      }
+    } else {
+      router.push("/signin");
     }
-  }
+  };
   return (
     <>
       <div className="px-3">
         <div className="position-relative">
           <div className="position-relative mb-3">
             <button
-            onClick={() => addWishlist(_id)}
-              className="btn btn-icon btn-light-primary btn-xs text-primary rounded-circle position-absolute top-0 end-0 m-3 zindex-5"
+              onClick={() => addWishlist(_id)}
+              className={` ${users.user.wishlists.includes(_id) ? 'active' : ''} btn btn-icon btn-light-primary btn-xs text-primary
+              rounded-circle position-absolute top-0 end-0 m-3 zindex-5`}
               type="button"
               data-bs-toggle="tooltip"
               data-bs-placement="left"
@@ -57,9 +71,12 @@ const RecentItem = ({ recent }) => {
             >
               <i className="fi-heart" />
             </button>
-            <img 
-            style={{height: '250px', width: '100%'}}
-            className="rounded-3" src={images[0]} alt="Article img" />
+            <img
+              style={{ height: "250px", width: "100%" }}
+              className="rounded-3"
+              src={images[0]}
+              alt="Article img"
+            />
           </div>
           <h3 className="mb-2 fs-lg">
             <Link href={`property?${query}`}>
