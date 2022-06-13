@@ -37,7 +37,11 @@ const isAuth = async (req, res, next) => {
 
 const isAdmin = async (req, res, next) => {
   const { authorization } = req.headers;
+<<<<<<< HEAD
   console.log(authorization)
+=======
+  console.log(authorization);
+>>>>>>> de4adc3aa114533fa76837b0cf70ef4e1157574f
   if (authorization) {
     // Bearer xxx => xxx
     const token = authorization.slice(7, authorization.length);

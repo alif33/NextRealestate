@@ -41,7 +41,6 @@ handler.use(isAdmin, upload.single("image")).post(async (req, res) => {
 
   if (url) {
     await db.connect();
-
     const blog = new Blog({
       title,
       slug: slugify(title, "-"),
