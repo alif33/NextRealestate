@@ -4,13 +4,7 @@ import Slider from 'react-slick';
 import ReviewItem from './ReviewItem';
 import {setReviews} from '../../../../../store/reviews/actions'
 
-function Review(){
-    const dispatch = useDispatch()
-    const {reviews} = useSelector(state => state)
-
-    useEffect(() => {
-      dispatch(setReviews())
-    },[])
+function Review({reviews}){
 
 
     const settings = {
@@ -39,7 +33,7 @@ function Review(){
           <div className="col-md-8 col-lg-7">
             <div className="tns-carousel-wrapper overflow-hidden">
               <Slider {...settings}>
-              {reviews.reviewList?.map((review, i) => <ReviewItem key={i} review={review}/>)}
+              {reviews?.map((review, i) => <ReviewItem key={i} review={review}/>)}
               </Slider>
             </div>
             <div className="tns-carousel-controls justify-content-center justify-content-md-start my-2 ms-md-2" id="agents-carousel-controls">

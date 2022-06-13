@@ -39,7 +39,7 @@ const Item = ({property}) => {
           <div className="position-relative mb-3">
             <button
               onClick={() => addWishlist(property?._id)}
-              className={` ${users.user?.wishlists.includes(property?._id) ? 'active' : ''} btn btn-icon btn-light-primary btn-xs text-primary
+              className={` ${users.user?.wishlists.some(pr => pr._id === property?._id) ? 'active' : ''} btn btn-icon btn-light-primary btn-xs text-primary
               rounded-circle position-absolute top-0 end-0 m-3 zindex-5`}
               type="button"
               data-bs-toggle="tooltip"

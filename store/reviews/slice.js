@@ -9,6 +9,7 @@ export const reviewsSlice = createSlice({
     },
     reducers: {
         setReviews: (state, action) => {
+            console.log(action);
             return {
                 ...state,
                 reviewList: action.payload,

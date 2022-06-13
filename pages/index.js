@@ -9,7 +9,7 @@ import Layout from '../src/components/client/layout';
 import { userAuthStatus } from '../__lib__/helpers/Cookiehandler';
 import { getData } from '../__lib__/helpers/HttpService';
  
-export default function Home({properties}) {
+export default function Home({properties, reviews}) {
  
   return (
     <>
@@ -22,7 +22,7 @@ export default function Home({properties}) {
         <Hero />
         <Recent properties={properties}/>
         <About />
-        <Review />
+        <Review reviews={reviews}/>
       </Layout>
     </>
   );
@@ -30,10 +30,11 @@ export default function Home({properties}) {
 
 export async function getServerSideProps() {
   const properties = await getData('/properties')
-
+  const reviews = await getData('/reviews')
   return {
     props: {
-        properties
+        properties,
+        reviews
     }
   }
 }

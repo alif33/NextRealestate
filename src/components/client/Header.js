@@ -108,12 +108,18 @@ const Header = () => {
                 </a>
               </Link>
             </li>
+            <li className={`nav-item dropdown ${router.pathname === '/properties' ? 'active' : ''}`}>
+              <Link href="/properties">
+                <a className="nav-link" role="button" aria-expanded="false">
+                 Properties
+                </a>
+              </Link>
+            </li>
             <li className={`nav-item dropdown
              ${router.pathname === '/contact-us' ||
               router.pathname === '/reviews' ||
               router.pathname === '/about-us' ? 'active' : ''}`}
 
-             
              >
               <a
                 className="nav-link dropdown-toggle"
