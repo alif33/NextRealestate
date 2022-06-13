@@ -3,10 +3,10 @@ import Property from "../../../../models/Property";
 import User from "../../../../models/User";
 import { isAuth } from "../../../../utils/auth";
 import db from "../../../../utils/db";
-
 const handler = nc();
 
 handler.use(isAuth).put(async (req, res) => {
+  const { authorization } = req.headers;
   const { PID } = req.query;
   await db.connect();
   const property = await Property.find({ _id: PID });
@@ -27,7 +27,14 @@ handler.use(isAuth).put(async (req, res) => {
       await db.disconnect();
 
       if (userUpdate) {
-        res.send(userUpdate);
+        const token = authorization.slice(7, authorization.length);
+
+        res.send({
+          success: true,
+          message: "Added wishlist",
+          token: token,
+          update: userUpdate,
+        });
       } else {
         res.send({
           error: "Unauthorized",
@@ -35,7 +42,7 @@ handler.use(isAuth).put(async (req, res) => {
       }
     } else {
       res.send({
-        error: "Already added on wishlisht",
+        error: "Already added on wishlist",
       });
     }
   } else {
