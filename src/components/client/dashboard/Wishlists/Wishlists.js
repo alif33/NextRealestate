@@ -6,7 +6,6 @@ import WishListItem from "./WishListItem";
 const Wishlists = () => {
   const {users} = useSelector(state => state)
   const {user} = users;
-  console.log(user.wishlists)
    return (
     <>
       <div className="tab-pane fade" id="wishlist" role="tabpanel">

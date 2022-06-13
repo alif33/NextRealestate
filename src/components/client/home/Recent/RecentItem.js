@@ -34,9 +34,7 @@ const RecentItem = ({ recent }) => {
   );
   const { users } = useSelector((state) => state);
   const dispatch = useDispatch();
-
   const router = useRouter();
-
   const addWishlist = async (propertyId) => {
     const user = await cookies.get("_info");
     if (user?.token) {

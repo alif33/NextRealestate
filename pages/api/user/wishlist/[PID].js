@@ -15,8 +15,6 @@ handler.use(isAuth).put(async (req, res) => {
 
   if (property.length > 0) {
     const alreadyExists = await User.findById({ _id: req.user._id });
-    console.log(alreadyExists)
-
     if (!alreadyExists.wishlists.includes(PID)) {
       const userUpdate = await User.findByIdAndUpdate(
         { _id: req.user._id },
