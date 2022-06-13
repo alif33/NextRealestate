@@ -12,6 +12,7 @@ handler.use(isAuth).put(async (req, res) => {
   const { PID } = req.query;
   await db.connect();
   const property = await Property.find({ _id: PID });
+
   if (property.length > 0) {
     const alreadyExists = await User.findById({ _id: req.user._id });
 
@@ -41,13 +42,11 @@ handler.use(isAuth).put(async (req, res) => {
         });
       }
     } else {
-      const removed = alreadyExists.wishlists?.filter((wish) => wish !== PID);
-      console.log(removed, PID);
       const userUpdate = await User.findByIdAndUpdate(
         { _id: req.user._id },
         {
-          $set: {
-            wishlists: removed,
+          $pull: {
+            wishlists: PID,
           },
         },
         { returnOriginal: false }

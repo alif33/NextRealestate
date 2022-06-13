@@ -12,7 +12,6 @@ const AllBlogs = () => {
   useEffect(() => {
     dispatch(setBlogs())
   }, []);
-  console.log(blogs)
 
   return (
     <secttion>

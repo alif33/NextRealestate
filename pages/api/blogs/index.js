@@ -12,7 +12,6 @@ handler.get(async (req, res) => {
     await db.disconnect();
     res.send(blogs);
   } catch (error) {
-    console.log(error)
     await db.disconnect();
     res.send(blogs);
   }

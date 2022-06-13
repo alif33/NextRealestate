@@ -20,7 +20,6 @@ const PropertySorting = ({ properties, filterData, amenitiesData }) => {
       if (filterData && !amenitiesData) {
         const lowToHigh = filterData.slice().sort((a, b) => a.monthlyRent - b.monthlyRent);
         dispatch(setSortProperty(lowToHigh));
-        console.log(lowToHigh, "low to high")
       } else if (!filterData && amenitiesData) {
         const lowToHigh = amenitiesData.slice().sort((a, b) => a.monthlyRent - b.monthlyRent);
         dispatch(setSortProperty(lowToHigh));

@@ -16,7 +16,6 @@ const CategoryTable = (props) => {
   useEffect(() => {
     dispatch(setCategories())
   },[])
-  console.log(trigger)
   return (
     <div>
       <CategoryModal setTrigger={setTrigger} trigger={trigger} />
