@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Slider from 'react-slick';
 import ReviewItem from './ReviewItem';
 import {setReviews} from '../../../../../store/reviews/actions'
+import Link from 'next/link';
 
 function Review({reviews}){
 
@@ -22,7 +23,12 @@ function Review({reviews}){
         <section className="container pt-lg-2 pb-5 mb-md-4" style={{marginTop: '-40px'}}>
         <div className="d-flex align-items-center justify-content-between mb-4 pb-2">
           <h2 className="h3 mt-md-4">Testimonials</h2>
-          <a className="btn btn-link fw-normal ms-sm-3 p-0" href="city-guide-catalog.html">View all<i className="fi-arrow-long-right ms-2" /></a>
+          <Link href="/reviews">
+          <a className="btn btn-link fw-normal ms-sm-3 p-0" >
+          
+            View all
+            <i className="fi-arrow-long-right ms-2" /></a>
+          </Link>
         </div>
         <div className="row">
           <div className="col-md-4 mb-3 mb-md-0">

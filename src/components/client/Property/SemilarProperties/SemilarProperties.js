@@ -77,7 +77,7 @@ const SemilarProperties = () => {
           <Link href="/properties">
           <a
             className="btn btn-link fw-normal ms-sm-3 p-0"
-            href="city-guide-catalog.html"
+          
           >
             View all
             <i className="fi-arrow-long-right ms-2" />
