@@ -11,7 +11,6 @@ const UsersTable = (props) => {
   const [color, setColor] = useState("#27d37f");
   const [users, setUsers] = useState({isLoading: true, userList: []})
   const admin = cookies.get('_admin')
-  console.log(admin.token)
 
   useEffect(() => {
     getUserData('/admin/users', admin.token)

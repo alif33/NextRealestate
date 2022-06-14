@@ -1,7 +1,7 @@
 import Layout from "../src/components/client/layout";
 import PersonalInfo from "../src/components/client/dashboard/AccountInfo/PersonalInfo";
 import MyListings from "../src/components/client/dashboard/MyListing/MyListings";
-import Wishlist from "../src/components/client/dashboard/Wishlist";
+import Wishlists from "../src/components/client/dashboard/Wishlists/Wishlists";
 import AddBlog from "../src/components/client/dashboard/AddBlog";
 import AccountHeader from "../src/components/client/dashboard/AccountHeader";
 import { userAuth } from "../__lib__/helpers/requireAuthentication";
@@ -47,7 +47,7 @@ const Dashboard = () => {
             {/* My listings*/}
             <MyListings />
             {/* My Wishlist*/}
-            <Wishlist/>
+            <Wishlists/>
             {/* ----------------------Add blog section-------------------------------- */}
             {/* <AddBlog/> */}
            

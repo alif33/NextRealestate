@@ -12,7 +12,6 @@ const MainContent = ({ properties }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const propertyPerPage = 5;
   const pagesVisited = pageNumber * propertyPerPage;
-  console.log(propertySort.sortData);
 
   const propertiesPageNumber = Math.ceil(properties.length / propertyPerPage);
   const filterPageNumber = Math.ceil(
@@ -23,9 +22,6 @@ const MainContent = ({ properties }) => {
   );
   const sortPage = Math.ceil(propertySort.sortData?.length / propertyPerPage);
 
-  console.log(!filterData.dataList &&
-    !amenitiesData.dataList &&
-    !propertySort.sortData)
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };

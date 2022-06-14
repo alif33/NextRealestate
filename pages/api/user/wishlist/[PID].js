@@ -12,9 +12,9 @@ handler.use(isAuth).put(async (req, res) => {
   const { PID } = req.query;
   await db.connect();
   const property = await Property.find({ _id: PID });
+
   if (property.length > 0) {
     const alreadyExists = await User.findById({ _id: req.user._id });
-
     if (!alreadyExists.wishlists.includes(PID)) {
       const userUpdate = await User.findByIdAndUpdate(
         { _id: req.user._id },
@@ -24,7 +24,7 @@ handler.use(isAuth).put(async (req, res) => {
           },
         },
         { returnOriginal: false }
-      );
+      ).populate('wishlists', {Property});
 
       await db.disconnect();
 
@@ -41,17 +41,20 @@ handler.use(isAuth).put(async (req, res) => {
         });
       }
     } else {
+<<<<<<< HEAD
       const removed = alreadyExists.wishlists?.filter(wish => wish !== PID);
       console.log(removed, PID);
+=======
+>>>>>>> 2c8ebe10c2144e06606863832cb6504273dd966e
       const userUpdate = await User.findByIdAndUpdate(
         { _id: req.user._id },
         {
-          $set: {
-            wishlists: removed,
+          $pull: {
+            wishlists: PID,
           },
         },
         { returnOriginal: false }
-      );
+      ).populate("wishlists", {Property});
 
       await db.disconnect();
       res.send({
