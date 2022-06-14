@@ -1,16 +1,15 @@
-import React from "react";
 import dateFormat from "dateformat";
 import { Trash } from "react-feather";
+import toast from "react-hot-toast";
 import Cookies from "universal-cookie";
 import { getData, removeData } from "../../../../__lib__/helpers/HttpService";
-import toast from "react-hot-toast";
 
 const ReferEarnCard = ({ refer, setRefers }) => {
   const cookies = new Cookies();
   
   const hanndleRemove = async (id) => {
     const admin = cookies.get('_admin')
-      removeData(`/admin/refer/${id}`, admin.token)
+      removeData(`/refer/${id}`, admin.token)
       .then(res => {
         if (res.success) {
           getData('/refers')
