@@ -9,7 +9,7 @@ export const FillData = [
         name: "Property details",
     },
     {
-        name: "Photos / video",
+        name: "Photos",
     },
     {
         name: "Contact detais",
