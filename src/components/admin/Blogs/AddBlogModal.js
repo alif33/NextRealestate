@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { authPost } from "../../../../__lib__/helpers/HttpService";
-import Modals from "../Modals/Modals";
-import Cookies from "universal-cookie";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select";
+import Cookies from "universal-cookie";
+import { setBlogs } from "../../../../store/blogs/actions";
 import { setCategories } from "../../../../store/catrgories/actions";
 import { setTags } from "../../../../store/tags/actions";
-import Select from "react-select";
-import { setBlogs } from "../../../../store/blogs/actions";
-import toast from "react-hot-toast";
+import { authPost } from "../../../../__lib__/helpers/HttpService";
+import Modals from "../Modals/Modals";
 
 const AddBlogModal = ({ trigger, setTrigger }) => {
   const dispatch = useDispatch();
@@ -18,8 +18,7 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
   const { categories, tags } = useSelector((state) => state);
   const { categoryList } = categories;
   const { tagList } = tags;
-  const [isValid, setIsValid] = useState(false)
-
+  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     dispatch(setCategories());
@@ -34,11 +33,10 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
     formState: { errors },
   } = useForm();
 
-
   const onSubmit = async (data) => {
-    setIsValid(true)
-    setDisable(true);
-    const formData =  new FormData();
+    setIsValid(true);
+  
+    const formData = new FormData();
     formData.append("title", data.title);
     formData.append("body", data.body);
     formData.append("image", data.image[0]);
@@ -46,22 +44,30 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
     for (let i = 0; i < selectedTag?.length; i++) {
       formData.append("tags[]", selectedTag[i].value);
     }
-    await submit(formData)
+  
+      await submit(formData);
+  
   };
+  console.log(watch().category !== "true" && isValid)
+
+  
   const submit = async (data) => {
     const admins = await cookies.get("_admin");
+   if (watch().category !== "true" && isValid) {
+    setDisable(true);
     authPost("/blog", data, admins.token).then((res) => {
       if (res.success) {
         toast.success(res.message);
         reset();
         setDisable(false);
         dispatch(setBlogs());
-        setTrigger(false)
+        setTrigger(false);
       } else {
         setDisable(false);
         toast.error(res.message);
       }
     });
+   }
   };
 
   const handleSelectTag = (e) => {
@@ -157,7 +163,7 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
                 ))}
               </select>
             </div>
-            {watch().category === 'true' && isValid && (
+            {watch().category === "true" && isValid && (
               <div className="text-danger">Category required </div>
             )}
           </div>

@@ -1,18 +1,16 @@
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-export const ROOT_URL = `https://next-realestate-xi.vercel.app/`
-export const APP_URL = `https://next-realestate-xi.vercel.app/`
-// export const ROOT_URL = `http://localhost:3000/`;
-// export const APP_URL = `http://localhost:3000/`;
+// export const ROOT_URL = `https://next-realestate-xi.vercel.app/`
+// export const APP_URL = `https://next-realestate-xi.vercel.app/`
+export const ROOT_URL = `http://localhost:3000/`;
+export const APP_URL = `http://localhost:3000/`;
 export const IMAGE_URL = `${APP_URL}storage`;
 export const API_URL = `${APP_URL}api/`;
 
 const api = axios.create({
   baseURL: API_URL,
 });
-
-
 
 const authHeader = (token) => {
   return {
@@ -79,14 +77,14 @@ export const authPost = async (endPoint, formData, token) => {
     });
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
+    console.log(error);
     return error;
   }
 };
 
 export const updateData = async (endPoint, formData, token) => {
   try {
-    const { data } = await axios.put( API_URL + endPoint, formData, {
+    const { data } = await axios.put(API_URL + endPoint, formData, {
       headers: authHeader(token),
     });
     return data;

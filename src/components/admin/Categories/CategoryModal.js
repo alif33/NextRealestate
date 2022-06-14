@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -32,7 +32,7 @@ const CategoryModal = ({ trigger, setTrigger }) => {
         dispatch(setCategories());
       } else {
         setDisable(false);
-        toast.error(res.message);
+        toast.error(res.error);
       }
     });
   };
