@@ -1,11 +1,11 @@
-import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import ClipLoader from "react-spinners/ClipLoader";
 import Layout from "../src/components/client/layout";
 import { postData } from "../__lib__/helpers/HttpService";
-import toast from "react-hot-toast";
-import { useRouter } from "next/router";
-import ClipLoader from "react-spinners/ClipLoader";
 
 export default function SignUp() {
   const [disable, setDisable] = useState(false);
@@ -103,7 +103,7 @@ export default function SignUp() {
                 />
                 <div className="mt-4 mt-sm-5">
                   Already have an account?{" "}
-                  <Link href="/signup">
+                  <Link href="/signin">
                     <a>Sign in</a>
                   </Link>
                 </div>
