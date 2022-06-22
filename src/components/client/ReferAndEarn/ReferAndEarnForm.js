@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { postData } from "../../../../__lib__/helpers/HttpService";
@@ -148,6 +148,7 @@ const ReferAndEarnForm = () => {
             <button
               className="btn btn-lg btn-primary w-sm-auto w-100"
               type="submit"
+              disabled={disable}
             >
               Submit form
             </button>

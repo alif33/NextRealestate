@@ -1,29 +1,32 @@
-import React from "react";
 import dateFormat from "dateformat";
-import { User } from "react-feather";
-import { removeData } from "../../../../__lib__/helpers/HttpService";
-import Cookies from "universal-cookie";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
 import { setBlogs } from "../../../../store/blogs/actions";
+import { removeData } from "../../../../__lib__/helpers/HttpService";
 const BlogCard = ({ data }) => {
   const cookies = new Cookies();
   const dispatch = useDispatch();
   const { _id, tags, category, title, image, body, postedBy } = data;
-  const admin = cookies.get('_admin')
+  const admin = cookies.get('_admin');
+  const [disable, setDisable] = useState(false);
 
 
   const blogRemove = id => {
+
     const isTrue = confirm('Are you sure')
         if (isTrue) {
+          setDisable(true);
           removeData(`/blog/${id}`, admin.token)
           .then(res => {
             if (res.success) {
               dispatch(setBlogs())
               toast.success(res.message)
+              setDisable(false);
             }else{
-              
-              toast.error(res.error)
+              toast.error(res.error);
+              setDisable(false);
             }
           })
     }
@@ -47,6 +50,7 @@ const BlogCard = ({ data }) => {
                 <button
                   onClick={() => blogRemove(_id)}
                   className="btn btn-danger"
+                  disabled={disable}
                 >
                   Remove
                 </button>

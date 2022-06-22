@@ -1,15 +1,16 @@
-import React, { useState } from "react";
 import dateFormat from "dateformat";
+import { useState } from "react";
 import { CheckSquare, ChevronDown, ChevronUp, MapPin } from "react-feather";
-import { removeData } from "../../../../__lib__/helpers/HttpService";
 import toast from "react-hot-toast";
-import Cookies from "universal-cookie";
 import { useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
 import { setProperties } from "../../../../store/properties/actions";
+import { removeData } from "../../../../__lib__/helpers/HttpService";
 
 const ContactsCard = ({ data, index }) => {
   const cookies = new Cookies();
   const [collapse, setCollapse] = useState(false)
+  const [disable, setDisable] = useState(false)
   const dispatch = useDispatch()
   const {
     _id,
@@ -48,13 +49,16 @@ const hanndleRemove = async (id) => {
   const admin = cookies.get('_admin')
   const isTrue = confirm('Are you sure?')
   if (isTrue) {
+    setDisable(true);
     removeData(`/property/${id}`, admin.token)
     .then(res => {
       if (res.success) {
         dispatch(setProperties())
         toast.success(res.message);
+        setDisable(false);
       }else{
         toast.error(res.message)
+        setDisable(false);
       }
     })
   }
@@ -83,6 +87,7 @@ const hanndleRemove = async (id) => {
                 <button
                   onClick={() => hanndleRemove(_id)}
                   className="btn btn-danger"
+                  disabled={disable}
                 >
                   Remove
                 </button>
