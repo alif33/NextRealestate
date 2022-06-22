@@ -1,12 +1,13 @@
-import { useState } from "react";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
-import Layout from "../src/components/client/layout";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from 'react-hot-toast';
+import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
-import { postData } from "../__lib__/helpers/HttpService";
+import Layout from "../src/components/client/layout";
 import { userLogin } from "../store/users/actions";
+import { postData } from "../__lib__/helpers/HttpService";
 export default function SignIn() {
   const [showPass, setShowPass] = useState(false);
   const dispatch = useDispatch();
@@ -30,7 +31,8 @@ export default function SignIn() {
         router.push({  pathname: "/" });
         dispatch(userLogin(res));
         // reset()
-        
+      }else{
+        toast.error(res.error)
       }
     });
   };

@@ -1,10 +1,9 @@
 import axios from "axios";
-import { toast } from "react-hot-toast";
 
-// export const ROOT_URL = `https://next-realestate-xi.vercel.app/`
-// export const APP_URL = `https://next-realestate-xi.vercel.app/`
-export const ROOT_URL = `http://localhost:3000/`;
-export const APP_URL = `http://localhost:3000/`;
+export const ROOT_URL = `https://next-realestate-hc6jknuba-alif33.vercel.app/`
+export const APP_URL = `https://next-realestate-hc6jknuba-alif33.vercel.app/`
+// export const ROOT_URL = `http://localhost:3000/`;
+// export const APP_URL = `http://localhost:3000/`;
 export const IMAGE_URL = `${APP_URL}storage`;
 export const API_URL = `${APP_URL}api/`;
 
@@ -23,7 +22,7 @@ export const getData = async (endPoint) => {
     const { data } = await api.get(endPoint);
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
+    return error;
   }
 };
 export const getDataWithReq = async (endPoint, reqData) => {
@@ -31,7 +30,7 @@ export const getDataWithReq = async (endPoint, reqData) => {
     const { data } = await api.post(endPoint, reqData);
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
+    return error;
   }
 };
 
@@ -42,7 +41,6 @@ export const getUserData = async (endPoint, token) => {
     });
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
@@ -54,8 +52,6 @@ export const postData = async (endPoint, formData, setDisable) => {
     return data;
   } catch (error) {
     setDisable(false);
-    console.log(error);
-    toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
@@ -65,7 +61,6 @@ export const postReq = async (endPoint, formData) => {
     const { data } = await api.post(endPoint, formData);
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
@@ -77,7 +72,6 @@ export const authPost = async (endPoint, formData, token) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
@@ -89,7 +83,6 @@ export const updateData = async (endPoint, formData, token) => {
     });
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
@@ -116,7 +109,6 @@ export const removeData = async (endPoint, token) => {
     });
     return data;
   } catch (error) {
-    // toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
