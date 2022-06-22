@@ -8,10 +8,12 @@ import Cookies from "universal-cookie";
 import Layout from "../src/components/client/layout";
 import { userLogin } from "../store/users/actions";
 import { postData } from "../__lib__/helpers/HttpService";
+import ForgetPass from './../src/components/client/ForgetPass/ForgetPass';
 export default function SignIn() {
   const [showPass, setShowPass] = useState(false);
   const dispatch = useDispatch();
   const [disable, setDisable] = useState(false);
+  const [trigger, setTrigger] = useState(false);
   const {
     register,
     reset,
@@ -36,9 +38,18 @@ export default function SignIn() {
       }
     });
   };
+
+  const handleForgetPass = () => {
+    setTrigger(true);
+    console.log("hello")
+  }
+
+
   return (
     <Layout>
+     
       <div className="container mt-5 mb-md-4 py-5">
+      <ForgetPass />
         <nav className="mb-4 pt-md-3" aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
@@ -112,7 +123,7 @@ export default function SignIn() {
                       >
                         Password
                       </label>
-                      <a className="fs-sm" href="#">
+                      <a type="button" onClick={handleForgetPass} className="fs-sm">
                         Forgot password?
                       </a>
                     </div>
