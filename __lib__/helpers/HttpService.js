@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const ROOT_URL = `https://next-realestate-hc6jknuba-alif33.vercel.app/`
-export const APP_URL = `https://next-realestate-hc6jknuba-alif33.vercel.app/`
+export const ROOT_URL = `https://next-realestate-xi.vercel.app/`
+export const APP_URL = `https://next-realestate-xi.vercel.app/`
 // export const ROOT_URL = `http://localhost:3000/`;
 // export const APP_URL = `http://localhost:3000/`;
 export const IMAGE_URL = `${APP_URL}storage`;
