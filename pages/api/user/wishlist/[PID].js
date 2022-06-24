@@ -41,6 +41,10 @@ handler.use(isAuth).put(async (req, res) => {
         });
       }
     } else {
+
+      const removed = alreadyExists.wishlists?.filter(wish => wish !== PID);
+      
+
       const userUpdate = await User.findByIdAndUpdate(
         { _id: req.user._id },
         {

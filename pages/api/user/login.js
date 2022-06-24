@@ -1,9 +1,9 @@
-import nc from 'next-connect';
 import bcrypt from 'bcryptjs';
-import User from '../../../models/User';
+import nc from 'next-connect';
 import Property from '../../../models/Property';
-import db from '../../../utils/db';
+import User from '../../../models/User';
 import { signToken } from '../../../utils/auth';
+import db from '../../../utils/db';
 
 const handler = nc();
 
@@ -19,7 +19,7 @@ handler.post(async (req, res) => {
       user
     });
   } else {
-    res.status(401).send({ message: 'Invalid email or password' });
+    res.send({ error: 'Invalid email or password' });
   }
 });
 

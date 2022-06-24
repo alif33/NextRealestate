@@ -1,6 +1,8 @@
 import nc from 'next-connect';
-import Refer from '../../../../models/Refer';
-import db from '../../../../utils/db';
+import Refer from '../../../models/Refer';
+import db from '../../../utils/db';
+
+
 
 const handler = nc();
 

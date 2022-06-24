@@ -1,28 +1,31 @@
-import React from "react";
 import dateFormat from "dateformat";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { getData, removeData } from "../../../../__lib__/helpers/HttpService";
 import Cookies from "universal-cookie";
+import { getData, removeData } from "../../../../__lib__/helpers/HttpService";
 
 
-const ContactsCard = ({ data, setContacts}) => {
+const ContactsCard = ({ data, setContacts }) => {
+  const [disable, setDisable] = useState(false);
 
   const cookies = new Cookies();
   const hanndleRemove = async (id) => {
-    const admin = cookies.get('_admin')
-      removeData(`/admin/contact/${id}`, admin.token)
+    setDisable(true);
+    const admin = await cookies.get('_admin')
+    removeData(`/admin/contact/${id}`, admin.token)
       .then(res => {
         if (res.success) {
           getData('/contacts')
-          .then(res => setContacts({isLoading: false, dataList: res}))
+            .then(res => setContacts({ isLoading: false, dataList: res }))
+            setDisable(false);
           toast.success(res.message);
-        }else{
+        } else {
           toast.error(res.error)
+          setDisable(false);
         }
       })
   }
-  
+
   return (
     <div className="col-12">
       <div className="card mb-4">
@@ -42,11 +45,15 @@ const ContactsCard = ({ data, setContacts}) => {
                 <p className="mb-0">Email: {data.email}</p>
                 <p className="card-text">{data.message}</p>
               </div>
-             <div> 
-               <button
-               onClick={()=> hanndleRemove(data._id)}
-                className="btn btn-danger">Remove</button>
-               </div>
+              <div>
+                <button
+                  onClick={() => hanndleRemove(data._id)}
+                  className="btn btn-danger"
+                  disabled={disable}
+                  >
+                  Remove
+                </button>
+              </div>
             </div>
           </div>
         </div>

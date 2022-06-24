@@ -1,22 +1,25 @@
-import React from "react";
 import dateFormat from "dateformat";
 import { Trash } from "react-feather";
+import toast from "react-hot-toast";
 import Cookies from "universal-cookie";
 import { getData, removeData } from "../../../../__lib__/helpers/HttpService";
-import toast from "react-hot-toast";
 
 const ReferEarnCard = ({ refer, setRefers }) => {
   const cookies = new Cookies();
+  const [disable, setDisable] = useState(false);
   
   const hanndleRemove = async (id) => {
+    setDisable(true);
     const admin = cookies.get('_admin')
-      removeData(`/admin/refer/${id}`, admin.token)
+      removeData(`/refer/${id}`, admin.token)
       .then(res => {
         if (res.success) {
+          setDisable(false);
           getData('/refers')
           .then(res => setRefers({isLoading: false, dataList: res}))
           toast.success(res.message);
         }else{
+          setDisable(false);
           toast.error(res.error)
         }
       })
@@ -45,8 +48,11 @@ const ReferEarnCard = ({ refer, setRefers }) => {
               </div>
               <div>
                 <button 
+                disabled={disable}
                 onClick={() => hanndleRemove(refer._id)}
-                className="btn btn-danger"><Trash size={18}/></button>
+                className="btn btn-danger">
+                  <Trash size={18}/>
+                  </button>
               </div>
             </div>
           </div>

@@ -1,21 +1,21 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const tagSchema = new mongoose.Schema(
-    {
-        tagName: {
-            type: String,
-            required: true,
-            trim: true,
-        },
-        tagSlug: {
-            type: String,
-            required: true,
-            unique: true,
-            trim: true
-        }
+  {
+    tagName: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: true,
     },
-    { timestamps: true }
+    tagSlug: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+  },
+  { timestamps: true }
 );
 
-export default mongoose.models.Tag || mongoose.model('Tag', tagSchema);
-
+export default mongoose.models.Tag || mongoose.model("Tag", tagSchema);

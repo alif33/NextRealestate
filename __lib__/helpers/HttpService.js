@@ -1,5 +1,4 @@
 import axios from "axios";
-import { toast } from "react-hot-toast";
 
 // export const ROOT_URL = `https://next-realestate-xi.vercel.app/`
 // export const APP_URL = `https://next-realestate-xi.vercel.app/`
@@ -12,8 +11,6 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
-
-
 const authHeader = (token) => {
   return {
     Authorization: `Bearer ${token}`,
@@ -25,7 +22,7 @@ export const getData = async (endPoint) => {
     const { data } = await api.get(endPoint);
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
+    return error;
   }
 };
 export const getDataWithReq = async (endPoint, reqData) => {
@@ -33,7 +30,7 @@ export const getDataWithReq = async (endPoint, reqData) => {
     const { data } = await api.post(endPoint, reqData);
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
+    return error;
   }
 };
 
@@ -44,7 +41,6 @@ export const getUserData = async (endPoint, token) => {
     });
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
@@ -56,8 +52,6 @@ export const postData = async (endPoint, formData, setDisable) => {
     return data;
   } catch (error) {
     setDisable(false);
-    console.log(error);
-    toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
@@ -67,7 +61,6 @@ export const postReq = async (endPoint, formData) => {
     const { data } = await api.post(endPoint, formData);
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
@@ -79,19 +72,17 @@ export const authPost = async (endPoint, formData, token) => {
     });
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
 
 export const updateData = async (endPoint, formData, token) => {
   try {
-    const { data } = await axios.put( API_URL + endPoint, formData, {
+    const { data } = await axios.put(API_URL + endPoint, formData, {
       headers: authHeader(token),
     });
     return data;
   } catch (error) {
-    toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
@@ -118,7 +109,6 @@ export const removeData = async (endPoint, token) => {
     });
     return data;
   } catch (error) {
-    // toast.error(`${error?.response?.data?.message}`);
     return error;
   }
 };
