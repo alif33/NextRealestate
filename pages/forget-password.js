@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { toast } from 'react-hot-toast';
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
-import ForgetPass from '../src/components/client/ForgetPass/ForgetPass';
 import Layout from "../src/components/client/layout";
 import { userLogin } from "../store/users/actions";
 import { postData } from "../__lib__/helpers/HttpService";
@@ -44,7 +43,6 @@ export default function SignIn() {
     <Layout>
      
       <div className="container mt-5 mb-md-4 py-5">
-      <ForgetPass />
         <nav className="mb-4 pt-md-3" aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
