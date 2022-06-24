@@ -11,6 +11,7 @@ const handler = nc({ onError });
 handler.post(async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
+    
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     jwt.verify(req.body.token, process.env.JWT_SECRET, async(err, decode) => {

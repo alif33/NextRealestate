@@ -8,7 +8,10 @@ import Cookies from "universal-cookie";
 import Layout from "../src/components/client/layout";
 import { userLogin } from "../store/users/actions";
 import { postData } from "../__lib__/helpers/HttpService";
-export default function SignIn() {
+
+
+
+export default function ForgetPassword() {
   const [showPass, setShowPass] = useState(false);
   const dispatch = useDispatch();
   const [disable, setDisable] = useState(false);
