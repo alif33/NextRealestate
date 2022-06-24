@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import BeatLoader from "react-spinners/BeatLoader";
 import Cookies from "universal-cookie";
 import * as Yup from "yup";
-import { postData } from "./../../../../__lib__/helpers/HttpService";
+// import { postData } from "./../../../../__lib__/helpers/HttpService";
 import styles from "./Signup.module.css";
 
 export default function Signup() {
