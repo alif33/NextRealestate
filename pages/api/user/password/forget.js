@@ -13,7 +13,7 @@ handler.post(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
         if(user){
             const { _id, name, email } = user;
-            const token = signToken(_id, name, email);
+            const token = signToken(user);
 
             const send = await sendMail({
                 from: process.env.SENDER_MAIL,
