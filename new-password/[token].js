@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import { toast } from 'react-hot-toast';
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
-import Layout from "../src/components/client/layout";
-import { userLogin } from "../store/users/actions";
-import { postData } from "../__lib__/helpers/HttpService";
+import Layout from "../../src/components/client/layout";
+import { userLogin } from "../../store/users/actions";
+import { postData } from "../../__lib__/helpers/HttpService";
 export default function SignIn() {
   const [showPass, setShowPass] = useState(false);
   const dispatch = useDispatch();
