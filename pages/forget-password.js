@@ -25,9 +25,9 @@ export default function SignIn() {
     postData("/user/password/forget", {email: data.email}, setDisable).then((res) => {
       if (res?.success) {
         dispatch(userLogin(res));
-        // reset()
-        // console.log(res)
+        reset()
         toast.success(res.message)
+        console.log(res)
       }else{
         toast.error(res.message)
       }

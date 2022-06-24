@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import Layout from "../../src/components/client/layout";
 import { userLogin } from "../../store/users/actions";
 import { postData } from "../../__lib__/helpers/HttpService";
+import jwt from 'jsonwebtoken';
 
 
 export default function SignIn() {
@@ -17,6 +18,8 @@ export default function SignIn() {
     const [conPass, setConPass] = useState(false);
     const dispatch = useDispatch();
     const [disable, setDisable] = useState(false);
+  
+
 
     // form validation rules
     const validationSchema = Yup.object().shape({
@@ -39,7 +42,12 @@ export default function SignIn() {
         formState: { errors },
     } = useForm(formOptions);
     const cookies = new Cookies();
-    const router = useRouter();
+    const {query} = useRouter();
+
+   jwt.verify(query.token, process.env.JWT_SECRET, (err, decode) => {
+    console.log(decode)
+    console.log(err)
+   })
 
     const onSubmit = (data) => {
 
@@ -130,7 +138,7 @@ export default function SignIn() {
                                                 })}
                                                 className="form-control"
                                                 type={`${showPass ? "text" : "password"}`}
-                                                id="signin-password"
+                                                id="new-password"
                                                 placeholder="Enter password"
                                             />
 
@@ -174,7 +182,7 @@ export default function SignIn() {
                                                 })}
                                                 className="form-control"
                                                 type={`${conPass ? "text" : "password"}`}
-                                                id="signin-password"
+                                                id="confirm-password"
                                                 placeholder="Enter password"
                                             />
                                             <label
