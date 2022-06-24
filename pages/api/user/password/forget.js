@@ -22,9 +22,11 @@ handler.post(async (req, res) => {
                 text: 'test text',
                 html: `<h1>Reset your password. <a href=${'http://localhost:3000/new-password/'+token}>link</a></h1>`
             });
-            return res.send(token);
+            return res.send({
+                success: true,
+                message: "Please check your Email",
+            });
         }
-
 
     res.json({
         message: "Please register first."
