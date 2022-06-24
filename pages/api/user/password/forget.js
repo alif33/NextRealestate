@@ -28,7 +28,8 @@ handler.post(async (req, res) => {
             });
         }
 
-    res.json({
+    res.send({
+        success: false,
         message: "Please register first."
     })
 
