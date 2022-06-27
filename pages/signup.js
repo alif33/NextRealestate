@@ -55,9 +55,9 @@ export default function SignUp() {
         <nav className="mb-4 pt-md-3" aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-            <Link href="/">
-                  <a>Home</a>
-                </Link>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
               Sign up
@@ -159,14 +159,23 @@ export default function SignUp() {
                     <input
                       {...register("phone", {
                         required: true,
+                        maxLength: 10,
+                        minLength: 10
                       })}
                       className="form-control"
                       type="number"
                       id="phone"
                       placeholder="Enter phone"
                     />
-                    {errors?.phone && (
-                      <span className="text-danger">Email is required.</span>
+                  
+                    {errors.phone && errors.phone.type === "required" && (
+                      <span className="text-danger">Phone is required</span>
+                    )}
+                    {errors.phone && errors.phone.type === "maxLength" && (
+                      <span className="text-danger">Phone number must be 10 digit</span>
+                    )}
+                    {errors.phone && errors.phone.type === "minLength" && (
+                      <span className="text-danger">Phone number must be 10 digit</span>
                     )}
                   </div>
                   <div className="mb-4">

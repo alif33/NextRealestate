@@ -67,30 +67,40 @@ const CompanyProfile = () => {
             </li>
           </ul>
           <div className="text-center text-md-start">
+            <Link href="https://www.facebook.com/rokyerealty">
             <a
+            target="_blank"
               className="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm me-2"
-              href="#"
+              
             >
               <i className="fi-facebook" />
             </a>
-            <a
+            </Link>
+           <Link href="https://twitter.com/rokyerealty">
+           <a
+           target="_blank"
               className="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm"
-              href="#"
             >
               <i className="fi-twitter" />
             </a>
+           </Link>
+
+            <Link href="https://www.instagram.com/rokyerealty">
             <a
+            target="_blank"
               className="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm"
-              href="#"
             >
               <i className="fi-instagram" />
             </a>
-            <a
+            </Link>
+           <Link href="#">
+           <a
+           target="_blank"
               className="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm"
-              href="#"
             >
               <i className="fi-youtube" />
             </a>
+           </Link>
           </div>
           <div className="text-center text-md-start pt-md-2 mt-4">
             <Link href="/contact-us">

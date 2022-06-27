@@ -69,11 +69,25 @@ const ContactForm = () => {
         </div>
         <div className="mb-3">
           <input
-            {...register("phone", { required: true })}
+             {...register("phone", {
+              required: true,
+              maxLength: 10,
+              minLength: 10,
+            })}
+
             className={`form-control ${errors.phone && "border-danger"}`}
             type="number"
             placeholder="Phone*"
           />
+          {errors.phone && errors.phone.type === "required" && (
+              <span className="text-danger">Phone is required</span>
+            )}
+            {errors.phone && errors.phone.type === "maxLength" && (
+              <span className="text-danger">Phone number must be 10 digit</span>
+            )}
+            {errors.phone && errors.phone.type === "minLength" && (
+              <span className="text-danger">Phone number must be 10 digit</span>
+            )}
         </div>
         <input
           {...register("email", { required: true })}
@@ -82,10 +96,10 @@ const ContactForm = () => {
           placeholder="Email*"
         />
         <textarea
-          {...register("message", { required: true })}
+          {...register("message", { required: false })}
           className={`form-control mb-3 ${errors.message && "border-danger"}`}
           rows={3}
-          placeholder="Message"
+          placeholder="Message (Optional)"
           style={{ resize: "none" }}
           defaultValue={""}
         />
