@@ -77,6 +77,8 @@ const AddBlogModal = ({ trigger, setTrigger }) => {
     label: tag.tagName,
     value: tag.tagSlug,
   }));
+
+  
   return (
     <>
       <Modals trigger={trigger} setTrigger={setTrigger} size={""}>

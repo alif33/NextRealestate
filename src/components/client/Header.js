@@ -55,7 +55,7 @@ const Header = () => {
         {userInfo?.token ? (
           <a
             onClick={() => handleLogOut()}
-            className="nav-link text-primary ms-2 order-lg-3  d-none d-lg-block"
+            className="nav-link text-primary ms-2 order-lg-3"
             role="button"
             aria-expanded="false"
           >
@@ -64,7 +64,7 @@ const Header = () => {
         ) : (
           <Link href="/signin">
             <a
-              className="nav-link text-primary ms-2 order-lg-3  d-none d-lg-block"
+              className="nav-link text-primary ms-2 order-lg-3"
               role="button"
               aria-expanded="false"
             >
@@ -74,13 +74,13 @@ const Header = () => {
           </Link>
         )}
         <Link href="/refer-earn">
-          <a className="btn btn-primary btn-sm ms-2 order-lg-3  d-none d-lg-block">
+          <a className="btn btn-primary btn-sm ms-2 order-lg-3">
             ₹ Refer &amp; Earn
           </a>
         </Link>
         <Link href="/add-property">
           <a
-            className="btn btn-primary btn-sm ms-2 order-lg-3 d-none d-lg-block"
+            className="btn btn-primary btn-sm ms-2 order-lg-3"
             href="job-board-post-resume-1.html"
           >
             <i className="fi-plus me-2" />
@@ -204,7 +204,7 @@ const Header = () => {
                 </li>
               </ul>
             </li>
-            <li className="nav-item d-block d-lg-none">
+            {/* <li className="nav-item">
               {userInfo?.token ? (
                 <a
                   onClick={() => handleLogOut()}
@@ -226,8 +226,8 @@ const Header = () => {
                   </a>
                 </Link>
               )}
-            </li>
-            <li className="nav-item d-block d-lg-none">
+            </li> */}
+            {/* <li className="nav-item d-block d-lg-none">
               <Link href="/refer-earn">
                 <a className="btn btn-primary btn-sm ms-2 order-lg-3">
                   ₹ Refer &amp; Earn
@@ -244,7 +244,7 @@ const Header = () => {
                   Add Property
                 </a>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
