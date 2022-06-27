@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Footer() {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <footer className="footer bg-dark pt-2">
       <div className="border-bottom border-light py-4">
@@ -22,7 +22,11 @@ export default function Footer() {
             <p className="fs-sm text-light opacity-70">
               Don’t miss any relevant offers!
             </p>
-            <button onClick={() => router.push('/contact-us')} className="btn btn-primary w-80" type="submit">
+            <button
+              onClick={() => router.push("/contact-us")}
+              className="btn btn-primary w-80"
+              type="submit"
+            >
               Contact us
             </button>
           </div>
@@ -31,24 +35,17 @@ export default function Footer() {
             <ul className="list-unstyled fs-sm">
               <li>
                 <Link href="/our-plans">
-                <a className="nav-link-light" 
-                >
-                  Our Plans
-                </a>
+                  <a className="nav-link-light">Our Plans</a>
                 </Link>
               </li>
               <li>
-               <Link href="/refer-earn">
-               <a className="nav-link-light">
-                  Refer &amp; Earn
-                </a>
-               </Link>
+                <Link href="/refer-earn">
+                  <a className="nav-link-light">Refer &amp; Earn</a>
+                </Link>
               </li>
               <li>
                 <Link href="/reviews">
-                <a className="nav-link-light" >
-                  Reviews
-                </a>
+                  <a className="nav-link-light">Reviews</a>
                 </Link>
               </li>
             </ul>
@@ -57,25 +54,19 @@ export default function Footer() {
             <h3 className="fs-base text-light">About</h3>
             <ul className="list-unstyled fs-sm">
               <li>
-                <Link href='/contact-us'>
-                <a className="nav-link-light" >
-                  Contact Us
-                </a>
+                <Link href="/contact-us">
+                  <a className="nav-link-light">Contact Us</a>
                 </Link>
               </li>
               <li>
                 <Link href="/about-us">
-                <a className="nav-link-light" >
-                  About Us
-                </a>
+                  <a className="nav-link-light">About Us</a>
                 </Link>
               </li>
               <li>
-              <Link  href="/faqs">
-              <a className="nav-link-light">
-                  FAQs
-                </a>
-              </Link>
+                <Link href="/faqs">
+                  <a className="nav-link-light">FAQs</a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -84,48 +75,77 @@ export default function Footer() {
             <ul className="list-unstyled fs-sm">
               <li>
                 <Link href="/dashboard">
-                <a className="nav-link-light">
-                  My account
-                </a>
+                  <a className="nav-link-light">My account</a>
                 </Link>
               </li>
               <li>
-              <Link href="/dashboard">
-              <a className="nav-link-light">
-                  My listings
-                </a>
-            </Link>
+                <Link href="/dashboard">
+                  <a className="nav-link-light">My listings</a>
+                </Link>
               </li>
               <li>
-               <Link href="/dashboard">
-               <a className="nav-link-light" >
-                  Wishlist
-                </a>
-               </Link>
+                <Link href="/dashboard">
+                  <a className="nav-link-light">Wishlist</a>
+                </Link>
               </li>
             </ul>
           </div>
-          {/* <div className="col-xl-2 col-lg-3 col-sm-6 col-md-3 mb-2 mb-sm-4"><a className="d-flex align-items-center text-decoration-none mb-2" < a /><a className="d-flex align-items-center text-decoration-none mb-2" href="mailto:example@email.com"><i className="fi-mail me-2" /><span className="text-light">sales@rokye.com</span></a>
-            <div className="d-flex flex-wrap pt-4"><a className="btn btn-icon btn-translucent-light btn-xs rounded-circle mb-2 me-2" href="#"><i className="fi-facebook" /></a><a className="btn btn-icon btn-translucent-light btn-xs rounded-circle mb-2 me-2" href="#"><i className="fi-twitter" /></a><a className="btn btn-icon btn-translucent-light btn-xs rounded-circle mb-2 me-2" href="#"><i className="fi-instagram" /></a><a className="btn btn-icon btn-translucent-light btn-xs rounded-circle mb-2" href="#"><i className="fi-youtube" /></a></div>
-          </div> */}
+          <div className="col-xl-2 col-lg-3 col-sm-6 col-md-3 mb-2 mb-sm-4">
+            <a className="d-flex align-items-center text-decoration-none mb-2"></a>
+            <a
+              className="d-flex align-items-center text-decoration-none mb-2"
+              href="mailto:example@email.com"
+            >
+              <i className="fi-mail me-2" />
+              <span className="text-light">sales@rokye.com</span>
+            </a>
+            <div className="d-flex flex-wrap pt-4">
+              <Link href="https://www.facebook.com/rokyerealty">
+                <a
+                  target="_blank"
+                  className="btn btn-icon btn-translucent-light btn-xs rounded-circle mb-2 me-2"
+                >
+                  <i className="fi-facebook" />
+                </a>
+              </Link>
+              <Link href="https://twitter.com/rokyerealty">
+                <a
+                  target="_blank"
+                  className="btn btn-icon btn-translucent-light btn-xs rounded-circle mb-2 me-2"
+                >
+                  <i className="fi-twitter" />
+                </a>
+              </Link>
+              <Link href="https://www.instagram.com/rokyerealty/">
+                <a
+                  target="_blank"
+                  className="btn btn-icon btn-translucent-light btn-xs rounded-circle mb-2 me-2"
+                >
+                  <i className="fi-instagram" />
+                </a>
+              </Link>
+              <Link href="/">
+                <a
+                  target="_blank"
+                  className="btn btn-icon btn-translucent-light btn-xs rounded-circle mb-2"
+                >
+                  <i className="fi-youtube" />
+                </a>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
       <div className="container d-lg-flex align-items-center justify-content-between fs-sm pb-3">
         <div className="d-flex flex-wrap justify-content-center order-lg-2 mb-3">
           <Link href="/terms">
-          <a className="nav-link nav-link-light fw-normal" >
-            Terms of use
-          </a>
+            <a className="nav-link nav-link-light fw-normal">Terms of use</a>
           </Link>
-         <Link href="/privacy-policy">
-         <a className="nav-link nav-link-light fw-normal">
-            Privacy policy
-          </a>
-         </Link>
+          <Link href="/privacy-policy">
+            <a className="nav-link nav-link-light fw-normal">Privacy policy</a>
+          </Link>
           <Link href="/blogs">
-          <a className="nav-link nav-link-light fw-normal">
-            Blogs
-          </a>
+            <a className="nav-link nav-link-light fw-normal">Blogs</a>
           </Link>
         </div>
         <p className="text-center text-lg-start order-lg-1 mb-lg-0">
@@ -145,104 +165,5 @@ export default function Footer() {
         </p>
       </div>
     </footer>
-
-    // <footer className={styles.footer__main}>
-    //   <div className="container">
-    //     <div className="row align-items-center justify-content-center">
-    //       <div className="col-12 col-md-7">
-    //         <div className={`${styles.footer__info} text-center`}>
-    //           <div className={styles.footer__logo}>
-
-    //             <Link href="/">
-
-    //               <a className={styles.header__logo_link}>
-    //                 <img className="w-75" src="/images/Scouted.png" alt="scouted" />
-    //               </a>
-    //             </Link>
-    //           </div>
-
-    //           <nav className={styles.footer__menu}>
-    //             <ul className='d-flex flex-wrap gap-2'>
-    //               <li>
-    //                 <Link href="/about-us">
-    //                   <a>our team</a>
-    //                 </Link>
-    //               </li>
-    //               <li>
-    //                 <Link href="/terms">
-    //                   <a>terms of use</a>
-    //                 </Link>
-    //               </li>
-    //               <li>
-    //                 <Link href="/privacy-policy">
-    //                   <a>privacy policy</a>
-    //                 </Link>
-    //               </li>
-    //               <li>
-    //                 <Link href="/for-referrers">
-    //                   <a>for referrers</a>
-    //                 </Link>
-    //               </li>
-    //               <li>
-    //                 <Link href="https://thecareerbuddy.com/employers/" >
-    //                   <a target="_blank">for employers</a>
-    //                 </Link>
-    //               </li>
-    //               <li>
-    //                 <Link href="/pricing">
-    //                   <a>pricing</a>
-    //                 </Link>
-    //               </li>
-    //               <li>
-    //                 <Link href="/contact-us">
-    //                   <a>contact us</a>
-    //                 </Link>
-    //               </li>
-    //             </ul>
-    //           </nav>
-    //           <div className={styles.footer__social}>
-
-    //             <Link href="https://www.facebook.com/careerbuddyafrica">
-    //               <a className={styles.footer__social_item}>
-    //                 <i className="fab fa-facebook-f"></i>
-    //               </a>
-    //             </Link>
-
-    //             <Link href="https://twitter.com/careerbuddyhq">
-    //               <a className={styles.footer__social_item}>
-    //                 <i className="fab fa-twitter"></i>
-    //               </a>
-    //             </Link>
-
-    //             <Link href="https://www.instagram.com/careerbuddyhq/">
-    //               <a className={styles.footer__social_item}>
-    //                 <i className="fab fa-instagram"></i>
-    //               </a>
-    //             </Link>
-
-    //             <Link href="https://www.linkedin.com/company/thecareerbuddy/?viewAsMember=true">
-    //               <a className={styles.footer__social_item}>
-    //                 <i className="fab fa-linkedin-in"></i>
-    //               </a>
-    //             </Link>
-
-    //             {/* <div className={styles.footer__social_item}>
-    //               <Link href="/">
-    //                 <a>
-    //                   <i className="fab fa-google-plus-g"></i>
-    //                 </a>
-    //               </Link>
-    //             </div> */}
-    //           </div>
-    //           <p className={styles.footer__copyright}>
-
-    //             Copyright &copy; {new Date().getFullYear()} Scouted Ltd. All rights reserved.
-
-    //           </p>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </footer>
   );
 }
