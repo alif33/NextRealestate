@@ -1,6 +1,36 @@
 import React from "react";
+import Cookies from 'universal-cookie'
+import { updateData } from "../../../../__lib__/helpers/HttpService";
+import {toast} from 'react-hot-toast'
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { userLogin } from "../../../../store/users/actions";
 
 const TitlePlusSharing = ({property}) => {
+const cookies = new Cookies()
+const dispatch = useDispatch()
+const router = useRouter()
+const {users} = useSelector(state => state)
+
+
+  const addWishlist = async (propertyId) => {
+    const user = await cookies.get("_info");
+    if (user?.token) {
+      const res = await updateData(
+        `/user/wishlist/${propertyId}`,
+        {},
+        user.token
+      );
+      if (res.success) {
+        toast.success(res.message);
+        dispatch(userLogin({success: res.success, token: res.token, user: res.update}));
+      } else {
+        toast.error(res.error);
+      }
+    } else {
+      router.push("/signin");
+    }
+  };
   return (
     <>
       <div
@@ -17,7 +47,8 @@ const TitlePlusSharing = ({property}) => {
         </div>
         <div className="text-nowrap pt-3 pt-sm-0">
           <button
-            className="btn btn-icon btn-translucent-dark btn-xs rounded-circle mb-sm-2"
+         onClick={() => addWishlist(property._id)}
+            className={`${users.user?.wishlists.some(pr => pr._id === property._id) ? 'active' : ''}  btn btn-icon btn-translucent-dark btn-xs rounded-circle mb-sm-2`}
             type="button"
             data-bs-toggle="tooltip"
             title="Add to Wishlist"
