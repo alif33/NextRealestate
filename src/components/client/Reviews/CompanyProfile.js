@@ -1,10 +1,26 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import _ from "lodash"
+import RatingStar from "./RatingStar";
 
 const CompanyProfile = () => {
-    const {reviews} = useSelector(state => state)
-  return (
+    const {reviews} = useSelector(state => state);
+    const [star, setStar] = useState([])
+
+
+    const reviewAverage  = _.sumBy(reviews.reviewList, review => review.rating) / reviews.reviewList?.length
+  
+
+    
+
+ 
+       
+      // <i key={i} className="star-rating-icon fi-star-filled active" />
+      // fi-star-filled,
+      // fi-star
+      // fi-star-half
+    return (
     <>
       <aside className="col-lg-3 col-md-4 mb-5">
         <div className="pe-lg-3">
@@ -20,13 +36,12 @@ const CompanyProfile = () => {
           </p>
           <div className="d-flex justify-content-center justify-content-md-start border-bottom pb-4 mb-4">
             <span className="star-rating">
-              <i className="star-rating-icon fi-star-filled active" />
-              <i className="star-rating-icon fi-star-filled active" />
-              <i className="star-rating-icon fi-star-filled active" />
-              <i className="star-rating-icon fi-star-filled active" />
-              <i className="star-rating-icon fi-star-filled active" />
+            <RatingStar rating={reviewAverage}/>
+
             </span>
-            <div className="text-muted ms-2">({reviews.reviewList?.length} reviews)</div>
+            <div className="text-muted ms-2">
+              ({reviewAverage})
+              </div>
           </div>
           <div className="border-bottom pb-4 mb-4">
             <p className="fs-sm mb-0">
@@ -67,30 +82,40 @@ const CompanyProfile = () => {
             </li>
           </ul>
           <div className="text-center text-md-start">
+            <Link href="https://www.facebook.com/rokyerealty">
             <a
+            target="_blank"
               className="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm me-2"
-              href="#"
+              
             >
               <i className="fi-facebook" />
             </a>
-            <a
+            </Link>
+           <Link href="https://twitter.com/rokyerealty">
+           <a
+           target="_blank"
               className="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm"
-              href="#"
             >
               <i className="fi-twitter" />
             </a>
+           </Link>
+
+            <Link href="https://www.instagram.com/rokyerealty">
             <a
+            target="_blank"
               className="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm"
-              href="#"
             >
               <i className="fi-instagram" />
             </a>
-            <a
+            </Link>
+           <Link href="#">
+           <a
+           target="_blank"
               className="btn btn-icon btn-light-primary btn-xs rounded-circle shadow-sm"
-              href="#"
             >
               <i className="fi-youtube" />
             </a>
+           </Link>
           </div>
           <div className="text-center text-md-start pt-md-2 mt-4">
             <Link href="/contact-us">

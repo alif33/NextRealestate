@@ -51,7 +51,7 @@ export async function getServerSideProps(context) {
   const property = await getData(`/property/${context.query?.id}`);
   return {
     props: {
-      property,
+      property: property || {},
     },
   };
 }

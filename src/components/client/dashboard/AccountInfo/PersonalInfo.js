@@ -120,10 +120,10 @@ const PersonalInfo = () => {
           >
             Save changes
           </button>
-          <button className="btn btn-link btn-sm px-0" type="button">
+          {/* <button className="btn btn-link btn-sm px-0" type="button">
             <i className="fi-trash me-2" />
             Delete account
-          </button>
+          </button> */}
         </div>
       </div>
     </>

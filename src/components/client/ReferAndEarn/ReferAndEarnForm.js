@@ -4,25 +4,25 @@ import toast from "react-hot-toast";
 import { postData } from "../../../../__lib__/helpers/HttpService";
 
 const ReferAndEarnForm = () => {
-    const [disable, setDisable] = useState(false);
-    const {
-      register,
-      reset, 
-      handleSubmit,
-      formState: { errors },
-    } = useForm();
-  
-    const onSubmit = (data) => {
-      setDisable(true);
+  const [disable, setDisable] = useState(false);
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    setDisable(true);
     postData("/refer", data, setDisable).then((res) => {
-        if (res?.success) {
-          setDisable(false);
-          toast.success(`${res.message}`);
-          reset();
-        }
-      });
-    };
-   
+      if (res?.success) {
+        setDisable(false);
+        toast.success(`${res.message}`);
+        reset();
+      }
+    });
+  };
+
   return (
     <>
       <div className="col-xl-5 offset-xl-1 col-md-6">
@@ -50,7 +50,6 @@ const ReferAndEarnForm = () => {
             {errors._name && (
               <span className="text-danger">{errors._name.message}</span>
             )}
-            <div className="invalid-tooltip mt-1">Please, enter your name</div>
           </div>
           <div className="col">
             <label className="form-label" htmlFor="c-phone">
@@ -58,17 +57,24 @@ const ReferAndEarnForm = () => {
             </label>
             <input
               {...register("_phone", {
-                required: "Phone is required.",
+                required: true,
+                maxLength: 10,
+                minLength: 10,
               })}
               className="form-control form-control-lg"
               id="c-phone"
               type="number"
               placeholder="XXXXXX"
             />
-            {errors._phone && (
-              <span className="text-danger">{errors._phone.message}</span>
+            {errors._phone && errors._phone.type === "required" && (
+              <span className="text-danger">Phone is required</span>
             )}
-            <div className="invalid-tooltip mt-1">Please, enter your phone</div>
+            {errors._phone && errors._phone.type === "maxLength" && (
+              <span className="text-danger">Phone number must be 10 digit</span>
+            )}
+            {errors._phone && errors._phone.type === "minLength" && (
+              <span className="text-danger">Phone number must be 10 digit</span>
+            )}
           </div>
           <div className="col">
             <label className="form-label" htmlFor="r-name">
@@ -95,17 +101,24 @@ const ReferAndEarnForm = () => {
             <span className="text-danger">*</span>
             <input
               {...register("phone_", {
-                required: "Referral phone is required.",
+                required: true,
+                maxLength: 10,
+                minLength: 10,
               })}
               className="form-control form-control-lg"
               id="r-phone"
               type="tel"
               placeholder="XXXXXX"
             />
-            {errors.phone_ && (
-              <span className="text-danger">{errors.phone_.message}</span>
+            {errors.phone_ && errors.phone_.type === "required" && (
+              <span className="text-danger">Phone is required</span>
             )}
-            <div className="invalid-tooltip mt-1">Please, enter your phone</div>
+            {errors.phone_ && errors.phone_.type === "maxLength" && (
+              <span className="text-danger">Phone number must be 10 digit</span>
+            )}
+            {errors.phone_ && errors.phone_.type === "minLength" && (
+              <span className="text-danger">Phone number must be 10 digit</span>
+            )}
           </div>
           <div className="col-12 w-100">
             <label className="form-label" htmlFor="c-message">

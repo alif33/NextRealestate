@@ -101,17 +101,18 @@ const Header = () => {
               </Link>
             </li>
             
-            <li className={`nav-item dropdown ${router.pathname === '/our-plans' ? 'active' : ''}`}>
-              <Link href="/our-plans">
-                <a className="nav-link" role="button" aria-expanded="false">
-                  Our Plans
-                </a>
-              </Link>
-            </li>
+           
             <li className={`nav-item dropdown ${router.pathname === '/properties' ? 'active' : ''}`}>
               <Link href="/properties">
                 <a className="nav-link" role="button" aria-expanded="false">
                  Properties
+                </a>
+              </Link>
+            </li>
+            <li className={`nav-item dropdown ${router.pathname === '/our-plans' ? 'active' : ''}`}>
+              <Link href="/our-plans">
+                <a className="nav-link" role="button" aria-expanded="false">
+                  Our Plans
                 </a>
               </Link>
             </li>

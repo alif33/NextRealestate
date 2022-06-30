@@ -16,26 +16,24 @@ function Contact() {
   } = useForm();
 
   const onSubmit = (data) => {
-    
     if (data.role === "true") {
       setDisable(false);
     }
-    if (data.isAgree && data.role === "OWNER" || "TENANT") {
+    if ((data.isAgree && data.role === "OWNER") || "TENANT") {
       setDisable(true);
       const newData = {
         name: data.name,
         email: data.email,
         phone: data.phone,
         role: data.role,
-        message: data.message
+        message: data.message,
       };
       postData("/contact", newData, setDisable).then((res) => {
         if (res?.success) {
           toast.success(`${res.message}`);
           setDisable(false);
           reset();
-        }else{
-            
+        } else {
         }
       });
     }
@@ -47,9 +45,9 @@ function Contact() {
         <nav aria-label="breadcrumb">
           <ol className="breadcrumb pt-3 mb-4">
             <li className="breadcrumb-item">
-             <Link href="/">
-             <a >Home</a>
-             </Link>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
               Contact us
@@ -99,18 +97,27 @@ function Contact() {
                 </label>
                 <input
                   {...register("phone", {
-                    required: "Phone number is required.",
+                    required: true,
+                    maxLength: 10,
+                    minLength: 10,
                   })}
                   className="form-control form-control-lg"
                   id="c-phone"
                   type="number"
                 />
-                {errors.phone && (
-                  <span className="text-danger">{errors.phone.message}</span>
+                {errors.phone && errors.phone.type === "required" && (
+                  <span className="text-danger">Phone is required</span>
                 )}
-                <div className="invalid-tooltip mt-1">
-                  Please, enter your phone
-                </div>
+                {errors.phone && errors.phone.type === "maxLength" && (
+                  <span className="text-danger">
+                    Phone number must be 10 digit
+                  </span>
+                )}
+                {errors.phone && errors.phone.type === "minLength" && (
+                  <span className="text-danger">
+                    Phone number must be 10 digit
+                  </span>
+                )}
               </div>
               <div className="col">
                 <label className="form-label" htmlFor="c-email">
@@ -119,16 +126,16 @@ function Contact() {
                 <input
                   {...register("email", {
                     required: "Email is required.",
-                    pattern: /\S+@\S+\.\S+/
+                    pattern: /\S+@\S+\.\S+/,
                   })}
                   className="form-control form-control-lg"
                   id="c-email"
                   type="text"
                 />
-                {errors?.email?.type === 'required' && (
+                {errors?.email?.type === "required" && (
                   <span className="text-danger">{errors.email.message}</span>
                 )}
-                {errors?.email?.type === 'pattern' && (
+                {errors?.email?.type === "pattern" && (
                   <span className="text-danger">Invalid email</span>
                 )}
                 <div className="invalid-tooltip mt-1">
@@ -152,34 +159,30 @@ function Contact() {
                   <option value="OWNER">Owner</option>
                   <option value="TENANT">Tenant</option>
                 </select>
-                {watch().role === 'true'  && (
+                {watch().role === "true" && (
                   <span className="text-danger">Role is required</span>
                 )}
               </div>
               <div className="col-12 w-100">
                 <label className="form-label" htmlFor="c-message">
-                  Message<span className="text-danger">*</span>
+                  Message<span className=""> (Optional)</span>
                 </label>
                 <textarea
                   {...register("message", {
-                    required: "Message is required.",
+                    required: false,
                   })}
                   className="form-control form-control-lg"
                   id="c-message"
                   rows={4}
                   placeholder="Leave your message"
                 />
-                {errors.message && (
-                  <span className="text-danger">{errors.message.message}</span>
-                )}
-                <div className="invalid-tooltip mt-1">
-                  Please, leave your message
-                </div>
               </div>
               <div className="form-check w-100" style={{ marginLeft: "15px" }}>
                 <input
                   {...register("isAgree", { required: true })}
-                  className={`form-check-input ${errors.isAgree ? 'border-danger': ''}`}
+                  className={`form-check-input ${
+                    errors.isAgree ? "border-danger" : ""
+                  }`}
                   id="form-submit"
                   type="checkbox"
                 />

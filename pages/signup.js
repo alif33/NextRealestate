@@ -28,7 +28,7 @@ export default function SignUp() {
       setDisable(true);
       const newData = {
         name: data.name,
-        email: data.email.toLowerCase(),
+        email: data.email,
         phone: data.phone,
         password: data.password,
         role: data.role,
@@ -160,7 +160,8 @@ export default function SignUp() {
                     <input
                       {...register("phone", {
                         required: true,
-                        
+                        maxLength: 10,
+                        minLength: 10
                       })}
                       maxlength="10"
                       className="form-control"
@@ -168,8 +169,15 @@ export default function SignUp() {
                       id="phone"
                       placeholder="Enter phone"
                     />
-                    {errors?.phone && (
-                      <span className="text-danger">Phone is required.</span>
+                  
+                    {errors.phone && errors.phone.type === "required" && (
+                      <span className="text-danger">Phone is required</span>
+                    )}
+                    {errors.phone && errors.phone.type === "maxLength" && (
+                      <span className="text-danger">Phone number must be 10 digit</span>
+                    )}
+                    {errors.phone && errors.phone.type === "minLength" && (
+                      <span className="text-danger">Phone number must be 10 digit</span>
                     )}
                   </div>
                   <div className="mb-4">

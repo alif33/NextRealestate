@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick/lib/slider";
 import slugify from "slugify";
@@ -15,6 +15,7 @@ const SemilarProperties = () => {
   useEffect(() => {
     dispatch(setProperties());
   }, []);
+
   var settings = {
     dots: true,
     infinite: true,
@@ -53,6 +54,7 @@ const SemilarProperties = () => {
     ],
   };
 
+
   const { query } = useRouter();
   const { areaName, state, city, bedrooms, propertyType } = query;
   const bedroomsArray = bedrooms;
@@ -68,6 +70,7 @@ const SemilarProperties = () => {
       return val;
     }
   });
+
 
   return (
     <>

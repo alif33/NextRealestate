@@ -32,13 +32,13 @@ const Wishlists = () => {
                 <option>Oldest</option>
               </select>
             </div>
-            <a
+            {/* <a
               className="d-inline-block ms-sm-4 ms-3 mb-sm-0 mb-2 fs-sm fw-bold text-decoration-none text-nowrap"
               href="#"
             >
               <i className="fi-x fs-xs me-2 align-middle" />
               Clear all
-            </a>
+            </a> */}
           </div>
         </div>
         {/* Favorites grid*/}
