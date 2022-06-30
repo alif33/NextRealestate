@@ -55,9 +55,9 @@ export default function SignUp() {
         <nav className="mb-4 pt-md-3" aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-            <Link href="/">
-                  <a>Home</a>
-                </Link>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
             </li>
             <li className="breadcrumb-item active" aria-current="page">
               Sign up
@@ -74,7 +74,7 @@ export default function SignUp() {
             <div className="row mx-0 align-items-center">
               <div
                 className="col-md-5 border-end-md p-4 p-sm-5"
-                // style={{ marginLeft: "120px" }}
+              // style={{ marginLeft: "120px" }}
               >
                 <h2 className="h3 mb-4 mb-sm-5">
                   Welcome to
@@ -147,6 +147,7 @@ export default function SignUp() {
                       type="text"
                       id="signup-name"
                       placeholder="Enter name"
+                  
                     />
                     {errors.name && (
                       <span className="text-danger">Name is required</span>
@@ -159,14 +160,16 @@ export default function SignUp() {
                     <input
                       {...register("phone", {
                         required: true,
+                        
                       })}
+                      maxlength="10"
                       className="form-control"
                       type="number"
                       id="phone"
                       placeholder="Enter phone"
                     />
                     {errors?.phone && (
-                      <span className="text-danger">Email is required.</span>
+                      <span className="text-danger">Phone is required.</span>
                     )}
                   </div>
                   <div className="mb-4">
@@ -230,9 +233,8 @@ export default function SignUp() {
                       {...register("isAgree", {
                         required: true,
                       })}
-                      className={`form-check-input ${
-                        errors.isAgree ? "border-danger" : ""
-                      }`}
+                      className={`form-check-input ${errors.isAgree ? "border-danger" : ""
+                        }`}
                       type="checkbox"
                       id="agree-to-terms"
                     />
