@@ -42,8 +42,9 @@ export default function SignUp() {
             pathname: "/dashboard",
           });
         } else {
-          toast.error("Email already exist");
+          toast.error(res.error);
           setDisable(false);
+          console.log(res.user)
         }
       });
     }
@@ -163,7 +164,7 @@ export default function SignUp() {
                         maxLength: 10,
                         minLength: 10
                       })}
-                      maxlength="10"
+                      maxLength="10"
                       className="form-control"
                       type="number"
                       id="phone"

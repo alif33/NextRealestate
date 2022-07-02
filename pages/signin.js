@@ -23,7 +23,7 @@ export default function SignIn() {
   } = useForm();
   const onSubmit = (data) => {
     setDisable(true);
-    postData("/user/login", { email: data.email.toLowerCase(), password: data.password }, setDisable).then((res) => {
+    postData("/user/login", { email: data.email, password: data.password }, setDisable).then((res) => {
       if (res?.success) {
         cookies.set("_info", JSON.stringify({ token: res.token }), {
           path: "/",
