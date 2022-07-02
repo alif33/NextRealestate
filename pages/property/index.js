@@ -11,7 +11,7 @@ import SemilarProperties from "../../src/components/client/Property/SemilarPrope
 import TitlePlusSharing from "../../src/components/client/Property/TitlePlusSharing";
 import { getData } from "../../__lib__/helpers/HttpService";
 
-const Property = ({property}) => {
+const Property = ({property, properties}) => {
   return (
     <Layout>
       <div className="container mt-5 mb-md-4 py-5">
@@ -40,7 +40,7 @@ const Property = ({property}) => {
 
       {/* similar properties */}
 
-      <SemilarProperties />
+      <SemilarProperties properties={properties} />
     </Layout>
   );
 };
@@ -49,9 +49,11 @@ export default Property;
 
 export async function getServerSideProps(context) {
   const property = await getData(`/property/${context.query?.id}`);
+  const properties = await getData(`/properties`);
   return {
     props: {
       property: property || {},
+      properties: properties || [],
     },
   };
 }

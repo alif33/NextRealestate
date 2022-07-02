@@ -1,20 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick/lib/slider";
 import slugify from "slugify";
-import { setProperties } from "../../../../../store/properties/actions";
 import Item from "./Item";
 
-const SemilarProperties = () => {
-  const dispatch = useDispatch();
-  const { properties } = useSelector((state) => state);
-  const { propertyList } = properties;
-
-  useEffect(() => {
-    dispatch(setProperties());
-  }, []);
+const SemilarProperties = ({properties}) => {
 
   var settings = {
     dots: true,
@@ -58,7 +48,7 @@ const SemilarProperties = () => {
   const { query } = useRouter();
   const { areaName, state, city, bedrooms, propertyType } = query;
   const bedroomsArray = bedrooms;
-  const filtered = propertyList?.filter((val) => {
+  const filtered = properties?.filter((val) => {
     if (
       slugify(val.areaName.toLowerCase()).includes(
         slugify(areaName.toLowerCase())
@@ -89,11 +79,14 @@ const SemilarProperties = () => {
         </div>
 
         {/* Item*/}
-        <Slider {...settings}>
-          {filtered?.map((semilar, i) => (
-            <Item key={i} property={semilar} />
-          ))}
-        </Slider>
+       {filtered.length > 0 ? (
+         <Slider {...settings}>
+         {filtered?.map((semilar, i) => (
+           <Item key={i} property={semilar} />
+         ))}
+       </Slider>
+       ): <h4>Similar property not found</h4>}
+       
       </section>
     </>
   );

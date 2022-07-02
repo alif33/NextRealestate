@@ -44,7 +44,6 @@ export default function SignUp() {
         } else {
           toast.error(res.error);
           setDisable(false);
-          console.log(res.user)
         }
       });
     }

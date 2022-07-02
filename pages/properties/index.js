@@ -22,7 +22,7 @@ export async function getServerSideProps() {
   const properties = await getData("/properties");
   return {
     props: {
-      properties,
+      properties: properties || [],
     },
   };
 }
